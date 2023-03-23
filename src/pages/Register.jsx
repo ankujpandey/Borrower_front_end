@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useFormik } from "formik";
+import { useFormik } from "formik"; //npm i formik
 import { validationSchema, initialValues } from "../schemas";
-import axios from "axios";
+import axios from "axios"; //npm i axios
+import { Link } from "react-router-dom";
 
 function Register(props) {
   const [validPIN, setVaidPIN] = useState(true);
@@ -213,9 +214,11 @@ function Register(props) {
               <div className="form-error">{formik.errors.Tenure}</div>
             ) : null}
 
-            <button type="submit" className="btn btn-primary mt-3">
-              Proceed
-            </button>
+            <Link to="/register3">
+              <button type="submit" className="btn btn-primary mt-3">
+                Proceed
+              </button>
+            </Link>
           </form>
         </div>
       </div>

@@ -1,4 +1,4 @@
-import * as Yup from "yup";
+import * as Yup from "yup"; // npm i yup
 
 export const validationSchema = Yup.object({
   firstName: Yup.string()
