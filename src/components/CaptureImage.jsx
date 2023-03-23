@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Webcam from "react-webcam"; //npm i react-webcam
 
 import { useFaceDetection } from "react-use-face-detection"; //npm i react-use-face-detection
@@ -124,15 +124,17 @@ function CaptureImage(props) {
                 >
                   Retake
                 </button>
-                <button
-                  className="btn btn-success float-end"
-                  onClick={() => {
-                    // UploadPicture();
-                    // getAddress();
-                  }}
-                >
-                  Submit Picture
-                </button>
+                <Link to="/register4">
+                  <button
+                    className="btn btn-success float-end"
+                    onClick={() => {
+                      // UploadPicture();
+                      // getAddress();
+                    }}
+                  >
+                    Submit Picture
+                  </button>
+                </Link>
               </>
             ) : (
               <div>

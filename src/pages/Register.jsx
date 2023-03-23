@@ -134,7 +134,6 @@ function Register(props) {
               type="text"
               className="form-control"
               name="PINCode"
-              value={values.firstName}
               onChange={(event) => {
                 setPinCode(event.target.value);
               }}

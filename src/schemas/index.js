@@ -30,9 +30,14 @@ export const validationSchema = Yup.object({
     .max(6)
     .required("Amount can't be empty"),
   Tenure: Yup.string()
-    .matches(/([0-9])$/, "Please enter a valid amount")
+    .matches(/([0-9])$/, "Please enter a valid time")
     .max(2)
     .required("Tenure can't be empty"),
+  AccountNumber: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid Account Number")
+    .max(14)
+    .min(11)
+    .required("Account Number can't be empty"),
 });
 
 export const initialValues = {
@@ -44,4 +49,8 @@ export const initialValues = {
   Aadhar: "",
   Amount: "",
   Tenure: "",
+  AccountNumber: "",
+  IFSC: "",
+  Bank: "",
+  Branch: "",
 };
