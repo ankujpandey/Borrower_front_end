@@ -37,6 +37,7 @@ export const validationSchema = Yup.object({
 
 export const initialValues = {
   firstName: "",
+  lastName: "",
   Contact: "",
   Email: "",
   PAN: "",
