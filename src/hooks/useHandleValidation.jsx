@@ -6,9 +6,9 @@ export const useHandleValidation = () => {
     useFormik({
       initialValues,
       validationSchema,
-      onSubmit: (values, action) => {
+      onSubmit: (values) => {
         console.log(values);
-        action.resetForm();
+        // action.resetForm();
       },
     });
 

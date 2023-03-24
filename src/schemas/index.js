@@ -25,6 +25,10 @@ export const validationSchema = Yup.object({
     .matches(/([0-9]){12}$/, "Please enter a valid aadhar number.")
     .max(12)
     .required("Aadhaar can not be empty!"),
+  PinCode: Yup.string()
+    .matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
+    .max(6)
+    .required("Pin Code can not be empty!"),
   Amount: Yup.string()
     .matches(/([0-9])/, "Please enter a valid amount")
     .max(6)
@@ -47,6 +51,7 @@ export const initialValues = {
   Email: "",
   PAN: "",
   Aadhar: "",
+  PinCode: "",
   Amount: "",
   Tenure: "",
   AccountNumber: "",

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function Register4(props) {
-  const [validIFSC, setValidIFSC] = useState(true);
+  const [validIFSC, setValidIFSC] = useState(false);
   const [IFSC, setIFSC] = useState("");
   const [bank, setBank] = useState("");
   const [branch, setBranch] = useState("");
@@ -15,26 +15,28 @@ function Register4(props) {
   const fetchBank = async () => {
     if (IFSC.length == 11) {
       setValidIFSC(true);
-      console.log(IFSC);
-      const response = await axios.get("https://ifsc.razorpay.com/" + IFSC, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response.status);
-      if (response.status === 200) {
-        console.log(
-          "Branch--> ",
-          response.data.BRANCH,
-          ", Bank---> ",
-          response?.data?.BANK
-        );
-        setBank(response.data.BANK);
-        setBranch(response.data.BRANCH);
-      } else {
+      // console.log(IFSC);
+
+      try {
+        const response = await axios.get("https://ifsc.razorpay.com/" + IFSC, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        // console.log("+++++++++++", response.data);
+        if (response.status === 200) {
+          // console.log(
+          //   "Branch--> ",
+          //   response.data.BRANCH,
+          //   ", Bank---> ",
+          //   response?.data?.BANK
+          // );
+          setBank(response.data.BANK);
+          setBranch(response.data.BRANCH);
+        }
+      } catch (error) {
+        // console.log("Error geting---", error.response.data);
         setValidIFSC(false);
-        console.log(validIFSC);
-        console.log("Something went wrong");
       }
     }
   };
@@ -73,8 +75,10 @@ function Register4(props) {
               }}
               required
             />
-            {validIFSC ? null : (
-              <div className="form-error">Enter a valid IFSC</div>
+
+            {/* Add CSS for class form-error */}
+            {IFSC.length != 6 ? null : validIFSC ? null : (
+              <div className="form-error">Enter valid IFSC</div>
             )}
 
             <label className="col-form-label">Bank Name</label>
@@ -96,9 +100,6 @@ function Register4(props) {
               onChange={handleChange}
               onBlur={handleBlur}
             />
-            {/* {errors.Email && touched.Email ? (
-              <div className="form-error">{errors.Email}</div>
-            ) : null} */}
 
             <button type="submit" className="btn btn-primary mt-3">
               Proceed

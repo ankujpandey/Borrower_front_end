@@ -4,39 +4,47 @@ import { Link } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function Register(props) {
-  const [validPIN, setVaidPIN] = useState(true);
+  const [validPIN, setVaidPIN] = useState(false);
   const [pinCode, setPinCode] = useState("");
-  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
   const [state, setState] = useState("");
+  const [postOffice, setPostOffice] = useState([]);
 
   useEffect(() => {
-    fetchCity();
+    fetchDistrict();
   }, [pinCode]);
 
-  const fetchCity = async () => {
+  const fetchDistrict = async () => {
     if (pinCode.length == 6) {
-      setVaidPIN(true);
-      console.log(pinCode);
-      const response = await axios.get(
-        "https://api.postalpincode.in/pincode/" + pinCode,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.data[0].Status === "Success") {
-        console.log(
-          "City-->",
-          response.data[0].PostOffice[0].District,
-          ", State--->",
-          response.data[0].PostOffice[0].State
+      // console.log(pinCode);
+      try {
+        const response = await axios.get(
+          "https://api.postalpincode.in/pincode/" + pinCode,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
         );
-        // console.log(response.data[0].Status);
-        setCity(response.data[0].PostOffice[0].District);
-        setState(response.data[0].PostOffice[0].State);
-      } else {
+
+        if (response.data[0].Status === "Success") {
+          setVaidPIN(true);
+          console.log(
+            "District-->",
+            response.data[0].PostOffice[0].District,
+            ", State--->",
+            response.data[0].PostOffice[0].State
+          );
+          // console.log(response.data[0].Status);
+          setDistrict(response.data[0].PostOffice[0].District);
+          setState(response.data[0].PostOffice[0].State);
+          setPostOffice(response.data[0].PostOffice);
+          console.log("postOffice", response.data[0].PostOffice);
+        } else {
+          setVaidPIN(false);
+          console.log("Something went wrong");
+        }
+      } catch (error) {
         setVaidPIN(false);
         console.log("Something went wrong");
       }
@@ -139,23 +147,41 @@ function Register(props) {
               }}
               required
             />
-            {validPIN ? null : (
+
+            {pinCode.length != 6 ? null : validPIN ? null : (
               <div className="form-error">Enter valid PIN Code</div>
             )}
 
-            <label className="col-form-label">City</label>
+            {validPIN ? (
+              <>
+                <label className="col-form-label">Post Office</label>
+                <select type="text" className="form-select" name="PostOffice">
+                  <option>Please select your area Post Office</option>
+
+                  {postOffice.map((area, index) => {
+                    return (
+                      <option key={index} value={area.Name}>
+                        {area.Name}
+                      </option>
+                    );
+                  })}
+                </select>
+              </>
+            ) : null}
+
+            <label className="col-form-label">District</label>
             <input
               type="text"
               className="form-control"
-              name="City"
-              value={city}
+              name="District"
+              value={district}
               onChange={(event) => {
-                setCity(event.target.value);
+                setDistrict(event.target.value);
               }}
               onBlur={handleBlur}
             />
-            {errors.City && touched.City ? (
-              <div className="form-error">{errors.City}</div>
+            {errors.District && touched.District ? (
+              <div className="form-error">{errors.District}</div>
             ) : null}
 
             <label className="col-form-label">State</label>
@@ -184,7 +210,7 @@ function Register(props) {
               onBlur={handleBlur}
             >
               {/* You can add the interest rates acording to you */}
-              <option defaultValue>Please select the rate of interest</option>
+              <option>Please select the rate of interest</option>
               <option value={5}>5 %</option>
               <option value={8}>8 %</option>
               <option value={10}>10 %</option>
@@ -217,11 +243,15 @@ function Register(props) {
               <div className="form-error">{errors.Tenure}</div>
             ) : null}
 
-            <Link to="/register3">
-              <button type="submit" className="btn btn-primary mt-3">
-                Proceed
-              </button>
-            </Link>
+            {/* <Link to="/register3"> */}
+            <button
+              type="submit"
+              className="btn btn-primary mt-3"
+              onClick={handleSubmit}
+            >
+              Proceed
+            </button>
+            {/* </Link> */}
           </form>
         </div>
       </div>
