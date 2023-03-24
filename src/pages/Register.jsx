@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function Register(props) {
-  const [validPIN, setVaidPIN] = useState(false);
+  const [validPIN, setValidPin] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [district, setDistrict] = useState("");
   const [state, setState] = useState("");
@@ -28,7 +28,7 @@ function Register(props) {
         );
 
         if (response.data[0].Status === "Success") {
-          setVaidPIN(true);
+          setValidPin(true);
           console.log(
             "District-->",
             response.data[0].PostOffice[0].District,
@@ -41,11 +41,11 @@ function Register(props) {
           setPostOffice(response.data[0].PostOffice);
           console.log("postOffice", response.data[0].PostOffice);
         } else {
-          setVaidPIN(false);
+          setValidPin(false);
           console.log("Something went wrong");
         }
       } catch (error) {
-        setVaidPIN(false);
+        setValidPin(false);
         console.log("Something went wrong");
       }
     }
