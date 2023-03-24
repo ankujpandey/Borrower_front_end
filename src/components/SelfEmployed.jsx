@@ -1,53 +1,53 @@
-// import React from "react";
+import React from "react";
+import {
+  selfEmployedSchema,
+  initialValueSelfEmployed,
+} from "../schema/EmploymetTypeValidation";
+import { useHandleValidation } from "../hooks/useHandleValidation";
 
-// function SelfEmployed(props) {
-//   const initialValueSelfEmployee = {
-//     nature_type: "",
-//     monthly_income: "",
-//     monthly_salary: "",
-//     company_name: "",
-//     company_email: "",
-//   };
+function SelfEmployed(props) {
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useHandleValidation(initialValueSelfEmployed, selfEmployedSchema);
 
-//   return (
-//     <div>
-//       <div className="form-group">
-//         <label htmlFor="monthly_income">Monthly Income:</label>
-//         <input
-//           type="text"
-//           className="form-control"
-//           id="monthly_income"
-//           name="monthly_income"
-//           placeholder="Enter your monthly Income"
-//           value={values.monthly_income}
-//           onChange={handleChange}
-//           onBlur={handleBlur}
-//         />
-//         {errors.monthly_income && touched.monthly_income ? (
-//           <p className="form-error text-danger">{errors.monthly_income}</p>
-//         ) : null}
-//       </div>
-//       <div className="form-group">
-//         <label htmlFor="nature_type">Nature of Business:</label>
-//         <input
-//           type="text"
-//           className="form-control"
-//           id="nature_type"
-//           name="nature_type"
-//           placeholder="Enter your nature of Business"
-//           value={values.nature_type}
-//           onChange={handleChange}
-//           onBlur={handleBlur}
-//         />
-//         {errors.nature_type && touched.nature_type ? (
-//           <p className="form-error text-danger">{errors.nature_type}</p>
-//         ) : null}
-//       </div>
-//       <button type="submit" className="btn btn-success">
-//         Submit
-//       </button>
-//     </div>
-//   );
-// }
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="form-group">
+        <label htmlFor="monthly_income">Monthly Income:</label>
+        <input
+          type="text"
+          className="form-control"
+          id="monthly_income"
+          name="monthly_income"
+          placeholder="Enter your monthly Income"
+          value={values.monthly_income}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {errors.monthly_income && touched.monthly_income ? (
+          <p className="form-error text-danger">{errors.monthly_income}</p>
+        ) : null}
+      </div>
+      <div className="form-group">
+        <label htmlFor="nature">Nature of Business:</label>
+        <input
+          type="text"
+          className="form-control"
+          id="nature"
+          name="nature"
+          placeholder="Enter your nature of Business"
+          value={values.nature}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {errors.nature && touched.nature ? (
+          <p className="form-error text-danger">{errors.nature}</p>
+        ) : null}
+      </div>
+      <button type="submit" className="btn btn-success">
+        Submit
+      </button>
+    </form>
+  );
+}
 
-// export default SelfEmployed;
+export default SelfEmployed;

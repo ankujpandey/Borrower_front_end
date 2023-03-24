@@ -1,16 +1,17 @@
 import logo from "./logo.svg";
 import "./App.css";
-import EmploymentType from "./pages/EmploymentType";
-import AadharUpload from "./components/AadharUploadComponent";
-import SignUp from "./components/SignUpComponent";
+import EmploymentDetails from "./pages/EmploymentDetails";
+import AadharUploadComponent from "./components/AadharUploadComponent";
 import SignUpComponent from "./components/SignUpComponent";
+import LoginComponent from "./components/LoginComponent";
 
 function App() {
   return (
     <div>
-      {/* <EmploymentType /> */}
-      {/* <AadharUp /> */}
-      <SignUpComponent />
+      {/* <EmploymentDetails /> */}
+      {/* <AadharUploadComponent /> */}
+      {/* <SignUpComponent /> */}
+      <LoginComponent />
     </div>
   );
 }

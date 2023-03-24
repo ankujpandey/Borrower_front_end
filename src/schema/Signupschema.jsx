@@ -14,6 +14,17 @@ export const SignUpschema = Yup.object({
       "Email should be a valid mail. No personal email id's are allowed"
     )
     .required("E-mail can not be empty!"),
+  password: Yup.string()
+    .matches(
+      /([A-Z]){1}([a-z]){1}([a-zA-Z0-9])*(@|#|$|&)([a-zA-Z0-9])*$/,
+      "Please follow this format : first letter capital,second letter small,include "
+    )
+    .min(5, `password can\'t less than 5`)
+    .max(15, `password can't greater than 15`)
+    .required("Please enter the password"),
+  Confirmpassword: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password"), null], "Password must Match"),
 });
 
 export const initialValuesSignupschema = {
@@ -21,4 +32,5 @@ export const initialValuesSignupschema = {
   lastName: "",
   email: "",
   password: "",
+  Confirmpassword: "",
 };
