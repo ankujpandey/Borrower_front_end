@@ -77,7 +77,7 @@ function Register4(props) {
             />
 
             {/* Add CSS for class form-error */}
-            {IFSC.length != 6 ? null : validIFSC ? null : (
+            {IFSC.length != 11 ? null : validIFSC ? null : (
               <div className="form-error">Enter valid IFSC</div>
             )}
 
