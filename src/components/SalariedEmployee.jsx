@@ -3,7 +3,7 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 import {
   salariedSchema,
   initialValuesSalaried,
-} from "../schema/EmploymetTypeValidation";
+} from "../schemas/EmploymetTypeValidation";
 
 function SalariedEmployee(props) {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

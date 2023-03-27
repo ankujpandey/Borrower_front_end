@@ -2,7 +2,7 @@ import React from "react";
 import {
   selfEmployedSchema,
   initialValueSelfEmployed,
-} from "../schema/EmploymetTypeValidation";
+} from "../schemas/EmploymetTypeValidation";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function SelfEmployed(props) {
