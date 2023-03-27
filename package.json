@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@mediapipe/camera_utils": "^0.3.1675466862",
+    "@mediapipe/face_detection": "^0.4.1646425229",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -11,9 +13,18 @@
     "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0",
     "react-scripts": "5.0.1",
+=======
+    "react-icon": "^1.0.0",
+    "react-icons": "^4.8.0",
+    "react-router-dom": "^6.9.0",
+    "react-scripts": "5.0.1",
+    "react-use-face-detection": "^1.0.1",
+    "react-webcam": "^7.0.1",
+>>>>>>> 505843bf43b550d9e178523234889b1fe569dbe4
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
   },
