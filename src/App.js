@@ -9,29 +9,33 @@ import SignUpPage from "./pages/SignUpPage";
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
 import HeroImage from "./components/HeroImage";
+import Address from "./components/Address";
+import BorrowingDetails from "./components/BorrowingDetails";
 
 function App() {
-	return (
-		<div>
-			{/* <EmploymentDetails /> */}
-			{/* <AadharUploadComponent /> */}
-			{/* <SignUpComponent /> */}
-			{/* <LoginComponent /> */}
-			{/* <LoginPage /> */}
-			<NavBar />
+  return (
+    <div>
+      {/* <EmploymentDetails /> */}
+      {/* <AadharUploadComponent /> */}
+      {/* <SignUpComponent /> */}
+      {/* <LoginComponent /> */}
+      {/* <LoginPage /> */}
+      <NavBar />
 
-			<Routes>
-				<Route path="/" element={<HeroImage />} />
-				{/* <Route path="/dashboard" element={<Dashboard />} /> */}
-				<Route path="/sign-up" element={<SignUpPage />} />
-				<Route path="/sign-in" element={<LoginPage />} />
-				{/* <Route path="/register" element={<Register />} />
-				<Route path="/register2" element={<EmploymentDetails />} />
-				<Route path="/register3" element={<Register3 />} />
-				<Route path="/register4" element={<Register4 />} /> */}
-			</Routes>
-		</div>
-	);
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/register2" element={<EmploymentDetails />} />
+        <Route path="/register3" element={<Register3 />} />
+        <Route path="/register4" element={<Register4 />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/borrowing-details" element={<BorrowingDetails />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

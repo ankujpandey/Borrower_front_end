@@ -32,7 +32,7 @@ function LoginComponent(props) {
               <div className="card">
                 <form
                   action=""
-                  onSubmit={handleSubmit}
+                  onSubmit={e => handleSubmit(e)}
                   className="needs-validation"
                   novalidate>
                   <div class="row justify-content-center g-3 m-3 mb-4">

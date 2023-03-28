@@ -7,8 +7,12 @@ import {
 } from "../schemas/Signupschema";
 
 function SignUpPage(props) {
+  const url = "/dashboard";
+
+  const api = "http://localhost:4000/api/v1/user";
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(initialValuesSignupschema, SignUpschema);
+    useHandleValidation(initialValuesSignupschema, SignUpschema, url, api);
 
   (() => {
     "use strict";
