@@ -17,14 +17,14 @@ export const SignUpschema = Yup.object({
   password: Yup.string()
     .matches(
       /([A-Z]){1}([a-z]){1}([a-zA-Z0-9])*(@|#|$|&)([a-zA-Z0-9])*$/,
-      "Please follow this format : first letter capital,second letter small,include "
+      "Please follow this format : first letter capital, second letter small, include a special character(@,#,$,&) and a digit "
     )
-    .min(5, `password can\'t less than 5`)
-    .max(15, `password can't greater than 15`)
+    .min(5, `password can't be less than 5 characters`)
+    .max(15, `password can't be greater than 15 characters`)
     .required("Please enter the password"),
   Confirmpassword: Yup.string()
     .required()
-    .oneOf([Yup.ref("password"), null], "Password must Match"),
+    .oneOf([Yup.ref("password"), null], "Password must match"),
 });
 
 export const initialValuesSignupschema = {
