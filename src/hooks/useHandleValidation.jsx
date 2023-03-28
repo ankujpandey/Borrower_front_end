@@ -5,7 +5,7 @@ export const useHandleValidation = (initialValues, validationSchema) => {
     useFormik({
       initialValues,
       validationSchema,
-      onSubmit: (values) => {
+      onSubmit: values => {
         // console.log("scsdnsdfds");
         console.log(values);
         // console.log(employeeType);
