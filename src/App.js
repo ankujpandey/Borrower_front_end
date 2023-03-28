@@ -8,9 +8,9 @@ import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
-import HeroImage from "./components/HeroImage";
 import Address from "./components/Address";
 import BorrowingDetails from "./components/BorrowingDetails";
+import Home from "./pages/Home";
 
 function App() {
   return (
