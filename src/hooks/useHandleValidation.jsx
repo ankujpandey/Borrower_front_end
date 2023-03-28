@@ -1,14 +1,14 @@
-import { useFormik } from "formik"; //npm i formik
-import { validationSchema, initialValues } from "../schemas";
+import { useFormik } from "formik";
 
-export const useHandleValidation = () => {
+export const useHandleValidation = (initialValues, validationSchema) => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
       validationSchema,
       onSubmit: (values) => {
+        // console.log("scsdnsdfds");
         console.log(values);
-        // action.resetForm();
+        // console.log(employeeType);
       },
     });
 

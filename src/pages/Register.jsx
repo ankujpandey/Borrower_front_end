@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios"; //npm i axios
 import { Link } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
+import { validationSchema, initialValues } from "../schemas";
 
 function Register(props) {
-  const [validPIN, setValidPin] = useState(false);
+  const [validPIN, setVaidPIN] = useState(false);
   const [pinCode, setPinCode] = useState("");
   const [district, setDistrict] = useState("");
   const [state, setState] = useState("");
@@ -28,7 +29,7 @@ function Register(props) {
         );
 
         if (response.data[0].Status === "Success") {
-          setValidPin(true);
+          setVaidPIN(true);
           console.log(
             "District-->",
             response.data[0].PostOffice[0].District,
@@ -41,18 +42,18 @@ function Register(props) {
           setPostOffice(response.data[0].PostOffice);
           console.log("postOffice", response.data[0].PostOffice);
         } else {
-          setValidPin(false);
+          setVaidPIN(false);
           console.log("Something went wrong");
         }
       } catch (error) {
-        setValidPin(false);
+        setVaidPIN(false);
         console.log("Something went wrong");
       }
     }
   };
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation();
+    useHandleValidation(initialValues, validationSchema);
 
   return (
     <div className="container mt-3">
@@ -205,7 +206,7 @@ function Register(props) {
             <select
               className="form-select"
               name="ROI"
-              value={values.firstName}
+              value={values.ROI}
               onChange={handleChange}
               onBlur={handleBlur}
             >
@@ -243,15 +244,15 @@ function Register(props) {
               <div className="form-error">{errors.Tenure}</div>
             ) : null}
 
-            {/* <Link to="/register3"> */}
-            <button
-              type="submit"
-              className="btn btn-primary mt-3"
-              onClick={handleSubmit}
-            >
-              Proceed
-            </button>
-            {/* </Link> */}
+            <Link to="/register2">
+              <button
+                type="submit"
+                className="btn btn-primary mt-3"
+                // onClick={handleSubmit}
+              >
+                Proceed
+              </button>
+            </Link>
           </form>
         </div>
       </div>
