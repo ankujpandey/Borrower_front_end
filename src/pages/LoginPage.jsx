@@ -47,11 +47,11 @@ function LoginComponent(props) {
               />
             </div>
 
-            {/* <NavLink to="/dashboard"> */}
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-            {/* </NavLink> */}
+            <NavLink to="/dashboard">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
+            </NavLink>
           </form>
         </div>
       </div>

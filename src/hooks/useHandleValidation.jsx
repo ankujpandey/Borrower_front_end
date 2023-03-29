@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../components/UserContext";
 
 export const useHandleValidation = (
   initialValues,
@@ -9,8 +10,8 @@ export const useHandleValidation = (
   url,
   api
 ) => {
+  const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
-  const [flag, setFlag] = useState(false);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -39,8 +40,15 @@ export const useHandleValidation = (
           );
           console.log(res);
           if (res.status === 201) {
-            // setFlag(true);
+            localStorage.setItem("localUser", JSON.stringify(res?.data?.data));
+
+            // // setFlag(true);
+            // const uid = res?.data?.data?.signUp?.uid;
+            // setUser(res.data.data);
+            // console.log("uid ---- ", uid);
+            // localStorage.setItem("localUser", JSON.stringify(user));
             navigate(url);
+            // return uid;
           } else {
             alert("Something went wrong!!!");
           }

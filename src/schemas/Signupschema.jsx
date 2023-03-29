@@ -15,10 +15,10 @@ export const SignUpschema = Yup.object({
     )
     .required("E-mail can not be empty!"),
   password: Yup.string()
-    .matches(
-      /([A-Z]){1}([a-z]){1}([a-zA-Z0-9])*(@|#|$|&)([a-zA-Z0-9])*$/,
-      "Please follow this format : first letter capital, second letter small, include a special character(@,#,$,&) and a digit "
-    )
+    // .matches(
+    //   /([A-Z]){1}([a-z]){1}([a-zA-Z0-9])*(@|#|$|&)([a-zA-Z0-9])*$/,
+    //   "Please follow this format : first letter capital, second letter small, include a special character(@,#,$,&) and a digit "
+    // )
     .min(5, `password can't be less than 5 characters`)
     .max(15, `password can't be greater than 15 characters`)
     .required("Please enter the password"),

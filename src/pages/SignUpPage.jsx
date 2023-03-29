@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
+
+import PasswordStrengthBar from "react-password-strength-bar";
+
 import {
   SignUpschema,
   initialValuesSignupschema,
@@ -86,6 +89,10 @@ function SignUpPage(props) {
                 onChange={handleChange}
                 onBlur={handleBlur}
               />
+              <PasswordStrengthBar
+                className="mt-3"
+                password={values.password}
+              />
               {errors.password && touched.password ? (
                 <p className="form-error text-danger">{errors.password}</p>
               ) : null}
@@ -111,7 +118,7 @@ function SignUpPage(props) {
               ) : null}
             </div>
 
-            {/* <NavLink to="/dashboard"> */}
+            {/* <NavLink to="/Sign-in"> */}
             <button type="submit" className="btn btn-primary">
               Sign-Up
             </button>

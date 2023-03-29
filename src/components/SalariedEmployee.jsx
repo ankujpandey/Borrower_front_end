@@ -73,11 +73,11 @@ function SalariedEmployee(props) {
           <p className="form-error text-danger">{errors.company_email}</p>
         ) : null}
       </div>
-      {/* <Link to="/register3"> */}
-      <button type="submit" className="btn btn-success mt-3">
-        Submit
-      </button>
-      {/* </Link> */}
+      <Link to="/register3">
+        <button type="submit" className="btn btn-success mt-3">
+          Submit
+        </button>
+      </Link>
     </form>
   );
 }

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 
 function Address(props) {
   const [validPIN, setVaidPIN] = useState(false);
@@ -129,9 +130,11 @@ function Address(props) {
         />
 
         {loading ? null : (
-          <button type="submit" className="btn btn-success mt-3">
-            Submit
-          </button>
+          <NavLink to="/borrowing-details">
+            <button type="submit" className="btn btn-success mt-3">
+              Submit
+            </button>
+          </NavLink>
         )}
       </form>
     </div>
