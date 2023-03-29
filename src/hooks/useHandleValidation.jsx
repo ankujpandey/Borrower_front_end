@@ -2,54 +2,65 @@ import axios from "axios";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { Axios } from "../functions/Axios";
 
 export const useHandleValidation = (
-  initialValues,
-  validationSchema,
-  url,
-  api
+	initialValues,
+	validationSchema,
+	url,
+	api
 ) => {
-  const navigate = useNavigate();
-  const [flag, setFlag] = useState(false);
+	const navigate = useNavigate();
+	// const [flag, setFlag] = useState(false);
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useFormik({
-      initialValues,
-      validationSchema,
-      // onSubmit: (values) => {
-      //   // console.log("scsdnsdfds");
-      //   console.log(values);
-      //   // console.log(employeeType);
-      //   // setFlag(true);
-      // },
+	const config = {
+		method: "post",
+		url: api,
+		headers: { "Content-Type": "application/json" },
+	};
 
-      onSubmit: async (values, action) => {
-        console.log(values);
-        try {
-          const res = await axios.post(
-            api,
+	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+		useFormik({
+			initialValues,
+			validationSchema,
+			// onSubmit: (values) => {
+			//   // console.log("scsdnsdfds");
+			//   console.log(values);
+			//   // console.log(employeeType);
+			//   // setFlag(true);
+			// },
 
-            values,
+			onSubmit: async (values, action) => {
+				console.log(values);
+				// try {
+				// 	const res = await axios.post(
+				// 		api,
 
-            {
-              headers: {
-                "Content-Type": "application/json",
-              },
-            }
-          );
-          console.log(res);
-          if (res.status === 201) {
-            // setFlag(true);
-            navigate(url);
-          } else {
-            alert("Something went wrong!!!");
-          }
-        } catch (error) {
-          console.log(error);
-        }
-        action.resetForm();
-      },
-    });
+				// 		values,
 
-  return { values, errors, touched, handleBlur, handleChange, handleSubmit };
+				// 		{
+				// 			headers: {
+				// 				"Content-Type": "application/json",
+				// 			},
+				// 		}
+				// 	);
+				// 	console.log(res);
+
+				const { loading, error, data } = Axios(config);
+
+				if (data.status === 201) {
+					// setFlag(true);
+					console.log(data.data);
+					navigate(url);
+				} else {
+					alert("Something went wrong!!!");
+				}
+				// } catch (error) {
+				// 	console.log(error);
+				// }
+				action.resetForm();
+			},
+		});
+
+	return { values, errors, touched, handleBlur, handleChange, handleSubmit };
 };
