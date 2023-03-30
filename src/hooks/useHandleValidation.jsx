@@ -1,8 +1,8 @@
-import axios from "axios";
 import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
+
 import { useNavigate } from "react-router";
-import { Axios } from "../functions/Axios";
+import { ApiCall } from "../functions/ApiCall";
+// import { Axios } from "../functions/Axios";
 import { UserContext } from "../components/UserContext";
 
 export const useHandleValidation = (
@@ -13,12 +13,6 @@ export const useHandleValidation = (
 ) => {
 	const navigate = useNavigate();
 	// const [flag, setFlag] = useState(false);
-
-	const config = {
-		method: "post",
-		url: api,
-		headers: { "Content-Type": "application/json" },
-	};
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useFormik({
@@ -33,8 +27,15 @@ export const useHandleValidation = (
 
 			onSubmit: async (values, action) => {
 				console.log(values);
+
+				const config = {
+					method: "post",
+					url: api,
+					headers: { "Content-Type": "application/json" },
+					data: values,
+				};
 				// try {
-				// 	const res = await axios.post(
+				// 	const data = await axios.post(
 				// 		api,
 
 				// 		values,
@@ -45,9 +46,8 @@ export const useHandleValidation = (
 				// 			},
 				// 		}
 				// 	);
-				// 	console.log(res);
-
-				const { loading, error, data } = Axios(config);
+				// console.log(data);
+				let data = await ApiCall(config);
 
 				if (data.status === 201) {
 					// setFlag(true);
@@ -60,7 +60,7 @@ export const useHandleValidation = (
 				// } catch (error) {
 				// 	console.log(error);
 				// }
-				action.resetForm();
+				// action.resetForm();
 			},
 		});
 

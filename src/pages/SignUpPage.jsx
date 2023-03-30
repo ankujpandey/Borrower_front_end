@@ -12,7 +12,7 @@ import {
 function SignUpPage(props) {
 	const url = "/dashboard";
 
-	const api = "http://localhost:4000/api/v1/user";
+	const api = "http://localhost:4000/api/v1/signUp";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useHandleValidation(initialValuesSignupschema, SignUpschema, url, api);
@@ -45,7 +45,7 @@ function SignUpPage(props) {
 					<div className="row mt-5">
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
-								<h1 class="text-white animated zoomIn">Sign-Up</h1>
+								<h1 className="text-white animated zoomIn">Sign-Up</h1>
 							</div>
 							<hr className="bg-white mx-auto mt-0" style={{ width: 90 }} />
 							<nav aria-label="breadcrumb"></nav>
@@ -53,21 +53,21 @@ function SignUpPage(props) {
 					</div>
 				</div>
 
-				<div class="container px-lg-5">
-					<div class="row justify-content-center">
-						<div class="col-lg-5">
+				<div className="container px-lg-5">
+					<div className="row justify-content-center">
+						<div className="col-lg-5">
 							<div className="card wow fadeInUp" data-wow-delay="0.3s">
 								<form
 									action=""
 									onSubmit={handleSubmit}
 									className="needs-validation"
-									novalidate>
-									<div class="row justify-content-center g-3 m-3 mb-4">
+									noValidate>
+									<div className="row justify-content-center g-3 m-3 mb-4">
 										<div className="col-md-6">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="text"
-													class="form-control"
+													className="form-control"
 													id="firstName"
 													name="firstName"
 													placeholder="First Name"
@@ -75,7 +75,7 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label for="firstName">First Name</label>
+												<label htmlFor="firstName">First Name</label>
 												{errors.firstName && touched.firstName ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.firstName}
@@ -85,7 +85,7 @@ function SignUpPage(props) {
 										</div>
 
 										<div className="col-md-6">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="text"
 													className="form-control"
@@ -96,7 +96,7 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label for="lastName">Last Name</label>
+												<label htmlFor="lastName">Last Name</label>
 												{errors.lastname && touched.lastname ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.lastName}
@@ -105,7 +105,7 @@ function SignUpPage(props) {
 											</div>
 										</div>
 										<div className="col-12">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="email"
 													className="form-control"
@@ -125,7 +125,7 @@ function SignUpPage(props) {
 											</div>
 										</div>
 										<div className="col-12">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="password"
 													className="form-control"
@@ -137,10 +137,12 @@ function SignUpPage(props) {
 													onBlur={handleBlur}
 												/>
 												<label htmlFor="password">Password</label>
-												<PasswordStrengthBar
-													className="mt-2"
-													password={values.password}
-												/>
+												{values.password.length > 0 ? (
+													<PasswordStrengthBar
+														className="mt-2"
+														password={values.password}
+													/>
+												) : null}
 												{errors.password && touched.password ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.password}
@@ -148,8 +150,8 @@ function SignUpPage(props) {
 												) : null}
 											</div>
 										</div>
-										<div className="col-12 mt-1">
-											<div class="form-floating">
+										<div className="col-12">
+											<div className="form-floating">
 												<input
 													type="password"
 													className="form-control"

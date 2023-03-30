@@ -1,16 +1,37 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { ApiCall } from "../functions/ApiCall";
 
 function LoginComponent(props) {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
-	const handleSubmit = (e) => {
+	const navigate = useNavigate();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(email);
 		console.log(password);
 		setEmail("");
 		setPassword("");
+
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/logIn/?email=${email}&password=${password}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
+		let data = await ApiCall(config);
+
+		if (data.status === 201) {
+			// setFlag(true);
+			console.log(data.data);
+			localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
+			navigate("/dashboard");
+		} else {
+			alert("Something went wrong!!!");
+		}
 	};
+
 	return (
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">
@@ -18,7 +39,7 @@ function LoginComponent(props) {
 					<div className="row mt-5">
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
-								<h1 class="text-white animated zoomIn">Sign-In</h1>
+								<h1 className="text-white animated zoomIn">Sign-In</h1>
 							</div>
 							<hr className="bg-white mx-auto mt-0" style={{ width: 90 }} />
 							<nav aria-label="breadcrumb"></nav>
@@ -26,18 +47,14 @@ function LoginComponent(props) {
 					</div>
 				</div>
 
-				<div class="container px-lg-5">
-					<div class="row justify-content-center">
-						<div class="col-lg-5">
+				<div className="container px-lg-5">
+					<div className="row justify-content-center">
+						<div className="col-lg-5">
 							<div className="card wow fadeInUp" data-wow-delay="0.3s">
-								<form
-									action=""
-									onSubmit={(e) => handleSubmit(e)}
-									className="needs-validation"
-									novalidate>
-									<div class="row justify-content-center g-3 m-3 mb-4">
+								<form action="" onSubmit={(e) => handleSubmit(e)}>
+									<div className="row justify-content-center g-3 m-3 mb-4">
 										<div className="col-12">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="email"
 													className="form-control"
@@ -52,7 +69,7 @@ function LoginComponent(props) {
 											</div>
 										</div>
 										<div className="col-12">
-											<div class="form-floating">
+											<div className="form-floating">
 												<input
 													type="password"
 													className="form-control"
