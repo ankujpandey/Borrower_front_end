@@ -1,8 +1,9 @@
-// import axios from "axios";
 import { useFormik } from "formik";
-import { useContext, useEffect, useState } from "react";
+
 import { useNavigate } from "react-router";
 import { ApiCall } from "../functions/ApiCall";
+// import { Axios } from "../functions/Axios";
+import { UserContext } from "../components/UserContext";
 
 export const useHandleValidation = (
 	initialValues,
@@ -51,6 +52,7 @@ export const useHandleValidation = (
 				if (data.status === 201) {
 					// setFlag(true);
 					console.log(data.data);
+					localStorage.setItem("localUser", JSON.stringify(res?.data?.data));
 					navigate(url);
 				} else {
 					alert("Something went wrong!!!");
