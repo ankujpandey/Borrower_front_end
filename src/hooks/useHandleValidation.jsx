@@ -52,7 +52,7 @@ export const useHandleValidation = (
 				if (data.status === 201) {
 					// setFlag(true);
 					console.log(data.data);
-					localStorage.setItem("localUser", JSON.stringify(res?.data?.data));
+					localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
 					navigate(url);
 				} else {
 					alert("Something went wrong!!!");
