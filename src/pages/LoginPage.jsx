@@ -1,16 +1,37 @@
 import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { ApiCall } from "../functions/ApiCall";
 
 function LoginComponent(props) {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
-	const handleSubmit = (e) => {
+	const navigate = useNavigate();
+
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 		console.log(email);
 		console.log(password);
 		setEmail("");
 		setPassword("");
+
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/logIn/?email=${email}&password=${password}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
+		let data = await ApiCall(config);
+
+		if (data.status === 201) {
+			// setFlag(true);
+			console.log(data.data);
+			localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
+			navigate("/dashboard");
+		} else {
+			alert("Something went wrong!!!");
+		}
 	};
+
 	return (
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">

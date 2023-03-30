@@ -12,7 +12,7 @@ import {
 function SignUpPage(props) {
 	const url = "/dashboard";
 
-	const api = "http://localhost:4000/api/v1/user";
+	const api = "http://localhost:4000/api/v1/signUp";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useHandleValidation(initialValuesSignupschema, SignUpschema, url, api);
