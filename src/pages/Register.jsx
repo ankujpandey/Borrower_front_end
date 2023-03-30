@@ -6,6 +6,7 @@ import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
 
 function Register() {
 	const url = "/address";
+	const api = "http://localhost:4000/api/v1/user";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useHandleValidation(RegistrationInitialValues, RegistrationSchema, url);
@@ -113,13 +114,12 @@ function Register() {
 									{errors.Aadhaar && touched.Aadhaar ? (
 										<div className="form-error">{errors.Aadhaar}</div>
 									) : null}
-
-									{/* <Link to="/register2"> */}
-									<button type="submit" className="btn btn-success mt-3">
-										Submit
-									</button>
-									{/* </Link> */}
 								</div>
+								{/* <Link to="/register2"> */}
+								<button type="submit" className="btn btn-success mt-3">
+									Submit
+								</button>
+								{/* </Link> */}
 							</form>
 						</div>
 					</div>

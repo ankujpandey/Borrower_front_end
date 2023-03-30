@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { BorrowingInitialValues, BorrowingSchema } from "../schemas";
 
@@ -52,10 +53,11 @@ function BorrowingDetails() {
         {errors.Tenure && touched.Tenure ? (
           <div className="form-error">{errors.Tenure}</div>
         ) : null}
-
-        <button type="submit" className="btn btn-success mt-3">
-          Submit
-        </button>
+        <NavLink to="/register2">
+          <button type="submit" className="btn btn-success mt-3">
+            Submit
+          </button>
+        </NavLink>
       </form>
     </div>
   );

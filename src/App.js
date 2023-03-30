@@ -1,5 +1,12 @@
 import "./App.css";
 import EmploymentDetails from "./pages/EmploymentDetails";
+<<<<<<< HEAD
+=======
+// import AadharUploadComponent from "./components/AadharUploadComponent";
+// import SignUpComponent from "./pages/SignUpPage";
+// import LoginComponent from "./pages/LoginPage";
+import Home from "./pages/Home";
+>>>>>>> 035746a68596ddfaaead62b34eb07a273077a50d
 import { Routes, Route } from "react-router-dom"; //npm i react-router-dom
 import Register from "./pages/Register";
 import Register3 from "./pages/Register3";
@@ -10,11 +17,15 @@ import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
 import Address from "./components/Address";
 import BorrowingDetails from "./components/BorrowingDetails";
+<<<<<<< HEAD
 import Home from "./pages/Home";
+=======
+import { UserProvider } from "./components/UserContext";
+>>>>>>> 035746a68596ddfaaead62b34eb07a273077a50d
 
 function App() {
   return (
-    <div>
+    <UserProvider>
       {/* <EmploymentDetails /> */}
       {/* <AadharUploadComponent /> */}
       {/* <SignUpComponent /> */}
@@ -34,7 +45,7 @@ function App() {
         <Route path="/address" element={<Address />} />
         <Route path="/borrowing-details" element={<BorrowingDetails />} />
       </Routes>
-    </div>
+    </UserProvider>
   );
 }
 

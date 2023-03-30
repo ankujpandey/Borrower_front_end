@@ -111,11 +111,11 @@ function Register4(props) {
                   disabled
                 />
 
-                {/* <Link to="/dashboard"> */}
-                <button type="submit" className="btn btn-success mt-3">
-                  Submit
-                </button>
-                {/* </Link> */}
+                <Link to="/dashboard">
+                  <button type="submit" className="btn btn-success mt-3">
+                    Submit
+                  </button>
+                </Link>
               </>
             ) : null}
           </form>
