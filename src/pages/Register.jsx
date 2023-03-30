@@ -9,7 +9,12 @@ function Register() {
 	const api = "http://localhost:4000/api/v1/user";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useHandleValidation(RegistrationInitialValues, RegistrationSchema, url);
+		useHandleValidation(
+			RegistrationInitialValues,
+			RegistrationSchema,
+			url
+			//   api
+		);
 
 	const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
@@ -134,11 +139,11 @@ function Register() {
 										<div className="form-error">{errors.Aadhaar}</div>
 									) : null}
 								</div>
-								{/* <Link to="/register2"> */}
-								<button type="submit" className="btn btn-success mt-3">
-									Submit
-								</button>
-								{/* </Link> */}
+								<Link to="/address">
+									<button type="submit" className="btn btn-success mt-3">
+										Submit
+									</button>
+								</Link>
 							</form>
 						</div>
 					</div>
