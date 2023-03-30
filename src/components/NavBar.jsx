@@ -55,13 +55,13 @@ function NavBar(props) {
 						Contact
 					</Link>
 				</div>
-				<butaton
+				<button
 					type="button"
 					className="btn text-secondary ms-3"
 					data-bs-toggle="modal"
 					data-bs-target="#searchModal">
 					<i className="fa fa-search" />
-				</butaton>
+				</button>
 				<Link
 					href="https://htmlcodex.com/startup-company-website-template"
 					className="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3">
