@@ -105,7 +105,7 @@ function Address(props) {
           </>
         ) : null}
 
-        <label className="col-form-label">District</label>
+        <label className="col-form-label">City</label>
         <input
           type="text"
           className="form-control"
