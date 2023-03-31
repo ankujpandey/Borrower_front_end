@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { ApiCall } from "../functions/ApiCall";
+import { UserContext } from "../components/UserContext";
 
 function LoginComponent(props) {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
 	const navigate = useNavigate();
+	const { setUser } = useContext(UserContext);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -25,6 +27,7 @@ function LoginComponent(props) {
 		if (data.status === 201) {
 			// setFlag(true);
 			console.log(data.data);
+			setUser(data?.data?.data);
 			localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
 			navigate("/dashboard");
 		} else {
@@ -50,7 +53,9 @@ function LoginComponent(props) {
 				<div className="container px-lg-5">
 					<div className="row justify-content-center">
 						<div className="col-lg-5">
-							<div className="card wow fadeInUp" data-wow-delay="0.3s">
+							<div
+								className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+								data-wow-delay="0.3s">
 								<form action="" onSubmit={(e) => handleSubmit(e)}>
 									<div className="row justify-content-center g-3 m-3 mb-4">
 										<div className="col-12">

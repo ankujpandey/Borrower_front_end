@@ -66,84 +66,118 @@ function Register() {
 			<div className="container px-lg-5">
 				<div className="row justify-content-center">
 					<div className="col-lg-11">
-						<div className="card wow fadeInUp" data-wow-delay="0.3s">
+						<div
+							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+							data-wow-delay="0.3s">
 							<form
 								action=""
 								onSubmit={handleSubmit}
 								className="needs-validation"
 								noValidate>
 								<div className="row justify-content-center g-3 m-3 mb-4">
-									<label className="col-form-label">First Name</label>
-									<input
-										type="text"
-										className="form-control"
-										name="firstName"
-										value={user.userName.firstName}
-										disabled
-									/>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="firstName"
+												value={user.userName.firstName}
+												disabled
+											/>
+											<label htmlFor="firstName">First Name</label>
+										</div>
+									</div>
 
-									<label className="col-form-label">Last Name</label>
-									<input
-										type="text"
-										className="form-control"
-										name="lastName"
-										value={user.userName.lastName}
-										disabled
-									/>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="lastName"
+												value={user.userName.lastName}
+												disabled
+											/>
+											<label htmlFor="lastName">Last Name</label>
+										</div>
+									</div>
 
-									<label className="col-form-label">Contact</label>
-									<input
-										type="text"
-										className="form-control"
-										name="Contact"
-										value={values.Contact}
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-									{errors.Contact && touched.Contact ? (
-										<div className="form-error">{errors.Contact}</div>
-									) : null}
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="Contact"
+												id="Contact"
+												value={values.Contact}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<label htmlFor="Contact">Contact</label>
+											{errors.Contact && touched.Contact ? (
+												<div className="form-error">{errors.Contact}</div>
+											) : null}
+										</div>
+									</div>
 
-									<label className="col-form-label">Email</label>
-									<input
-										type="text"
-										className="form-control"
-										name="Email"
-										value={user.signUp.email}
-										disabled
-									/>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="Email"
+												id="Email"
+												value={user.signUp.email}
+												disabled
+											/>
+											<label htmlFor="Email">Email</label>
+										</div>
+									</div>
 
-									<label className="col-form-label">PAN</label>
-									<input
-										type="text"
-										className="form-control"
-										name="PAN"
-										value={values.PAN}
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-									{errors.PAN && touched.PAN ? (
-										<div className="form-error">{errors.PAN}</div>
-									) : null}
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="PAN"
+												id="PAN"
+												value={values.PAN}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<label htmlFor="PAN">PAN</label>
+											{errors.PAN && touched.PAN ? (
+												<div className="form-error">{errors.PAN}</div>
+											) : null}
+										</div>
+									</div>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="Aadhaar"
+												id="Aadhaar"
+												value={values.Aadhaar}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<label htmlFor="Aadhaar">Aadhaar</label>
+											{errors.Aadhaar && touched.Aadhaar ? (
+												<div className="form-error">{errors.Aadhaar}</div>
+											) : null}
+										</div>
+									</div>
 
-									<label className="col-form-label">Aadhaar</label>
-									<input
-										type="text"
-										className="form-control"
-										name="Aadhaar"
-										value={values.Aadhaar}
-										onChange={handleChange}
-										onBlur={handleBlur}
-									/>
-									{errors.Aadhaar && touched.Aadhaar ? (
-										<div className="form-error">{errors.Aadhaar}</div>
-									) : null}
+									<div className="col-12">
+										{/* <Link to="/address"> */}
+										<button
+											type="submit"
+											className="btn btn-primary w-100 py-3 btn-primary">
+											Next
+										</button>
+										{/* </Link> */}
+									</div>
 								</div>
-								<Link to="/address">
-									<button type="submit" className="btn btn-success mt-3">
-										Submit
-									</button>
-								</Link>
 							</form>
 						</div>
 					</div>
