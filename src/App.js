@@ -18,17 +18,17 @@ import { UserContext, UserProvider } from "./components/UserContext";
 import { useContext } from "react";
 
 function App() {
-	// const { user, setUser } = useContext(UserContext);
-	return (
-		<UserProvider>
-			{/* <EmploymentDetails /> */}
-			{/* <AadharUploadComponent /> */}
-			{/* <SignUpComponent /> */}
-			{/* <LoginComponent /> */}
-			{/* <LoginPage /> */}
-			<NavBar />
+  // const { user, setUser } = useContext(UserContext);
+  return (
+    <UserProvider>
+      {/* <EmploymentDetails /> */}
+      {/* <AadharUploadComponent /> */}
+      {/* <SignUpComponent /> */}
+      {/* <LoginComponent /> */}
+      {/* <LoginPage /> */}
+      <NavBar />
 
-			{/* {user ? (
+      {/* {user ? (
 				<Routes>
 					<Route path="/dashboard" element={<Dashboard />} />
 					<Route path="/register" element={<Register />} />
@@ -46,20 +46,20 @@ function App() {
 				</Routes>
 			)} */}
 
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/dashboard" element={<Dashboard />} />
-				<Route path="/sign-up" element={<SignUpPage />} />
-				<Route path="/sign-in" element={<LoginPage />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/register2" element={<EmploymentDetails />} />
-				<Route path="/register3" element={<Register3 />} />
-				<Route path="/register4" element={<Register4 />} />
-				<Route path="/address" element={<Address />} />
-				<Route path="/borrowing-details" element={<BorrowingDetails />} />
-			</Routes>
-		</UserProvider>
-	);
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/sign-up" element={<SignUpPage />} />
+        <Route path="/sign-in" element={<LoginPage />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/register2" element={<EmploymentDetails />} />
+        <Route path="/register3" element={<Register3 />} />
+        <Route path="/register4" element={<Register4 />} />
+        <Route path="/address" element={<Address />} />
+        <Route path="/borrowing-details" element={<BorrowingDetails />} />
+      </Routes>
+    </UserProvider>
+  );
 }
 
 export default App;
