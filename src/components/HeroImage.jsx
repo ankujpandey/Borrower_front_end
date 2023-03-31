@@ -11,7 +11,7 @@ function HeroImage(props) {
 					<div className="row g-4 py-3">
 						<div className="col-lg-6 text-center text-lg-start">
 							<h1 className="text-white mb-4 mt-3 animated zoomIn">
-								Get Up-to 12% intrest loan
+								Get Up-to 12% interest loan
 							</h1>
 							<p className="text-white pb-3 animated zoomIn">
 								Tempor rebum no at dolore lorem clita rebum rebum ipsum rebum
