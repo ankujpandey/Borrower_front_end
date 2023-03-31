@@ -1,23 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { UserContext } from "../components/UserContext";
 
 function Dashboard(props) {
-	const [user, setUser] = useState(null);
+	// const [user, setUser] = useState(null);
 	const [loading, setLoading] = useState(true);
+	const { user } = useContext(UserContext);
+	console.log("Context at dashboard", user?.result?.userName?.firstName);
 
-	useEffect(() => {
-		const userdata = JSON.parse(localStorage.getItem("localUser"));
-		if (userdata) {
-			setUser(userdata.result);
-			setLoading(false);
+	// useEffect(() => {
+	// 	// const userdata = JSON.parse(localStorage.getItem("localUser"));
+	// 	// if (userdata) {
+	// 	// 	setUser(userdata.result);
+	// 	// 	setLoading(false);
+	// 	// 	console.log(user);
+	// 	// }
+	// }, []);
 
-			console.log(user);
-		}
-	}, []);
-
-	if (loading) {
-		return <div>Loading....</div>;
-	}
+	// if (loading) {
+	// 	return <div>Loading....</div>;
+	// }
 	return (
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">
@@ -26,7 +28,7 @@ function Dashboard(props) {
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
 								<h1 className="text-white animated zoomIn mt-5">
-									Welcome {user.userName.firstName} !
+									Welcome {user?.result?.userName?.firstName} !
 								</h1>
 							</div>
 							<hr

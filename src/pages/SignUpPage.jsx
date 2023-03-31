@@ -17,32 +17,11 @@ function SignUpPage(props) {
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useHandleValidation(initialValuesSignupschema, SignUpschema, url, api);
 
-	useEffect(() => {
-		// Fetch all the forms we want to apply custom Bootstrap validation styles to
-		const forms = document.querySelectorAll(".needs-validation");
-
-		// Loop over them and prevent submission
-		Array.from(forms).forEach((form) => {
-			form.addEventListener(
-				"focusout",
-				(event) => {
-					if (!form.checkValidity()) {
-						event.preventDefault();
-						event.stopPropagation();
-					}
-
-					form.classList.add("was-validated");
-				},
-				false
-			);
-		});
-	}, []);
-
 	return (
 		<>
 			<div className="py-5 bg-primary hero-header mb-3">
 				<div className="container py-3 px-5">
-					<div className="row mt-5">
+					<div className="row mt-6">
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
 								<h1 className="text-white animated zoomIn">Sign-Up</h1>
@@ -56,7 +35,9 @@ function SignUpPage(props) {
 				<div className="container px-lg-5">
 					<div className="row justify-content-center">
 						<div className="col-lg-5">
-							<div className="card wow fadeInUp" data-wow-delay="0.3s">
+							<div
+								className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+								data-wow-delay="0.3s">
 								<form
 									action=""
 									onSubmit={handleSubmit}
@@ -67,7 +48,13 @@ function SignUpPage(props) {
 											<div className="form-floating">
 												<input
 													type="text"
-													className="form-control"
+													className={`form-control ${
+														errors.firstName && touched.firstName
+															? "is-invalid"
+															: touched.firstName
+															? "is-valid"
+															: ""
+													}`}
 													id="firstName"
 													name="firstName"
 													placeholder="First Name"
@@ -88,7 +75,13 @@ function SignUpPage(props) {
 											<div className="form-floating">
 												<input
 													type="text"
-													className="form-control"
+													className={`form-control ${
+														errors.lastname && touched.lastname
+															? "is-invalid"
+															: touched.lastname
+															? "is-valid"
+															: ""
+													}`}
 													id="lastName"
 													name="lastName"
 													placeholder="Last Name"
@@ -108,7 +101,13 @@ function SignUpPage(props) {
 											<div className="form-floating">
 												<input
 													type="email"
-													className="form-control"
+													className={`form-control ${
+														errors.email && touched.email
+															? "is-invalid"
+															: touched.email
+															? "is-valid"
+															: ""
+													}`}
 													id="email"
 													name="email"
 													placeholder="Please enter your Email"
@@ -128,7 +127,13 @@ function SignUpPage(props) {
 											<div className="form-floating">
 												<input
 													type="password"
-													className="form-control"
+													className={`form-control ${
+														errors.password && touched.password
+															? "is-invalid"
+															: touched.password
+															? "is-valid"
+															: ""
+													}`}
 													id="password"
 													name="password"
 													placeholder="Please enter your password"
@@ -154,7 +159,13 @@ function SignUpPage(props) {
 											<div className="form-floating">
 												<input
 													type="password"
-													className="form-control"
+													className={`form-control ${
+														errors.Confirmpassword && touched.Confirmpassword
+															? "is-invalid"
+															: touched.Confirmpassword
+															? "is-valid"
+															: ""
+													}`}
 													id="Confirmpassword"
 													name="Confirmpassword"
 													placeholder="Please enter your Confirm password"

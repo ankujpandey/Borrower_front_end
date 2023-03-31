@@ -1,3 +1,5 @@
+import React from "react";
+
 import "./App.css";
 import EmploymentDetails from "./pages/EmploymentDetails";
 // import AadharUploadComponent from "./components/AadharUploadComponent";

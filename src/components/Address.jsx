@@ -63,79 +63,163 @@ function Address(props) {
 		}
 	};
 	return (
-		<div className="container">
-			<form className="col-md-6 my-5" onSubmit={(event) => handleSubmit(event)}>
-				<label className="col-form-label">PIN Code</label>
-				<input
-					type="text"
-					className="form-control"
-					name="PinCode"
-					onChange={(event) => {
-						setPinCode(event.target.value);
-					}}
-					required
-				/>
+		<div>
+			<div className="py-5 bg-primary hero-header mb-3">
+				<div className="container py-3 px-5">
+					<div className="row mt-5">
+						<div className="col-12 text-center">
+							<div data-wow-delay="0.1s">
+								<h1 className="text-white animated zoomIn mt-5">
+									Registration
+								</h1>
+							</div>
+							<hr
+								className="bg-white mx-auto mt-0 mb-5"
+								style={{ width: 90 }}
+							/>
+							<nav aria-label="breadcrumb"></nav>
+						</div>
+					</div>
+				</div>
+			</div>
 
-				{/* Add CSS for class loading-msg */}
-				{loading ? (
-					<div className="loading-msg">Please Wait...</div>
-				) : pinCode.length != 6 ? null : validPIN ? null : (
-					<div className="form-error">Enter valid PIN Code</div>
-				)}
+			<div
+				className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
+				data-wow-delay="0.1s">
+				<h6 className="position-relative d-inline text-primary ps-4">
+					Address Details
+				</h6>
+				<h2 className="mt-2">Please enter the following details...</h2>
+			</div>
 
-				{validPIN ? (
-					<>
-						<label className="col-form-label">Post Office</label>
-						<select
-							type="text"
-							className="form-select"
-							name="PostOffice"
-							onChange={(event) => setPO(event.target.value)}>
-							<option>Please select your area Post Office</option>
+			<div className="container px-lg-5">
+				<div className="row justify-content-center">
+					<div className="col-lg-10">
+						<div
+							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+							data-wow-delay="0.3s">
+							<form
+								action=""
+								onSubmit={handleSubmit}
+								className="needs-validation"
+								noValidate>
+								<div className="row justify-content-center g-3 m-3 mb-4">
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="PinCode"
+												id="PinCode"
+												onChange={(event) => {
+													setPinCode(event.target.value);
+												}}
+												required
+											/>
+											<label htmlFor="PinCode">PIN Code</label>
 
-							{postOffice.map((area, index) => {
-								return (
-									<option key={index} value={area.Name}>
-										{area.Name}
-									</option>
-								);
-							})}
-						</select>
-					</>
-				) : null}
+											{/* Add CSS for class loading-msg */}
+											{loading ? (
+												<div className="loading-msg">Please Wait...</div>
+											) : pinCode.length != 6 ? (
+												// && form.touched.PinCode
+												<div className="form-error">Enter valid PIN Code</div>
+											) : validPIN ? null : (
+												<div className="form-error">Enter valid PIN Code</div>
+											)}
+										</div>
+									</div>
 
-				<label className="col-form-label">City</label>
-				<input
-					type="text"
-					className="form-control"
-					name="District"
-					disabled
-					value={district}
-					onChange={(event) => {
-						setDistrict(event.target.value);
-					}}
-				/>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<select
+												type="text"
+												className="form-select"
+												name="PostOffice"
+												id="PostOffice"
+												onChange={(event) => setPO(event.target.value)}>
+												<option>Please select your area Post Office</option>
 
-				<label className="col-form-label">State</label>
-				<input
-					type="text"
-					className="form-control"
-					name="State"
-					disabled
-					value={state}
-					onChange={(event) => {
-						setState(event.target.value);
-					}}
-				/>
+												{validPIN
+													? postOffice.map((area, index) => {
+															return (
+																<option key={index} value={area.Name}>
+																	{area.Name}
+																</option>
+															);
+													  })
+													: null}
+											</select>
+											<label htmlFor="PostOffice">Post Office</label>
+										</div>
+									</div>
 
-				{loading ? null : (
-					<NavLink to="/borrowing-details">
-						<button type="submit" className="btn btn-success mt-3">
-							Submit
-						</button>
-					</NavLink>
-				)}
-			</form>
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="District"
+												id="District"
+												disabled
+												value={district}
+												onChange={(event) => {
+													setDistrict(event.target.value);
+												}}
+											/>
+											<label htmlFor="District">City</label>
+										</div>
+									</div>
+
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												name="State"
+												id="State"
+												disabled
+												value={state}
+												onChange={(event) => {
+													setState(event.target.value);
+												}}
+											/>
+											<label htmlFor="State">State</label>
+										</div>
+									</div>
+
+									<div className="col-12">
+										{loading ? (
+											<button
+												type="submit"
+												className="btn btn-primary w-100 py-3 btn-primary"
+												disabled>
+												Submit
+											</button>
+										) : (
+											<NavLink to="/borrowing-details">
+												<button
+													type="submit"
+													className="btn btn-primary w-100 py-3 btn-primary">
+													Submit
+												</button>
+											</NavLink>
+										)}
+									</div>
+
+									{/* {loading ? null : (
+										<NavLink to="/borrowing-details">
+											<button type="submit" className="btn btn-success mt-3">
+												Submit
+											</button>
+										</NavLink>
+									)} */}
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 }
