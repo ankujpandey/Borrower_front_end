@@ -16,7 +16,7 @@ import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
 import Address from "./components/Address";
 import BorrowingDetails from "./components/BorrowingDetails";
-import { UserContext, UserProvider } from "./components/UserContext";
+import { UserProvider } from "./context/UserContext";
 import { useContext } from "react";
 
 function App() {

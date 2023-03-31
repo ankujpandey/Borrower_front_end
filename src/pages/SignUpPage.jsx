@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
-
 import PasswordStrengthBar from "react-password-strength-bar";
 
 import {
@@ -21,7 +20,7 @@ function SignUpPage(props) {
     <>
       <div className="py-5 bg-primary hero-header mb-3">
         <div className="container py-3 px-5">
-          <div className="row mt-6">
+          <div className="row mt-5">
             <div className="col-12 text-center">
               <div data-wow-delay="0.1s">
                 <h1 className="text-white animated zoomIn">Sign-Up</h1>

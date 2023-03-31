@@ -5,186 +5,186 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
 
 function Register() {
-	const url = "/address";
-	const api = "http://localhost:4000/api/v1/user";
+  const url = "/address";
+  const api = "http://localhost:4000/api/v1/user";
 
-	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useHandleValidation(
-			RegistrationInitialValues,
-			RegistrationSchema,
-			url
-			//   api
-		);
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useHandleValidation(
+      RegistrationInitialValues,
+      RegistrationSchema,
+      url
+      //   api
+    );
 
-	const [user, setUser] = useState(null);
-	const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-	useEffect(() => {
-		const userdata = JSON.parse(localStorage.getItem("localUser"));
-		if (userdata) {
-			setUser(userdata.result);
-			console.log(userdata);
-			setLoading(false);
+  useEffect(() => {
+    const userdata = JSON.parse(localStorage.getItem("localUser"));
+    if (userdata) {
+      setUser(userdata.result);
+      console.log(userdata);
+      setLoading(false);
 
-			//   console.log(user);
-		}
-	}, []);
+      //   console.log(user);
+    }
+  }, []);
 
-	if (loading) {
-		return <div>Loading....</div>;
-	}
-	return (
-		<div>
-			<div className="py-5 bg-primary hero-header mb-3">
-				<div className="container py-3 px-5">
-					<div className="row mt-5">
-						<div className="col-12 text-center">
-							<div data-wow-delay="0.1s">
-								<h1 className="text-white animated zoomIn mt-5">
-									Registration
-								</h1>
-							</div>
-							<hr
-								className="bg-white mx-auto mt-0 mb-5"
-								style={{ width: 90 }}
-							/>
-							<nav aria-label="breadcrumb"></nav>
-						</div>
-					</div>
-				</div>
-			</div>
+  if (loading) {
+    return <div>Loading....</div>;
+  }
+  return (
+    <div>
+      <div className="py-5 bg-primary hero-header mb-3">
+        <div className="container py-3 px-5">
+          <div className="row mt-5">
+            <div className="col-12 text-center">
+              <div data-wow-delay="0.1s">
+                <h1 className="text-white animated zoomIn mt-5">
+                  Registration
+                </h1>
+              </div>
+              <hr
+                className="bg-white mx-auto mt-0 mb-5"
+                style={{ width: 90 }}
+              />
+              <nav aria-label="breadcrumb"></nav>
+            </div>
+          </div>
+        </div>
+      </div>
 
-			<div
-				className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-				data-wow-delay="0.1s">
-				<h6 className="position-relative d-inline text-primary ps-4">
-					Initial Registration
-				</h6>
-				<h2 className="mt-2">Please enter the following details...</h2>
-			</div>
+      <div
+        className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
+        data-wow-delay="0.1s">
+        <h6 className="position-relative d-inline text-primary ps-4">
+          Initial Registration
+        </h6>
+        <h2 className="mt-2">Please enter the following details...</h2>
+      </div>
 
-			<div className="container px-lg-5">
-				<div className="row justify-content-center">
-					<div className="col-lg-11">
-						<div
-							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-							data-wow-delay="0.3s">
-							<form
-								action=""
-								onSubmit={handleSubmit}
-								className="needs-validation"
-								noValidate>
-								<div className="row justify-content-center g-3 m-3 mb-4">
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="firstName"
-												value={user.userName.firstName}
-												disabled
-											/>
-											<label htmlFor="firstName">First Name</label>
-										</div>
-									</div>
+      <div className="container px-lg-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-11">
+            <div
+              className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+              data-wow-delay="0.3s">
+              <form
+                action=""
+                onSubmit={handleSubmit}
+                className="needs-validation"
+                noValidate>
+                <div className="row justify-content-center g-3 m-3 mb-4">
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="firstName"
+                        value={user.userName.firstName}
+                        disabled
+                      />
+                      <label htmlFor="firstName">First Name</label>
+                    </div>
+                  </div>
 
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="lastName"
-												value={user.userName.lastName}
-												disabled
-											/>
-											<label htmlFor="lastName">Last Name</label>
-										</div>
-									</div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="lastName"
+                        value={user.userName.lastName}
+                        disabled
+                      />
+                      <label htmlFor="lastName">Last Name</label>
+                    </div>
+                  </div>
 
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="Contact"
-												id="Contact"
-												value={values.Contact}
-												onChange={handleChange}
-												onBlur={handleBlur}
-											/>
-											<label htmlFor="Contact">Contact</label>
-											{errors.Contact && touched.Contact ? (
-												<div className="form-error">{errors.Contact}</div>
-											) : null}
-										</div>
-									</div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="Contact"
+                        id="Contact"
+                        value={values.Contact}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <label htmlFor="Contact">Contact</label>
+                      {errors.Contact && touched.Contact ? (
+                        <div className="form-error">{errors.Contact}</div>
+                      ) : null}
+                    </div>
+                  </div>
 
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="Email"
-												id="Email"
-												value={user.signUp.email}
-												disabled
-											/>
-											<label htmlFor="Email">Email</label>
-										</div>
-									</div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="Email"
+                        id="Email"
+                        value={user.signUp.email}
+                        disabled
+                      />
+                      <label htmlFor="Email">Email</label>
+                    </div>
+                  </div>
 
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="PAN"
-												id="PAN"
-												value={values.PAN}
-												onChange={handleChange}
-												onBlur={handleBlur}
-											/>
-											<label htmlFor="PAN">PAN</label>
-											{errors.PAN && touched.PAN ? (
-												<div className="form-error">{errors.PAN}</div>
-											) : null}
-										</div>
-									</div>
-									<div className="col-md-6">
-										<div className="form-floating">
-											<input
-												type="text"
-												className="form-control"
-												name="Aadhaar"
-												id="Aadhaar"
-												value={values.Aadhaar}
-												onChange={handleChange}
-												onBlur={handleBlur}
-											/>
-											<label htmlFor="Aadhaar">Aadhaar</label>
-											{errors.Aadhaar && touched.Aadhaar ? (
-												<div className="form-error">{errors.Aadhaar}</div>
-											) : null}
-										</div>
-									</div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="PAN"
+                        id="PAN"
+                        value={values.PAN}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <label htmlFor="PAN">PAN</label>
+                      {errors.PAN && touched.PAN ? (
+                        <div className="form-error">{errors.PAN}</div>
+                      ) : null}
+                    </div>
+                  </div>
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className="form-control"
+                        name="Aadhaar"
+                        id="Aadhaar"
+                        value={values.Aadhaar}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <label htmlFor="Aadhaar">Aadhaar</label>
+                      {errors.Aadhaar && touched.Aadhaar ? (
+                        <div className="form-error">{errors.Aadhaar}</div>
+                      ) : null}
+                    </div>
+                  </div>
 
-									<div className="col-12">
-										{/* <Link to="/address"> */}
-										<button
-											type="submit"
-											className="btn btn-primary w-100 py-3 btn-primary">
-											Next
-										</button>
-										{/* </Link> */}
-									</div>
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
+                  <div className="col-4">
+                    {/* <Link to="/address"> */}
+                    <button
+                      type="submit"
+                      className="btn btn-primary w-100 py-3 btn-primary">
+                      Next
+                    </button>
+                    {/* </Link> */}
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Register;
