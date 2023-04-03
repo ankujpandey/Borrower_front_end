@@ -11,7 +11,6 @@ export const useHandleValidation = (
   api
 ) => {
   const navigate = useNavigate();
-  const { user, setUser } = useContext(UserContext);
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
@@ -21,7 +20,7 @@ export const useHandleValidation = (
       //   console.log(values);
       // },
 
-      onSubmit: async (values, action) => {
+      onSubmit: async (values) => {
         console.log(values);
 
         const config = {
@@ -35,11 +34,11 @@ export const useHandleValidation = (
 
         if (response.status === 201) {
           console.log(response.data);
-          setUser(response?.data?.data);
-          localStorage.setItem(
-            "localUser",
-            JSON.stringify(response?.data?.data)
-          );
+          // setUser(response?.data?.data);
+          // localStorage.setItem(
+          //   "localUser",
+          //   JSON.stringify(response?.data?.data)
+          // );
           navigate(url);
         } else {
           alert("Something went wrong!!!");

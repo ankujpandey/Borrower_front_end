@@ -26,7 +26,7 @@ function Dashboard(props) {
             <div className="col-12 text-center">
               <div data-wow-delay="0.1s">
                 <h1 className="text-white animated zoomIn mt-5">
-                  Welcome {user?.result?.userName?.firstName} !
+                  Welcome {user?.userName?.firstName} !
                 </h1>
               </div>
               <hr

@@ -9,19 +9,18 @@ function Address(props) {
 
   const url = "/register2";
 
-  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp.uid;
+  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp?.uid;
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useHandleValidation(AddressInitialValues, AddressSchema, url, api);
 
   const [validPIN, setValidPIN] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [pinCode, setPinCode] = useState("");
   const [postOffice, setPostOffice] = useState([]);
 
   useEffect(() => {
     fetchDistrict();
-  }, [pinCode]);
+  }, [values.pinCode]);
 
   const fetchDistrict = async () => {
     if (values.pinCode.length == 6) {
@@ -111,7 +110,6 @@ function Address(props) {
                         value={values.pinCode}
                         onBlur={handleBlur}
                         onChange={(event) => {
-                          setPinCode(event.target.value);
                           handleChange(event);
                         }}
                       />
@@ -124,7 +122,7 @@ function Address(props) {
                       {/* Add CSS for class loading-msg */}
                       {loading ? (
                         <div className="loading-msg">Please Wait...</div>
-                      ) : pinCode.length < 6 ? null : validPIN ? null : (
+                      ) : values.pinCode.length < 6 ? null : validPIN ? null : (
                         <div>Please enter a Valid Pin</div>
                       )}
                     </div>

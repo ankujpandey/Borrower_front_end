@@ -10,7 +10,7 @@ export const UserProvider = (props) => {
     const userData = JSON.parse(localStorage.getItem("localUser"));
 
     if (userData) {
-      console.log("local storage at context", userData);
+      console.log("local storage at context", userData.result);
       setUser(userData.result);
     } else {
       setUser([]);

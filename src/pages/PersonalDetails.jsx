@@ -1,16 +1,15 @@
-import React, { useContext, useEffect, useState } from "react";
-// import axios from "axios"; //npm i axios
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
 import { UserContext } from "../context/UserContext";
 
-function Register() {
+function PersonalDetails() {
   const { user } = useContext(UserContext);
+  console.log(user);
 
   const url = "/address";
 
-  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp.uid;
+  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp?.uid;
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useHandleValidation(
@@ -87,7 +86,8 @@ function Register() {
                         type="text"
                         className="form-control"
                         name="firstName"
-                        value={user.userName.firstName}
+                        id="firstName"
+                        value={user?.userName?.firstName}
                         disabled
                       />
                       <label htmlFor="firstName">First Name</label>
@@ -100,7 +100,8 @@ function Register() {
                         type="text"
                         className="form-control"
                         name="lastName"
-                        value={user.userName.lastName}
+                        id="lastName"
+                        value={user?.userName?.lastName}
                         disabled
                       />
                       <label htmlFor="lastName">Last Name</label>
@@ -112,15 +113,15 @@ function Register() {
                       <input
                         type="text"
                         className="form-control"
-                        name="Contact"
-                        id="Contact"
-                        value={values.Contact}
+                        name="contact"
+                        id="contact"
+                        value={values.contact}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <label htmlFor="Contact">Contact</label>
-                      {errors.Contact && touched.Contact ? (
-                        <div className="form-error">{errors.Contact}</div>
+                      <label htmlFor="contact">Contact</label>
+                      {errors.contact && touched.contact ? (
+                        <div className="form-error">{errors.contact}</div>
                       ) : null}
                     </div>
                   </div>
@@ -130,12 +131,12 @@ function Register() {
                       <input
                         type="text"
                         className="form-control"
-                        name="Email"
-                        id="Email"
-                        value={user.signUp.email}
+                        name="email"
+                        id="email"
+                        value={user?.signUp?.email}
                         disabled
                       />
-                      <label htmlFor="Email">Email</label>
+                      <label htmlFor="email">Email</label>
                     </div>
                   </div>
 
@@ -144,15 +145,15 @@ function Register() {
                       <input
                         type="text"
                         className="form-control"
-                        name="PAN"
-                        id="PAN"
-                        value={values.PAN}
+                        name="pan"
+                        id="pan"
+                        value={values.pan}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <label htmlFor="PAN">PAN</label>
-                      {errors.PAN && touched.PAN ? (
-                        <div className="form-error">{errors.PAN}</div>
+                      <label htmlFor="pan">PAN</label>
+                      {errors.pan && touched.pan ? (
+                        <div className="form-error">{errors.pan}</div>
                       ) : null}
                     </div>
                   </div>
@@ -161,28 +162,26 @@ function Register() {
                       <input
                         type="text"
                         className="form-control"
-                        name="Aadhaar"
-                        id="Aadhaar"
-                        value={values.Aadhaar}
+                        name="aadhaar"
+                        id="aadhaar"
+                        value={values.aadhaar}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <label htmlFor="Aadhaar">Aadhaar</label>
-                      {errors.Aadhaar && touched.Aadhaar ? (
-                        <div className="form-error">{errors.Aadhaar}</div>
+                      <label htmlFor="aadhaar">Aadhaar</label>
+                      {errors.aadhaar && touched.aadhaar ? (
+                        <div className="form-error">{errors.aadhaar}</div>
                       ) : null}
                     </div>
                   </div>
 
                   <div className="col-4">
-                    {/* <Link to="/address"> */}
                     <button
                       type="submit"
                       className="btn btn-primary w-100 py-3 btn-primary"
                     >
                       Next
                     </button>
-                    {/* </Link> */}
                   </div>
                 </div>
               </form>
@@ -194,4 +193,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default PersonalDetails;
