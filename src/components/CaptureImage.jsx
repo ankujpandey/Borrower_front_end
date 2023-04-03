@@ -6,10 +6,11 @@ import Webcam from "react-webcam"; //npm i react-webcam
 import { useFaceDetection } from "react-use-face-detection"; //npm i react-use-face-detection
 import FaceDetection from "@mediapipe/face_detection"; //npm i @mediapipe/face_detection
 import { Camera } from "@mediapipe/camera_utils"; //npm i @mediapipe/camera_utils
+import AadharUploadComponent from "./AadharUploadComponent";
 
 function CaptureImage(props) {
 	const [image, setImage] = useState(null);
-	const [seconds, setSeconds] = useState(10);
+	const [seconds, setSeconds] = useState(0);
 	const { id } = useParams();
 	const [flag, setFlag] = useState(false);
 	const [warning, setWarning] = useState(false);
@@ -44,12 +45,12 @@ function CaptureImage(props) {
 		}
 	}, [seconds]);
 
-	useEffect(() => {
-		if (isLoading == false) {
-			clickImage();
-			//   getLocation();
-		}
-	}, [flag, isLoading]);
+	// useEffect(() => {
+	// 	if (isLoading == false) {
+	// 		//	clickImage();
+	// 		//   getLocation();
+	// 	}
+	// }, [flag, isLoading]);
 
 	const clickImage = () => {
 		setTimeout(async () => {
@@ -64,128 +65,137 @@ function CaptureImage(props) {
 				setImage(picture);
 				// console.log("image----", image);
 			}
-		}, 10000);
+		}, 2000);
 	};
-
-	//   const UploadPicture = async () => {
-	//     if (image) {
-	//       console.log("Image---->", image);
-	//       try {
-	//         const response = await axios.put(
-	//           `http://localhost:3002/image/${id}`,
-	//           {
-	//             Image: image,
-	//             Latitude: latitude,
-	//             Longitude: longitude,
-	//             Address: address,
-	//           },
-	//           {
-	//             headers: {
-	//               "Content-Type": "application/json",
-	//             },
-	//           }
-	//         );
-
-	//         if (response.status == 200) {
-	//           window.location = "/";
-	//         }
-	//       } catch (error) {
-	//         console.log(error);
-	//       }
-	//     }
-	//   };
 
 	return (
 		<div>
-			<div className="container p-5">
-				<div
-					style={{
-						width: "500px",
-						height: "500px",
-						position: "relative",
-						marginBottom: "20px",
-						marginLeft: "auto",
-						marginRight: "auto",
-					}}>
-					<div className="container mb-5">
-						{image ? (
-							<>
-								<div className="success-msg">Image captured succesfully!!!</div>
-								<img src={image} className="taken-image" />
-								<br />
-								<button
-									className="btn btn-primary"
-									onClick={() => {
-										setFlag(!flag);
-										setSeconds(10);
-										setImage(null);
-									}}>
-									Retake
-								</button>
-								<Link to="/register4">
-									<button
-										className="btn btn-success float-end"
-										onClick={() => {
-											// UploadPicture();
-											// getAddress();
-										}}>
-										Submit Picture
-									</button>
-								</Link>
-							</>
-						) : (
-							<div>
-								{boundingBox.map((box, index) => (
-									<div
-										key={`${index + 1}`}
-										style={{
-											border: "2px solid green",
-											position: "absolute",
-											top: `${box.yCenter * 80}%`,
-											left: `${box.xCenter * 95}%`,
-											width: `${box.width * 100}%`,
-											height: `${box.height * 100}%`,
-											zIndex: 1,
-										}}
-									/>
-								))}
+			<div>
+				<div className="row justify-content-center g-3 m-3">
+					{image ? (
+						<>
+							<div className="col-md-6">
+								<div className="form-floating">
+									<AadharUploadComponent />
+								</div>
+							</div>
 
-								<Webcam
-									ref={webcamRef}
+							<div className="col-md-6">
+								<div className="form-floating">
+									<div className="col-md-12">
+										<img src={image} className="biometric-image" />
+										{/* {window.location.reload(false)} */}
+									</div>
+
+									<div
+										className="alert alert-success mt-2 col-md-12"
+										role="alert">
+										{/* <svg className="bi" role="img" aria-label="Danger:">
+								<use xlinkHref="#exclamation-triangle-fill" />
+							</svg> */}
+										<div className="mt-0">Image captured succesfully!!!</div>
+									</div>
+
+									<div className="col-md-12">
+										<button
+											className="btn btn-primary"
+											onClick={() => {
+												setFlag(!flag);
+												setSeconds(10);
+												setImage(null);
+												setWarning(false);
+												clickImage();
+												window.location.reload(false);
+											}}>
+											Retake
+										</button>
+
+										<Link to="/register4">
+											<button
+												className="btn btn-success float-end"
+												onClick={() => {
+													// UploadPicture();
+													// getAddress();
+												}}>
+												Upload
+											</button>
+										</Link>
+									</div>
+								</div>
+							</div>
+						</>
+					) : (
+						<div className="row justify-content-center">
+							{boundingBox.map((box, index) => (
+								<div
+									key={`${index + 1}`}
 									style={{
-										width: "500px",
-										height: "500px",
+										border: "2px solid green",
 										position: "absolute",
-										borderRadius: "50%",
+										top: `${box.yCenter * 80}%`,
+										left: `${box.xCenter * 95}%`,
+										width: `${box.width * 100}%`,
+										height: `${box.height * 100}%`,
+										zIndex: 1,
 									}}
 								/>
+							))}
+							<Webcam
+								style={{
+									width: "600px",
+									height: "500px",
+									position: "relative",
+									//marginBottom: "20px",
+									marginLeft: "auto",
+									marginRight: "auto",
+								}}
+								ref={webcamRef}
+							/>
+							<div className="col-md-4">
+								{warning ? (
+									<div>
+										<div className="form-floating">
+											<div className="alert alert-danger" role="alert">
+												{/* <svg className="bi" role="img" aria-label="Danger:">
+								<use xlinkHref="#exclamation-triangle-fill" />
+							</svg> */}
+												<div className="mt-0">
+													Image can only be clicked when there is only one
+													person in the frame!! Curently, the number of faces
+													recognised are {facesDetected}
+												</div>
+											</div>
+										</div>
+
+										<button
+											className="btn btn-primary w-100 py-2 btn-primary"
+											onClick={() => {
+												setFlag(!flag);
+												setSeconds(10);
+												setImage(null);
+												setWarning(false);
+												clickImage();
+											}}>
+											Retake
+										</button>
+									</div>
+								) : (
+									<button
+										// type="submit"
+										className="btn btn-primary w-100 py-3 btn-primary"
+										onClick={() => {
+											setSeconds(2);
+											clickImage();
+										}}>
+										Take Picture
+									</button>
+								)}
 							</div>
-						)}
-					</div>
+						</div>
+					)}
+
 					{seconds > 0 ? <div className="seconds">{seconds}</div> : null}
 				</div>
-
-				{warning ? (
-					<>
-						<div className="warning">
-							Image can only be clicked when there is only one person in the
-							frame!!
-							<br />
-							Curently, the number of faces recognised are {facesDetected}
-							<br />
-						</div>
-						<button
-							className="btn btn-primary"
-							onClick={() => {
-								setFlag(!flag);
-								setSeconds(10);
-								setImage(null);
-								setWarning(false);
-							}}>
-							Retake
-						</button>
-					</>
-				) : null}
 			</div>
 		</div>
 	);
