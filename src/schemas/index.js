@@ -28,6 +28,24 @@ export const RegistrationInitialValues = {
 };
 
 // ---------------------------------------
+//   For Address Registration
+// ---------------------------------------
+
+export const AddressSchema = Yup.object({
+  pinCode: Yup.string()
+    .matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
+    .max(6)
+    .required("Pin Code can not be empty!"),
+});
+
+export const AddressInitialValues = {
+  pinCode: "",
+  postOffice: "",
+  city: "",
+  state: "",
+};
+
+// ---------------------------------------
 //   For Borrowing Details Registration
 // ---------------------------------------
 

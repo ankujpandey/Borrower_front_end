@@ -2,13 +2,8 @@ import React, { createContext, useState, useEffect } from "react";
 
 export const UserContext = createContext();
 
-export const UserProvider = props => {
+export const UserProvider = (props) => {
   const [user, setUser] = useState(null);
-
-  //   const state = {
-  //     user,
-  //     setUser,
-  //   };
 
   useEffect(() => {
     // localStorage.clear();
@@ -16,7 +11,7 @@ export const UserProvider = props => {
 
     if (userData) {
       console.log("local storage at context", userData);
-      setUser(userData);
+      setUser(userData.result);
     } else {
       setUser([]);
     }

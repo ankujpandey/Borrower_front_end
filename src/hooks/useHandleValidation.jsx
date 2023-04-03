@@ -1,10 +1,8 @@
 import { useFormik } from "formik";
 import { useContext } from "react";
-
 import { useNavigate } from "react-router";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
-// import { Axios } from "../functions/Axios";
 
 export const useHandleValidation = (
   initialValues,
@@ -20,10 +18,7 @@ export const useHandleValidation = (
       initialValues,
       validationSchema,
       // onSubmit: (values) => {
-      //   // console.log("scsdnsdfds");
       //   console.log(values);
-      //   // console.log(employeeType);
-      //   // setFlag(true);
       // },
 
       onSubmit: async (values, action) => {
@@ -35,34 +30,20 @@ export const useHandleValidation = (
           headers: { "Content-Type": "application/json" },
           data: values,
         };
-        // try {
-        // 	const data = await axios.post(
-        // 		api,
 
-        // 		values,
+        let response = await ApiCall(config);
 
-        // 		{
-        // 			headers: {
-        // 				"Content-Type": "application/json",
-        // 			},
-        // 		}
-        // 	);
-        // console.log(data);
-        let data = await ApiCall(config);
-
-        if (data.status === 201) {
-          // setFlag(true);
-          console.log(data.data);
-          setUser(data?.data?.data);
-          localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
+        if (response.status === 201) {
+          console.log(response.data);
+          setUser(response?.data?.data);
+          localStorage.setItem(
+            "localUser",
+            JSON.stringify(response?.data?.data)
+          );
           navigate(url);
         } else {
           alert("Something went wrong!!!");
         }
-        // } catch (error) {
-        // 	console.log(error);
-        // }
-        // action.resetForm();
       },
     });
 

@@ -1,36 +1,35 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "../context/UserContext";
+import { useHandleValidation } from "../hooks/useHandleValidation";
+import { AddressInitialValues, AddressSchema } from "../schemas";
 
 function Address(props) {
-  const [validPIN, setVaidPIN] = useState(false);
+  const { user } = useContext(UserContext);
+
+  const url = "/register2";
+
+  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp.uid;
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useHandleValidation(AddressInitialValues, AddressSchema, url, api);
+
+  const [validPIN, setValidPIN] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pinCode, setPinCode] = useState("");
-  const [district, setDistrict] = useState("");
-  const [state, setState] = useState("");
   const [postOffice, setPostOffice] = useState([]);
-  const [PO, setPO] = useState("");
 
   useEffect(() => {
     fetchDistrict();
   }, [pinCode]);
 
-  const handleSubmit = event => {
-    event.preventDefault();
-    // console.log("form submitted");
-    console.log("Pin Code: ", pinCode);
-    console.log("Post Office: ", PO);
-    console.log("District: ", district);
-    console.log("State: ", state);
-  };
-
   const fetchDistrict = async () => {
-    if (pinCode.length == 6) {
+    if (values.pinCode.length == 6) {
       setLoading(true);
-      // console.log(pinCode);
+
       try {
         const response = await axios.get(
-          "https://api.postalpincode.in/pincode/" + pinCode,
+          "https://api.postalpincode.in/pincode/" + values.pinCode,
           {
             headers: {
               "Content-Type": "application/json",
@@ -39,25 +38,19 @@ function Address(props) {
         );
 
         if (response.data[0].Status === "Success") {
-          setVaidPIN(true);
-          //   console.log(
-          //     "District-->",
-          //     response.data[0].PostOffice[0].District,
-          //     ", State--->",
-          //     response.data[0].PostOffice[0].State
-          //   );
-          // console.log(response.data[0].Status);
-          setDistrict(response.data[0].PostOffice[0].District);
-          setState(response.data[0].PostOffice[0].State);
+          setValidPIN(true);
           setPostOffice(response.data[0].PostOffice);
+          values.city = response.data[0].PostOffice[0].District;
+          values.state = response.data[0].PostOffice[0].State;
           setLoading(false);
-          //   console.log("postOffice", response.data[0].PostOffice);
         } else {
-          setVaidPIN(false);
+          setLoading(false);
+          setValidPIN(false);
           console.log("Something went wrong");
         }
       } catch (error) {
-        setVaidPIN(false);
+        setLoading(false);
+        setValidPIN(false);
         console.log("Something went wrong");
       }
     }
@@ -85,7 +78,8 @@ function Address(props) {
 
       <div
         className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s">
+        data-wow-delay="0.1s"
+      >
         <h6 className="position-relative d-inline text-primary ps-4">
           Address Details
         </h6>
@@ -97,35 +91,41 @@ function Address(props) {
           <div className="col-lg-10">
             <div
               className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-              data-wow-delay="0.3s">
+              data-wow-delay="0.3s"
+            >
               <form
                 action=""
                 onSubmit={handleSubmit}
                 className="needs-validation"
-                noValidate>
+                noValidate
+              >
                 <div className="row justify-content-center g-3 m-3 mb-4">
                   <div className="col-md-6">
                     <div className="form-floating">
                       <input
                         type="text"
                         className="form-control"
-                        name="PinCode"
-                        id="PinCode"
-                        onChange={event => {
+                        name="pinCode"
+                        id="pinCode"
+                        disabled={validPIN}
+                        value={values.pinCode}
+                        onBlur={handleBlur}
+                        onChange={(event) => {
                           setPinCode(event.target.value);
+                          handleChange(event);
                         }}
-                        required
                       />
                       <label htmlFor="PinCode">PIN Code</label>
+
+                      {errors.pinCode && touched.pinCode ? (
+                        <div className="form-error">{errors.pinCode}</div>
+                      ) : null}
 
                       {/* Add CSS for class loading-msg */}
                       {loading ? (
                         <div className="loading-msg">Please Wait...</div>
-                      ) : pinCode.length != 6 ? (
-                        // && form.touched.PinCode
-                        <div className="form-error">Enter valid PIN Code</div>
-                      ) : validPIN ? null : (
-                        <div className="form-error">Enter valid PIN Code</div>
+                      ) : pinCode.length < 6 ? null : validPIN ? null : (
+                        <div>Please enter a Valid Pin</div>
                       )}
                     </div>
                   </div>
@@ -135,9 +135,12 @@ function Address(props) {
                       <select
                         type="text"
                         className="form-select"
-                        name="PostOffice"
-                        id="PostOffice"
-                        onChange={event => setPO(event.target.value)}>
+                        name="postOffice"
+                        id="postOffice"
+                        value={values.postOffice}
+                        onChange={handleChange}
+                        required
+                      >
                         <option>Please select your area Post Office</option>
 
                         {validPIN
@@ -159,13 +162,10 @@ function Address(props) {
                       <input
                         type="text"
                         className="form-control"
-                        name="District"
-                        id="District"
+                        name="city"
+                        id="city"
                         disabled
-                        value={district}
-                        onChange={event => {
-                          setDistrict(event.target.value);
-                        }}
+                        value={values.city}
                       />
                       <label htmlFor="District">City</label>
                     </div>
@@ -179,41 +179,21 @@ function Address(props) {
                         name="State"
                         id="State"
                         disabled
-                        value={state}
-                        onChange={event => {
-                          setState(event.target.value);
-                        }}
+                        value={values.state}
                       />
                       <label htmlFor="State">State</label>
                     </div>
                   </div>
 
                   <div className="col-4">
-                    {loading ? (
-                      <button
-                        type="submit"
-                        className="btn btn-primary w-100 py-3 btn-primary"
-                        disabled>
-                        Submit
-                      </button>
-                    ) : (
-                      <NavLink to="/borrowing-details">
-                        <button
-                          type="submit"
-                          className="btn btn-primary w-100 py-3 btn-primary">
-                          Submit
-                        </button>
-                      </NavLink>
-                    )}
+                    <button
+                      type="submit"
+                      className="btn btn-primary w-100 py-3 btn-primary"
+                      disabled={!(validPIN && values.postOffice != "")}
+                    >
+                      Submit
+                    </button>
                   </div>
-
-                  {/* {loading ? null : (
-										<NavLink to="/borrowing-details">
-											<button type="submit" className="btn btn-success mt-3">
-												Submit
-											</button>
-										</NavLink>
-									)} */}
                 </div>
               </form>
             </div>

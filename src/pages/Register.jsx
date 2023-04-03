@@ -1,38 +1,41 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // import axios from "axios"; //npm i axios
 import { Link } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
+import { UserContext } from "../context/UserContext";
 
 function Register() {
+  const { user } = useContext(UserContext);
+
   const url = "/address";
-  const api = "http://localhost:4000/api/v1/user";
+
+  let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp.uid;
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useHandleValidation(
       RegistrationInitialValues,
       RegistrationSchema,
-      url
-      //   api
+      url,
+      api
     );
 
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const userdata = JSON.parse(localStorage.getItem("localUser"));
-    if (userdata) {
-      setUser(userdata.result);
-      console.log(userdata);
-      setLoading(false);
+  // useEffect(() => {
+  //   const userdata = JSON.parse(localStorage.getItem("localUser"));
+  //   if (userdata) {
+  //     setUser(userdata.result);
+  //     console.log(userdata);
+  //     setLoading(false);
 
-      //   console.log(user);
-    }
-  }, []);
+  //     //   console.log(user);
+  //   }
+  // }, []);
 
-  if (loading) {
-    return <div>Loading....</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading....</div>;
+  // }
   return (
     <div>
       <div className="py-5 bg-primary hero-header mb-3">
@@ -56,7 +59,8 @@ function Register() {
 
       <div
         className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s">
+        data-wow-delay="0.1s"
+      >
         <h6 className="position-relative d-inline text-primary ps-4">
           Initial Registration
         </h6>
@@ -68,12 +72,14 @@ function Register() {
           <div className="col-lg-11">
             <div
               className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-              data-wow-delay="0.3s">
+              data-wow-delay="0.3s"
+            >
               <form
                 action=""
                 onSubmit={handleSubmit}
                 className="needs-validation"
-                noValidate>
+                noValidate
+              >
                 <div className="row justify-content-center g-3 m-3 mb-4">
                   <div className="col-md-6">
                     <div className="form-floating">
@@ -172,7 +178,8 @@ function Register() {
                     {/* <Link to="/address"> */}
                     <button
                       type="submit"
-                      className="btn btn-primary w-100 py-3 btn-primary">
+                      className="btn btn-primary w-100 py-3 btn-primary"
+                    >
                       Next
                     </button>
                     {/* </Link> */}
