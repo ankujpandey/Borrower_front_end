@@ -9,7 +9,7 @@ function LoginComponent(props) {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
 
-  const handleSubmit = async e => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email);
     console.log(password);
@@ -26,7 +26,7 @@ function LoginComponent(props) {
 
     if (data.status === 201) {
       // setFlag(true);
-      console.log(data.data);
+      console.log("data.data.data.result----", data.data.data);
       setUser(data?.data?.data);
       localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
       navigate("/dashboard");
@@ -55,8 +55,9 @@ function LoginComponent(props) {
             <div className="col-lg-5">
               <div
                 className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-                data-wow-delay="0.3s">
-                <form action="" onSubmit={e => handleSubmit(e)}>
+                data-wow-delay="0.3s"
+              >
+                <form action="" onSubmit={(e) => handleSubmit(e)}>
                   <div className="row justify-content-center g-3 m-3 mb-4">
                     <div className="col-12">
                       <div className="form-floating">
@@ -66,7 +67,7 @@ function LoginComponent(props) {
                           id="email"
                           name="email"
                           placeholder="Please enter your Email"
-                          onChange={e => {
+                          onChange={(e) => {
                             setEmail(e.target.value);
                           }}
                         />
@@ -81,7 +82,7 @@ function LoginComponent(props) {
                           id="password"
                           name="password"
                           placeholder="Please enter your password"
-                          onChange={e => {
+                          onChange={(e) => {
                             setPassword(e.target.value);
                           }}
                         />
@@ -93,7 +94,8 @@ function LoginComponent(props) {
                       {/* <NavLink to="/dashboard"> */}
                       <button
                         type="submit"
-                        className="btn btn-primary w-100 py-3 btn-primary">
+                        className="btn btn-primary w-100 py-3 btn-primary"
+                      >
                         Sign-In
                       </button>
                       {/* </NavLink> */}

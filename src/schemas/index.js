@@ -120,7 +120,6 @@ export const initialValuesSalaried = {
   employment_type: "salaried",
   company_name: "",
   email: "",
-  // business_nature: "",
   monthly_income: "",
 };
 export const initialValueSelfEmployed = {

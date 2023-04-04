@@ -7,7 +7,7 @@ import { AddressInitialValues, AddressSchema } from "../schemas";
 function Address(props) {
   const { user } = useContext(UserContext);
 
-  const url = "/register2";
+  const url = "/employment-details";
 
   let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp?.uid;
 

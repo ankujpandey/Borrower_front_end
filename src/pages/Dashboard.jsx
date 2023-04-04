@@ -4,20 +4,17 @@ import { UserContext } from "../context/UserContext";
 
 function Dashboard(props) {
   const { user } = useContext(UserContext);
-  console.log("Context at dashboard", user);
+  const [loading, setLoading] = useState(false);
+  console.log("Context at dashboard ", user);
 
-  // useEffect(() => {
-  // 	// const userdata = JSON.parse(localStorage.getItem("localUser"));
-  // 	// if (userdata) {
-  // 	// 	setUser(userdata.result);
-  // 	// 	setLoading(false);
-  // 	// 	console.log(user);
-  // 	// }
-  // }, []);
+  useEffect(() => {
+    if (user == null) setLoading(true);
+    else setLoading(false);
+  }, [user]);
 
-  // if (loading) {
-  // 	return <div>Loading....</div>;
-  // }
+  if (loading) {
+    return <div>Loading....</div>;
+  }
   return (
     <div>
       <div className="py-5 bg-primary hero-header mb-3">
@@ -51,7 +48,7 @@ function Dashboard(props) {
       <div className="row d-flex justify-content-center">
         <div className="col-lg-5 d-flex justify-content-center">
           <div className="col-10 card wow fadeInUp" data-wow-delay="0.3s">
-            <NavLink to="/register">
+            <NavLink to="/personal-details">
               <button
                 type="submit"
                 className="btn btn-primary w-100 py-3 btn-primary"
