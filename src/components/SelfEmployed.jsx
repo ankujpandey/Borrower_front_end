@@ -1,19 +1,20 @@
-import React from "react";
-import {
-  selfEmployedSchema,
-  initialValueSelfEmployed,
-} from "../schemas/EmploymetTypeValidation";
+import React, { useContext } from "react";
+import { selfEmployedSchema, initialValueSelfEmployed } from "../schemas";
 import { useHandleValidation } from "../hooks/useHandleValidation";
-import { Link } from "react-router-dom";
+import { UserContext } from "../context/UserContext";
 
 function SelfEmployed(props) {
+  const { user } = useContext(UserContext);
+  const url = "/register3";
+  const api = "http://localhost:4000/api/v1/createEmployment";
+
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(initialValueSelfEmployed, selfEmployedSchema);
+    useHandleValidation(initialValueSelfEmployed, selfEmployedSchema, url, api);
+
+  values.uid = user?.signUp?.uid;
 
   return (
-    <form
-    // onSubmit={handleSubmit}
-    >
+    <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="monthly_income" className="form-label">
           Monthly Income:
@@ -33,28 +34,44 @@ function SelfEmployed(props) {
         ) : null}
       </div>
       <div className="form-group">
-        <label htmlFor="nature" className="form-label">
+        <label htmlFor="business_nature" className="form-label">
           Nature of Business:
         </label>
         <input
           type="text"
           className="form-control"
-          id="nature"
-          name="nature"
-          placeholder="Enter your nature of Business"
-          value={values.nature}
+          id="business_nature"
+          name="business_nature"
+          placeholder="Enter the nature of your Business"
+          value={values.business_nature}
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        {errors.nature && touched.nature ? (
-          <p className="form-error text-danger">{errors.nature}</p>
+        {errors.business_nature && touched.business_nature ? (
+          <p className="form-error text-danger">{errors.business_nature}</p>
         ) : null}
       </div>
-      <Link to="/register3">
-        <button type="submit" className="btn btn-success mt-3">
-          Submit
-        </button>
-      </Link>
+      <div className="form-group">
+        <label htmlFor="email" className="form-label">
+          Professional Email id:
+        </label>
+        <input
+          type="email"
+          className="form-control"
+          id="email"
+          name="email"
+          placeholder="Enter your Professional Email Id"
+          value={values.email}
+          onChange={handleChange}
+          onBlur={handleBlur}
+        />
+        {errors.email && touched.email ? (
+          <p className="form-error text-danger">{errors.email}</p>
+        ) : null}
+      </div>
+      <button type="submit" className="btn btn-success mt-3">
+        Submit
+      </button>
     </form>
   );
 }

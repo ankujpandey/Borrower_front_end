@@ -1,12 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import PasswordStrengthBar from "react-password-strength-bar";
-
-import {
-  SignUpschema,
-  initialValuesSignupschema,
-} from "../schemas/Signupschema";
+import { SignUpschema, initialValuesSignupschema } from "../schemas";
 
 function SignUpPage(props) {
   const url = "/dashboard";
@@ -36,12 +30,14 @@ function SignUpPage(props) {
             <div className="col-lg-5">
               <div
                 className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-                data-wow-delay="0.3s">
+                data-wow-delay="0.3s"
+              >
                 <form
                   action=""
                   onSubmit={handleSubmit}
                   className="needs-validation"
-                  noValidate>
+                  noValidate
+                >
                   <div className="row justify-content-center g-3 m-3 mb-4">
                     <div className="col-md-6">
                       <div className="form-floating">
@@ -183,13 +179,12 @@ function SignUpPage(props) {
                       </div>
                     </div>
                     <div className="col-12">
-                      {/* <NavLink to="/dashboard"> */}
                       <button
                         type="submit"
-                        className="btn btn-primary w-100 py-3 btn-primary">
+                        className="btn btn-primary w-100 py-3 btn-primary"
+                      >
                         Sign-Up
                       </button>
-                      {/* </NavLink> */}
                     </div>
                   </div>
                 </form>

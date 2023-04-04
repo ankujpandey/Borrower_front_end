@@ -3,8 +3,6 @@ import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
 function Dashboard(props) {
-  // const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
   const { user } = useContext(UserContext);
   console.log("Context at dashboard", user);
 
@@ -28,7 +26,7 @@ function Dashboard(props) {
             <div className="col-12 text-center">
               <div data-wow-delay="0.1s">
                 <h1 className="text-white animated zoomIn mt-5">
-                  Welcome {user?.result?.userName?.firstName} !
+                  Welcome {user?.userName?.firstName} !
                 </h1>
               </div>
               <hr
@@ -42,7 +40,8 @@ function Dashboard(props) {
       </div>
       <div
         className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s">
+        data-wow-delay="0.1s"
+      >
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
@@ -55,7 +54,8 @@ function Dashboard(props) {
             <NavLink to="/register">
               <button
                 type="submit"
-                className="btn btn-primary w-100 py-3 btn-primary">
+                className="btn btn-primary w-100 py-3 btn-primary"
+              >
                 Register
               </button>
             </NavLink>
