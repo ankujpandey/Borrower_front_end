@@ -8,7 +8,8 @@ export const useHandleValidation = (
   initialValues,
   validationSchema,
   url,
-  api
+  api,
+  token
 ) => {
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ export const useHandleValidation = (
         const config = {
           method: "post",
           url: api,
-          headers: { "Content-Type": "application/json" },
+          headers: { "Content-Type": "application/json", authorization: token },
           data: values,
         };
 

@@ -5,13 +5,13 @@ import { BankSchema, BankInitialValues } from "../schemas";
 import { UserContext } from "../context/UserContext";
 
 function BankDetails(props) {
-  const { user } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
 
   const url = "/dashboard";
   const api = "http://localhost:4000/api/v1/createBank";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(BankInitialValues, BankSchema, url, api);
+    useHandleValidation(BankInitialValues, BankSchema, url, api, token);
 
   values.uid = user?.signUp?.uid;
 

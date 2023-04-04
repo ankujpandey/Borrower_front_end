@@ -5,12 +5,12 @@ import { UserContext } from "../context/UserContext";
 import MyAutosuggest from "./MyAutosuggest";
 
 function SalariedEmployee(props) {
-  const { user } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
   const url = "/register3";
   const api = "http://localhost:4000/api/v1/createEmployment";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(initialValuesSalaried, salariedSchema, url, api);
+    useHandleValidation(initialValuesSalaried, salariedSchema, url, api, token);
 
   const setCompanyName = (value) => {
     values.company_name = value;
