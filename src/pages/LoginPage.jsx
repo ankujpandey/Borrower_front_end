@@ -7,7 +7,7 @@ function LoginComponent(props) {
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const navigate = useNavigate();
-  const { setUser } = useContext(UserContext);
+  const { setUser, setToken } = useContext(UserContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +27,7 @@ function LoginComponent(props) {
     if (data.status === 201) {
       console.log("data.data.data.result----", data.data.data);
       setUser(data?.data?.data.result);
+      setToken(data?.data?.data?.auth);
       localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
       navigate("/dashboard");
     } else {

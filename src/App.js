@@ -19,6 +19,7 @@ import BorrowingDetails from "./components/BorrowingDetails";
 import { UserProvider } from "./context/UserContext";
 import { useContext } from "react";
 import AdminDashboard from "./pages/AdminDashboard";
+import UserDetails from "./pages/UserDetails";
 
 function App() {
   // const { user, setUser } = useContext(UserContext);
@@ -61,6 +62,7 @@ function App() {
         <Route path="/address" element={<Address />} />
         <Route path="/borrowing-details" element={<BorrowingDetails />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/users/:id" element={<UserDetails />} />
       </Routes>
     </UserProvider>
   );

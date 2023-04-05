@@ -117,14 +117,14 @@ export const selfEmployedSchema = Yup.object({
 
 export const initialValuesSalaried = {
   uid: "",
-  employment_type: "salaried",
+  employment_type: "Salaried",
   company_name: "",
   email: "",
   monthly_income: "",
 };
 export const initialValueSelfEmployed = {
   uid: "",
-  employment_type: "self-employed",
+  employment_type: "Self-employed",
   business_nature: "",
   monthly_income: "",
   company_name: "",
