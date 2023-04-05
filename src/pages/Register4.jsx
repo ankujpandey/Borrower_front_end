@@ -1,13 +1,11 @@
 import React, { useContext } from "react";
-// import AadharUploadComponent from "../components/AadharUploadComponent";
-import CaptureImage from "../components/CaptureImage";
-import CamOpener from "../components/CamOpener";
+
 import { UserImageContext } from "../context/UserImageContext";
 import AadharUploadComponent from "../components/AadharUploadComponent";
 
 console.log("register 3 page");
 
-function Register3(props) {
+function Register4(props) {
 	const { image, setImage } = useContext(UserImageContext);
 
 	return (
@@ -47,10 +45,7 @@ function Register3(props) {
 							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
 							data-wow-delay="0.3s">
 							<div className="form-floating">
-								{/* For camera  */}
-								<CaptureImage />
-
-								{/* {image ? null : <CamOpener />} */}
+								<AadharUploadComponent />
 							</div>
 						</div>
 					</div>
@@ -60,4 +55,4 @@ function Register3(props) {
 	);
 }
 
-export default Register3;
+export default Register4;

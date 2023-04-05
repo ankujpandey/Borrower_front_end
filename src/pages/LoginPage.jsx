@@ -6,32 +6,37 @@ import { ApiCall } from "../functions/ApiCall";
 function LoginComponent(props) {
 	const [email, setEmail] = useState(null);
 	const [password, setPassword] = useState(null);
+	const [invalidInfo, setInvalidInfo] = useState(false);
 	const navigate = useNavigate();
 	const { setUser } = useContext(UserContext);
 
 	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(email);
-		console.log(password);
-		setEmail("");
-		setPassword("");
+		try {
+			e.preventDefault();
 
-		const config = {
-			method: "get",
-			url: `http://localhost:4000/api/v1/logIn/?email=${email}&password=${password}`,
-			headers: { "Content-Type": "application/json" },
-		};
+			const config = {
+				method: "get",
+				url: `http://localhost:4000/api/v1/logIn/?email=${email}&password=${password}`,
+				headers: { "Content-Type": "application/json" },
+			};
 
-		let data = await ApiCall(config);
+			let data = await ApiCall(config);
 
-		if (data.status === 201) {
-			// setFlag(true);
-			console.log(data.data);
-			setUser(data?.data?.data);
-			localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
-			navigate("/dashboard");
-		} else {
-			alert("Something went wrong!!!");
+			if (data.status === 201) {
+				// setFlag(true);
+				console.log(data.data);
+				setUser(data?.data?.data);
+				localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
+				navigate("/dashboard");
+				console.log(email);
+				console.log(password);
+				setEmail("");
+				setPassword("");
+			} else {
+				setInvalidInfo(true);
+			}
+		} catch (error) {
+			console.log(error);
 		}
 	};
 
@@ -89,16 +94,18 @@ function LoginComponent(props) {
 											</div>
 										</div>
 
-										<div className="form-floating">
-											<div className="alert alert-danger" role="alert">
-												{/* <svg className="bi" role="img" aria-label="Danger:">
+										{invalidInfo && (
+											<div className="form-floating">
+												<div className="alert alert-danger" role="alert">
+													{/* <svg className="bi" role="img" aria-label="Danger:">
 								<use xlinkHref="#exclamation-triangle-fill" />
 							</svg> */}
-												<div className="mt-0">
-													Please enter valid details!!!
+													<div className="mt-0">
+														Please enter valid details!!!
+													</div>
 												</div>
 											</div>
-										</div>
+										)}
 
 										<div className="col-12">
 											{/* <NavLink to="/dashboard"> */}

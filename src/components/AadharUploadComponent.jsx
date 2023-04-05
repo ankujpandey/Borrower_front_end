@@ -1,17 +1,50 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { UserImageContext } from "../context/UserImageContext";
 
 function AadharUploadComponent(props) {
-	// store Aadhar data
+	const { image, setImage } = useContext(UserImageContext);
+
+	const [bioImage, setBioImage] = useState();
+
 	let formData = new FormData();
+
+	const biometicBlob = async (base64) => {
+		return new Promise(async (resolve, reject) => {
+			await fetch(base64).then(async (res) => resolve(res.blob()));
+		});
+	};
+
+	useEffect(async () => {
+		handleImage();
+		console.log("image---------------", await biometicBlob(image));
+	}, []);
+
+	const handleImage = async () => {
+		const img = await JSON.parse(localStorage.getItem("capImg"));
+
+		if (img) {
+			setImage(img);
+			biometicBlob(img).then((res) => {
+				console.log(res);
+				formData.append("biometric", res, "image/webp");
+			});
+			localStorage.removeItem("capImg");
+		}
+	};
 
 	// submit button handle
 
 	const handlesubmit = (e) => {
 		e.preventDefault();
+		console.log("form data------>>>>", formData.get("biometric"));
 		console.log("form data------>>>>", formData.get("frontendpart"));
 		console.log("form data------>>>>", formData.get("backendpart"));
 	};
+
+	if (!image) {
+		return <>Loading...</>;
+	}
 
 	return (
 		// ----------------------------------------------------
@@ -20,7 +53,7 @@ function AadharUploadComponent(props) {
 
 		<form
 			action=""
-			// onSubmit={(e) => handlesubmit(e)
+			onSubmit={(e) => handlesubmit(e)}
 			className="needs-validation"
 			noValidate>
 			<div className="row justify-content-center g-3">
