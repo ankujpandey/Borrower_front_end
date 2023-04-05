@@ -1,8 +1,12 @@
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import PasswordStrengthBar from "react-password-strength-bar";
 import { SignUpschema, initialValuesSignupschema } from "../schemas";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 function SignUpPage(props) {
+  const { setUser } = useContext(UserContext);
+
   const url = "/dashboard";
 
   const api = "http://localhost:4000/api/v1/signUp";

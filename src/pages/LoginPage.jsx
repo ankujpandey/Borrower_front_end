@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
 
@@ -25,9 +25,8 @@ function LoginComponent(props) {
     let data = await ApiCall(config);
 
     if (data.status === 201) {
-      // setFlag(true);
       console.log("data.data.data.result----", data.data.data);
-      setUser(data?.data?.data);
+      setUser(data?.data?.data.result);
       localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
       navigate("/dashboard");
     } else {

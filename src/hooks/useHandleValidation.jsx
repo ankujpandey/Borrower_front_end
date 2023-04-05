@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
-import { useContext } from "react";
 import { useNavigate } from "react-router";
-import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 export const useHandleValidation = (
   initialValues,
@@ -11,6 +11,8 @@ export const useHandleValidation = (
   api,
   token
 ) => {
+  const { setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -35,7 +37,7 @@ export const useHandleValidation = (
 
         if (response.status === 201) {
           console.log(response.data);
-          // setUser(response?.data?.data);
+          setUser(response?.data?.data.result);
           // localStorage.setItem(
           //   "localUser",
           //   JSON.stringify(response?.data?.data)
