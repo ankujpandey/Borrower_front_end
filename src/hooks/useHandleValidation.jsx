@@ -39,15 +39,15 @@ export const useHandleValidation = (
         if (response.status === 201) {
           console.log(response.data);
           if (signUp) {
-            setUser(response?.data?.data.result);
+            setUser(response?.data?.data?.result);
+            console.log(response?.data?.data?.result);
             localStorage.setItem(
               "localUser",
-              JSON.stringify(response?.data?.data)
+              JSON.stringify(response?.data?.data?.result)
             );
-
             setToken(response?.data?.data?.auth);
           }
-          console.log(url);
+          // console.log(url);
           navigate(url);
         } else {
           alert("Something went wrong!!!");

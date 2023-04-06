@@ -12,9 +12,9 @@ function Dashboard(props) {
     else setLoading(false);
   }, [user]);
 
-  if (loading) {
-    return <div>Loading....</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading....</div>;
+  // }
   return (
     <div>
       <div className="py-5 bg-primary hero-header mb-3">

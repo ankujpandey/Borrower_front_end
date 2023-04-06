@@ -20,17 +20,23 @@ function LoginComponent(props) {
         headers: { "Content-Type": "application/json" },
       };
 
-      let data = await ApiCall(config);
+      let response = await ApiCall(config);
 
-      if (data.status === 201) {
+      if (response.status === 201) {
         // setFlag(true);
-        console.log("data.data.data.result----", data.data.data);
-        setUser(data?.data?.data.result);
-        setToken(data?.data?.data?.auth);
-        localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
-        navigate("/dashboard");
-        console.log(email);
-        console.log(password);
+
+        console.log(response.data);
+
+        setUser(response?.data?.data.result);
+        setToken(response?.data?.data?.auth);
+        localStorage.setItem("localUser", JSON.stringify(response?.data?.data));
+
+        if (response?.data?.data?.result?.signUp) {
+          navigate("/dashboard");
+        } else {
+          navigate("/admin-dashboard");
+        }
+
         setEmail("");
         setPassword("");
       } else {
