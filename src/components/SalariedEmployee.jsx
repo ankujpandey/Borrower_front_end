@@ -5,76 +5,76 @@ import { UserContext } from "../context/UserContext";
 import MyAutosuggest from "./MyAutosuggest";
 
 function SalariedEmployee(props) {
-  const { user, token } = useContext(UserContext);
-  const url = "/register3";
-  const api = "http://localhost:4000/api/v1/createEmployment";
+	const { user, token } = useContext(UserContext);
+	const url = "/register3";
+	const api = "http://localhost:4000/api/v1/createEmployment";
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(initialValuesSalaried, salariedSchema, url, api, token);
+	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+		useHandleValidation(initialValuesSalaried, salariedSchema, url, api, token);
 
-  const setCompanyName = (value) => {
-    values.company_name = value;
-  };
+	const setCompanyName = (value) => {
+		values.company_name = value;
+	};
 
-  values.uid = user?.signUp?.uid;
+	values.uid = user?.signUp?.uid;
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div className="row justify-content-center g-3 m-3 mb-4">
-        <div className="col-12">
-          <div className="form-floating">
-            <input
-              type="text"
-              className="form-control"
-              id="monthly_income"
-              name="monthly_income"
-              placeholder="Enter your monthly income"
-              value={values.monthly_income}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            <label htmlFor="monthly_income">Monthly Salary</label>
-            {errors.monthly_income && touched.monthly_income ? (
-              <p className="form-error text-danger">{errors.monthly_income}</p>
-            ) : null}
-          </div>
-        </div>
+	return (
+		<form onSubmit={handleSubmit}>
+			<div className="row justify-content-center g-3 m-3 mb-4">
+				<div className="col-12">
+					<div className="form-floating">
+						<input
+							type="text"
+							className="form-control"
+							id="monthly_income"
+							name="monthly_income"
+							placeholder="Enter your monthly income"
+							value={values.monthly_income}
+							onChange={handleChange}
+							onBlur={handleBlur}
+						/>
+						<label htmlFor="monthly_income">Monthly Salary</label>
+						{errors.monthly_income && touched.monthly_income ? (
+							<p className="form-error text-danger">{errors.monthly_income}</p>
+						) : null}
+					</div>
+				</div>
 
-        <div className="form-group">
-          <label htmlFor="company_name" className="form-label">
-            Company Name:
-          </label>
+				<div className="form-group">
+					<label htmlFor="company_name" className="form-label">
+						Company Name:
+					</label>
 
-          <MyAutosuggest setCompanyName={setCompanyName} />
+					<MyAutosuggest setCompanyName={setCompanyName} />
 
-          {errors.company_name && touched.company_name ? (
-            <p className="form-error text-danger">{errors.company_name}</p>
-          ) : null}
-        </div>
-        <div className="form-group">
-          <label htmlFor="company_email" className="form-label">
-            Professional Email id:
-          </label>
-          <input
-            type="email"
-            className="form-control"
-            id="email"
-            name="email"
-            placeholder="Enter your Professional Email Id"
-            value={values.email}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-          {errors.company_email && touched.company_email ? (
-            <p className="form-error text-danger">{errors.company_email}</p>
-          ) : null}
-        </div>
-        <button type="submit" className="btn btn-success mt-3">
-          Submit
-        </button>
-      </div>
-    </form>
-  );
+					{errors.company_name && touched.company_name ? (
+						<p className="form-error text-danger">{errors.company_name}</p>
+					) : null}
+				</div>
+				<div className="form-group">
+					<label htmlFor="company_email" className="form-label">
+						Professional Email id:
+					</label>
+					<input
+						type="email"
+						className="form-control"
+						id="email"
+						name="email"
+						placeholder="Enter your Professional Email Id"
+						value={values.email}
+						onChange={handleChange}
+						onBlur={handleBlur}
+					/>
+					{errors.company_email && touched.company_email ? (
+						<p className="form-error text-danger">{errors.company_email}</p>
+					) : null}
+				</div>
+				<button type="submit" className="btn btn-success mt-3">
+					Submit
+				</button>
+			</div>
+		</form>
+	);
 }
 
 export default SalariedEmployee;

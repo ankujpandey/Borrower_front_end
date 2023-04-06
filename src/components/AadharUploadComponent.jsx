@@ -1,42 +1,64 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { UserImageContext } from "../context/UserImageContext";
+import { UserContext } from "../context/UserContext";
+import { ApiCall } from "../functions/ApiCall";
 
 function AadharUploadComponent(props) {
 	const { image, setImage } = useContext(UserImageContext);
+	const { user } = useContext(UserContext);
 
-	const [bioImage, setBioImage] = useState();
+	console.log(user);
 
 	let formData = new FormData();
 
-	const biometicBlob = async (base64) => {
-		return new Promise(async (resolve, reject) => {
-			await fetch(base64).then(async (res) => resolve(res.blob()));
-		});
-	};
+	// const biometicBlob = async (base64) => {
+	// 	return new Promise(async (resolve, reject) => {
+	// 		await fetch(base64).then(async (res) => resolve(res.blob()));
+	// 	});
+	// };
 
 	useEffect(async () => {
 		handleImage();
-		console.log("image---------------", await biometicBlob(image));
 	}, []);
 
 	const handleImage = async () => {
 		const img = await JSON.parse(localStorage.getItem("capImg"));
 
 		if (img) {
-			setImage(img);
-			biometicBlob(img).then((res) => {
-				console.log(res);
-				formData.append("biometric", res, "image/webp");
-			});
+			var myBlob = new Blob([img], { type: "text/plain" });
+			console.log(myBlob);
+			setImage(myBlob);
+
+			// biometicBlob(img).then((res) => {
+			// 	console.log(res);
+
+			// });
 			localStorage.removeItem("capImg");
 		}
 	};
 
+	console.log("form data------>>>>", formData.get("biometric"));
+	console.log("form data------>>>>", formData.get("frontendpart"));
+	console.log("form data------>>>>", formData.get("backendpart"));
+
 	// submit button handle
 
-	const handlesubmit = (e) => {
+	const handlesubmit = async (e) => {
 		e.preventDefault();
+		formData.append("biometric", image, "profileImage.jpg");
+		console.log("form data------>>>>", formData.get("biometric"));
+		const config = {
+			method: "post",
+			url: `http://localhost:4000/api/v1/uploadImage/${user?.userName?.uid}`,
+			headers: { "Content-Type": "multipart/form-data" },
+			data: formData,
+		};
+
+		let response = await ApiCall(config);
+
+		console.log(response);
+
 		console.log("form data------>>>>", formData.get("biometric"));
 		console.log("form data------>>>>", formData.get("frontendpart"));
 		console.log("form data------>>>>", formData.get("backendpart"));
