@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
 
@@ -8,7 +8,7 @@ function LoginComponent(props) {
 	const [password, setPassword] = useState(null);
 	const [invalidInfo, setInvalidInfo] = useState(false);
 	const navigate = useNavigate();
-	const { setUser } = useContext(UserContext);
+	const { setUser, setToken } = useContext(UserContext);
 
 	const handleSubmit = async (e) => {
 		try {
@@ -24,8 +24,9 @@ function LoginComponent(props) {
 
 			if (data.status === 201) {
 				// setFlag(true);
-				console.log(data.data);
-				setUser(data?.data?.data);
+				console.log("data.data.data.result----", data.data.data);
+				setUser(data?.data?.data.result);
+				setToken(data?.data?.data?.auth);
 				localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
 				navigate("/dashboard");
 				console.log(email);

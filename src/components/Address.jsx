@@ -5,14 +5,14 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 import { AddressInitialValues, AddressSchema } from "../schemas";
 
 function Address(props) {
-  const { user } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
 
-  const url = "/register2";
+  const url = "/employment-details";
 
   let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp?.uid;
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(AddressInitialValues, AddressSchema, url, api);
+    useHandleValidation(AddressInitialValues, AddressSchema, url, api, token);
 
   const [validPIN, setValidPIN] = useState(false);
   const [loading, setLoading] = useState(false);

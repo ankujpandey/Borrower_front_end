@@ -4,12 +4,18 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 import { UserContext } from "../context/UserContext";
 
 function SelfEmployed(props) {
-  const { user } = useContext(UserContext);
+  const { user, token } = useContext(UserContext);
   const url = "/register3";
   const api = "http://localhost:4000/api/v1/createEmployment";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(initialValueSelfEmployed, selfEmployedSchema, url, api);
+    useHandleValidation(
+      initialValueSelfEmployed,
+      selfEmployedSchema,
+      url,
+      api,
+      token
+    );
 
   values.uid = user?.signUp?.uid;
 

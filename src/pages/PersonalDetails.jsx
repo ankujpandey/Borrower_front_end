@@ -4,8 +4,10 @@ import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
 import { UserContext } from "../context/UserContext";
 
 function PersonalDetails() {
-  const { user } = useContext(UserContext);
-  console.log(user);
+  const { user, token } = useContext(UserContext);
+  console.log("Token at register--", token);
+
+  console.log("user at register", user);
 
   const url = "/address";
 
@@ -16,7 +18,8 @@ function PersonalDetails() {
       RegistrationInitialValues,
       RegistrationSchema,
       url,
-      api
+      api,
+      token
     );
 
   // const [loading, setLoading] = useState(true);
