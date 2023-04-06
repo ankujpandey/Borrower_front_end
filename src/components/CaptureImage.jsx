@@ -9,64 +9,56 @@ import { Camera } from "@mediapipe/camera_utils"; //npm i @mediapipe/camera_util
 import AadharUploadComponent from "./AadharUploadComponent";
 
 function CaptureImage(props) {
-<<<<<<< HEAD
 	const [image, setImage] = useState(null);
 	const [seconds, setSeconds] = useState(0);
 	const { id } = useParams();
 	const [flag, setFlag] = useState(false);
 	const [warning, setWarning] = useState(false);
 	const navigate = useNavigate();
-=======
-  const [image, setImage] = useState(null);
-  const [seconds, setSeconds] = useState(10);
-  const { id } = useParams();
-  const [flag, setFlag] = useState(false);
-  const [warning, setWarning] = useState(false);
->>>>>>> 3380610c821e3f9c98cfa71bf1a7b14c94010e6f
 
-  let picture = null;
+	let picture = null;
 
-  //Face Detection------->>>>
-  const { webcamRef, isLoading, boundingBox, facesDetected } = useFaceDetection(
-    {
-      faceDetectionOptions: {
-        model: "short",
-      },
-      faceDetection: new FaceDetection.FaceDetection({
-        locateFile: (file) =>
-          `https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
-      }),
-      camera: ({ mediaSrc, onFrame, width, height }) =>
-        new Camera(mediaSrc, {
-          onFrame,
-          width,
-          height,
-        }),
-    }
-  );
+	//Face Detection------->>>>
+	const { webcamRef, isLoading, boundingBox, facesDetected } = useFaceDetection(
+		{
+			faceDetectionOptions: {
+				model: "short",
+			},
+			faceDetection: new FaceDetection.FaceDetection({
+				locateFile: (file) =>
+					`https://cdn.jsdelivr.net/npm/@mediapipe/face_detection/${file}`,
+			}),
+			camera: ({ mediaSrc, onFrame, width, height }) =>
+				new Camera(mediaSrc, {
+					onFrame,
+					width,
+					height,
+				}),
+		}
+	);
 
-  //Image Capturing--------->>>>>>>>
-  useEffect(() => {
-    if (seconds > 0) {
-      setTimeout(() => {
-        setSeconds(seconds - 1);
-      }, 1000);
-    }
-  }, [seconds]);
+	//Image Capturing--------->>>>>>>>
+	useEffect(() => {
+		if (seconds > 0) {
+			setTimeout(() => {
+				setSeconds(seconds - 1);
+			}, 1000);
+		}
+	}, [seconds]);
 
 	// const biometicBlob = async (base64) => {
 	// 	await fetch(base64).then(async (res) => setBioImage(await res.blob()));
 	// };
 
-  const clickImage = () => {
-    setTimeout(async () => {
-      if (facesDetected != 1) {
-        setWarning(true);
-      } else {
-        picture = webcamRef?.current?.getScreenshot({
-          width: 400,
-          height: 400,
-        });
+	const clickImage = () => {
+		setTimeout(async () => {
+			if (facesDetected != 1) {
+				setWarning(true);
+			} else {
+				picture = webcamRef?.current?.getScreenshot({
+					width: 400,
+					height: 400,
+				});
 
 				console.log("pic clicked");
 				setImage(picture);
