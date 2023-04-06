@@ -9,9 +9,10 @@ export const useHandleValidation = (
   validationSchema,
   url,
   api,
-  token
+  token,
+  signUp
 ) => {
-  const { setUser } = useContext(UserContext);
+  const { setUser, setToken } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -37,11 +38,16 @@ export const useHandleValidation = (
 
         if (response.status === 201) {
           console.log(response.data);
-          setUser(response?.data?.data.result);
-          // localStorage.setItem(
-          //   "localUser",
-          //   JSON.stringify(response?.data?.data)
-          // );
+          if (signUp) {
+            setUser(response?.data?.data.result);
+            localStorage.setItem(
+              "localUser",
+              JSON.stringify(response?.data?.data)
+            );
+
+            setToken(response?.data?.data?.auth);
+          }
+          console.log(url);
           navigate(url);
         } else {
           alert("Something went wrong!!!");

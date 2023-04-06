@@ -123,10 +123,10 @@ function UserDetails(props) {
                 Professional Email
               </span>
             </li>
-            {user.bussiness_nature ? (
+            {user.business_nature ? (
               <li className="list-group-item">
                 {/* <HiPhone className="icons" /> */}
-                {user.bussiness_nature}
+                {user.business_nature}
                 <span className="float-end text-secondary">
                   Nature of Bussiness
                 </span>

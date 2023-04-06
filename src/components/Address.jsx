@@ -6,6 +6,7 @@ import { AddressInitialValues, AddressSchema } from "../schemas";
 
 function Address(props) {
   const { user, token } = useContext(UserContext);
+  console.log("token at address", token);
 
   const url = "/employment-details";
 
