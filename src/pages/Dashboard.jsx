@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import RegisteredDetails from "../components/RegisteredDetails";
 
 function Dashboard(props) {
   const { user } = useContext(UserContext);
@@ -45,20 +46,24 @@ function Dashboard(props) {
         <h2 className="mt-2">Press Button To Continue</h2>
       </div>
 
-      <div className="row d-flex justify-content-center">
-        <div className="col-lg-5 d-flex justify-content-center">
-          <div className="col-10 card wow fadeInUp" data-wow-delay="0.3s">
-            <NavLink to="/personal-details">
-              <button
-                type="submit"
-                className="btn btn-primary w-100 py-3 btn-primary"
-              >
-                Register
-              </button>
-            </NavLink>
+      {user?.userName?.contact ? (
+        <RegisteredDetails />
+      ) : (
+        <div className="row d-flex justify-content-center">
+          <div className="col-lg-5 d-flex justify-content-center">
+            <div className="col-10 card wow fadeInUp" data-wow-delay="0.3s">
+              <NavLink to="/personal-details">
+                <button
+                  type="submit"
+                  className="btn btn-primary w-100 py-3 btn-primary"
+                >
+                  Register
+                </button>
+              </NavLink>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }

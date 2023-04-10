@@ -5,7 +5,7 @@ import { UserContext } from "../context/UserContext";
 
 function NavBar(props) {
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
+  // console.log(user);
   const navigate = useNavigate();
   return (
     <nav className="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
