@@ -38,9 +38,10 @@ export const useHandleValidation = (
 
         if (response.status === 201) {
           console.log(response.data);
+          console.log(signUp);
           if (signUp) {
             setUser(response?.data?.data?.result);
-            console.log(response?.data?.data?.result);
+            // console.log(response?.data?.data?.result);
             localStorage.setItem(
               "localUser",
               JSON.stringify(response?.data?.data?.result)

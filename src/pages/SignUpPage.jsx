@@ -17,6 +17,7 @@ function SignUpPage(props) {
       SignUpschema,
       url,
       api,
+      "",
       true
     );
 
