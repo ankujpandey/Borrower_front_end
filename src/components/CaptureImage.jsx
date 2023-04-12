@@ -76,21 +76,90 @@ function CaptureImage(props) {
 	return (
 		<div>
 			<div>
-				<div className="row justify-content-center g-3 m-3">
-					{image ? (
-						<>
-							{/* {window.location.reload(false)} */}
+				{image ? (
+					<>
+						{/* {window.location.reload(false)} */}
 
-							<div className="row justify-content-center col-md-12">
-								<div className="col-md-8">
-									<img src={image} className="biometric-image" />
+						<div className="row justify-content-center g-3 m-3">
+							<div className="col-md-9">
+								<img src={image} className="biometric-image" />
+							</div>
+
+							<div className="alert alert-success col-md-9" role="alert">
+								Image captured succesfully!!!
+							</div>
+
+							<div className="col-5">
+								<button
+									className="btn btn-primary w-100 py-2 btn-primary"
+									onClick={() => {
+										setFlag(!flag);
+										setSeconds(10);
+										setImage(null);
+										setWarning(false);
+										clickImage();
+										window.location.reload(false);
+									}}>
+									Retake
+								</button>
+							</div>
+
+							<div className="col-5">
+								<button
+									className="btn btn-primary w-100 py-2 btn-primary"
+									onClick={() => {
+										window.location.href = "/register4";
+										// navigate("/register4");
+									}}>
+									Next Page
+								</button>
+							</div>
+						</div>
+					</>
+				) : (
+					<div className="row justify-content-center">
+						{boundingBox.map((box, index) => (
+							<div
+								key={`${index + 1}`}
+								style={{
+									border: "2px solid green",
+									position: "absolute",
+									top: `${box.yCenter * 80}%`,
+									left: `${box.xCenter * 95}%`,
+									width: `${box.width * 100}%`,
+									height: `${box.height * 100}%`,
+									zIndex: 1,
+								}}
+							/>
+						))}
+						<Webcam
+							style={{
+								width: "600px",
+								height: "500px",
+								position: "relative",
+								//marginBottom: "20px",
+								marginLeft: "auto",
+								marginRight: "auto",
+							}}
+							ref={webcamRef}
+						/>
+
+						{warning ? (
+							<div className="row justify-content-center">
+								<div className="form-floating col-md-8">
+									<div className="alert alert-danger" role="alert">
+										{/* <svg className="bi" role="img" aria-label="Danger:">
+								<use xlinkHref="#exclamation-triangle-fill" />
+							</svg> */}
+										<div className="mt-0">
+											Image can only be clicked when there is only one person in
+											the frame!! Curently, the number of faces recognised are{" "}
+											{facesDetected}
+										</div>
+									</div>
 								</div>
 
-								<div className="alert alert-success col-md-12" role="alert">
-									Image captured succesfully!!!
-								</div>
-
-								<div className="col-md-4">
+								<div className="col-6">
 									<button
 										className="btn btn-primary w-100 py-2 btn-primary"
 										onClick={() => {
@@ -99,96 +168,28 @@ function CaptureImage(props) {
 											setImage(null);
 											setWarning(false);
 											clickImage();
-											window.location.reload(false);
 										}}>
 										Retake
 									</button>
 								</div>
-
-								<div className="col-md-4">
-									<button
-										className="btn btn-primary w-100 py-2 btn-primary"
-										onClick={() => {
-											window.location.href = "/register4";
-											// navigate("/register4");
-										}}>
-										Next Page
-									</button>
-								</div>
 							</div>
-						</>
-					) : (
-						<div className="row justify-content-center">
-							{boundingBox.map((box, index) => (
-								<div
-									key={`${index + 1}`}
-									style={{
-										border: "2px solid green",
-										position: "absolute",
-										top: `${box.yCenter * 80}%`,
-										left: `${box.xCenter * 95}%`,
-										width: `${box.width * 100}%`,
-										height: `${box.height * 100}%`,
-										zIndex: 1,
-									}}
-								/>
-							))}
-							<Webcam
-								style={{
-									width: "600px",
-									height: "500px",
-									position: "relative",
-									//marginBottom: "20px",
-									marginLeft: "auto",
-									marginRight: "auto",
-								}}
-								ref={webcamRef}
-							/>
-							<div className="col-md-12">
-								{warning ? (
-									<div>
-										<div className="form-floating">
-											<div className="alert alert-danger" role="alert">
-												{/* <svg className="bi" role="img" aria-label="Danger:">
-								<use xlinkHref="#exclamation-triangle-fill" />
-							</svg> */}
-												<div className="mt-0">
-													Image can only be clicked when there is only one
-													person in the frame!! Curently, the number of faces
-													recognised are {facesDetected}
-												</div>
-											</div>
-										</div>
-
-										<button
-											className="btn btn-primary w-100 py-2 btn-primary"
-											onClick={() => {
-												setFlag(!flag);
-												setSeconds(10);
-												setImage(null);
-												setWarning(false);
-												clickImage();
-											}}>
-											Retake
-										</button>
-									</div>
-								) : (
-									<button
-										// type="submit"
-										className="btn btn-primary w-100 py-3 btn-primary"
-										onClick={() => {
-											setSeconds(2);
-											clickImage();
-										}}>
-										Take Picture
-									</button>
-								)}
+						) : (
+							<div className="col-6">
+								<button
+									// type="submit"
+									className="btn btn-primary w-100 py-3 btn-primary"
+									onClick={() => {
+										setSeconds(2);
+										clickImage();
+									}}>
+									Take Picture
+								</button>
 							</div>
-						</div>
-					)}
+						)}
+					</div>
+				)}
 
-					{seconds > 0 ? <div className="seconds">{seconds}</div> : null}
-				</div>
+				{seconds > 0 ? <div className="seconds">{seconds}</div> : null}
 			</div>
 		</div>
 	);

@@ -12,12 +12,6 @@ function AadharUploadComponent(props) {
 
 	let formData = new FormData();
 
-	// const biometicBlob = async (base64) => {
-	// 	return new Promise(async (resolve, reject) => {
-	// 		await fetch(base64).then(async (res) => resolve(res.blob()));
-	// 	});
-	// };
-
 	useEffect(async () => {
 		handleImage();
 	}, []);
@@ -26,28 +20,17 @@ function AadharUploadComponent(props) {
 		const img = await JSON.parse(localStorage.getItem("capImg"));
 
 		if (img) {
-			var myBlob = new Blob([img], { type: "text/plain" });
-			console.log(myBlob);
-			setImage(myBlob);
-
-			// biometicBlob(img).then((res) => {
-			// 	console.log(res);
-
-			// });
+			setImage(img);
 			localStorage.removeItem("capImg");
 		}
 	};
-
-	console.log("form data------>>>>", formData.get("biometric"));
-	console.log("form data------>>>>", formData.get("frontendpart"));
-	console.log("form data------>>>>", formData.get("backendpart"));
 
 	// submit button handle
 
 	const handlesubmit = async (e) => {
 		e.preventDefault();
-		formData.append("biometric", image, "profileImage.jpg");
-		console.log("form data------>>>>", formData.get("biometric"));
+		formData.append("biometric", image);
+		console.log("form data------>>>>", formData.get("aadharBiometric"));
 		const config = {
 			method: "post",
 			url: `http://localhost:4000/api/v1/uploadImage/${user?.userName?.uid}`,
@@ -59,9 +42,9 @@ function AadharUploadComponent(props) {
 
 		console.log(response);
 
-		console.log("form data------>>>>", formData.get("biometric"));
-		console.log("form data------>>>>", formData.get("frontendpart"));
-		console.log("form data------>>>>", formData.get("backendpart"));
+		console.log("form data------>>>>", formData.get("aadharBiometric"));
+		console.log("form data------>>>>", formData.get("aadharBiometric"));
+		console.log("form data------>>>>", formData.get("aadharBiometric"));
 	};
 
 	if (!image) {
@@ -87,7 +70,7 @@ function AadharUploadComponent(props) {
 							id="aadharfrontfile"
 							onChange={(e) => {
 								console.log(e.target.files[0]);
-								formData.append("frontendpart", e.target.files[0]);
+								formData.append("aadharBiometric", e.target.files[0]);
 							}}
 						/>
 						<label htmlFor="aadharfrontfile">
@@ -104,7 +87,7 @@ function AadharUploadComponent(props) {
 							id="aadharbackendsidefile"
 							onChange={(e) => {
 								console.log(e.target.files[0]);
-								formData.append("backendpart", e.target.files[0]);
+								formData.append("aadharBiometric", e.target.files[0]);
 							}}
 						/>
 						<label htmlFor="aadharbackendsidefile">
@@ -112,17 +95,17 @@ function AadharUploadComponent(props) {
 						</label>
 					</div>
 				</div>
-			</div>
 
-			{/*---------------------------------------------------------
+				{/*---------------------------------------------------------
 					Upload Button
-			 -----------------------------------------------------------*/}
-			<div className="col-md-4">
-				{/* <Link to="/register4"> */}
-				<button type="submit" className="btn btn-success mt-3">
-					Upload
-				</button>
-				{/* </Link> */}
+			 	--------------------------------------------------------*/}
+				<div className="col-4">
+					<button
+						type="submit"
+						className="btn btn-primary w-100 py-3 btn-primary">
+						Upload
+					</button>
+				</div>
 			</div>
 		</form>
 	);

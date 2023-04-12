@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 // import AadharUploadComponent from "../components/AadharUploadComponent";
 import CaptureImage from "../components/CaptureImage";
-import CamOpener from "../components/CamOpener";
+
 import { UserImageContext } from "../context/UserImageContext";
 import AadharUploadComponent from "../components/AadharUploadComponent";
 
