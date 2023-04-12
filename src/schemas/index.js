@@ -34,8 +34,8 @@ export const RegistrationInitialValues = {
 export const AddressSchema = Yup.object({
   pinCode: Yup.string()
     .matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
-    .max(6),
-  // .required("Pin Code can not be empty!"),
+    .max(6)
+    .required("Pin Code can not be empty!"),
 });
 
 export const AddressInitialValues = {
@@ -54,6 +54,7 @@ export const BorrowingSchema = Yup.object({
     .matches(/([0-9])/, "Please enter a valid amount")
     .max(6)
     .required("Amount can't be empty"),
+
   tenure: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid time")
     .max(2)
@@ -71,6 +72,11 @@ export const BorrowingInitialValues = {
 // ---------------------------------------
 
 export const BankSchema = Yup.object({
+  ifsc_code: Yup.string()
+    .matches(/([A-Z][0-9])/, "Please enter a valid IFSC Code")
+    .length(11)
+    .required("IFSC Code can't be empty"),
+
   account_number: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid Account Number")
     .max(14)
@@ -87,7 +93,7 @@ export const BankInitialValues = {
 };
 
 // ---------------------------------------
-//   For Employement Details
+//   For Employment Details
 // ---------------------------------------
 
 export const salariedSchema = Yup.object({

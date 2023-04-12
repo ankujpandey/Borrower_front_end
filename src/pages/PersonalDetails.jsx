@@ -115,7 +115,13 @@ function PersonalDetails() {
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          errors.contact && touched.contact
+                            ? "is-invalid"
+                            : touched.contact
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="contact"
                         id="contact"
                         value={values.contact}
@@ -147,7 +153,13 @@ function PersonalDetails() {
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          errors.pan && touched.pan
+                            ? "is-invalid"
+                            : touched.pan
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="pan"
                         id="pan"
                         value={values.pan}
@@ -164,7 +176,13 @@ function PersonalDetails() {
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          errors.aadhaar && touched.aadhaar
+                            ? "is-invalid"
+                            : touched.aadhaar
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="aadhaar"
                         id="aadhaar"
                         value={values.aadhaar}

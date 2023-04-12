@@ -43,6 +43,7 @@ function BankDetails(props) {
         }
       } catch (error) {
         setValidIFSC(false);
+        setLoading(false);
       }
     }
   };
@@ -96,7 +97,13 @@ function BankDetails(props) {
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          errors.account_number && touched.account_number
+                            ? "is-invalid"
+                            : touched.account_number
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="account_number"
                         id="account_number"
                         value={values.account_number}
@@ -105,33 +112,44 @@ function BankDetails(props) {
                       />
                       <label className="col-form-label">Account Number</label>
                       {errors.account_number && touched.account_number ? (
-                        <div className="form-error">
+                        <div className="form-error form-validation-warning text-danger">
                           {errors.account_number}
                         </div>
                       ) : null}
                     </div>
                   </div>
 
-                  {/* add css for class form-error */}
-
                   <div className="col-md-6">
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          (errors.ifsc_code || !validIFSC) && touched.ifsc_code
+                            ? "is-invalid"
+                            : touched.ifsc_code
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="ifsc_code"
                         id="ifsc_code"
                         onChange={(event) => {
                           handleChange(event);
                         }}
-                        required
+                        onBlur={handleBlur}
                       />
                       <label className="col-form-label">IFSC Code</label>
 
-                      {/* Add CSS for class form-error */}
+                      {errors.ifsc_code && touched.ifsc_code ? (
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.ifsc_code}
+                        </div>
+                      ) : null}
+
                       {values.ifsc_code.length !=
                       11 ? null : validIFSC ? null : (
-                        <div className="form-error">Enter valid IFSC</div>
+                        <div className="form-error form-validation-warning text-danger">
+                          Enter valid IFSC
+                        </div>
                       )}
                     </div>
                   </div>

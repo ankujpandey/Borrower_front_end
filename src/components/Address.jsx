@@ -104,7 +104,13 @@ function Address(props) {
                     <div className="form-floating">
                       <input
                         type="text"
-                        className="form-control"
+                        className={`form-control ${
+                          (errors.pinCode || !validPIN) && touched.pinCode
+                            ? "is-invalid"
+                            : touched.pinCode
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="pinCode"
                         id="pinCode"
                         disabled={validPIN}
@@ -117,14 +123,18 @@ function Address(props) {
                       <label htmlFor="PinCode">PIN Code</label>
 
                       {errors.pinCode && touched.pinCode ? (
-                        <div className="form-error">{errors.pinCode}</div>
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.pinCode}
+                        </div>
                       ) : null}
 
                       {/* Add CSS for class loading-msg */}
                       {loading ? (
                         <div className="loading-msg">Please Wait...</div>
                       ) : values.pinCode.length < 6 ? null : validPIN ? null : (
-                        <div>Please enter a Valid Pin</div>
+                        <div className="form-error form-validation-warning text-danger">
+                          Please enter a Valid Pin
+                        </div>
                       )}
                     </div>
                   </div>
