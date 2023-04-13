@@ -8,7 +8,6 @@ export const UserProvider = (props) => {
 	const [companyDomain, setCompanyDomain] = useState(null);
 
 	useEffect(() => {
-		// localStorage.clear();
 		const userData = JSON.parse(localStorage.getItem("localUser"));
 
 		if (userData) {
@@ -16,7 +15,7 @@ export const UserProvider = (props) => {
 			setUser(userData.result);
 			setToken(userData.auth);
 		} else {
-			setUser([]);
+			setUser(null);
 		}
 	}, []);
 

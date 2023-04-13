@@ -6,20 +6,14 @@ import { AddressInitialValues, AddressSchema } from "../schemas";
 
 function Address(props) {
 	const { user, token } = useContext(UserContext);
+	console.log("token at address", token);
 
 	const url = "/employment-details";
 
 	let api = "http://localhost:4000/api/v1/user_info/" + user?.signUp?.uid;
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useHandleValidation(
-			AddressInitialValues,
-			AddressSchema,
-			url,
-			api,
-			token,
-			false
-		);
+		useHandleValidation(AddressInitialValues, AddressSchema, url, api, token);
 
 	const [validPIN, setValidPIN] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -107,7 +101,13 @@ function Address(props) {
 										<div className="form-floating">
 											<input
 												type="text"
-												className="form-control"
+												className={`form-control ${
+													(errors.pinCode || !validPIN) && touched.pinCode
+														? "is-invalid"
+														: touched.pinCode
+														? "is-valid"
+														: ""
+												}`}
 												name="pinCode"
 												id="pinCode"
 												disabled={validPIN}
@@ -120,14 +120,18 @@ function Address(props) {
 											<label htmlFor="PinCode">PIN Code</label>
 
 											{errors.pinCode && touched.pinCode ? (
-												<div className="form-error">{errors.pinCode}</div>
+												<div className="form-error form-validation-warning text-danger">
+													{errors.pinCode}
+												</div>
 											) : null}
 
 											{/* Add CSS for class loading-msg */}
 											{loading ? (
 												<div className="loading-msg">Please Wait...</div>
 											) : values.pinCode.length < 6 ? null : validPIN ? null : (
-												<div>Please enter a Valid Pin</div>
+												<div className="form-error form-validation-warning text-danger">
+													Please enter a Valid Pin
+												</div>
 											)}
 										</div>
 									</div>

@@ -43,6 +43,7 @@ function BankDetails(props) {
         }
       } catch (error) {
         setValidIFSC(false);
+        setLoading(false);
       }
     }
   };
@@ -68,71 +69,133 @@ function BankDetails(props) {
         </div>
       </div>
 
-      <div className="row">
-        <div className="col-md-12">
-          <h2>Registration Form</h2>
-          <form className="col-md-6 my-5" onSubmit={handleSubmit}>
-            <label className="col-form-label">Account Number</label>
-            <input
-              type="text"
-              className="form-control"
-              name="account_number"
-              id="account_number"
-              value={values.account_number}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-            {errors.account_number && touched.account_number ? (
-              <div className="form-error">{errors.account_number}</div>
-            ) : null}
+      <div
+        className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
+        data-wow-delay="0.1s"
+      >
+        <h6 className="position-relative d-inline text-primary ps-4">
+          Bank Details
+        </h6>
+        <h2 className="mt-2">Please enter the following details...</h2>
+      </div>
 
-            {/* add css for class form-error */}
+      <div className="container px-lg-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-10">
+            <div
+              className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+              data-wow-delay="0.3s"
+            >
+              <form
+                action=""
+                onSubmit={handleSubmit}
+                className="needs-validation"
+                noValidate
+              >
+                <div className="row justify-content-center g-3 m-3 mb-4">
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className={`form-control ${
+                          errors.account_number && touched.account_number
+                            ? "is-invalid"
+                            : touched.account_number
+                            ? "is-valid"
+                            : ""
+                        }`}
+                        name="account_number"
+                        id="account_number"
+                        value={values.account_number}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <label className="col-form-label">Account Number</label>
+                      {errors.account_number && touched.account_number ? (
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.account_number}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
 
-            <label className="col-form-label">IFSC Code</label>
-            <input
-              type="text"
-              className="form-control"
-              name="ifsc_code"
-              id="ifsc_code"
-              onChange={(event) => {
-                handleChange(event);
-              }}
-              required
-            />
+                  <div className="col-md-6">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className={`form-control ${
+                          (errors.ifsc_code || !validIFSC) && touched.ifsc_code
+                            ? "is-invalid"
+                            : touched.ifsc_code
+                            ? "is-valid"
+                            : ""
+                        }`}
+                        name="ifsc_code"
+                        id="ifsc_code"
+                        onChange={(event) => {
+                          handleChange(event);
+                        }}
+                        onBlur={handleBlur}
+                      />
+                      <label className="col-form-label">IFSC Code</label>
 
-            {/* Add CSS for class form-error */}
-            {values.ifsc_code.length != 11 ? null : validIFSC ? null : (
-              <div className="form-error">Enter valid IFSC</div>
-            )}
+                      {errors.ifsc_code && touched.ifsc_code ? (
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.ifsc_code}
+                        </div>
+                      ) : null}
 
-            {loading ? (
-              <div className="loading-msg">Please wait...</div>
-            ) : validIFSC ? (
-              <>
-                <label className="col-form-label">Bank Name</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="bank_name"
-                  value={values.bank_name}
-                  disabled
-                />
+                      {values.ifsc_code.length !=
+                      11 ? null : validIFSC ? null : (
+                        <div className="form-error form-validation-warning text-danger">
+                          Enter valid IFSC
+                        </div>
+                      )}
+                    </div>
+                  </div>
 
-                <label className="col-form-label">Branch</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="branch_name"
-                  value={values.branch_name}
-                  disabled
-                />
-
-                <button type="submit" className="btn btn-success mt-3">
-                  Submit
-                </button>
-              </>
-            ) : null}
-          </form>
+                  {loading ? (
+                    <div className="loading-msg">Please wait...</div>
+                  ) : validIFSC ? (
+                    <>
+                      <div className="col-md-6">
+                        <div className="form-floating">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="bank_name"
+                            value={values.bank_name}
+                            disabled
+                          />
+                          <label className="col-form-label">Bank Name</label>
+                        </div>
+                      </div>
+                      <div className="col-md-6">
+                        <div className="form-floating">
+                          <input
+                            type="text"
+                            className="form-control"
+                            name="branch_name"
+                            value={values.branch_name}
+                            disabled
+                          />
+                          <label className="col-form-label">Branch</label>
+                        </div>
+                      </div>
+                      <div className="col-4">
+                        <button
+                          type="submit"
+                          className="btn btn-primary w-100 py-3 btn-primary"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </>
+                  ) : null}
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>

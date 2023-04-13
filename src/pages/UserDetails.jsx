@@ -4,6 +4,7 @@ import { ApiCall } from "../functions/ApiCall";
 
 function UserDetails(props) {
   const { id } = useParams();
+  const [isData, setIsData] = useState(false);
 
   const [user, setUser] = useState([]);
 
@@ -27,12 +28,18 @@ function UserDetails(props) {
   const fetchData = async () => {
     let response = await ApiCall(config);
     if (response.status === 201) {
+      setIsData(true);
       console.log(response.data.data[0]);
       setUser(response?.data?.data[0]);
     } else {
-      alert("Something went wrong!!!");
+      setIsData(false);
+      // alert("Something went wrong!!!");
     }
   };
+
+  if (!isData) {
+    return <h1>No data available!!</h1>;
+  }
   return (
     <div className="container border border-dark-subtle rounded my-4 p-3">
       <div className="row">
@@ -123,10 +130,10 @@ function UserDetails(props) {
                 Professional Email
               </span>
             </li>
-            {user.bussiness_nature ? (
+            {user.business_nature ? (
               <li className="list-group-item">
                 {/* <HiPhone className="icons" /> */}
-                {user.bussiness_nature}
+                {user.business_nature}
                 <span className="float-end text-secondary">
                   Nature of Bussiness
                 </span>

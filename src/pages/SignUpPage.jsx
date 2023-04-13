@@ -11,6 +11,7 @@ function SignUpPage(props) {
 
 	const api = "http://localhost:4000/api/v1/signUp";
 
+<<<<<<< HEAD
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useHandleValidation(
 			initialValuesSignupschema,
@@ -19,6 +20,17 @@ function SignUpPage(props) {
 			api,
 			true
 		);
+=======
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useHandleValidation(
+      initialValuesSignupschema,
+      SignUpschema,
+      url,
+      api,
+      "",
+      true
+    );
+>>>>>>> 797d3d348790c2dceabd3e616b774d55d2ae31c3
 
 	return (
 		<>

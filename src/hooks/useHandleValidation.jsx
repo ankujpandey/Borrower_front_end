@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import { ApiCall } from "../functions/ApiCall";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../context/UserContext";
 
 export const useHandleValidation = (
@@ -14,6 +14,8 @@ export const useHandleValidation = (
 ) => {
 	const { setUser, setToken } = useContext(UserContext);
 
+	const [validUser, setValidUser] = useState(true);
+
 	const navigate = useNavigate();
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -25,7 +27,7 @@ export const useHandleValidation = (
 			// },
 
 			onSubmit: async (values) => {
-				console.log(values);
+				// console.log(values);
 
 				const config = {
 					method: "post",
@@ -37,19 +39,27 @@ export const useHandleValidation = (
 				let response = await ApiCall(config);
 
 				if (response.status === 201) {
-					console.log(response.data);
-
+					// console.log(response.data);
+					// console.log(signUp);
 					if (signUp) {
-						setUser(response?.data?.data.result);
-						localStorage.setItem(
-							"localUser",
-							JSON.stringify(response?.data?.data)
-						);
+						// console.log(response.data.data.result.status);
 
-						setToken(response?.data?.data?.auth);
+						if (response?.data?.data?.result?.status == 203) {
+							// setValidUser(false);
+							errors.email = "Email already exists! Please login to continue!";
+						} else {
+							setUser(response?.data?.data?.result);
+							// console.log(response?.data?.data?.result);
+							localStorage.setItem(
+								"localUser",
+								JSON.stringify(response?.data?.data?.result)
+							);
+							setToken(response?.data?.data?.auth);
+							navigate(url);
+						}
 					}
-					console.log(url);
-					navigate(url);
+					// console.log("validuser before navigate---", validUser);
+					else navigate(url);
 				} else {
 					alert("Something went wrong!!!");
 				}
