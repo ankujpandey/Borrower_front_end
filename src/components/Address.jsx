@@ -110,6 +110,7 @@ function Address(props) {
 												}`}
 												name="pinCode"
 												id="pinCode"
+												placeholder="PIN Code"
 												disabled={validPIN}
 												value={values.pinCode}
 												onBlur={handleBlur}
@@ -117,7 +118,7 @@ function Address(props) {
 													handleChange(event);
 												}}
 											/>
-											<label htmlFor="PinCode">PIN Code</label>
+											<label htmlFor="pinCode">PIN Code</label>
 
 											{errors.pinCode && touched.pinCode ? (
 												<div className="form-error form-validation-warning text-danger">
@@ -143,6 +144,7 @@ function Address(props) {
 												className="form-select"
 												name="postOffice"
 												id="postOffice"
+												placeholder="Post Office"
 												value={values.postOffice}
 												onChange={handleChange}
 												required>
@@ -169,6 +171,7 @@ function Address(props) {
 												className="form-control"
 												name="city"
 												id="city"
+												placeholder="City"
 												disabled
 												value={values.city}
 											/>
@@ -183,6 +186,7 @@ function Address(props) {
 												className="form-control"
 												name="State"
 												id="State"
+												placeholder="State"
 												disabled
 												value={values.state}
 											/>

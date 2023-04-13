@@ -98,13 +98,13 @@ function SalariedEmployee(props) {
 						) : null}
 					</div>
 				</div>
-			</div>
-			<div className="col-4">
-				<button
-					type="submit"
-					className="btn btn-primary w-100 py-3 btn-primary">
-					Submit
-				</button>
+				<div className="col-4">
+					<button
+						type="submit"
+						className="btn btn-primary w-100 py-3 btn-primary">
+						Submit
+					</button>
+				</div>
 			</div>
 		</form>
 	);
