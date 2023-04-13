@@ -43,7 +43,7 @@ function Dashboard(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
-        <h2 className="mt-2">Press Button To Continue</h2>
+        {/* <h2 className="mt-2">Press Button To Continue</h2> */}
       </div>
 
       {user?.userName?.contact ? (
