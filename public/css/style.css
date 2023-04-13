@@ -508,3 +508,9 @@ h6,
 .form-validation-warning {
 	font-size: smaller;
 }
+
+/***Biometric Image***/
+
+.biometric-image {
+	width: 100%;
+}

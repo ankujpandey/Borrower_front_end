@@ -3,24 +3,33 @@ import React, { createContext, useState, useEffect } from "react";
 export const UserContext = createContext();
 
 export const UserProvider = (props) => {
-	const [user, setUser] = useState([]);
+	const [user, setUser] = useState(null);
+	const [token, setToken] = useState(null);
+	const [companyDomain, setCompanyDomain] = useState(null);
 
 	useEffect(() => {
-		// localStorage.clear();
 		const userData = JSON.parse(localStorage.getItem("localUser"));
+
 		if (userData) {
-			setUser(userData);
+			console.log("local storage at context", userData.result);
+			setUser(userData.result);
+			setToken(userData.auth);
 		} else {
-			setUser([]);
+			setUser(null);
 		}
 	}, []);
 
-	const state = {
-		user,
-		setUser,
-	};
-
 	return (
-		<UserContext.Provider value={state}>{props.children}</UserContext.Provider>
+		<UserContext.Provider
+			value={{
+				user,
+				setUser,
+				token,
+				setToken,
+				companyDomain,
+				setCompanyDomain,
+			}}>
+			{props.children}
+		</UserContext.Provider>
 	);
 };

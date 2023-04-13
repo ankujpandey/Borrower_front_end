@@ -1,66 +1,68 @@
 import { useFormik } from "formik";
-
 import { useNavigate } from "react-router";
 import { ApiCall } from "../functions/ApiCall";
-// import { Axios } from "../functions/Axios";
-import { UserContext } from "../components/UserContext";
+import { useContext, useState } from "react";
+import { UserContext } from "../context/UserContext";
 
 export const useHandleValidation = (
 	initialValues,
 	validationSchema,
 	url,
-	api
+	api,
+	token,
+	signUp
 ) => {
+	const { setUser, setToken } = useContext(UserContext);
+
+	const [validUser, setValidUser] = useState(true);
+
 	const navigate = useNavigate();
-	// const [flag, setFlag] = useState(false);
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
 		useFormik({
 			initialValues,
 			validationSchema,
 			// onSubmit: (values) => {
-			//   // console.log("scsdnsdfds");
 			//   console.log(values);
-			//   // console.log(employeeType);
-			//   // setFlag(true);
 			// },
 
-			onSubmit: async (values, action) => {
-				console.log(values);
+			onSubmit: async (values) => {
+				// console.log(values);
 
 				const config = {
 					method: "post",
 					url: api,
-					headers: { "Content-Type": "application/json" },
+					headers: { "Content-Type": "application/json", authorization: token },
 					data: values,
 				};
-				// try {
-				// 	const data = await axios.post(
-				// 		api,
 
-				// 		values,
+				let response = await ApiCall(config);
 
-				// 		{
-				// 			headers: {
-				// 				"Content-Type": "application/json",
-				// 			},
-				// 		}
-				// 	);
-				// console.log(data);
-				let data = await ApiCall(config);
+				if (response.status === 201) {
+					// console.log(response.data);
+					// console.log(signUp);
+					if (signUp) {
+						// console.log(response.data.data.result.status);
 
-				if (data.status === 201) {
-					// setFlag(true);
-					console.log(data.data);
-					localStorage.setItem("localUser", JSON.stringify(data?.data?.data));
-					navigate(url);
+						if (response?.data?.data?.result?.status == 203) {
+							// setValidUser(false);
+							errors.email = "Email already exists! Please login to continue!";
+						} else {
+							setUser(response?.data?.data?.result);
+							// console.log(response?.data?.data?.result);
+							localStorage.setItem(
+								"localUser",
+								JSON.stringify(response?.data?.data?.result)
+							);
+							setToken(response?.data?.data?.auth);
+							navigate(url);
+						}
+					}
+					// console.log("validuser before navigate---", validUser);
+					else navigate(url);
 				} else {
 					alert("Something went wrong!!!");
 				}
-				// } catch (error) {
-				// 	console.log(error);
-				// }
-				// action.resetForm();
 			},
 		});
 
