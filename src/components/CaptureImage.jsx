@@ -164,7 +164,7 @@ function CaptureImage(props) {
 										className="btn btn-primary w-100 py-2 btn-primary"
 										onClick={() => {
 											setFlag(!flag);
-											setSeconds(10);
+											setSeconds(5);
 											setImage(null);
 											setWarning(false);
 											clickImage();
@@ -179,7 +179,7 @@ function CaptureImage(props) {
 									// type="submit"
 									className="btn btn-primary w-100 py-3 btn-primary"
 									onClick={() => {
-										setSeconds(2);
+										setSeconds(5);
 										clickImage();
 									}}>
 									Take Picture

@@ -25,3 +25,19 @@ code {
 	color: white;
 	animation: blinker 1s linear infinite;
 }
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.seconds {
+  position: absolute;
+  top: 20%;
+  left: 40%;
+  font-size: 200px;
+  font-weight: bold;
+  color: white;
+  animation: blinker 1s linear infinite;
+}

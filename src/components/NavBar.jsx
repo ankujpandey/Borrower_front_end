@@ -30,6 +30,10 @@ function NavBar(props) {
             <Link to="/" className="nav-item nav-link">
               Home
             </Link>
+          ) : user.adminID ? (
+            <Link to="/admin-dashboard" className="nav-item nav-link">
+              Home
+            </Link>
           ) : (
             <Link to="/dashboard" className="nav-item nav-link">
               Home
