@@ -4,7 +4,9 @@ import { ApiCall } from "../functions/ApiCall";
 import { NavLink } from "react-router-dom";
 
 function AdminDashboard(props) {
+  const { token } = useContext(UserContext);
   const [users, setUsers] = useState([]);
+  console.log(token);
 
   const config = {
     method: "get",
@@ -26,13 +28,47 @@ function AdminDashboard(props) {
     }
   };
 
+  const handleDeleteUser = async (id) => {
+    const deleteConfig = {
+      method: "delete",
+      url: `http://localhost:4000/api/v1/user/${id}`,
+      headers: { "Content-Type": "application/json", authorization: token },
+    };
+    let response = await ApiCall(deleteConfig);
+    if (response.status === 201) {
+      console.log(response.data.message);
+      window.location = "/admin-dashboard";
+      // setUsers(response?.data?.data);
+    } else {
+      alert("Something went wrong!!!");
+    }
+  };
+
   return (
     <div>
+      <div className="py-5 bg-primary hero-header mb-3">
+        <div className="container py-3 px-5">
+          <div className="row mt-5">
+            <div className="col-12 text-center">
+              <div data-wow-delay="0.1s">
+                <h1 className="text-white animated zoomIn mt-5">
+                  Admin Dashboard!
+                </h1>
+              </div>
+              <hr
+                className="bg-white mx-auto mt-0 mb-5"
+                style={{ width: 90 }}
+              />
+              <nav aria-label="breadcrumb"></nav>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="py-5 mb-3">
         <div className="container py-3 px-5">
           <div className="row mt-5">
             <div className="col-12 ">
-              <table className="table my-5">
+              <table className="table mb-5">
                 <thead>
                   <tr>
                     <th scope="col">ID</th>
@@ -40,6 +76,7 @@ function AdminDashboard(props) {
                     <th scope="col">Last Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Active</th>
+                    <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                   </tr>
@@ -64,7 +101,7 @@ function AdminDashboard(props) {
                       <td scope="row">
                         <button
                           className="btn btn-danger"
-                          // onClick={() => handleDeleteClient(client.ID)}
+                          onClick={() => handleDeleteUser(user.uid)}
                         >
                           {/* <AiOutlineDelete /> */}
                           Delete
