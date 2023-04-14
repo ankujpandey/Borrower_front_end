@@ -22,6 +22,7 @@ import { UserImageProvider } from "./context/UserImageContext";
 import Register4 from "./pages/Register4";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDetails from "./pages/UserDetails";
+import PanCardDetails from "./pages/PanCardDetails";
 
 function App() {
 	// const { user, setUser } = useContext(UserContext);
@@ -63,6 +64,7 @@ function App() {
 					<Route path="/register3" element={<Register3 />} />
 					<Route path="/register4" element={<Register4 />} />
 					<Route path="/bank-details" element={<BankDetails />} />
+					<Route path="/pancard" element={<PanCardDetails />} />
 					<Route path="/address" element={<Address />} />
 					<Route path="/borrowing-details" element={<BorrowingDetails />} />
 					<Route path="/admin-dashboard" element={<AdminDashboard />} />

@@ -1,20 +1,20 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import Webcam from "react-webcam"; //npm i react-webcam
 
 import { useFaceDetection } from "react-use-face-detection"; //npm i react-use-face-detection
 import FaceDetection from "@mediapipe/face_detection"; //npm i @mediapipe/face_detection
 import { Camera } from "@mediapipe/camera_utils"; //npm i @mediapipe/camera_utils
-import AadharUploadComponent from "./AadharUploadComponent";
+
+import { UserImageContext } from "../context/UserImageContext";
 
 function CaptureImage(props) {
-	const [image, setImage] = useState(null);
+	const { image, setImage } = useContext(UserImageContext);
 	const [seconds, setSeconds] = useState(0);
 	const { id } = useParams();
 	const [flag, setFlag] = useState(false);
 	const [warning, setWarning] = useState(false);
-	const navigate = useNavigate();
 
 	let picture = null;
 
