@@ -19,25 +19,9 @@ code {
 .seconds {
 	position: absolute;
 	top: 20%;
-	left: 40%;
+	left: 45%;
 	font-size: 200px;
 	font-weight: bold;
-	color: white;
-	animation: blinker 1s linear infinite;
-}
-
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-}
-
-.seconds {
-  position: absolute;
-  top: 20%;
-  left: 40%;
-  font-size: 200px;
-  font-weight: bold;
-  color: white;
-  animation: blinker 1s linear infinite;
+	color: rgb(232, 232, 232);
+	animation: blinker 1.2s linear infinite;
 }

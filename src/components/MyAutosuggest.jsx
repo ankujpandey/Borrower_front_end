@@ -56,20 +56,37 @@ function MyAutosuggest({ setCompanyName }) {
 	};
 
 	const inputProps = {
-		placeholder: "Enter your company name",
 		value,
 		onChange: onChange,
+		// id: "company_name",
+		onFocus() {
+			console.log("hi---------------------");
+		},
 	};
 
 	return (
-		<Autosuggest
-			suggestions={suggestions}
-			onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-			onSuggestionsClearRequested={onSuggestionsClearRequested}
-			getSuggestionValue={getSuggestionValue}
-			renderSuggestion={renderSuggestion}
-			inputProps={inputProps}
-		/>
+		<>
+			<Autosuggest
+				disablePortal
+				suggestions={suggestions}
+				onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+				onSuggestionsClearRequested={onSuggestionsClearRequested}
+				getSuggestionValue={getSuggestionValue}
+				renderSuggestion={renderSuggestion}
+				inputProps={inputProps}
+				// value={`${value}`}
+				// onChange={onChange}
+				placeholder="Company Name"
+				theme={{
+					// Pass `className` into Autosuggest theme. The `container` is className for root block
+					...Autosuggest.defaultProps.theme,
+					container: "form-select-autosuggestion form-floating",
+				}}
+			/>
+			<label htmlFor="company_name" className="auto-suggetion-label">
+				Company Name
+			</label>
+		</>
 	);
 }
 

@@ -56,10 +56,6 @@ function SalariedEmployee(props) {
 
 				<div className="col-md-6">
 					<div className="form-floating">
-						<label htmlFor="company_name" className="form-label">
-							Company Name:
-						</label>
-
 						<MyAutosuggest setCompanyName={setCompanyName} />
 
 						{errors.company_name && touched.company_name ? (
@@ -89,7 +85,7 @@ function SalariedEmployee(props) {
 							onBlur={handleBlur}
 						/>
 						<label htmlFor="company_email" className="col-form-label">
-							Professional Email id:
+							Professional Email id
 						</label>
 						{errors.email && touched.email ? (
 							<p className="form-error form-validation-warning text-danger">
@@ -111,67 +107,3 @@ function SalariedEmployee(props) {
 }
 
 export default SalariedEmployee;
-
-// body {
-//   font-family: Helvetica, sans-serif;
-// }
-
-// .react-autosuggest__container {
-//   position: relative;
-//   margin-bottom: 200px;
-// }
-
-// .react-autosuggest__input {
-//   width: 240px;
-//   color:red;
-//   height: 30px;
-//   padding: 10px 20px;
-//   font-family: Helvetica, sans-serif;
-//   font-weight: 300;
-//   font-size: 16px;
-//   border: 1px solid #aaa;
-//   border-radius: 4px;
-// }
-
-// .react-autosuggest__input--focused {
-//   outline: none;
-// }
-
-// .react-autosuggest__input--open {
-//   border-bottom-left-radius: 0;
-//   border-bottom-right-radius: 0;
-// }
-
-// .react-autosuggest__suggestions-container {
-//   display: none;
-// }
-
-// .react-autosuggest__suggestions-container--open {
-//   display: block;
-//   position: absolute;
-//   top: 51px;
-//   width: 280px;
-//   border: 1px solid #aaa;
-//   background-color: #fff;
-//   font-family: Helvetica, sans-serif;
-//   font-weight: 300;
-//   font-size: 16px;
-//   border-bottom-left-radius: 4px;
-//   border-bottom-right-radius: 4px;
-//   z-index: 2;
-// }
-
-// .react-autosuggest__suggestions-list {
-//   margin: 0;
-//   padding: 0;
-//   list-style-type: none;
-// }
-
-// .react-autosuggest__suggestion {
-//   cursor: pointer;
-//   padding: 10px 20px;
-// }
-
-// .react-autosuggest__suggestion--highlighted {
-//   background-color: #ddd;
-// }

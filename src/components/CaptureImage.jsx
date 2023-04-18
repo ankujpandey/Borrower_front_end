@@ -37,6 +37,10 @@ function CaptureImage(props) {
 		}
 	);
 
+	useEffect(() => {
+		localStorage.removeItem("capImg");
+	}, []);
+
 	//Image Capturing--------->>>>>>>>
 	useEffect(() => {
 		if (seconds > 0) {
@@ -64,7 +68,7 @@ function CaptureImage(props) {
 				setImage(picture);
 				localStorage.setItem("capImg", JSON.stringify(picture));
 			}
-		}, 2000);
+		}, 5000);
 	};
 
 	console.log("image section renderd");
@@ -94,11 +98,12 @@ function CaptureImage(props) {
 									className="btn btn-primary w-100 py-2 btn-primary"
 									onClick={() => {
 										setFlag(!flag);
-										setSeconds(10);
+										setSeconds(5);
 										setImage(null);
 										setWarning(false);
-										clickImage();
+										localStorage.removeItem("capImg");
 										window.location.reload(false);
+										// clickImage();
 									}}>
 									Retake
 								</button>
@@ -167,7 +172,8 @@ function CaptureImage(props) {
 											setSeconds(5);
 											setImage(null);
 											setWarning(false);
-											clickImage();
+											localStorage.removeItem("capImg");
+											// clickImage();
 										}}>
 										Retake
 									</button>
