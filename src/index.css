@@ -1,27 +1,27 @@
 body {
-  margin: 0;
-  font-family: sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
 
 @keyframes blinker {
-  50% {
-    opacity: 0;
-  }
+	50% {
+		opacity: 0;
+	}
 }
 
 .seconds {
-  position: absolute;
-  top: 20%;
-  left: 40%;
-  font-size: 200px;
-  font-weight: bold;
-  color: white;
-  animation: blinker 1s linear infinite;
+	position: absolute;
+	top: 20%;
+	left: 45%;
+	font-size: 200px;
+	font-weight: bold;
+	color: rgb(232, 232, 232);
+	animation: blinker 1.2s linear infinite;
 }

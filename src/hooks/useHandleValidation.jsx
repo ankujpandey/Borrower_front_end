@@ -48,6 +48,7 @@ export const useHandleValidation = (
               // setValidUser(false);
               errors.email = "Email already exists! Please login to continue!";
             } else {
+              console.log(response?.data?.data?.auth);
               setUser(response?.data?.data?.result);
               // console.log(response?.data?.data?.result);
               localStorage.setItem(

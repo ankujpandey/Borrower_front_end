@@ -7,7 +7,9 @@ import { UserContext } from "../context/UserContext";
 function BankDetails(props) {
 	const { user, token } = useContext(UserContext);
 
-	const url = "/dashboard";
+	console.log(token);
+
+	const url = "/pancard";
 	const api = "http://localhost:4000/api/v1/createBank";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
