@@ -183,7 +183,7 @@ function RegisteredDetails(props) {
                             className="col-10 card wow fadeInUp"
                             data-wow-delay="0.3s"
                           >
-                            <NavLink to="/bank-details">
+                            <NavLink to="/register3">
                               <button
                                 type="submit"
                                 className="btn btn-primary w-100 py-3 btn-primary"

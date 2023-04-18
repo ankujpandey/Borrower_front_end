@@ -27,7 +27,7 @@ export const useHandleValidation = (
       // },
 
       onSubmit: async (values) => {
-        // console.log(values);
+        console.log(values);
 
         const config = {
           method: "post",
@@ -39,7 +39,7 @@ export const useHandleValidation = (
         let response = await ApiCall(config);
 
         if (response.status === 201) {
-          // console.log(response.data);
+          console.log("Response--- ", response);
           // console.log(signUp);
           if (signUp) {
             // console.log(response.data.data.result.status);
