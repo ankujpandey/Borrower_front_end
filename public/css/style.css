@@ -600,7 +600,7 @@ h6,
 /***Form***/
 
 .row-loader {
-	filter: blur(4px);
+	filter: blur(1px);
 }
 
 /*** auto suggestion box ***/
@@ -669,7 +669,7 @@ h6,
 	background-color: #ddd;
 } */
 
-.form-select-autosuggestion input {
+/* .form-select-autosuggestion input {
 	display: block;
 	width: 100%;
 	padding: 0.375rem 0.75rem;
@@ -687,4 +687,4 @@ h6,
 }
 .form-select-autosuggestion input:focus {
 	outline: none;
-}
+} */

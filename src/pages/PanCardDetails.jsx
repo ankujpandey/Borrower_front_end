@@ -25,7 +25,7 @@ function PanCardDetails(props) {
 
 		if (response.status === 201) {
 			setLoading(false);
-			if (response.data.data.authentication.score < 0.35) {
+			if (response.data.data.verification.passed) {
 				alert("PAN Authentication Failed!");
 				setPassed(false);
 			} else {
