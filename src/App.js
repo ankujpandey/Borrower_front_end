@@ -15,14 +15,14 @@ import SignUpPage from "./pages/SignUpPage";
 import Dashboard from "./pages/Dashboard";
 import NavBar from "./components/NavBar";
 import Address from "./components/Address";
-import BorrowingDetails from "./components/BorrowingDetails";
+import BorrowingDetails from "./pages/BorrowingDetails";
 import { UserProvider } from "./context/UserContext";
-import { useContext } from "react";
 import { UserImageProvider } from "./context/UserImageContext";
 import Register4 from "./pages/Register4";
 import AdminDashboard from "./pages/AdminDashboard";
 import UserDetails from "./pages/UserDetails";
 import PanCardDetails from "./pages/PanCardDetails";
+import Footer from "./components/Footer";
 
 function App() {
 	// const { user, setUser } = useContext(UserContext);
@@ -70,6 +70,7 @@ function App() {
 					<Route path="/admin-dashboard" element={<AdminDashboard />} />
 					<Route path="/users/:id" element={<UserDetails />} />
 				</Routes>
+				<Footer />
 			</UserProvider>
 		</UserImageProvider>
 	);

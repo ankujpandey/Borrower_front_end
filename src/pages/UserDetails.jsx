@@ -173,8 +173,6 @@ function UserDetails(props) {
 										</li>
 									</ul>
 
-									<hr />
-
 									<h3 className="menu-title fs-3 mt-5 fw-bold">
 										Employment Details
 									</h3>
@@ -216,37 +214,33 @@ function UserDetails(props) {
 										</li>
 									</ul>
 
-									<hr />
-
 									<h3 className="menu-title fs-3 mt-5 fw-bold">Bank Details</h3>
 
 									<ul className="list-group ">
 										<li className="list-group-item">
-											{user.account_number}
+											{Icons.account} {user.account_number}
 											<span className="float-end text-secondary">
 												Account Number
 											</span>
 										</li>
 
 										<li className="list-group-item">
-											{user.ifsc_code}
+											{Icons.searchWorld} {user.ifsc_code}
 											<span className="float-end text-secondary">IFSC</span>
 										</li>
 
 										<li className="list-group-item">
-											{user.branch_name}
+											{Icons.pin} {user.branch_name}
 											<span className="float-end text-secondary">Branch</span>
 										</li>
 
 										<li className="list-group-item">
-											{user.bank_name}
+											{Icons.bank} {user.bank_name}
 											<span className="float-end text-secondary">Bank</span>
 										</li>
 									</ul>
 
-									<hr />
-
-									<div className="d-flex justify-content-center mb-2">
+									<div className="row justify-content-center mt-5 mb-2">
 										<div className="col-3">
 											<button
 												type="button"
@@ -262,7 +256,7 @@ function UserDetails(props) {
 										<div className="col-3">
 											<button
 												type="button"
-												className="btn btn-warning ms-4 w-100 py-3 btn-warning">
+												className="btn btn-warning w-100 py-3 btn-warning">
 												{Icons.update} Update
 											</button>
 										</div>
@@ -270,7 +264,7 @@ function UserDetails(props) {
 										<div className="col-3">
 											<button
 												type="button"
-												className="btn btn-danger ms-5 w-100 py-3 btn-danger"
+												className="btn btn-danger w-100 py-3 btn-danger"
 												// onClick={() => handleDeleteApi(id)}
 											>
 												{Icons.delete} Delete User
