@@ -153,9 +153,7 @@ function AdminDashboard(props) {
 								</td>
 
 								<td>
-									<Link
-									// to={`/individual/${person.id}`}
-									>
+									<Link to={`/users/${person.uid}`}>
 										<button
 											type="button"
 											className="btn fs-6 btn-primary btn-sm">

@@ -59,13 +59,14 @@ function MyAutosuggest({ setCompanyName }) {
 		value,
 		onChange: onChange,
 		// id: "company_name",
+		placeholder: "Company Name",
 		onFocus() {
 			console.log("hi---------------------");
 		},
 	};
 
 	return (
-		<>
+		<div className="form-floating">
 			<Autosuggest
 				disablePortal
 				suggestions={suggestions}
@@ -76,17 +77,15 @@ function MyAutosuggest({ setCompanyName }) {
 				inputProps={inputProps}
 				// value={`${value}`}
 				// onChange={onChange}
-				placeholder="Company Name"
+
 				theme={{
 					// Pass `className` into Autosuggest theme. The `container` is className for root block
 					...Autosuggest.defaultProps.theme,
-					container: "form-select-autosuggestion form-floating",
+					container: "form-select-autosuggestion",
 				}}
 			/>
-			<label htmlFor="company_name" className="auto-suggetion-label">
-				Company Name
-			</label>
-		</>
+			{/* <label htmlFor="company_name">Company Name</label> */}
+		</div>
 	);
 }
 
