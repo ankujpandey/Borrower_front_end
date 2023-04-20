@@ -688,3 +688,20 @@ h6,
 .form-select-autosuggestion input:focus {
 	outline: none;
 } */
+
+.form-floating .dropdown {
+	position: absolute;
+	top: 62px;
+	left: 0;
+	z-index: 9999;
+	background: #ffff;
+	width: 100%;
+	/* padding: 5px 10px; */
+	/* border: 1px solid #efefef; */
+}
+.form-floating .dropdown-row {
+	cursor: pointer;
+	display: block;
+	padding: 5px;
+	color: #3c3c3d;
+}

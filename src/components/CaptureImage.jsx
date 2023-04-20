@@ -8,6 +8,7 @@ import FaceDetection from "@mediapipe/face_detection"; //npm i @mediapipe/face_d
 import { Camera } from "@mediapipe/camera_utils"; //npm i @mediapipe/camera_utils
 
 import { UserImageContext } from "../context/UserImageContext";
+import { Icons } from "../icons/Icons";
 
 function CaptureImage(props) {
 	const { image, setImage } = useContext(UserImageContext);
@@ -121,7 +122,7 @@ function CaptureImage(props) {
 						</div>
 					</>
 				) : (
-					<div className="row justify-content-center">
+					<div className="row justify-content-center g-3 m-3">
 						{boundingBox.map((box, index) => (
 							<div
 								key={`${index + 1}`}
@@ -186,7 +187,7 @@ function CaptureImage(props) {
 										setSeconds(5);
 										clickImage();
 									}}>
-									Take Picture
+									{Icons.camera} Take Picture
 								</button>
 							</div>
 						)}

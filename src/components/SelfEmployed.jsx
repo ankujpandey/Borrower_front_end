@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { selfEmployedSchema, initialValueSelfEmployed } from "../schemas";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { UserContext } from "../context/UserContext";
+import { Icons } from "../icons/Icons";
 
 function SelfEmployed(props) {
 	const { user, token } = useContext(UserContext);
@@ -108,7 +109,7 @@ function SelfEmployed(props) {
 					<button
 						type="submit"
 						className="btn btn-primary w-100 py-3 btn-primary">
-						Submit
+						Next {Icons.next}
 					</button>
 				</div>
 			</div>

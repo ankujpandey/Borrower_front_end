@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserImageContext } from "../context/UserImageContext";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
+import { Icons } from "../icons/Icons";
 
 function AadharUploadComponent(props) {
 	const { image } = useContext(UserImageContext);
@@ -95,7 +96,7 @@ function AadharUploadComponent(props) {
 							}}
 						/>
 						<label htmlFor="aadharfrontfile">
-							Upload Front Side Aadhar card
+							Upload Front Side of Aadhar card
 						</label>
 					</div>
 				</div>
@@ -112,7 +113,7 @@ function AadharUploadComponent(props) {
 							}}
 						/>
 						<label htmlFor="aadharbackendsidefile">
-							Upload Back Side Aadhar card
+							Upload Back Side of Aadhar card
 						</label>
 					</div>
 				</div>
@@ -129,7 +130,7 @@ function AadharUploadComponent(props) {
 								navigate("/bank-details");
 								setPassed(false);
 							}}>
-							Next
+							Next{Icons.next}
 						</button>
 					</div>
 				) : (
@@ -137,7 +138,7 @@ function AadharUploadComponent(props) {
 						<button
 							type="submit"
 							className="btn btn-primary w-100 py-3 btn-primary">
-							Upload
+							{Icons.upload} Upload
 						</button>
 					</div>
 				)}
