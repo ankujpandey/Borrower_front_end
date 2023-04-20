@@ -705,3 +705,8 @@ h6,
 	padding: 5px;
 	color: #3c3c3d;
 }
+
+/***Hero Image Design***/
+.hero-image {
+	height: 650px;
+}
