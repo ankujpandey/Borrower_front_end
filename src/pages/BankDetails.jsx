@@ -3,11 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { BankSchema, BankInitialValues } from "../schemas";
 import { UserContext } from "../context/UserContext";
+import { Icons } from "../icons/Icons";
 
 function BankDetails(props) {
 	const { user, token } = useContext(UserContext);
 
-	const url = "/dashboard";
+	console.log(token);
+
+	const url = "/pancard";
 	const api = "http://localhost:4000/api/v1/createBank";
 
 	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -185,7 +188,7 @@ function BankDetails(props) {
 												<button
 													type="submit"
 													className="btn btn-primary w-100 py-3 btn-primary">
-													Submit
+													Next{Icons.next}
 												</button>
 											</div>
 										</>

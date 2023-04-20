@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { AddressInitialValues, AddressSchema } from "../schemas";
+import { Icons } from "../icons/Icons";
 
 function Address(props) {
 	const { user, token } = useContext(UserContext);
@@ -118,7 +119,7 @@ function Address(props) {
 													handleChange(event);
 												}}
 											/>
-											<label htmlFor="pinCode">PIN Code</label>
+											<label htmlFor="pinCode">{}PIN Code</label>
 
 											{errors.pinCode && touched.pinCode ? (
 												<div className="form-error form-validation-warning text-danger">
@@ -199,7 +200,7 @@ function Address(props) {
 											type="submit"
 											className="btn btn-primary w-100 py-3 btn-primary"
 											disabled={!(validPIN && values.postOffice != "")}>
-											Submit
+											Next {Icons.next}
 										</button>
 									</div>
 								</div>

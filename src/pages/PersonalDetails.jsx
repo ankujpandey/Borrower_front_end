@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { RegistrationInitialValues, RegistrationSchema } from "../schemas";
 import { UserContext } from "../context/UserContext";
+import { Icons } from "../icons/Icons";
 
 function PersonalDetails() {
 	const { user, token } = useContext(UserContext);
@@ -24,21 +25,13 @@ function PersonalDetails() {
 
 	// const [loading, setLoading] = useState(true);
 
-	// useEffect(() => {
-	//   const userdata = JSON.parse(localStorage.getItem("localUser"));
-	//   if (userdata) {
-	//     setUser(userdata.result);
-	//     console.log(userdata);
-	//     setLoading(false);
-
-	//     //   console.log(user);
-	//   }
-	// }, []);
-
 	// if (loading) {
 	//   return <div>Loading....</div>;
 	// }
 	return (
+		// ----------------------------------------------------------
+		//  Form for Personal Details
+		// ----------------------------------------------------------
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">
 				<div className="container py-3 px-5">
@@ -90,7 +83,9 @@ function PersonalDetails() {
 												value={user?.userName?.firstName}
 												disabled
 											/>
-											<label htmlFor="firstName">First Name</label>
+											<label htmlFor="firstName">
+												{Icons.personIcon} First Name
+											</label>
 										</div>
 									</div>
 
@@ -104,7 +99,9 @@ function PersonalDetails() {
 												value={user?.userName?.lastName}
 												disabled
 											/>
-											<label htmlFor="lastName">Last Name</label>
+											<label htmlFor="lastName">
+												{Icons.personIcon} Last Name
+											</label>
 										</div>
 									</div>
 
@@ -126,7 +123,7 @@ function PersonalDetails() {
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
-											<label htmlFor="contact">Contact</label>
+											<label htmlFor="contact">{Icons.call} Contact</label>
 											{errors.contact && touched.contact ? (
 												<div className="form-error form-validation-warning text-danger">
 													{errors.contact}
@@ -145,7 +142,7 @@ function PersonalDetails() {
 												value={user?.signUp?.email}
 												disabled
 											/>
-											<label htmlFor="email">Email</label>
+											<label htmlFor="email">{Icons.email} Email</label>
 										</div>
 									</div>
 
@@ -167,7 +164,7 @@ function PersonalDetails() {
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
-											<label htmlFor="pan">PAN</label>
+											<label htmlFor="pan">{Icons.pan} PAN</label>
 											{errors.pan && touched.pan ? (
 												<div className="form-error form-validation-warning text-danger">
 													{errors.pan}
@@ -193,7 +190,7 @@ function PersonalDetails() {
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
-											<label htmlFor="aadhaar">Aadhaar</label>
+											<label htmlFor="aadhaar">{Icons.aadhar} Aadhaar</label>
 											{errors.aadhaar && touched.aadhaar ? (
 												<div className="form-error form-validation-warning text-danger">
 													{errors.aadhaar}
@@ -206,7 +203,7 @@ function PersonalDetails() {
 										<button
 											type="submit"
 											className="btn btn-primary w-100 py-3 btn-primary">
-											Next
+											Next {Icons.next}
 										</button>
 									</div>
 								</div>

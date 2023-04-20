@@ -3,13 +3,24 @@ import React, { createContext, useState, useEffect } from "react";
 export const UserImageContext = createContext();
 
 export const UserImageProvider = (props) => {
-  const [image, setImage] = useState(null);
+	const [image, setImage] = useState(null);
 
-  // console.log(image);
+	useEffect(() => {
+		const img = JSON.parse(localStorage.getItem("capImg"));
 
-  return (
-    <UserImageContext.Provider value={{ image, setImage }}>
-      {props.children}
-    </UserImageContext.Provider>
-  );
+		if (img) {
+			setImage(img);
+			localStorage.removeItem("capImg");
+		} else {
+			setImage(null);
+		}
+	}, []);
+
+	// console.log(image);
+
+	return (
+		<UserImageContext.Provider value={{ image, setImage }}>
+			{props.children}
+		</UserImageContext.Provider>
+	);
 };

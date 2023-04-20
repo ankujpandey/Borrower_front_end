@@ -1,20 +1,21 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, Navigate, useNavigate, useParams } from "react-router-dom";
 import Webcam from "react-webcam"; //npm i react-webcam
 
 import { useFaceDetection } from "react-use-face-detection"; //npm i react-use-face-detection
 import FaceDetection from "@mediapipe/face_detection"; //npm i @mediapipe/face_detection
 import { Camera } from "@mediapipe/camera_utils"; //npm i @mediapipe/camera_utils
-import AadharUploadComponent from "./AadharUploadComponent";
+
+import { UserImageContext } from "../context/UserImageContext";
+import { Icons } from "../icons/Icons";
 
 function CaptureImage(props) {
-	const [image, setImage] = useState(null);
+	const { image, setImage } = useContext(UserImageContext);
 	const [seconds, setSeconds] = useState(0);
 	const { id } = useParams();
 	const [flag, setFlag] = useState(false);
 	const [warning, setWarning] = useState(false);
-	const navigate = useNavigate();
 
 	let picture = null;
 
@@ -36,6 +37,10 @@ function CaptureImage(props) {
 				}),
 		}
 	);
+
+	useEffect(() => {
+		localStorage.removeItem("capImg");
+	}, []);
 
 	//Image Capturing--------->>>>>>>>
 	useEffect(() => {
@@ -64,7 +69,7 @@ function CaptureImage(props) {
 				setImage(picture);
 				localStorage.setItem("capImg", JSON.stringify(picture));
 			}
-		}, 2000);
+		}, 5000);
 	};
 
 	console.log("image section renderd");
@@ -94,11 +99,11 @@ function CaptureImage(props) {
 									className="btn btn-primary w-100 py-2 btn-primary"
 									onClick={() => {
 										setFlag(!flag);
-										setSeconds(10);
 										setImage(null);
 										setWarning(false);
-										clickImage();
+										localStorage.removeItem("capImg");
 										window.location.reload(false);
+										// clickImage();
 									}}>
 									Retake
 								</button>
@@ -117,7 +122,7 @@ function CaptureImage(props) {
 						</div>
 					</>
 				) : (
-					<div className="row justify-content-center">
+					<div className="row justify-content-center g-3 m-3">
 						{boundingBox.map((box, index) => (
 							<div
 								key={`${index + 1}`}
@@ -164,10 +169,10 @@ function CaptureImage(props) {
 										className="btn btn-primary w-100 py-2 btn-primary"
 										onClick={() => {
 											setFlag(!flag);
-											setSeconds(10);
 											setImage(null);
 											setWarning(false);
-											clickImage();
+											localStorage.removeItem("capImg");
+											// clickImage();
 										}}>
 										Retake
 									</button>
@@ -179,10 +184,10 @@ function CaptureImage(props) {
 									// type="submit"
 									className="btn btn-primary w-100 py-3 btn-primary"
 									onClick={() => {
-										setSeconds(2);
+										setSeconds(5);
 										clickImage();
 									}}>
-									Take Picture
+									{Icons.camera} Take Picture
 								</button>
 							</div>
 						)}

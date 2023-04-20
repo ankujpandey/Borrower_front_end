@@ -18,53 +18,70 @@ export const useHandleValidation = (
 
 	const navigate = useNavigate();
 
-	const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-		useFormik({
-			initialValues,
-			validationSchema,
-			// onSubmit: (values) => {
-			//   console.log(values);
-			// },
+	const {
+		values,
+		errors,
+		touched,
+		handleBlur,
+		handleChange,
+		handleSubmit,
+		setFieldValue,
+	} = useFormik({
+		initialValues,
+		validationSchema,
 
-			onSubmit: async (values) => {
-				// console.log(values);
+		// onSubmit: (values) => {
+		//   console.log(values);
+		// },
 
-				const config = {
-					method: "post",
-					url: api,
-					headers: { "Content-Type": "application/json", authorization: token },
-					data: values,
-				};
+		onSubmit: async (values) => {
+			// console.log(values);
 
-				let response = await ApiCall(config);
+			const config = {
+				method: "post",
+				url: api,
+				headers: { "Content-Type": "application/json", authorization: token },
+				data: values,
+			};
 
-				if (response.status === 201) {
-					// console.log(response.data);
-					// console.log(signUp);
-					if (signUp) {
-						// console.log(response.data.data.result.status);
+			let response = await ApiCall(config);
 
-						if (response?.data?.data?.result?.status == 203) {
-							// setValidUser(false);
-							errors.email = "Email already exists! Please login to continue!";
-						} else {
-							setUser(response?.data?.data?.result);
-							// console.log(response?.data?.data?.result);
-							localStorage.setItem(
-								"localUser",
-								JSON.stringify(response?.data?.data?.result)
-							);
-							setToken(response?.data?.data?.auth);
-							navigate(url);
-						}
+			if (response.status === 201) {
+				// console.log(response.data);
+				// console.log(signUp);
+				if (signUp) {
+					// console.log(response.data.data.result.status);
+
+					if (response?.data?.data?.result?.status == 203) {
+						// setValidUser(false);
+						errors.email = "Email already exists! Please login to continue!";
+					} else {
+						console.log(response?.data?.data?.auth);
+						setUser(response?.data?.data?.result);
+						// console.log(response?.data?.data?.result);
+						localStorage.setItem(
+							"localUser",
+							JSON.stringify(response?.data?.data)
+						);
+						setToken(response?.data?.data?.auth);
+						navigate(url);
 					}
-					// console.log("validuser before navigate---", validUser);
-					else navigate(url);
-				} else {
-					alert("Something went wrong!!!");
 				}
-			},
-		});
+				// console.log("validuser before navigate---", validUser);
+				else navigate(url);
+			} else {
+				alert("Something went wrong!!!");
+			}
+		},
+	});
 
-	return { values, errors, touched, handleBlur, handleChange, handleSubmit };
+	return {
+		values,
+		errors,
+		touched,
+		handleBlur,
+		handleChange,
+		handleSubmit,
+		setFieldValue,
+	};
 };

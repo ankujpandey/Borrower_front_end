@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { selfEmployedSchema, initialValueSelfEmployed } from "../schemas";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { UserContext } from "../context/UserContext";
+import { Icons } from "../icons/Icons";
 
 function SelfEmployed(props) {
 	const { user, token } = useContext(UserContext);
@@ -45,7 +46,7 @@ function SelfEmployed(props) {
 							onBlur={handleBlur}
 						/>
 						<label className="col-form-label" htmlFor="monthly_income">
-							Monthly Income:
+							Monthly Income
 						</label>
 						{errors.monthly_income && touched.monthly_income ? (
 							<p className="form-error text-danger">{errors.monthly_income}</p>
@@ -71,7 +72,7 @@ function SelfEmployed(props) {
 							onBlur={handleBlur}
 						/>
 						<label htmlFor="email" className="col-form-label">
-							Professional Email id:
+							Professional Email id
 						</label>
 						{errors.email && touched.email ? (
 							<p className="form-error text-danger">{errors.email}</p>
@@ -97,7 +98,7 @@ function SelfEmployed(props) {
 							onBlur={handleBlur}
 						/>
 						<label htmlFor="business_nature" className="col-form-label">
-							Nature of Business:
+							Nature of Business
 						</label>
 						{errors.business_nature && touched.business_nature ? (
 							<p className="form-error text-danger">{errors.business_nature}</p>
@@ -108,7 +109,7 @@ function SelfEmployed(props) {
 					<button
 						type="submit"
 						className="btn btn-primary w-100 py-3 btn-primary">
-						Submit
+						Next {Icons.next}
 					</button>
 				</div>
 			</div>
