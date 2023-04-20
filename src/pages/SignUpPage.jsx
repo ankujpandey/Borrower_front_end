@@ -3,6 +3,7 @@ import PasswordStrengthBar from "react-password-strength-bar";
 import { SignUpschema, initialValuesSignupschema } from "../schemas";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { Icons } from "../icons/Icons";
 
 function SignUpPage(props) {
 	const { setUser } = useContext(UserContext);
@@ -38,7 +39,7 @@ function SignUpPage(props) {
 
 				<div className="container px-lg-5">
 					<div className="row justify-content-center">
-						<div className="col-lg-5">
+						<div className="col-lg-6">
 							<div
 								className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
 								data-wow-delay="0.3s">
@@ -66,7 +67,9 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label htmlFor="firstName">First Name</label>
+												<label htmlFor="firstName">
+													{Icons.personIcon} First Name
+												</label>
 												{errors.firstName && touched.firstName ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.firstName}
@@ -93,7 +96,9 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label htmlFor="lastName">Last Name</label>
+												<label htmlFor="lastName">
+													{Icons.personIcon} Last Name
+												</label>
 												{errors.lastname && touched.lastname ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.lastName}
@@ -119,7 +124,7 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label htmlFor="email">Email</label>
+												<label htmlFor="email">{Icons.email} Email</label>
 												{errors.email && touched.email ? (
 													<p className="form-error form-validation-warning text-danger">
 														{errors.email}
@@ -145,7 +150,9 @@ function SignUpPage(props) {
 													onChange={handleChange}
 													onBlur={handleBlur}
 												/>
-												<label htmlFor="password">Password</label>
+												<label htmlFor="password">
+													{Icons.password} Password
+												</label>
 												{values.password.length > 0 ? (
 													<PasswordStrengthBar
 														className="mt-2"
@@ -178,7 +185,7 @@ function SignUpPage(props) {
 													onBlur={handleBlur}
 												/>
 												<label htmlFor="Confirmpassword">
-													Confirm Password
+													{Icons.password} Confirm Password
 												</label>
 												{errors.Confirmpassword && touched.Confirmpassword ? (
 													<p className="form-error form-validation-warning text-danger">

@@ -98,7 +98,6 @@ function CaptureImage(props) {
 									className="btn btn-primary w-100 py-2 btn-primary"
 									onClick={() => {
 										setFlag(!flag);
-										setSeconds(5);
 										setImage(null);
 										setWarning(false);
 										localStorage.removeItem("capImg");
@@ -169,7 +168,6 @@ function CaptureImage(props) {
 										className="btn btn-primary w-100 py-2 btn-primary"
 										onClick={() => {
 											setFlag(!flag);
-											setSeconds(5);
 											setImage(null);
 											setWarning(false);
 											localStorage.removeItem("capImg");

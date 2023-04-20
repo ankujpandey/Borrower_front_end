@@ -13,7 +13,12 @@ import PinDropIcon from "@mui/icons-material/PinDrop";
 import ApartmentIcon from "@mui/icons-material/Apartment";
 import Diversity2Icon from "@mui/icons-material/Diversity2";
 import BusinessIcon from "@mui/icons-material/Business";
-import PaidIcon from "@mui/icons-material/Paid";
+import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import PushPinIcon from "@mui/icons-material/PushPin";
+import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import LockIcon from "@mui/icons-material/Lock";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -24,6 +29,7 @@ export const Icons = {
 	pan: <BadgeIcon />,
 	back: <ChevronLeftIcon />,
 	person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
+	personIcon: <PersonIcon />,
 	addUser: <PersonAddIcon style={{ marginRight: "4px" }} />,
 	upload: <UploadIcon />,
 	download: <DownloadIcon />,
@@ -31,5 +37,10 @@ export const Icons = {
 	workPlace: <ApartmentIcon />,
 	employmentType: <Diversity2Icon />,
 	bussiness: <BusinessIcon />,
-	salary: <PaidIcon />,
+	salary: <CurrencyRupeeIcon />,
+	searchWorld: <TravelExploreIcon />,
+	pin: <PushPinIcon />,
+	bank: <AccountBalanceIcon />,
+	account: <AccountBoxIcon />,
+	password: <LockIcon />,
 };
