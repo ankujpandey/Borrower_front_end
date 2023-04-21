@@ -710,3 +710,15 @@ h6,
 .hero-image {
 	height: 650px;
 }
+
+/***calculate EMI***/
+
+.emi-calculations .li-emi {
+	display: block;
+	padding-bottom: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	opacity: 0.7;
+}
