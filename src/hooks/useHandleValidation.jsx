@@ -14,13 +14,12 @@ export const useHandleValidation = (
 ) => {
   const { setUser, setToken } = useContext(UserContext);
 
-  const [validUser, setValidUser] = useState(true);
-
   const navigate = useNavigate();
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues,
+      enableReinitialize: true,
       validationSchema,
       // onSubmit: (values) => {
       //   console.log(values);
@@ -60,7 +59,7 @@ export const useHandleValidation = (
             }
           }
           // console.log("validuser before navigate---", validUser);
-          else navigate(url);
+          // else navigate(url);
         } else {
           alert("Something went wrong!!!");
         }

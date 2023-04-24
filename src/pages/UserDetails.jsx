@@ -9,8 +9,9 @@ function UserDetails(props) {
   const { id } = useParams();
   const [isData, setIsData] = useState(false);
   const { token } = useContext(UserContext);
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   const [userImage, setUserImage] = useState();
+  const [isEditing, setIsEditing] = useState(false);
 
   let [color, setColor] = useState("black");
 
@@ -44,6 +45,7 @@ function UserDetails(props) {
         JSON.stringify(response.data.data[0])
       );
       setUser(response?.data?.data[0]);
+      console.log(user);
     } else {
       setIsData(false);
       // alert("Something went wrong!!!");
@@ -74,7 +76,19 @@ function UserDetails(props) {
   };
 
   if (!isData) {
-    return <h1>No data available!!</h1>;
+    return;
+    <div className="container px-lg-5">
+      <div className="row justify-content-center">
+        <div className="col-lg-11 mt-4">
+          <div
+            className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+            data-wow-delay="0.3s"
+          >
+            No data available!!
+          </div>
+        </div>
+      </div>
+    </div>;
   }
   return (
     <>
@@ -96,201 +110,217 @@ function UserDetails(props) {
           </div>
         </div>
       </div>
-      <div className="container px-lg-5">
-        <div className="row justify-content-center">
-          <div className="col-lg-11 mt-4">
-            <div
-              className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
-              <div className="row">
-                <div className="col-md-12 p-4">
-                  <NavLink to="/admin-dashboard">
-                    <button
-                      type="submit"
-                      className="btn btn-light float-end col-2 "
-                    >
-                      Back
-                    </button>
-                  </NavLink>
-                  <div className="d-flex justify-content-start align-items-center mt-5">
-                    {!userImage?.profile_photo ? (
-                      <div className="d-flex justify-content-center">
-                        <div
-                          className="card d-flex justify-content-center align-items-center"
-                          style={{ width: "150px", height: "150px" }}
+      {isEditing ? (
+        <UpdateUser user={user} />
+      ) : (
+        <>
+          <div className="container px-lg-5">
+            <div className="row justify-content-center">
+              <div className="col-lg-11 mt-4">
+                <div
+                  className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+                  data-wow-delay="0.3s"
+                >
+                  <div className="row">
+                    <div className="col-md-12 p-4">
+                      <NavLink to="/admin-dashboard">
+                        <button
+                          type="submit"
+                          className="btn btn-light float-end col-2 "
                         >
-                          {Icons.person}
+                          Back
+                        </button>
+                      </NavLink>
+                      <div className="d-flex justify-content-start align-items-center mt-5">
+                        {!userImage?.profile_photo ? (
+                          <div className="d-flex justify-content-center">
+                            <div
+                              className="card d-flex justify-content-center align-items-center"
+                              style={{ width: "150px", height: "150px" }}
+                            >
+                              {Icons.person}
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="d-flex justify-content-center">
+                            <img
+                              src={`data:image/jpg;base64,${userImage?.profile_photo}`}
+                              className="img-thumbnail"
+                              alt=""
+                              height={150}
+                              width={150}
+                            />
+                          </div>
+                        )}
+                        <div className="ms-3">
+                          <h3 className="menu-title fs-1 fw-bold">
+                            {user.firstName + " " + user.lastName}
+                          </h3>
+                          <div className="menu-text fs-5 fw-0 mb-2">
+                            {user.email}
+                          </div>
+                          <h6 className="menu-text fs-6 mb-1 fw-bold">
+                            Active Status
+                          </h6>
+                          <div
+                            className="menu-text fs-6 mt-0"
+                            style={{
+                              color: setColor(user.isActive),
+                            }}
+                          >
+                            {user.isActive == 1 ? "Yes" : "No"}
+                          </div>
                         </div>
                       </div>
-                    ) : (
-                      <div className="d-flex justify-content-center">
-                        <img
-                          src={`data:image/jpg;base64,${userImage?.profile_photo}`}
-                          className="img-thumbnail"
-                          alt=""
-                          height={150}
-                          width={150}
-                        />
-                      </div>
-                    )}
-                    <div className="ms-3">
-                      <h3 className="menu-title fs-1 fw-bold">
-                        {user.firstName + " " + user.lastName}
+
+                      <hr />
+
+                      <h3 className="menu-title fs-3 mt-5 fw-bold">
+                        Personal Details
                       </h3>
-                      <div className="menu-text fs-5 fw-0 mb-2">
-                        {user.email}
+
+                      <ul className="list-group ">
+                        <li className="list-group-item">
+                          {Icons.call} {user.contact}
+                          <span className="float-end text-secondary">
+                            Contact
+                          </span>
+                        </li>
+                        <li className="list-group-item">
+                          {Icons.pan} {user.pan}
+                          <span className="float-end text-secondary">PAN</span>
+                        </li>
+                        <li className="list-group-item">
+                          {Icons.aadhar} {user.aadhaar}
+                          <span className="float-end text-secondary">
+                            Aadhaar
+                          </span>
+                        </li>
+                        <li className="list-group-item">
+                          {Icons.location} {user.postOffice}, {user.city},{" "}
+                          {user.state}, {user.pinCode}
+                          <span className="float-end text-secondary">
+                            Location
+                          </span>
+                        </li>
+                      </ul>
+
+                      <hr />
+
+                      <h3 className="menu-title fs-3 mt-5 fw-bold">
+                        Employment Details
+                      </h3>
+
+                      <ul className="list-group ">
+                        <li className="list-group-item">
+                          {Icons.employmentType} {user.employment_type}
+                          <span className="float-end text-secondary">
+                            Employment Type
+                          </span>
+                        </li>
+                        {user.company_name ? (
+                          <li className="list-group-item">
+                            {Icons.workPlace} {user.company_name}
+                            <span className="float-end text-secondary">
+                              Company Name
+                            </span>
+                          </li>
+                        ) : null}
+                        <li className="list-group-item">
+                          {Icons.email} {user.professional_email}
+                          <span className="float-end text-secondary">
+                            Professional Email
+                          </span>
+                        </li>
+                        {user.business_nature ? (
+                          <li className="list-group-item">
+                            {Icons.bussiness} {user.business_nature}
+                            <span className="float-end text-secondary">
+                              Nature of Bussiness
+                            </span>
+                          </li>
+                        ) : null}
+                        <li className="list-group-item">
+                          {Icons.salary} {user.monthly_income}
+                          <span className="float-end text-secondary">
+                            Monthly Income
+                          </span>
+                        </li>
+                      </ul>
+
+                      <h3 className="menu-title fs-3 mt-5 fw-bold">
+                        Bank Details
+                      </h3>
+
+                      <ul className="list-group ">
+                        <li className="list-group-item">
+                          {Icons.account} {user.account_number}
+                          <span className="float-end text-secondary">
+                            Account Number
+                          </span>
+                        </li>
+
+                        <li className="list-group-item">
+                          {Icons.searchWorld} {user.ifsc_code}
+                          <span className="float-end text-secondary">IFSC</span>
+                        </li>
+
+                        <li className="list-group-item">
+                          {Icons.pin} {user.branch_name}
+                          <span className="float-end text-secondary">
+                            Branch
+                          </span>
+                        </li>
+
+                        <li className="list-group-item">
+                          {Icons.bank} {user.bank_name}
+                          <span className="float-end text-secondary">Bank</span>
+                        </li>
+                      </ul>
+
+                      <div className="row justify-content-center mt-5 mb-2">
+                        <div className="col-3">
+                          <button
+                            type="button"
+                            className="btn btn-success w-100 py-3 btn-success"
+                            // onClick={() => {
+                            // 	handlepdfDownload(id);
+                            // }}
+                          >
+                            {Icons.download} Download
+                          </button>
+                        </div>
+
+                        <div className="col-3">
+                          <button
+                            type="button"
+                            className="btn btn-warning w-100 py-3 btn-warning"
+                            onClick={() => {
+                              setIsEditing(true);
+                            }}
+                          >
+                            {Icons.update} Edit
+                          </button>
+                        </div>
+
+                        <div className="col-3">
+                          <button
+                            type="button"
+                            className="btn btn-danger w-100 py-3 btn-danger"
+                            // onClick={() => handleDeleteApi(id)}
+                          >
+                            {Icons.delete} Delete User
+                          </button>
+                        </div>
                       </div>
-                      <h6 className="menu-text fs-6 mb-1 fw-bold">
-                        Active Status
-                      </h6>
-                      <div
-                        className="menu-text fs-6 mt-0"
-                        style={{
-                          color: setColor(user.isActive),
-                        }}
-                      >
-                        {user.isActive == 1 ? "Yes" : "No"}
-                      </div>
-                    </div>
-                  </div>
-
-                  <hr />
-
-                  <h3 className="menu-title fs-3 mt-5 fw-bold">
-                    Personal Details
-                  </h3>
-
-                  <ul className="list-group ">
-                    <li className="list-group-item">
-                      {Icons.call} {user.contact}
-                      <span className="float-end text-secondary">Contact</span>
-                    </li>
-                    <li className="list-group-item">
-                      {Icons.pan} {user.pan}
-                      <span className="float-end text-secondary">PAN</span>
-                    </li>
-                    <li className="list-group-item">
-                      {Icons.aadhar} {user.aadhaar}
-                      <span className="float-end text-secondary">Aadhaar</span>
-                    </li>
-                    <li className="list-group-item">
-                      {Icons.location} {user.postOffice}, {user.city},{" "}
-                      {user.state}, {user.pinCode}
-                      <span className="float-end text-secondary">Location</span>
-                    </li>
-                  </ul>
-
-                  <hr />
-
-                  <h3 className="menu-title fs-3 mt-5 fw-bold">
-                    Employment Details
-                  </h3>
-
-                  <ul className="list-group ">
-                    <li className="list-group-item">
-                      {Icons.employmentType} {user.employment_type}
-                      <span className="float-end text-secondary">
-                        Employment Type
-                      </span>
-                    </li>
-                    {user.company_name ? (
-                      <li className="list-group-item">
-                        {Icons.workPlace} {user.company_name}
-                        <span className="float-end text-secondary">
-                          Company Name
-                        </span>
-                      </li>
-                    ) : null}
-                    <li className="list-group-item">
-                      {Icons.email} {user.professional_email}
-                      <span className="float-end text-secondary">
-                        Professional Email
-                      </span>
-                    </li>
-                    {user.business_nature ? (
-                      <li className="list-group-item">
-                        {Icons.bussiness} {user.business_nature}
-                        <span className="float-end text-secondary">
-                          Nature of Bussiness
-                        </span>
-                      </li>
-                    ) : null}
-                    <li className="list-group-item">
-                      {Icons.salary} {user.monthly_income}
-                      <span className="float-end text-secondary">
-                        Monthly Income
-                      </span>
-                    </li>
-                  </ul>
-
-                  <h3 className="menu-title fs-3 mt-5 fw-bold">Bank Details</h3>
-
-                  <ul className="list-group ">
-                    <li className="list-group-item">
-                      {Icons.account} {user.account_number}
-                      <span className="float-end text-secondary">
-                        Account Number
-                      </span>
-                    </li>
-
-                    <li className="list-group-item">
-                      {Icons.searchWorld} {user.ifsc_code}
-                      <span className="float-end text-secondary">IFSC</span>
-                    </li>
-
-                    <li className="list-group-item">
-                      {Icons.pin} {user.branch_name}
-                      <span className="float-end text-secondary">Branch</span>
-                    </li>
-
-                    <li className="list-group-item">
-                      {Icons.bank} {user.bank_name}
-                      <span className="float-end text-secondary">Bank</span>
-                    </li>
-                  </ul>
-
-                  <div className="row justify-content-center mt-5 mb-2">
-                    <div className="col-3">
-                      <button
-                        type="button"
-                        className="btn btn-success w-100 py-3 btn-success"
-                        // onClick={() => {
-                        // 	handlepdfDownload(id);
-                        // }}
-                      >
-                        {Icons.download} Download
-                      </button>
-                    </div>
-
-                    <div className="col-3">
-                      <button
-                        type="button"
-                        className="btn btn-warning ms-4 w-100 py-3 btn-warning"
-                        data-bs-toggle="modal"
-                        data-bs-target="#updateUser"
-                      >
-                        {Icons.update} Update
-                      </button>
-                    </div>
-
-                    <div className="col-3">
-                      <button
-                        type="button"
-                        className="btn btn-danger w-100 py-3 btn-danger"
-                        // onClick={() => handleDeleteApi(id)}
-                      >
-                        {Icons.delete} Delete User
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        <UpdateUser id={id} />
-      </div>
+        </>
+      )}
     </>
   );
 }

@@ -176,3 +176,56 @@ export const initialValuesSignupschema = {
   password: "",
   Confirmpassword: "",
 };
+
+// ---------------------------------------
+//   For Updating user by admin
+// ---------------------------------------
+
+export const UpdateSchema = Yup.object({
+  contact: Yup.string()
+    .matches(/([6-9]){1}([0-9]){9}$/, "Please enter a valid phone number.")
+    .max(10)
+    .required("Contact can not be empty!"),
+
+  aadhaar: Yup.string()
+    .matches(/([0-9]){12}$/, "Please enter a valid aadhaar number.")
+    .max(12)
+    .required("Aadhaar can not be empty!"),
+
+  pan: Yup.string()
+    .matches(
+      /([A-Z]){5}([0-9]){4}([A-Z]){1}$/,
+      "Please enter a valid PAN Number"
+    )
+    .required("PAN can not be empty!"),
+
+  pinCode: Yup.string()
+    .matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
+    .max(6)
+    .required("Pin Code can not be empty!"),
+
+  monthly_income: Yup.number()
+    .min(1)
+    .max(1000000)
+    .required("Please fill you monthly Income"),
+
+  business_nature: Yup.string()
+    .min(2)
+    .max(100)
+    .required("Please enter nature of business"),
+
+  email: Yup.string().email().required("Please enter your professional email"),
+
+  company_name: Yup.string().required("Please select your company name"),
+
+  ifsc_code: Yup.string()
+    .matches(/([A-Z][0-9])/, "Please enter a valid IFSC Code")
+    .length(11)
+    .required("IFSC Code can't be empty"),
+
+  account_number: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid Account Number")
+    .max(14)
+    .min(11)
+    .required("Account Number can't be empty"),
+});
