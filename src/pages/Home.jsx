@@ -13,7 +13,7 @@ function Home(props) {
 		<div>
 			<HeroImage />
 			<EmiCalculator />
-			<CalculatedEMI />
+			{/* <CalculatedEMI /> */}
 		</div>
 	);
 }

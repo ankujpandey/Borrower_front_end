@@ -1,29 +1,58 @@
-import React, { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
-import { useHandleValidation } from "../hooks/useHandleValidation";
+import React, { useEffect, useState } from "react";
+
+import moment from "moment";
+import { ApiCall } from "../functions/ApiCall";
+import CalculatedEMI from "./CalculatedEMI";
 
 function EmiCalculator(props) {
-	const { user, token } = useContext(UserContext);
-	const url = "/register3";
-	const api = "http://localhost:4000/api/v1/createEmployment";
-	const [companies, setCompanies] = useState([]);
-	// const [companyName, setCompanyName] = useState("");
+	const [calcData, setCalcData] = useState();
+	const [flag, setFlag] = useState(false);
 
-	const initialValuescalculate = {
-		loanAmount: "",
-		rateOfInterest: "",
-		loanTenure: "",
+	const [principle, setPrinciple] = useState("1000");
+	const [interest, setIntereset] = useState("5");
+	const [tenure, setTenure] = useState("1");
+	const [date, setDate] = useState(
+		moment().utcOffset("+05:30").format("DD/MM/YYYY")
+	);
+
+	const api = "http://localhost:4000/api/v1/calculateEMI";
+
+	useEffect(() => {
+		// setFlag(false);
+	}, [flag]);
+
+	const handleSubmit = async (e) => {
+		try {
+			e.preventDefault();
+
+			console.log(
+				"data of EMI calc------------>>>>>",
+				principle,
+				interest,
+				tenure,
+				date
+			);
+			const config = {
+				method: "post",
+				url: "http://localhost:4000/api/v1/calculateEMI",
+				headers: { "Content-Type": "application/json" },
+				data: { principle, interest, time: tenure, date },
+			};
+
+			let response = await ApiCall(config);
+
+			if (response.status === 201) {
+				setFlag(true);
+				setCalcData(response?.data?.data);
+				console.log(response.data.data);
+			} else {
+				alert("Something went wrong");
+				setFlag(false);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	};
-
-	const {
-		values,
-		errors,
-		touched,
-		handleBlur,
-		handleChange,
-		handleSubmit,
-		setFieldValue,
-	} = useHandleValidation(initialValuescalculate, "", url, api, token);
 
 	return (
 		<div className="container-xxl py-5">
@@ -32,7 +61,7 @@ function EmiCalculator(props) {
 					<div className="col-lg-6">
 						<img
 							className="img-fluid wow zoomIn"
-							data-wow-delay="0.5s"
+							data-wow-delay="0.3s"
 							src="img/about.jpg"
 						/>
 					</div>
@@ -47,146 +76,138 @@ function EmiCalculator(props) {
 							</h2>
 						</div>
 						<div className="card shadow p-3 bg-body-tertiary rounded wow fadeInUp">
-							<div className="row justify-content-center m-3 mb-1">
-								{/* <label htmlFor="customRange1" className="form-label">
-									Loan Amount
-								</label> */}
-								{/* <input type="range" className="form-range" id="customRange1" /> */}
-								<div className="col-md-6">
-									<div className="form-floating">
-										<input
-											type="text"
-											className="form-control"
-											id="loanAmmount"
-											name="loanAmmount"
-											value={values.loanAmmount}
-											placeholder="Loan Ammount"
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<input
-											type="range"
-											className="form-range"
-											id="loanAmmount"
-											min="1000"
-											max="100000"
-											step="1000"
-											// defaultValue={1000}
-											value={values.loanAmmount ? values.loanAmmount : 0}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<label htmlFor="loanAmmount">Loan Amount</label>
+							<form
+								action=""
+								onSubmit={(e) => handleSubmit(e)}
+								className="needs-validation"
+								noValidate>
+								<div className="row justify-content-center m-3 mb-1">
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												id="loanAmmount"
+												name="loanAmmount"
+												value={principle}
+												placeholder="Loan Ammount"
+												onChange={(e) => {
+													setPrinciple(e.target.value);
+												}}
+											/>
+											<input
+												type="range"
+												className="form-range"
+												id="loanAmmount"
+												min="1000"
+												max="100000"
+												step="1000"
+												// defaultValue={1000}
+												value={principle}
+												onChange={(e) => {
+													setPrinciple(e.target.value);
+												}}
+											/>
+											<label htmlFor="loanAmmount">Loan Amount</label>
+										</div>
+									</div>
+
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												id="roi"
+												name="roi"
+												placeholder="Rate of Intrest"
+												value={interest}
+												onChange={(e) => {
+													setIntereset(e.target.value);
+												}}
+											/>
+											<input
+												type="range"
+												className="form-range"
+												id="roi"
+												min="12"
+												max="40"
+												step="0.25"
+												value={interest}
+												onChange={(e) => {
+													setIntereset(e.target.value);
+												}}
+											/>
+
+											<label htmlFor="roi">
+												Rate of Intrest<small>(%)</small>
+											</label>
+										</div>
+									</div>
+
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="text"
+												className="form-control"
+												id="loanTenure"
+												name="loanTenure"
+												placeholder="Loan Tenure"
+												value={tenure}
+												onChange={(e) => {
+													setTenure(e.target.value);
+												}}
+											/>
+											<input
+												type="range"
+												className="form-range range-design"
+												id="loanTenure"
+												min="3"
+												max="40"
+												step="1.0"
+												value={tenure}
+												onChange={(e) => {
+													setTenure(e.target.value);
+												}}
+											/>
+
+											<label htmlFor="loanTenure">
+												Loan Tenure<small>(in month)</small>
+											</label>
+										</div>
+									</div>
+
+									<div className="col-md-6">
+										<div className="form-floating">
+											<input
+												type="date"
+												className="form-control"
+												id="date"
+												name="date"
+												placeholder="Date of Start"
+												value={date}
+												onChange={(e) => {
+													setDate(e.target.value);
+												}}
+											/>
+
+											<label htmlFor="date">Date of Start</label>
+										</div>
+									</div>
+									<div className="d-flex justify-content-center mt-2">
+										<button
+											className="btn btn-primary rounded-pill px-4"
+											type="submit">
+											Calculate
+										</button>
 									</div>
 								</div>
-
-								{/* <label htmlFor="customRange1" className="form-label">
-									Rate of Intrest
-								</label> */}
-								{/* <input type="range" className="form-range" id="customRange1" /> */}
-								<div className="col-md-6">
-									<div className="form-floating">
-										<input
-											type="text"
-											className="form-control"
-											id="roi"
-											name="roi"
-											placeholder="Rate of Intrest"
-											value={values.roi}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<input
-											type="range"
-											className="form-range"
-											id="roi"
-											min="12"
-											max="40"
-											step="2"
-											value={values.roi ? values.roi : 0}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-
-										<label htmlFor="roi">
-											Rate of Intrest<small>(%)</small>
-										</label>
-									</div>
-								</div>
-
-								{/* <label htmlFor="customRange1" className="form-label">
-									Loan Tenure
-								</label> */}
-								{/* <input type="range" className="form-range" id="customRange1" /> */}
-								<div className="col-md-6">
-									<div className="form-floating">
-										<input
-											type="text"
-											className="form-control"
-											id="loanTenure"
-											name="loanTenure"
-											placeholder="Loan Tenure"
-											value={values.loanTenure}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-										<input
-											type="range"
-											className="form-range range-design"
-											id="loanTenure"
-											min="3"
-											max="40"
-											step="1.0"
-											// defaultValue={3}
-											value={values.loanTenure ? values.loanTenure : 0}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-
-										<label htmlFor="loanTenure">
-											Loan Tenure<small>(in month)</small>
-										</label>
-									</div>
-								</div>
-
-								<div className="col-md-6">
-									<div className="form-floating">
-										<input
-											type="date"
-											className="form-control"
-											id="date"
-											name="date"
-											placeholder="Date of Start"
-											value={values.date}
-											onChange={handleChange}
-											onBlur={handleBlur}
-										/>
-
-										<label htmlFor="date">Date of Start</label>
-									</div>
-								</div>
-								<div className="d-flex justify-content-center mt-2">
-									<button className="btn btn-primary rounded-pill px-4">
-										Calculate
-									</button>
-									{/* <a className="btn btn-outline-primary btn-square me-3" href="">
-								<i className="fab fa-facebook-f" />
-							</a>
-							<a className="btn btn-outline-primary btn-square me-3" href="">
-								<i className="fab fa-twitter" />
-							</a>
-							<a className="btn btn-outline-primary btn-square me-3" href="">
-								<i className="fab fa-instagram" />
-							</a>
-							<a className="btn btn-outline-primary btn-square" href="">
-								<i className="fab fa-linkedin-in" />
-							</a> */}
-								</div>
-							</div>
+							</form>
 						</div>
 					</div>
 				</div>
 			</div>
+			{console.log(flag)}
+			{flag ? <CalculatedEMI calcData={calcData} setFlag={setFlag} /> : null}
 		</div>
 	);
 }
