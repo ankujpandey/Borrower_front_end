@@ -17,6 +17,11 @@ function CalculatedEMI(props) {
 	const options = {
 		title: "Break-up of total payment",
 		legend: { position: "bottom" },
+		animation: {
+			duration: 150000,
+			easing: "inAndOut",
+			startup: true,
+		},
 		pieHole: 0.4,
 		is3D: false,
 	};
@@ -66,7 +71,34 @@ function CalculatedEMI(props) {
 									options={options}
 								/>
 							</div>
-							<hr />
+							<hr className="mb-0 mt-4" />
+							<table className="table table-striped">
+								<thead>
+									<tr>
+										<th scope="col">Installment No.</th>
+										<th scope="col">Installment Date</th>
+										<th scope="col">Opening Balance</th>
+										<th scope="col">EMI</th>
+										<th scope="col">Closing Balance</th>
+										<th scope="col">Interest</th>
+										<th scope="col">Principal</th>
+									</tr>
+								</thead>
+								<tbody>
+									{props.calcData?.table?.map((row) => (
+										<tr>
+											<th scope="row">{row.installmentNo}</th>
+											<td>Date</td>
+											<td>{row.openingBalence}</td>
+											<td>{props.calcData.EMI}</td>
+											<td>{row.closingBalence}</td>
+											<td>{row.interestPerMonth}</td>
+											<td>{row.principle}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>
+
 							<div className="d-flex justify-content-center mt-2">
 								<button
 									className="btn btn-primary rounded-pill px-4"
