@@ -41,7 +41,7 @@ export const Icons = {
 	workPlace: <ApartmentIcon />,
 	employmentType: <Diversity2Icon />,
 	bussiness: <BusinessIcon />,
-	salary: <CurrencyRupeeIcon />,
+	salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
 	searchWorld: <TravelExploreIcon />,
 	pin: <PushPinIcon />,
 	bank: <AccountBalanceIcon />,
