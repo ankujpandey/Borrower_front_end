@@ -60,7 +60,7 @@ function RegisteredDetails(props) {
               className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
               data-wow-delay="0.3s"
             >
-              <div className="row">
+              <div className="row justify-content-center g-3 m-3 mb-4">
                 <div className="col-md-12 p-4">
                   <div className="d-flex justify-content-start align-items-center mt-5">
                     {!userImage?.profile_photo ? (
@@ -202,7 +202,7 @@ function RegisteredDetails(props) {
                                     </span>
                                   </li>
                                 </ul>
-                                <div className="row d-flex justify-content-center">
+                                <div className="row justify-content-center">
                                   <div className="col-5 mt-3">
                                     <NavLink to="/borrowing-details">
                                       <button
@@ -216,61 +216,46 @@ function RegisteredDetails(props) {
                                 </div>
                               </>
                             ) : (
-                              <div className="row d-flex justify-content-center">
-                                <div className="col-lg-5 d-flex mt-3">
-                                  <div
-                                    className="col-10 card wow fadeInUp"
-                                    data-wow-delay="0.3s"
-                                  >
-                                    <NavLink to="/bank-details">
-                                      <button
-                                        type="submit"
-                                        className="btn btn-primary w-100 py-3 btn-primary"
-                                      >
-                                        Continue Registration
-                                      </button>
-                                    </NavLink>
-                                  </div>
+                              <div className="row justify-content-center">
+                                <div className="col-5 mt-3">
+                                  <NavLink to="/bank-details">
+                                    <button
+                                      type="submit"
+                                      className="btn btn-primary w-100 py-3 btn-primary"
+                                    >
+                                      Continue Registration
+                                    </button>
+                                  </NavLink>
                                 </div>
                               </div>
                             )}
                           </>
                         ) : (
                           <div className="row d-flex justify-content-center">
-                            <div className="col-lg-5 d-flex mt-3">
-                              <div
-                                className="col-10 card wow fadeInUp"
-                                data-wow-delay="0.3s"
-                              >
-                                <NavLink to="/employment-details">
-                                  <button
-                                    type="submit"
-                                    className="btn btn-primary w-100 py-3 btn-primary"
-                                  >
-                                    Continue Registration
-                                  </button>
-                                </NavLink>
-                              </div>
+                            <div className="col-5 mt-3">
+                              <NavLink to="/employment-details">
+                                <button
+                                  type="submit"
+                                  className="btn btn-primary w-100 py-3 btn-primary"
+                                >
+                                  Continue Registration
+                                </button>
+                              </NavLink>
                             </div>
                           </div>
                         )}
                       </>
                     ) : (
-                      <div className="row d-flex justify-content-center">
-                        <div className="col-lg-5 d-flex mt-3">
-                          <div
-                            className="col-10 card wow fadeInUp"
-                            data-wow-delay="0.3s"
-                          >
-                            <NavLink to="/address">
-                              <button
-                                type="submit"
-                                className="btn btn-primary w-100 py-3 btn-primary"
-                              >
-                                Continue Registration
-                              </button>
-                            </NavLink>
-                          </div>
+                      <div className="row justify-content-center">
+                        <div className="col-5 mt-3">
+                          <NavLink to="/address">
+                            <button
+                              type="submit"
+                              className="btn btn-primary w-100 py-3 btn-primary"
+                            >
+                              Continue Registration
+                            </button>
+                          </NavLink>
                         </div>
                       </div>
                     )}
