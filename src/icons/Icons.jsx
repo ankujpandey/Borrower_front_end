@@ -42,6 +42,11 @@ export const Icons = {
 	employmentType: <Diversity2Icon />,
 	bussiness: <BusinessIcon />,
 	salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
+	smallRupee: (
+		<CurrencyRupeeIcon
+			style={{ marginTop: -5, width: "1rem", height: "1rem" }}
+		/>
+	),
 	searchWorld: <TravelExploreIcon />,
 	pin: <PushPinIcon />,
 	bank: <AccountBalanceIcon />,

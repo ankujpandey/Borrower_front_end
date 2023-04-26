@@ -86,14 +86,29 @@ function CalculatedEMI(props) {
 								</thead>
 								<tbody>
 									{props.calcData?.table?.map((row) => (
-										<tr>
+										<tr key={row.installmentNo}>
 											<th scope="row">{row.installmentNo}</th>
-											<td>Date</td>
-											<td>{row.openingBalence}</td>
-											<td>{props.calcData.EMI}</td>
-											<td>{row.closingBalence}</td>
-											<td>{row.interestPerMonth}</td>
-											<td>{row.principle}</td>
+											<td>{row.installmentDate}</td>
+											<td>
+												{Icons.smallRupee}
+												{row.openingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{props.calcData.EMI}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.closingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.interestPerMonth}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.principle}
+											</td>
 										</tr>
 									))}
 								</tbody>

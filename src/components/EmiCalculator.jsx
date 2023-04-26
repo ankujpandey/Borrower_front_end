@@ -12,7 +12,7 @@ function EmiCalculator(props) {
 	const [interest, setIntereset] = useState("5");
 	const [tenure, setTenure] = useState("1");
 	const [date, setDate] = useState(
-		moment().utcOffset("+05:30").format("DD/MM/YYYY")
+		moment().utcOffset("+05:30").format("YYYY-MM-DD")
 	);
 
 	const api = "http://localhost:4000/api/v1/calculateEMI";
@@ -90,6 +90,7 @@ function EmiCalculator(props) {
 												id="loanAmmount"
 												name="loanAmmount"
 												value={principle}
+												size={6}
 												placeholder="Loan Ammount"
 												onChange={(e) => {
 													setPrinciple(e.target.value);
@@ -120,6 +121,8 @@ function EmiCalculator(props) {
 												id="roi"
 												name="roi"
 												placeholder="Rate of Intrest"
+												min="12"
+												max="40"
 												value={interest}
 												onChange={(e) => {
 													setIntereset(e.target.value);
@@ -151,6 +154,8 @@ function EmiCalculator(props) {
 												className="form-control"
 												id="loanTenure"
 												name="loanTenure"
+												min="3"
+												max="40"
 												placeholder="Loan Tenure"
 												value={tenure}
 												onChange={(e) => {
@@ -183,6 +188,9 @@ function EmiCalculator(props) {
 												className="form-control"
 												id="date"
 												name="date"
+												min={`${moment()
+													.utcOffset("+05:30")
+													.format("YYYY-MM-DD")}`}
 												placeholder="Date of Start"
 												value={date}
 												onChange={(e) => {
