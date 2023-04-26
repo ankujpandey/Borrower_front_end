@@ -135,7 +135,8 @@ function RegisteredDetails(props) {
 																	Employment Type
 																</span>
 															</li>
-															{userData?.company_name != "N/A" ? (
+															{userData?.company_name != "N/A" &&
+															userData?.company_name ? (
 																<li className="list-group-item">
 																	{Icons.workPlace} {userData?.company_name}
 																	<span className="float-end text-secondary">
@@ -149,7 +150,8 @@ function RegisteredDetails(props) {
 																	Professional Email
 																</span>
 															</li>
-															{userData?.business_nature != "N/A" ? (
+															{userData?.business_nature != "N/A" &&
+															userData?.business_nature ? (
 																<li className="list-group-item">
 																	{Icons.bussiness} {userData?.business_nature}
 																	<span className="float-end text-secondary">

@@ -58,24 +58,26 @@ function SelfEmployed(props) {
 						<input
 							type="email"
 							className={`form-control ${
-								errors.email && touched.email
+								errors.professional_email && touched.professional_email
 									? "is-invalid"
-									: touched.email
+									: touched.professional_email
 									? "is-valid"
 									: ""
 							}`}
-							id="email"
-							name="email"
+							id="professional_email"
+							name="professional_email"
 							placeholder="Professional Email"
-							value={values.email}
+							value={values.professional_email}
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>
-						<label htmlFor="email" className="col-form-label">
+						<label htmlFor="professional_email" className="col-form-label">
 							Professional Email id
 						</label>
-						{errors.email && touched.email ? (
-							<p className="form-error text-danger">{errors.email}</p>
+						{errors.professional_email && touched.professional_email ? (
+							<p className="form-error text-danger">
+								{errors.professional_email}
+							</p>
 						) : null}
 					</div>
 				</div>

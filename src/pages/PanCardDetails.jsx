@@ -30,7 +30,7 @@ function PanCardDetails(props) {
 			//   "response__-------------->>>>>",
 			//   response.data.data.verification.passed
 			// );
-			if (!response.data.data.verification.passed) {
+			if (response.data.data.verification.passed) {
 				alert("PAN Authentication Failed!");
 				setPassed(false);
 			} else {

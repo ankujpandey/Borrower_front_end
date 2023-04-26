@@ -135,27 +135,25 @@ function SalariedEmployee(props) {
 				<div className="col-md-12">
 					<div className="form-floating">
 						<input
-							type="email"
+							type="professional_email"
 							className={`form-control ${
-								errors.email && touched.email
+								errors.professional_email && touched.professional_email
 									? "is-invalid"
-									: touched.email
+									: touched.professional_email
 									? "is-valid"
 									: ""
 							}`}
-							id="email"
-							name="email"
+							id="professional_email"
+							name="professional_email"
 							placeholder="Enter your Professional Email Id"
-							value={values.email}
+							value={values.professional_email}
 							onChange={handleChange}
 							onBlur={handleBlur}
 						/>
-						<label htmlFor="company_email" className="col-form-label">
-							Professional Email id
-						</label>
-						{errors.email && touched.email ? (
+						<label htmlFor="professional_email">Professional Email id</label>
+						{errors.professional_email && touched.professional_email ? (
 							<p className="form-error form-validation-warning text-danger">
-								{errors.email}
+								{errors.professional_email}
 							</p>
 						) : null}
 					</div>
