@@ -51,45 +51,47 @@ function RegisteredDetails(props) {
     }
   };
 
-	return (
-		<div>
-			<div className="container px-lg-5">
-				<div className="row justify-content-center">
-					<div className="col-lg-11 mt-4">
-						<div
-							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-							data-wow-delay="0.3s">
-							<div className="row justify-content-center g-3 m-3 mb-4">
-								<div className="col-md-12 p-4">
-									<div className="d-flex justify-content-start align-items-center mt-5">
-										{!userImage?.profile_photo ? (
-											<div className="d-flex justify-content-center">
-												<div
-													className="card d-flex justify-content-center align-items-center"
-													style={{ width: "150px", height: "150px" }}>
-													{Icons.person}
-												</div>
-											</div>
-										) : (
-											<div className="d-flex justify-content-center">
-												<img
-													src={`data:image/jpg;base64,${userImage?.profile_photo}`}
-													className="img-thumbnail"
-													alt=""
-													height={150}
-													width={150}
-												/>
-											</div>
-										)}
-										<div className="ms-3">
-											<h3 className="menu-title fs-1 fw-bold">
-												{userData?.firstName + " " + userData?.lastName}
-											</h3>
-											<div className="menu-text fs-5 fw-0 mb-3">
-												{userData?.email}
-											</div>
-										</div>
-									</div>
+  return (
+    <div>
+      <div className="container px-lg-5">
+        <div className="row justify-content-center">
+          <div className="col-lg-11 mt-4">
+            <div
+              className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+              data-wow-delay="0.3s"
+            >
+              <div className="row">
+                <div className="col-md-12 p-4">
+                  <div className="d-flex justify-content-start align-items-center mt-5">
+                    {!userImage?.profile_photo ? (
+                      <div className="d-flex justify-content-center">
+                        <div
+                          className="card d-flex justify-content-center align-items-center"
+                          style={{ width: "150px", height: "150px" }}
+                        >
+                          {Icons.person}
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="d-flex justify-content-center">
+                        <img
+                          src={`data:image/jpg;base64,${userImage?.profile_photo}`}
+                          className="img-thumbnail"
+                          alt=""
+                          height={150}
+                          width={150}
+                        />
+                      </div>
+                    )}
+                    <div className="ms-3">
+                      <h3 className="menu-title fs-1 fw-bold">
+                        {userData?.firstName + " " + userData?.lastName}
+                      </h3>
+                      <div className="menu-text fs-5 fw-0 mb-3">
+                        {userData?.email}
+                      </div>
+                    </div>
+                  </div>
 
                   <hr />
 
@@ -193,7 +195,6 @@ function RegisteredDetails(props) {
                                     </span>
                                   </li>
 
-<<<<<<< HEAD
                                   <li className="list-group-item">
                                     {Icons.bank} {userData?.bank_name}
                                     <span className="float-end text-secondary">
@@ -282,77 +283,6 @@ function RegisteredDetails(props) {
       </div>
     </div>
   );
-=======
-																	<li className="list-group-item">
-																		{Icons.bank} {userData?.bank_name}
-																		<span className="float-end text-secondary">
-																			Bank
-																		</span>
-																	</li>
-																</ul>
-																<div className="row justify-content-center">
-																	<div className="col-5 mt-3">
-																		<NavLink to="/borrowing-details">
-																			<button
-																				type="submit"
-																				className="btn btn-primary w-100 py-3 btn-primary">
-																				Apply for Loan
-																			</button>
-																		</NavLink>
-																	</div>
-																</div>
-															</>
-														) : (
-															<div className="row justify-content-center">
-																<div className="col-5 mt-3">
-																	<NavLink to="/bank-details">
-																		<button
-																			type="submit"
-																			className="btn btn-primary w-100 py-3 btn-primary">
-																			Continue Registration
-																		</button>
-																	</NavLink>
-																</div>
-															</div>
-														)}
-													</>
-												) : (
-													<div className="row d-flex justify-content-center">
-														<div className="col-5 mt-3">
-															<NavLink to="/employment-details">
-																<button
-																	type="submit"
-																	className="btn btn-primary w-100 py-3 btn-primary">
-																	Continue Registration
-																</button>
-															</NavLink>
-														</div>
-													</div>
-												)}
-											</>
-										) : (
-											<div className="row justify-content-center">
-												<div className="col-5 mt-3">
-													<NavLink to="/address">
-														<button
-															type="submit"
-															className="btn btn-primary w-100 py-3 btn-primary">
-															Continue Registration
-														</button>
-													</NavLink>
-												</div>
-											</div>
-										)}
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	);
->>>>>>> 401633dcf22d7129a4413e2762cb26dd59e542cd
 }
 
 export default RegisteredDetails;
