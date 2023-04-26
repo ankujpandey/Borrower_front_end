@@ -70,9 +70,6 @@ function AdminDashboard(props) {
 		if (response.status === 201) {
 			// console.log(response);
 			setLoading(true);
-			// window.location = "/admin-dashboard";
-
-			// setUsers(response?.data?.data);
 		} else {
 			alert("Something went wrong!!!");
 		}

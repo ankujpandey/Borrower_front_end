@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { ApiCall } from "../functions/ApiCall";
 import { UserContext } from "../context/UserContext";
 import { useNavigate } from "react-router-dom";
+import { Icons } from "../icons/Icons";
 
 function PanCardDetails(props) {
   const { user, token } = useContext(UserContext);
@@ -123,7 +124,7 @@ function PanCardDetails(props) {
                           setPassed(false);
                         }}
                       >
-                        Next
+                        Next {Icons.next}
                       </button>
                     </div>
                   ) : (
@@ -132,7 +133,7 @@ function PanCardDetails(props) {
                         type="submit"
                         className="btn btn-primary w-100 py-3 btn-primary"
                       >
-                        Upload
+                        {Icons.upload} Upload
                       </button>
                     </div>
                   )}

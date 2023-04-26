@@ -3,6 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { AddressInitialValues, AddressSchema } from "../schemas";
+import { Icons } from "../icons/Icons";
 
 function Address(props) {
   const { user, token } = useContext(UserContext);

@@ -19,6 +19,10 @@ import PushPinIcon from "@mui/icons-material/PushPin";
 import AccountBalanceIcon from "@mui/icons-material/AccountBalance";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import LockIcon from "@mui/icons-material/Lock";
+import NavigateNextIcon from "@mui/icons-material/NavigateNext";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import LoginIcon from "@mui/icons-material/Login";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -37,10 +41,19 @@ export const Icons = {
 	workPlace: <ApartmentIcon />,
 	employmentType: <Diversity2Icon />,
 	bussiness: <BusinessIcon />,
-	salary: <CurrencyRupeeIcon />,
+	salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
+	smallRupee: (
+		<CurrencyRupeeIcon
+			style={{ marginTop: -5, width: "1rem", height: "1rem" }}
+		/>
+	),
 	searchWorld: <TravelExploreIcon />,
 	pin: <PushPinIcon />,
 	bank: <AccountBalanceIcon />,
 	account: <AccountBoxIcon />,
 	password: <LockIcon />,
+	next: <NavigateNextIcon />,
+	camera: <CameraAltIcon />,
+	login: <LoginIcon />,
+	logout: <LogoutIcon />,
 };

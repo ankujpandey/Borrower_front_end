@@ -688,3 +688,51 @@ h6,
 .form-select-autosuggestion input:focus {
 	outline: none;
 } */
+
+.form-floating .dropdown {
+	position: absolute;
+	top: 62px;
+	left: 0;
+	z-index: 9999;
+	background: #ffff;
+	width: 100%;
+	/* padding: 5px 10px; */
+	/* border: 1px solid #efefef; */
+}
+.form-floating .dropdown-row {
+	cursor: pointer;
+	display: block;
+	padding: 5px;
+	color: #3c3c3d;
+}
+
+/***Hero Image Design***/
+.hero-image {
+	height: 650px;
+}
+
+/***calculate EMI***/
+
+.emi-calculations .li-emi {
+	display: block;
+	padding-bottom: 20px;
+	margin-bottom: 10px;
+	text-align: center;
+	font-size: 14px;
+	font-weight: 400;
+	opacity: 0.8;
+}
+
+.emi-calculations li span {
+	display: block;
+	font-size: 24px;
+	color: #111;
+	margin-top: 11px;
+	font-weight: 400;
+	opacity: 1;
+}
+
+/***Icons***/
+.form-floating svg {
+	margin-top: -6px;
+}
