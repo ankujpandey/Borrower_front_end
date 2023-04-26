@@ -26,7 +26,11 @@ function PanCardDetails(props) {
 
 		if (response.status === 201) {
 			setLoading(false);
-			if (response.data.data.verification.passed) {
+			// console.log(
+			//   "response__-------------->>>>>",
+			//   response.data.data.verification.passed
+			// );
+			if (!response.data.data.verification.passed) {
 				alert("PAN Authentication Failed!");
 				setPassed(false);
 			} else {
@@ -34,7 +38,7 @@ function PanCardDetails(props) {
 				setPassed(true);
 			}
 		} else {
-			alert("Somthing went wrong");
+			alert("Something went wrong");
 			setLoading(false);
 		}
 

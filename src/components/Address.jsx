@@ -56,6 +56,7 @@ function Address(props) {
 			}
 		}
 	};
+
 	return (
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">
@@ -119,7 +120,7 @@ function Address(props) {
 													handleChange(event);
 												}}
 											/>
-											<label htmlFor="pinCode">{}PIN Code</label>
+											<label htmlFor="pinCode">PIN Code</label>
 
 											{errors.pinCode && touched.pinCode ? (
 												<div className="form-error form-validation-warning text-danger">
@@ -127,7 +128,6 @@ function Address(props) {
 												</div>
 											) : null}
 
-											{/* Add CSS for class loading-msg */}
 											{loading ? (
 												<div className="loading-msg">Please Wait...</div>
 											) : values.pinCode.length < 6 ? null : validPIN ? null : (
@@ -200,7 +200,7 @@ function Address(props) {
 											type="submit"
 											className="btn btn-primary w-100 py-3 btn-primary"
 											disabled={!(validPIN && values.postOffice != "")}>
-											Next {Icons.next}
+											Submit
 										</button>
 									</div>
 								</div>
