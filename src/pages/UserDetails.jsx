@@ -54,11 +54,7 @@ function UserDetails(props) {
   };
 
   // ------------------------------------------
-<<<<<<< HEAD
   //  Fetch User's Image
-=======
-  //  Ftech User's Image
->>>>>>> 1395802f0fe4e9df5ee39ff2e03468874c9a4c2f
   // ------------------------------------------
 
   const fetchImage = async () => {
@@ -73,11 +69,7 @@ function UserDetails(props) {
       setIsData(true);
       console.log(response.data.data[0].profile_photo);
       await setUserImage(response?.data?.data[0]);
-<<<<<<< HEAD
       //   console.log("users Image ------------>>>>>>>", userImage.profile_photo);
-=======
-      console.log("users Image ------------>>>>>>>", userImage.profile_photo);
->>>>>>> 1395802f0fe4e9df5ee39ff2e03468874c9a4c2f
     } else {
       setIsData(false);
       alert("Something went wrong!!!");
