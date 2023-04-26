@@ -4,6 +4,7 @@ import { ApiCall } from "../functions/ApiCall";
 import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
+import { saveAs } from "file-saver";
 
 function UserDetails(props) {
   const { id } = useParams();
@@ -53,7 +54,11 @@ function UserDetails(props) {
   };
 
   // ------------------------------------------
+<<<<<<< HEAD
   //  Fetch User's Image
+=======
+  //  Ftech User's Image
+>>>>>>> 1395802f0fe4e9df5ee39ff2e03468874c9a4c2f
   // ------------------------------------------
 
   const fetchImage = async () => {
@@ -68,10 +73,39 @@ function UserDetails(props) {
       setIsData(true);
       console.log(response.data.data[0].profile_photo);
       await setUserImage(response?.data?.data[0]);
+<<<<<<< HEAD
       //   console.log("users Image ------------>>>>>>>", userImage.profile_photo);
+=======
+      console.log("users Image ------------>>>>>>>", userImage.profile_photo);
+>>>>>>> 1395802f0fe4e9df5ee39ff2e03468874c9a4c2f
     } else {
       setIsData(false);
       alert("Something went wrong!!!");
+    }
+
+  };
+
+  // ------------------------------------------
+  //  download pdf
+  // ------------------------------------------
+
+  const handlepdfDownload = async (id) => {
+    try {
+      const config = {
+        method: "get",
+        url: `http://localhost:4000/api/v1/createPdf/${id}`,
+        responseType: "blob",
+      };
+      let response = await ApiCall(config);
+      console.log("==========response", response);
+      if (response.status == 200) {
+        console.log(response.data);
+        const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+        console.log(pdfBlob);
+        saveAs(pdfBlob, `user_${id}.pdf`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -283,9 +317,9 @@ function UserDetails(props) {
                           <button
                             type="button"
                             className="btn btn-success w-100 py-3 btn-success"
-                            // onClick={() => {
-                            // 	handlepdfDownload(id);
-                            // }}
+                            onClick={() => {
+                            	handlepdfDownload(id);
+                            }}
                           >
                             {Icons.download} Download
                           </button>
@@ -319,8 +353,13 @@ function UserDetails(props) {
               </div>
             </div>
           </div>
+<<<<<<< HEAD
         </>
       )}
+=======
+        </div>
+      </div>
+>>>>>>> 1395802f0fe4e9df5ee39ff2e03468874c9a4c2f
     </>
   );
 }
