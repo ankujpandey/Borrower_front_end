@@ -7,7 +7,7 @@ import axios from "axios";
 
 function UpdateUser({ user }) {
   const { token } = useContext(UserContext);
-  console.log(token);
+  // console.log(token);
   const [validPIN, setValidPIN] = useState(true);
   const [loading, setLoading] = useState(false);
   const [postOffice, setPostOffice] = useState([]);
@@ -15,6 +15,7 @@ function UpdateUser({ user }) {
   const [bankLoading, setBankLoading] = useState(false);
   const [pinChanged, setPinChanged] = useState(false);
   const [ifscChanged, setIfscChanged] = useState(false);
+  const [empTypeChanged, setEmpTypeChanged] = useState(false);
   let [color, setColor] = useState("black");
 
   setColor = (status) => {
@@ -35,17 +36,32 @@ function UpdateUser({ user }) {
     state: user.state,
     employment_type: user.employment_type,
     monthly_income: user.monthly_income,
-    email: user.professional_email,
+    professional_email: user.professional_email,
     business_nature: user.business_nature,
     company_name: user.company_name,
     account_number: user.account_number,
     ifsc_code: user.ifsc_code,
     bank_name: user.bank_name,
     branch_name: user.branch_name,
+    uid: user.uid,
   };
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(UpdateInitialValues, UpdateSchema, url, api, token);
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+  } = useHandleValidation(UpdateInitialValues, UpdateSchema, url, api, token);
+
+  useEffect(() => {
+    values.company_name = "";
+    values.professional_email = "";
+    values.business_nature = "";
+    values.monthly_income = "";
+  }, [empTypeChanged]);
 
   useEffect(() => {
     fetchBank();
@@ -292,7 +308,10 @@ function UpdateUser({ user }) {
                     name="employment_type"
                     id="employment_type"
                     value={values.employment_type}
-                    onChange={handleChange}
+                    onChange={(event) => {
+                      handleChange(event);
+                      setEmpTypeChanged(true);
+                    }}
                   >
                     {values.employment_type == "Salaried" ? (
                       <>
@@ -327,17 +346,17 @@ function UpdateUser({ user }) {
                     className="form-control"
                     name="professional_email"
                     id="professional_email"
-                    value={values.email}
+                    value={values.professional_email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                  {errors.email && touched.email ? (
+                  {errors.professional_email && touched.professional_email ? (
                     <div className="form-error form-validation-warning text-danger">
-                      {errors.email}
+                      {errors.professional_email}
                     </div>
                   ) : null}
 
-                  {values.employment_type == "Self-employed" ? (
+                  {values.employment_type === "Self-employed" ? (
                     <>
                       <label htmlFor="business_nature">
                         Nature of Business
@@ -347,7 +366,10 @@ function UpdateUser({ user }) {
                         name="business_nature"
                         id="business_nature"
                         value={values.business_nature}
-                        onChange={handleChange}
+                        onChange={(event) => {
+                          setFieldValue("company_name", "N/A");
+                          handleChange(event);
+                        }}
                         onBlur={handleBlur}
                       />
                       {errors.business_nature && touched.business_nature ? (
@@ -364,7 +386,10 @@ function UpdateUser({ user }) {
                         name="company_name"
                         id="company_name"
                         value={values.company_name}
-                        onChange={handleChange}
+                        onChange={(event) => {
+                          setFieldValue("business_nature", "N/A");
+                          handleChange(event);
+                        }}
                         onBlur={handleBlur}
                       />
                       {errors.company_name && touched.company_name ? (

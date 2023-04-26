@@ -214,7 +214,9 @@ export const UpdateSchema = Yup.object({
     .max(100)
     .required("Please enter nature of business"),
 
-  email: Yup.string().email().required("Please enter your professional email"),
+  professional_email: Yup.string()
+    .email()
+    .required("Please enter your professional email"),
 
   company_name: Yup.string().required("Please select your company name"),
 
