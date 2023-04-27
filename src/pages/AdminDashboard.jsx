@@ -105,89 +105,95 @@ function AdminDashboard(props) {
 				<h2 className="mt-2">Users List</h2>
 			</div>
 
-			<div className="container mt-5">
-				<hr className="mb-0 mt-4" />
-				<table className="table table-striped shadow-sm p-3 mb-4 rounded">
-					<thead>
-						<tr>
-							<th scope="col">ID</th>
-							<th scope="col">Name</th>
-							<th scope="col">E-mail</th>
-							<th scope="col">Mobile</th>
-							<th scope="col">PAN</th>
-							<th scope="col">Aadhaar</th>
-							<th scope="col">Active</th>
-							<th scope="col">Deleted</th>
-							<th scope="col"></th>
-							<th scope="col"></th>
-						</tr>
-					</thead>
-					<tbody>
-						{users?.map((person) => (
-							<tr key={person.uid}>
-								<th scope="row">{person.uid}</th>
-								<td>
-									{person.firstName} {person.lastName}
-								</td>
-								<td>{person.email}</td>
-								<td>{person.contact}</td>
-								<td>{person.pan}</td>
-								<td>{person.aadhaar}</td>
-								<td style={{ color: setColor(person.isActive) }}>
-									{person.isActive == 1 ? "Yes" : "No"}
-								</td>
-								<td style={{ color: setColor(!person.isDeleted) }}>
-									{person.isDeleted == 1 ? "Yes" : "No"}
-								</td>
+			<div className="container mt-1">
+				<div
+					className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
+					data-wow-delay="0.3s">
+					<div className="m-3">
+						<hr className="mb-0 mt-3" />
+						<table className="table table-striped shadow-sm p-3 mb-4 rounded">
+							<thead>
+								<tr>
+									<th scope="col">ID</th>
+									<th scope="col">Name</th>
+									<th scope="col">E-mail</th>
+									<th scope="col">Mobile</th>
+									<th scope="col">PAN</th>
+									<th scope="col">Aadhaar</th>
+									<th scope="col">Active</th>
+									<th scope="col">Deleted</th>
+									<th scope="col"></th>
+									<th scope="col"></th>
+								</tr>
+							</thead>
+							<tbody>
+								{users?.map((person) => (
+									<tr key={person.uid}>
+										<th scope="row">{person.uid}</th>
+										<td>
+											{person.firstName} {person.lastName}
+										</td>
+										<td>{person.email}</td>
+										<td>{person.contact}</td>
+										<td>{person.pan}</td>
+										<td>{person.aadhaar}</td>
+										<td style={{ color: setColor(person.isActive) }}>
+											{person.isActive == 1 ? "Yes" : "No"}
+										</td>
+										<td style={{ color: setColor(!person.isDeleted) }}>
+											{person.isDeleted == 1 ? "Yes" : "No"}
+										</td>
 
-								<td>
-									<button
-										type="button"
-										className="btn btn-sm"
-										onClick={() => handleDeleteUser(person.uid)}>
-										{Icons.delete}
-									</button>
-								</td>
+										<td>
+											<button
+												type="button"
+												className="btn btn-sm"
+												onClick={() => handleDeleteUser(person.uid)}>
+												{Icons.delete}
+											</button>
+										</td>
 
-								<td>
-									<Link to={`/users/${person.uid}`}>
-										<button
-											type="button"
-											className="btn fs-6 btn-primary btn-sm">
-											View
-										</button>
-									</Link>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+										<td>
+											<Link to={`/users/${person.uid}`}>
+												<button
+													type="button"
+													className="btn fs-6 btn-primary btn-sm">
+													View
+												</button>
+											</Link>
+										</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
 
-				{/* -------------------------------
-				Pagination part
-			----------------------------------- */}
+						{/* -------------------------------
+						Pagination part
+					----------------------------------- */}
 
-				<ReactPaginate
-					breakLabel="..."
-					nextLabel="next >"
-					onPageChange={handlePageClick}
-					initialPage={0}
-					pageRangeDisplayed={2}
-					marginPagesDisplayed={2}
-					pageCount={pageCount}
-					previousLabel="< previous"
-					renderOnZeroPageCount={null}
-					containerClassName={"pagination justify-content-center"}
-					pageClassName={"page-item"}
-					pageLinkClassName={"page-link"}
-					previousClassName={"page-item"}
-					previousLinkClassName={"page-link"}
-					nextClassName={"page-item"}
-					nextLinkClassName={"page-link"}
-					breakLinkClassName={"page-link"}
-					activeClassName={"active"}
-					disabledClassName={"disabled"}
-				/>
+						<ReactPaginate
+							breakLabel="..."
+							nextLabel="next >"
+							onPageChange={handlePageClick}
+							initialPage={0}
+							pageRangeDisplayed={2}
+							marginPagesDisplayed={2}
+							pageCount={pageCount}
+							previousLabel="< previous"
+							renderOnZeroPageCount={null}
+							containerClassName={"pagination justify-content-center"}
+							pageClassName={"page-item"}
+							pageLinkClassName={"page-link"}
+							previousClassName={"page-item"}
+							previousLinkClassName={"page-link"}
+							nextClassName={"page-item"}
+							nextLinkClassName={"page-link"}
+							breakLinkClassName={"page-link"}
+							activeClassName={"active"}
+							disabledClassName={"disabled"}
+						/>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

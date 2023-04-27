@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, Navigate, useNavigate, useParams } from "react-router-dom";
 import { ApiCall } from "../functions/ApiCall";
 import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
@@ -13,6 +13,8 @@ function UserDetails(props) {
 	const [user, setUser] = useState({});
 	const [userImage, setUserImage] = useState();
 	const [isEditing, setIsEditing] = useState(false);
+
+	const navigate = useNavigate();
 
 	let [color, setColor] = useState("black");
 
@@ -97,6 +99,25 @@ function UserDetails(props) {
 			}
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+	// -----------------------------------------------
+	//  Delete Button functionality
+	// -----------------------------------------------
+	const handleDeleteUser = async (id) => {
+		const deleteConfig = {
+			method: "delete",
+			url: `http://localhost:4000/api/v1/user/${id}`,
+			headers: { "Content-Type": "application/json", authorization: token },
+		};
+		let response = await ApiCall(deleteConfig);
+
+		if (response.status === 201) {
+			// console.log(response);
+			navigate("/admin-dashboard");
+		} else {
+			alert("Something went wrong!!!");
 		}
 	};
 
@@ -317,7 +338,7 @@ function UserDetails(props) {
 														onClick={() => {
 															setIsEditing(true);
 														}}>
-														{Icons.update} Edit
+														{Icons.edit} Edit
 													</button>
 												</div>
 
@@ -325,8 +346,7 @@ function UserDetails(props) {
 													<button
 														type="button"
 														className="btn btn-danger w-100 py-3 btn-danger"
-														// onClick={() => handleDeleteApi(id)}
-													>
+														onClick={() => handleDeleteUser(id)}>
 														{Icons.delete} Delete User
 													</button>
 												</div>
