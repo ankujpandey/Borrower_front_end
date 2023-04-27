@@ -203,9 +203,8 @@ function Address(props) {
                     <button
                       type="submit"
                       className="btn btn-primary w-100 py-3 btn-primary"
-                      disabled={!(validPIN && values.postOffice != "")}
                     >
-                      Submit
+                      Next {Icons.next}
                     </button>
                   </div>
                 </div>

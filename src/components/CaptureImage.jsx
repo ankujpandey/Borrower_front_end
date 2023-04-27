@@ -62,7 +62,7 @@ function CaptureImage(props) {
 			} else {
 				picture = webcamRef?.current?.getScreenshot({
 					width: 400,
-					height: 400,
+					height: 270,
 				});
 
 				console.log("pic clicked");
@@ -139,8 +139,8 @@ function CaptureImage(props) {
 						))}
 						<Webcam
 							style={{
-								width: "600px",
-								height: "500px",
+								width: "100%",
+								height: "450px",
 								position: "relative",
 								//marginBottom: "20px",
 								marginLeft: "auto",
