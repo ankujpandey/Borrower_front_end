@@ -8,7 +8,6 @@ function Dashboard(props) {
   const [loading, setLoading] = useState(false);
 
   const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
-  console.log(updatedUser.contact);
 
   useEffect(() => {
     if (user == null) setLoading(true);
