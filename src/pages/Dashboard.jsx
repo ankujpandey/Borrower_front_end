@@ -7,6 +7,9 @@ function Dashboard(props) {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
+  const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
+  console.log(updatedUser.contact);
+
   useEffect(() => {
     if (user == null) setLoading(true);
     else setLoading(false);
@@ -48,7 +51,7 @@ function Dashboard(props) {
         )}
       </div>
 
-      {user?.userName?.contact ? (
+      {user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />
       ) : (
         <div className="row d-flex justify-content-center">
