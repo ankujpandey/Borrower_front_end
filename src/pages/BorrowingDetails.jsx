@@ -11,10 +11,6 @@ function BorrowingDetails() {
   const url = "/dashboard";
   const api = "http://localhost:4000/api/v1/createLoan";
 
-  useEffect(() => {
-    assignAgent();
-  }, []);
-
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useHandleValidation(
       BorrowingInitialValues,
@@ -25,28 +21,6 @@ function BorrowingDetails() {
     );
 
   values.uid = user?.signUp?.uid;
-
-  const assignAgent = async () => {
-    const config = {
-      method: "get",
-      url: "http://localhost:4000/api/v1/assignAgent",
-      headers: { "Content-Type": "application/json", authorization: token },
-    };
-    const response = await ApiCall(config);
-    response.data.data.jobAssignees_id
-      ? (values.jobAssignees_id = response.data.data.jobAssignees_id)
-      : (values.jobAssignees_id = response.data.data[0].jobAssignees_id);
-
-    if (values.jobAssignees_id) {
-      const config2 = {
-        method: "post",
-        url: `http://localhost:4000/api/v1/updateJobsAssigned/${values.jobAssignees_id}`,
-        headers: { "Content-Type": "application/json", authorization: token },
-      };
-
-      await ApiCall(config2);
-    }
-  };
 
   return (
     <div>
