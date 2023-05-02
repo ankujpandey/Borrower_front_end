@@ -5,15 +5,11 @@ import RegisteredDetails from "../components/RegisteredDetails";
 
 function Dashboard(props) {
   const { user } = useContext(UserContext);
-  const [loading, setLoading] = useState(false);
+  console.log("uid", user.userName.uid);
 
   const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
-  // console.log(updatedUser.contact);
 
-  useEffect(() => {
-    if (user == null) setLoading(true);
-    else setLoading(false);
-  }, [user]);
+  useEffect(() => {}, []);
 
   return (
     <div>
