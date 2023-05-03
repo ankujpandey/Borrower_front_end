@@ -40,6 +40,7 @@ function CaptureImage(props) {
 
 	useEffect(() => {
 		localStorage.removeItem("capImg");
+		setImage(null);
 	}, []);
 
 	//Image Capturing--------->>>>>>>>
@@ -50,10 +51,6 @@ function CaptureImage(props) {
 			}, 1000);
 		}
 	}, [seconds]);
-
-	// const biometicBlob = async (base64) => {
-	// 	await fetch(base64).then(async (res) => setBioImage(await res.blob()));
-	// };
 
 	const clickImage = () => {
 		setTimeout(async () => {

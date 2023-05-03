@@ -114,6 +114,17 @@ function CalculatedEMI(props) {
 								</tbody>
 							</table>
 
+							<p className="calculator-msg">
+								Amortization schedule shows the loan amount borrowed along with
+								a list of scheduled payments. The amortization table shows the
+								amount of each periodic payment along with the amount that goes
+								towards the principal deducted from the loan each time. The
+								amortization chart also shows the new loan balance after each
+								payment. The advantage of Amortization Calculator is that one
+								can determine when the loan will be paid off, and the principal
+								and interest component of each payment.
+							</p>
+
 							<div className="d-flex justify-content-center mt-2">
 								<button
 									className="btn btn-primary rounded-pill px-4"

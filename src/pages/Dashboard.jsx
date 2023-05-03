@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import RegisteredDetails from "../components/RegisteredDetails";
+import LoanStatus from "../components/LoanStatus";
 
 function Dashboard(props) {
   const { user } = useContext(UserContext);
