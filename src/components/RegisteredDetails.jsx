@@ -4,7 +4,7 @@ import { ApiCall } from "../functions/ApiCall";
 import { NavLink } from "react-router-dom";
 import { Icons } from "../icons/Icons";
 
-function RegisteredDetails(props) {
+function RegisteredDetails(loanStatus) {
   const { user, token } = useContext(UserContext);
   const [userImage, setUserImage] = useState();
   const [userData, setUserData] = useState([]);
@@ -43,9 +43,8 @@ function RegisteredDetails(props) {
 
     let response = await ApiCall(con);
     if (response.status === 201) {
-      console.log(response.data.data[0].profile_photo);
+      // console.log(response.data.data[0].profile_photo);
       await setUserImage(response?.data?.data[0]);
-      console.log("users Image ------------>>>>>>>", userImage.profile_photo);
     } else {
       alert("Something went wrong!!!");
     }
@@ -204,18 +203,20 @@ function RegisteredDetails(props) {
                                     </span>
                                   </li>
                                 </ul>
-                                <div className="row justify-content-center">
-                                  <div className="col-5 mt-3">
-                                    <NavLink to="/borrowing-details">
-                                      <button
-                                        type="submit"
-                                        className="btn btn-primary w-100 py-3 btn-primary"
-                                      >
-                                        Apply for Loan
-                                      </button>
-                                    </NavLink>
+                                {loanStatus ? null : (
+                                  <div className="row justify-content-center">
+                                    <div className="col-5 mt-3">
+                                      <NavLink to="/borrowing-details">
+                                        <button
+                                          type="submit"
+                                          className="btn btn-primary w-100 py-3 btn-primary"
+                                        >
+                                          Apply for Loan
+                                        </button>
+                                      </NavLink>
+                                    </div>
                                   </div>
-                                </div>
+                                )}
                               </>
                             ) : (
                               <div className="row justify-content-center">

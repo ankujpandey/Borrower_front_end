@@ -8,6 +8,7 @@ import { Icons } from "../icons/Icons";
 function AdminDashboard(props) {
   const [users, setUsers] = useState([]);
   const { token } = useContext(UserContext);
+  console.log(token);
   const [loading, setLoading] = useState(false);
   const [itemLen, setItemLen] = useState();
   const [page, setPage] = useState(1);
@@ -116,7 +117,7 @@ function AdminDashboard(props) {
               <th scope="col">Mobile</th>
               <th scope="col">PAN</th>
               <th scope="col">Aadhaar</th>
-              <th scope="col">Assigned To</th>
+              <th scope="col">Assigned</th>
               <th scope="col">Status</th>
               <th scope="col">Active</th>
               <th scope="col">Deleted</th>
