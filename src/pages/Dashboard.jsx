@@ -3,14 +3,33 @@ import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import RegisteredDetails from "../components/RegisteredDetails";
 import LoanStatus from "../components/LoanStatus";
+import { ApiCall } from "../functions/ApiCall";
 
 function Dashboard(props) {
-  const { user } = useContext(UserContext);
-  console.log("uid", user.userName.uid);
+  const { user, token } = useContext(UserContext);
+  const [loanStatus, setLoanStatus] = useState(null);
+  const uid = user.userName.uid;
+  // console.log("uid", uid);
 
   const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    fetchLoanDetails(uid);
+  }, []);
+
+  const fetchLoanDetails = async (uid) => {
+    const config = {
+      method: "get",
+      url: `http://localhost:4000/api/v1/getLoanStatus/${uid}`,
+      headers: { "Content-Type": "application/json", authorization: token },
+    };
+
+    let response = await ApiCall(config);
+    if (response?.status == 201) {
+      console.log(response?.data?.data);
+      setLoanStatus(response.data.data.cndtn_code);
+    }
+  };
 
   return (
     <div>
@@ -39,7 +58,7 @@ function Dashboard(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
-        {user?.userName?.contact ? (
+        {loanStatus ? null : user?.userName?.contact ? (
           <h2 className="mt-2">
             Congratulations! Your registration is completed.
           </h2>
@@ -48,7 +67,9 @@ function Dashboard(props) {
         )}
       </div>
 
-      {user?.userName?.contact || updatedUser?.contact ? (
+      {loanStatus ? (
+        <LoanStatus loanStatus={loanStatus} />
+      ) : user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />
       ) : (
         <div className="row d-flex justify-content-center">
