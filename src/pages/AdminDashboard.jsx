@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { Icons } from "../icons/Icons";
 
@@ -68,7 +68,6 @@ function AdminDashboard(props) {
     let response = await ApiCall(deleteConfig);
 
     if (response.status === 201) {
-      // console.log(response);
       setLoading(true);
     } else {
       alert("Something went wrong!!!");
@@ -117,8 +116,9 @@ function AdminDashboard(props) {
               <th scope="col">Mobile</th>
               <th scope="col">PAN</th>
               <th scope="col">Aadhaar</th>
+              <th scope="col">Assigned To</th>
+              <th scope="col">Status</th>
               <th scope="col">Active</th>
-              <th scope="col">Assignees</th>
               <th scope="col">Deleted</th>
               <th scope="col"></th>
               <th scope="col"></th>
@@ -135,15 +135,10 @@ function AdminDashboard(props) {
                 <td>{person.contact}</td>
                 <td>{person.pan}</td>
                 <td>{person.aadhaar}</td>
+                <td></td>
+                <td></td>
                 <td style={{ color: setColor(person.isActive) }}>
                   {person.isActive == 1 ? "Yes" : "No"}
-                </td>
-                <td>
-                  <select className="form-select">
-                    <option value="none">Select Option</option>
-                    <option value="Salaried">Salaried</option>
-                    <option value="SelfEmployed">Self Employed</option>
-                  </select>
                 </td>
                 <td style={{ color: setColor(!person.isDeleted) }}>
                   {person.isDeleted == 1 ? "Yes" : "No"}

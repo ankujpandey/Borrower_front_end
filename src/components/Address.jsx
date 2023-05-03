@@ -104,7 +104,8 @@ function Address(props) {
 											<input
 												type="text"
 												className={`form-control ${
-													(errors.pinCode || !validPIN) && touched.pinCode
+													(errors.pinCode && touched.pinCode) ||
+													(!validPIN && touched.pinCode)
 														? "is-invalid"
 														: touched.pinCode
 														? "is-valid"

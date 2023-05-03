@@ -6,16 +6,15 @@ import RegisteredDetails from "../components/RegisteredDetails";
 function Dashboard(props) {
 	const { user } = useContext(UserContext);
 	const [loading, setLoading] = useState(false);
-	console.log("Context at dashboard ", user);
+
+	const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
+	// console.log(updatedUser.contact);
 
 	useEffect(() => {
 		if (user == null) setLoading(true);
 		else setLoading(false);
 	}, [user]);
 
-	// if (loading) {
-	//   return <div>Loading....</div>;
-	// }
 	return (
 		<div>
 			<div className="py-5 bg-primary hero-header mb-3">
@@ -51,7 +50,7 @@ function Dashboard(props) {
 				)}
 			</div>
 
-			{user?.userName?.contact ? (
+			{user?.userName?.contact || updatedUser?.contact ? (
 				<RegisteredDetails />
 			) : (
 				<div className="row d-flex justify-content-center">

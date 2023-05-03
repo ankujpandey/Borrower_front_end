@@ -23,6 +23,7 @@ import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -56,4 +57,5 @@ export const Icons = {
 	camera: <CameraAltIcon />,
 	login: <LoginIcon />,
 	logout: <LogoutIcon />,
+	edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
 };
