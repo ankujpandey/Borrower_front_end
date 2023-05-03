@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import RegisteredDetails from "../components/RegisteredDetails";
+import LoanStatus from "../components/LoanStatus";
 
 function Dashboard(props) {
 	const { user } = useContext(UserContext);
@@ -51,7 +52,9 @@ function Dashboard(props) {
 			</div>
 
 			{user?.userName?.contact || updatedUser?.contact ? (
-				<RegisteredDetails />
+				// <RegisteredDetails />
+
+				<LoanStatus />
 			) : (
 				<div className="row d-flex justify-content-center">
 					<div className="col-lg-5 d-flex justify-content-center">
