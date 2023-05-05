@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import RegisteredDetails from "../components/RegisteredDetails";
-import LoanStatus from "../components/LoanStatus";
+import UserDashboard from "../components/UserDashboard";
 import { ApiCall } from "../functions/ApiCall";
 
 function Dashboard(props) {
@@ -69,7 +69,7 @@ function Dashboard(props) {
       </div>
 
       {loanStatus == 1200 ? (
-        <LoanStatus loanStatus={loanStatus} />
+        <UserDashboard loanStatus={loanStatus} />
       ) : user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />
       ) : (

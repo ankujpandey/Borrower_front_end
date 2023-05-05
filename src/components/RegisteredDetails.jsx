@@ -8,7 +8,6 @@ function RegisteredDetails(loanStatus) {
   const { user, token } = useContext(UserContext);
   const [userImage, setUserImage] = useState();
   const [userData, setUserData] = useState([]);
-  console.log(loanStatus);
 
   const config = {
     method: "get",
@@ -24,7 +23,7 @@ function RegisteredDetails(loanStatus) {
   const fetchData = async () => {
     let response = await ApiCall(config);
     if (response.status === 201) {
-      console.log(response.data.data[0]);
+      console.log(response?.data);
       setUserData(response?.data?.data[0]);
     } else {
       alert("Something went wrong!!!");

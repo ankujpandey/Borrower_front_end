@@ -671,29 +671,43 @@ h6,
 .nav-link {
 	color: white;
 	position: relative;
+	transition: none;
+	padding: 10px;
 }
-.round-nav .nav-link {
-	background: #2124b1;
+
+.nav-link span {
+	margin-left: 10px;
+}
+
+.round-nav .nav-btns .nav-link a:hover {
+	color: #d1d2ff;
+	background: white;
+}
+
+.nav-link.active::before {
+	content: "";
+	position: absolute;
+	right: 0;
+	top: -24px;
+	width: 24px;
+	height: 24px;
+	background-color: transparent;
+	border-radius: 50%;
+	box-shadow: 20px 20px 0 10px white;
+	pointer-events: none;
 }
 
 .nav-link.active::after {
-	position: absolute;
 	content: "";
+	position: absolute;
+	right: 0;
+	bottom: -24px;
 	width: 24px;
 	height: 24px;
-	background-color: #2124b1;
-	top: -24px;
-	right: 0;
-	border-bottom-right-radius: 20px;
-}
-.nav-link.active::before {
-	position: absolute;
-	content: "";
-	width: 24px;
-	height: 24px;
-	background-color: white;
-	top: -24px;
-	right: 0;
+	background-color: transparent;
+	border-radius: 50%;
+	box-shadow: 20px -20px 0 10px white;
+	pointer-events: none;
 }
 
 .active {
@@ -703,25 +717,19 @@ h6,
 	border-bottom-left-radius: 20px;
 }
 
-.nav-link .enable::after {
-	position: absolute;
-	content: "";
-	width: 24px;
-	height: 24px;
-	background-color: #2124b1;
-	bottom: -24px;
-	right: 0;
-	border-top-right-radius: 20px;
-	z-index: 99;
-}
+/* table */
 
-.nav-link .enable::before {
-	position: absolute;
-	content: "";
-	width: 24px;
-	height: 24px;
-	background-color: white;
-	bottom: -24px;
-	right: 0;
-	z-index: 99;
+.table-without-line {
+	--bs-table-bg: rgba(0, 0, 0, 0);
+	--bs-table-striped-color: #888;
+	--bs-table-striped-bg: rgba(0, 0, 0, 0.05);
+	--bs-table-active-color: #888;
+	--bs-table-active-bg: rgba(0, 0, 0, 0.1);
+	--bs-table-hover-color: #888;
+	--bs-table-hover-bg: rgba(0, 0, 0, 0.075);
+	width: 100%;
+	margin-bottom: 1rem;
+	color: #888;
+	vertical-align: top;
+	border-color: #dee2e6;
 }
