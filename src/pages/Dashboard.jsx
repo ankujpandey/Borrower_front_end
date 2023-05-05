@@ -27,7 +27,8 @@ function Dashboard(props) {
     let response = await ApiCall(config);
     if (response?.status == 201) {
       console.log(response?.data?.data);
-      setLoanStatus(response.data.data.cndtn_code);
+      setLoanStatus(response.data.data.Loan_state);
+      console.log(loanStatus);
     }
   };
 
@@ -58,7 +59,7 @@ function Dashboard(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
-        {loanStatus ? null : user?.userName?.contact ? (
+        {loanStatus == 1200 ? null : user?.userName?.contact ? (
           <h2 className="mt-2">
             Congratulations! Your registration is completed.
           </h2>
@@ -67,7 +68,7 @@ function Dashboard(props) {
         )}
       </div>
 
-      {loanStatus ? (
+      {loanStatus == 1200 ? (
         <LoanStatus loanStatus={loanStatus} />
       ) : user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />

@@ -8,6 +8,7 @@ function RegisteredDetails(loanStatus) {
   const { user, token } = useContext(UserContext);
   const [userImage, setUserImage] = useState();
   const [userData, setUserData] = useState([]);
+  console.log(loanStatus);
 
   const config = {
     method: "get",
@@ -203,7 +204,7 @@ function RegisteredDetails(loanStatus) {
                                     </span>
                                   </li>
                                 </ul>
-                                {loanStatus ? null : (
+                                {loanStatus.loanStatus == 1200 ? null : (
                                   <div className="row justify-content-center">
                                     <div className="col-5 mt-3">
                                       <NavLink to="/borrowing-details">

@@ -37,7 +37,7 @@ function AdminDashboard(props) {
   // ----------------------------------------------
   const fetchData = async () => {
     let response = await ApiCall(config);
-    console.log(page);
+    // console.log(page);
     if (response.status === 201) {
       console.log(response.data.data.data);
       setUsers(response?.data?.data?.data);
@@ -53,7 +53,7 @@ function AdminDashboard(props) {
 
   const handlePageClick = (event) => {
     setPage(event.selected + 1);
-    console.log("hit");
+    // console.log("hit");
     setLoading(true);
   };
 
@@ -136,8 +136,8 @@ function AdminDashboard(props) {
                 <td>{person.contact}</td>
                 <td>{person.pan}</td>
                 <td>{person.aadhaar}</td>
-                <td></td>
-                <td></td>
+                <td>{person.AgentName}</td>
+                <td>{person.Loan_state}</td>
                 <td style={{ color: setColor(person.isActive) }}>
                   {person.isActive == 1 ? "Yes" : "No"}
                 </td>
