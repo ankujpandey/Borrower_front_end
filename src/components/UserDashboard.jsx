@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RegisteredDetails from "./RegisteredDetails";
 import LoanStatus from "./LoanStatus";
+import UserProfile from "./UserProfile";
 
 function UserDashboard({ loanStatus }) {
 	console.log(loanStatus);
@@ -8,6 +9,7 @@ function UserDashboard({ loanStatus }) {
 	const [statusPage, setStatusPage] = useState(false);
 	const [emiPage, setEmiPage] = useState(false);
 	const [passBookPage, setPassBookPage] = useState(false);
+	const [loanDetailsPage, setLoanDetailsPage] = useState(false);
 
 	// useEffect(() => {}, [profilePage]);
 
@@ -35,6 +37,7 @@ function UserDashboard({ loanStatus }) {
 											setStatusPage(false);
 											setEmiPage(false);
 											setPassBookPage(false);
+											setLoanDetailsPage(false);
 										}}
 										href="#">
 										<span className={`${profilePage ? "enable" : ""}`}>
@@ -45,9 +48,10 @@ function UserDashboard({ loanStatus }) {
 										className={`nav-link ${statusPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
-											setStatusPage(true);
 											setEmiPage(false);
 											setPassBookPage(false);
+											setLoanDetailsPage(false);
+											setStatusPage(true);
 										}}
 										href="#">
 										<span className={`${statusPage ? "enable" : ""}`}>
@@ -59,8 +63,9 @@ function UserDashboard({ loanStatus }) {
 										onClick={() => {
 											setProfilePage(false);
 											setStatusPage(false);
-											setEmiPage(true);
 											setPassBookPage(false);
+											setLoanDetailsPage(false);
+											setEmiPage(true);
 										}}
 										href="#">
 										<span className={`${emiPage ? "enable" : ""}`}>
@@ -73,17 +78,31 @@ function UserDashboard({ loanStatus }) {
 											setProfilePage(false);
 											setStatusPage(false);
 											setEmiPage(false);
+											setLoanDetailsPage(false);
 											setPassBookPage(true);
 										}}>
 										<span className={`${passBookPage ? "enable" : ""}`}>
 											Passbook
 										</span>
 									</a>
+									<a
+										className={`nav-link ${loanDetailsPage ? "active" : ""}`}
+										onClick={() => {
+											setProfilePage(false);
+											setStatusPage(false);
+											setEmiPage(false);
+											setPassBookPage(false);
+											setLoanDetailsPage(true);
+										}}>
+										<span className={`${loanDetailsPage ? "enable" : ""}`}>
+											Loan Details
+										</span>
+									</a>
 								</nav>
 							</div>
 							{profilePage ? (
 								<div className="col-10">
-									<RegisteredDetails loanStatus={loanStatus} />
+									<UserProfile />
 								</div>
 							) : null}
 
@@ -92,6 +111,12 @@ function UserDashboard({ loanStatus }) {
 									<LoanStatus loanStatus={loanStatus} />
 								</div>
 							) : null}
+
+							{/* {profilePage ? (
+								<div className="col-10">
+									<UserProfile loanStatus={loanStatus} />
+								</div>
+							) : null} */}
 						</div>
 					</div>
 				</div>

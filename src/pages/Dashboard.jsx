@@ -27,7 +27,7 @@ function Dashboard(props) {
 		let response = await ApiCall(config);
 		if (response?.status == 201) {
 			console.log(response?.data?.data);
-			setLoanStatus(response.data.data.cndtn_code);
+			setLoanStatus(response?.data?.data?.cndtn_code);
 		}
 	};
 
