@@ -24,38 +24,44 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
+import PercentIcon from "@mui/icons-material/Percent";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 
 export const Icons = {
-	delete: <DeleteIcon />,
-	update: <PermContactCalendarIcon />,
-	call: <CallIcon />,
-	email: <EmailIcon />,
-	aadhar: <FingerprintIcon />,
-	pan: <BadgeIcon />,
-	back: <ChevronLeftIcon />,
-	person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
-	personIcon: <PersonIcon />,
-	addUser: <PersonAddIcon style={{ marginRight: "4px" }} />,
-	upload: <UploadIcon />,
-	download: <DownloadIcon />,
-	location: <PinDropIcon />,
-	workPlace: <ApartmentIcon />,
-	employmentType: <Diversity2Icon />,
-	bussiness: <BusinessIcon />,
-	salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
-	smallRupee: (
-		<CurrencyRupeeIcon
-			style={{ marginTop: -5, width: "1rem", height: "1rem" }}
-		/>
-	),
-	searchWorld: <TravelExploreIcon />,
-	pin: <PushPinIcon />,
-	bank: <AccountBalanceIcon />,
-	account: <AccountBoxIcon />,
-	password: <LockIcon />,
-	next: <NavigateNextIcon />,
-	camera: <CameraAltIcon />,
-	login: <LoginIcon />,
-	logout: <LogoutIcon />,
-	edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
+  delete: <DeleteIcon />,
+  update: <PermContactCalendarIcon />,
+  call: <CallIcon />,
+  email: <EmailIcon />,
+  aadhar: <FingerprintIcon />,
+  pan: <BadgeIcon />,
+  back: <ChevronLeftIcon />,
+  person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
+  personIcon: <PersonIcon />,
+  addUser: <PersonAddIcon style={{ marginRight: "4px" }} />,
+  upload: <UploadIcon />,
+  download: <DownloadIcon />,
+  location: <PinDropIcon />,
+  workPlace: <ApartmentIcon />,
+  employmentType: <Diversity2Icon />,
+  bussiness: <BusinessIcon />,
+  salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
+  smallRupee: (
+    <CurrencyRupeeIcon
+      style={{ marginTop: -5, width: "1rem", height: "1rem" }}
+    />
+  ),
+  searchWorld: <TravelExploreIcon />,
+  pin: <PushPinIcon />,
+  bank: <AccountBalanceIcon />,
+  account: <AccountBoxIcon />,
+  password: <LockIcon />,
+  next: <NavigateNextIcon />,
+  camera: <CameraAltIcon />,
+  login: <LoginIcon />,
+  logout: <LogoutIcon />,
+  edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
+  roi: <PercentIcon />,
+  tenure: <AccessTimeIcon />,
+  agent: <SupportAgentIcon />,
 };

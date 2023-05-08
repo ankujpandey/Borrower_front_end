@@ -333,6 +333,40 @@ function UserDetails(props) {
                           </li>
                         </ul>
 
+                        <h3 className="menu-title fs-3 mt-4 fw-bold">
+                          Loan Details
+                        </h3>
+
+                        <ul className="list-group ">
+                          <li className="list-group-item">
+                            {Icons.salary} {user.amount}
+                            <span className="float-end text-secondary">
+                              Amount
+                            </span>
+                          </li>
+
+                          <li className="list-group-item">
+                            {Icons.roi} {user.rate_of_interest}
+                            <span className="float-end text-secondary">
+                              Rate of Interest
+                            </span>
+                          </li>
+
+                          <li className="list-group-item">
+                            {Icons.tenure} {user.tenure}
+                            <span className="float-end text-secondary">
+                              Tenure
+                            </span>
+                          </li>
+
+                          <li className="list-group-item">
+                            {Icons.agent} {user.AgentName}
+                            <span className="float-end text-secondary">
+                              Assigned To
+                            </span>
+                          </li>
+                        </ul>
+
                         <div className="row justify-content-center mt-5 mb-2">
                           <div className="col-3">
                             <button

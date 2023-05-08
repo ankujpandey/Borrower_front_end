@@ -30,7 +30,7 @@ function PanCardDetails(props) {
       //   "response__-------------->>>>>",
       //   response.data.data.verification.passed
       // );
-      if (!response.data.data.verification.passed) {
+      if (response.data.data.verification.passed) {
         alert("PAN Authentication Failed!");
         setPassed(false);
       } else {
@@ -45,14 +45,16 @@ function PanCardDetails(props) {
     console.log(response);
   };
 
-  const updateLoanStatus = async () => {
+  const updateLoanStatus = async (e) => {
+    e.preventDefault();
+
     const config = {
       method: "post",
       url: `http://localhost:4000/api/v1/updateLoanStatus`,
-      headers: { "Content-Type": "multipart/form-data", authorization: token },
+      headers: { "Content-Type": "application/json", authorization: token },
       data: {
-        uid: user.userName.uid,
-        Loan_status: 1100,
+        uid: user?.userName?.uid,
+        Loan_state: 1100,
       },
     };
 
@@ -60,6 +62,7 @@ function PanCardDetails(props) {
 
     if ((response.status = 201)) {
       navigate("/dashboard");
+      console.log(response);
       setPassed(false);
     } else {
       alert("Something went wrong");
@@ -94,7 +97,7 @@ function PanCardDetails(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           PAN Card Upload
         </h6>
-        <h2 className="mt-2">Please uplod your PAN...</h2>
+        <h2 className="mt-2">Please upload your PAN...</h2>
       </div>
 
       <div className="container px-lg-5">
@@ -106,7 +109,7 @@ function PanCardDetails(props) {
             >
               <form
                 action=""
-                onSubmit={(e) => handlesubmit(e)}
+                // onSubmit={(e) => handlesubmit(e)}
                 className="needs-validation"
                 noValidate
               >
@@ -137,8 +140,8 @@ function PanCardDetails(props) {
                     <div className={`col-4 ${loading ? "row-loader" : ""}`}>
                       <button
                         className="btn btn-primary w-100 py-3 btn-primary"
-                        onClick={() => {
-                          updateLoanStatus();
+                        onClick={(event) => {
+                          updateLoanStatus(event);
                         }}
                       >
                         Next {Icons.next}
@@ -149,6 +152,9 @@ function PanCardDetails(props) {
                       <button
                         type="submit"
                         className="btn btn-primary w-100 py-3 btn-primary"
+                        onClick={(event) => {
+                          handlesubmit(event);
+                        }}
                       >
                         {Icons.upload} Upload
                       </button>

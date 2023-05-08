@@ -9,7 +9,7 @@ function Dashboard(props) {
   const { user, token } = useContext(UserContext);
   const [loanStatus, setLoanStatus] = useState(null);
   const uid = user.userName.uid;
-  // console.log("uid", uid);
+  console.log("token", token);
 
   const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
 
@@ -27,7 +27,7 @@ function Dashboard(props) {
     let response = await ApiCall(config);
     if (response?.status == 201) {
       console.log(response?.data?.data);
-      setLoanStatus(response.data.data.Loan_state);
+      setLoanStatus(response?.data?.data?.Loan_state);
       console.log(loanStatus);
     }
   };
