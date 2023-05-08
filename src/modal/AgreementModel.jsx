@@ -30,7 +30,16 @@ function AgreementModel(props) {
               aria-label="Close"
             />
           </div>
-          <div className="modal-body">
+          <div
+            className="modal-body"
+            style={{
+              height: "70vh",
+              width: "770px",
+              // border: "1px solid #ccc",
+              // font: "16px/26px Georgia, Garamond, Serif",
+              overflow: "auto",
+            }}
+          >
             <div>
               <p>
                 These Master Terms and Conditions of the Loan Agreement ("
