@@ -9,6 +9,7 @@ function AadharUploadComponent(props) {
 	const { image } = useContext(UserImageContext);
 	const { user, token } = useContext(UserContext);
 	const [passed, setPassed] = useState(false);
+	const [notPassed, setNotPassed] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -41,11 +42,11 @@ function AadharUploadComponent(props) {
 		if (response.status === 201) {
 			setLoading(false);
 			if (response.data.data.authentication.score < 0.35) {
-				alert("Aadhaar Authentication Failed!");
 				setPassed(false);
+				setNotPassed(true);
 			} else {
-				alert("Aadhaar Authentication Passed!");
 				setPassed(true);
+				setNotPassed(false);
 			}
 		}
 
@@ -87,7 +88,9 @@ function AadharUploadComponent(props) {
 				<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 					<div className="form-floating">
 						<input
-							className="form-control"
+							className={`form-control ${
+								notPassed ? "is-invalid" : passed ? "is-valid" : ""
+							}`}
 							type="file"
 							id="aadharfrontfile"
 							onChange={(e) => {
@@ -104,7 +107,9 @@ function AadharUploadComponent(props) {
 				<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 					<div className="form-floating">
 						<input
-							className="form-control"
+							className={`form-control ${
+								notPassed ? "is-invalid" : passed ? "is-valid" : ""
+							}`}
 							type="file"
 							id="aadharbackendsidefile"
 							onChange={(e) => {
@@ -123,16 +128,42 @@ function AadharUploadComponent(props) {
 			 	--------------------------------------------------------*/}
 
 				{passed ? (
-					<div className={`col-4 ${loading ? "row-loader" : ""}`}>
-						<button
-							className="btn btn-primary w-100 py-3 btn-primary"
-							onClick={() => {
-								navigate("/bank-details");
-								setPassed(false);
-							}}>
-							Next{Icons.next}
-						</button>
-					</div>
+					<>
+						<div className="form-floating mt-3">
+							<div className="alert alert-success m-0" role="alert">
+								{Icons.success}
+								<div className="mt-0 ">Verification Passed!</div>
+							</div>
+						</div>
+						<div className={`col-4 ${loading ? "row-loader" : ""}`}>
+							<button
+								className="btn btn-primary w-100 py-3 btn-primary"
+								onClick={() => {
+									navigate("/bank-details");
+									setPassed(false);
+								}}>
+								Next{Icons.next}
+							</button>
+						</div>
+					</>
+				) : notPassed ? (
+					<>
+						<div className="form-floating mt-3">
+							<div className="alert alert-danger m-0" role="alert">
+								{Icons.error}
+								<div className="mt-0 ">
+									It seems that the document You provided is not valid.
+								</div>
+							</div>
+						</div>
+						<div className={`col-4 ${loading ? "row-loader" : ""}`}>
+							<button
+								type="submit"
+								className="btn btn-primary w-100 py-3 btn-primary">
+								{Icons.upload} Upload
+							</button>
+						</div>
+					</>
 				) : (
 					<div className={`col-4 ${loading ? "row-loader" : ""}`}>
 						<button

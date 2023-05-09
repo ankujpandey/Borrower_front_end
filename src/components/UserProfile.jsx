@@ -22,7 +22,7 @@ function UserProfile(props) {
 	const fetchData = async () => {
 		let response = await ApiCall(config);
 		if (response.status === 201) {
-			console.log(response.data.data[0]);
+			console.log(response?.data?.data[0]);
 			setUserData(response?.data?.data[0]);
 		} else {
 			alert("Something went wrong!!!");
@@ -50,7 +50,7 @@ function UserProfile(props) {
 	};
 
 	return (
-		<div className="container px-lg-5">
+		<div className="container dashboard-card-border px-lg-5">
 			<div className="row m-5">
 				<div className="col-12">
 					<h4>Personal Details</h4>

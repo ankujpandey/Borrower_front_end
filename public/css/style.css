@@ -682,6 +682,7 @@ h6,
 .round-nav .nav-btns .nav-link a:hover {
 	color: #d1d2ff;
 	background: white;
+	font-size: 13px;
 }
 
 .nav-link.active::before {
@@ -717,6 +718,17 @@ h6,
 	border-bottom-left-radius: 20px;
 }
 
+.dashboard-card-border {
+	height: 86vh;
+	/* width: "500px"; */
+	overflow: auto;
+}
+
+.modals-card-border {
+	height: 65vh;
+	overflow: auto;
+}
+
 /* table */
 
 .table-without-line {
@@ -733,3 +745,17 @@ h6,
 	vertical-align: top;
 	border-color: #dee2e6;
 }
+
+/* Alert */
+.alert {
+	position: relative;
+	display: flex;
+	padding: 0.5rem 1rem;
+	margin: 10px;
+	margin-bottom: 1rem;
+	border: 1px solid transparent;
+	border-radius: 10px;
+	justify-content: center;
+}
+
+/*  */

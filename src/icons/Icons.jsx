@@ -24,6 +24,10 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import LoginIcon from "@mui/icons-material/Login";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
+import WarningAmberIcon from "@mui/icons-material/WarningAmber";
+import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import TaskAltIcon from "@mui/icons-material/TaskAlt";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -53,9 +57,25 @@ export const Icons = {
 	bank: <AccountBalanceIcon />,
 	account: <AccountBoxIcon />,
 	password: <LockIcon />,
-	next: <NavigateNextIcon />,
+	next: <NavigateNextIcon style={{ marginTop: -2 }} />,
 	camera: <CameraAltIcon />,
 	login: <LoginIcon />,
 	logout: <LogoutIcon />,
 	edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
+	warning: (
+		<WarningAmberIcon
+			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+		/>
+	),
+	error: (
+		<ReportGmailerrorredIcon
+			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+		/>
+	),
+	info: <InfoOutlinedIcon />,
+	success: (
+		<TaskAltIcon
+			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+		/>
+	),
 };

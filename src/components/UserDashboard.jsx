@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import RegisteredDetails from "./RegisteredDetails";
-import LoanStatus from "./LoanStatus";
+import LoanOverview from "./LoanOverview";
 import UserProfile from "./UserProfile";
+import LoanProposal from "./LoanProposal";
 
-function UserDashboard({ loanStatus }) {
-	console.log(loanStatus);
+function UserDashboard({ uid }) {
+	console.log(uid);
 	const [profilePage, setProfilePage] = useState(true);
-	const [statusPage, setStatusPage] = useState(false);
+	const [loanStatus, setLoanStatus] = useState(false);
+	const [loanOverview, setLoanOverview] = useState(false);
 	const [emiPage, setEmiPage] = useState(false);
 	const [passBookPage, setPassBookPage] = useState(false);
 	const [loanDetailsPage, setLoanDetailsPage] = useState(false);
@@ -34,7 +36,8 @@ function UserDashboard({ loanStatus }) {
 										aria-current="page"
 										onClick={() => {
 											setProfilePage(true);
-											setStatusPage(false);
+											setLoanOverview(false);
+											setLoanStatus(false);
 											setEmiPage(false);
 											setPassBookPage(false);
 											setLoanDetailsPage(false);
@@ -45,24 +48,40 @@ function UserDashboard({ loanStatus }) {
 										</span>
 									</a>
 									<a
-										className={`nav-link ${statusPage ? "active" : ""}`}
+										className={`nav-link ${loanOverview ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
 											setEmiPage(false);
+											setLoanStatus(false);
 											setPassBookPage(false);
 											setLoanDetailsPage(false);
-											setStatusPage(true);
+											setLoanOverview(true);
 										}}
 										href="#">
-										<span className={`${statusPage ? "enable" : ""}`}>
-											Loan Status
+										<span className={`${loanOverview ? "enable" : ""}`}>
+											Loan Overview
+										</span>
+									</a>
+									<a
+										className={`nav-link ${loanStatus ? "active" : ""}`}
+										onClick={() => {
+											setProfilePage(false);
+											setLoanOverview(false);
+											setEmiPage(false);
+											setPassBookPage(false);
+											setLoanDetailsPage(false);
+											setLoanStatus(true);
+										}}>
+										<span className={`${loanStatus ? "enable" : ""}`}>
+											Loan Proposal
 										</span>
 									</a>
 									<a
 										className={`nav-link ${emiPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
-											setStatusPage(false);
+											setLoanOverview(false);
+											setLoanStatus(false);
 											setPassBookPage(false);
 											setLoanDetailsPage(false);
 											setEmiPage(true);
@@ -76,7 +95,8 @@ function UserDashboard({ loanStatus }) {
 										className={`nav-link ${passBookPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
-											setStatusPage(false);
+											setLoanOverview(false);
+											setLoanStatus(false);
 											setEmiPage(false);
 											setLoanDetailsPage(false);
 											setPassBookPage(true);
@@ -89,7 +109,8 @@ function UserDashboard({ loanStatus }) {
 										className={`nav-link ${loanDetailsPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
-											setStatusPage(false);
+											setLoanOverview(false);
+											setLoanStatus(false);
 											setEmiPage(false);
 											setPassBookPage(false);
 											setLoanDetailsPage(true);
@@ -106,17 +127,17 @@ function UserDashboard({ loanStatus }) {
 								</div>
 							) : null}
 
-							{statusPage ? (
+							{loanOverview ? (
 								<div className="col-10">
-									<LoanStatus loanStatus={loanStatus} />
+									<LoanOverview uid={uid} />
 								</div>
 							) : null}
 
-							{/* {profilePage ? (
+							{loanStatus ? (
 								<div className="col-10">
-									<UserProfile loanStatus={loanStatus} />
+									<LoanProposal />
 								</div>
-							) : null} */}
+							) : null}
 						</div>
 					</div>
 				</div>
