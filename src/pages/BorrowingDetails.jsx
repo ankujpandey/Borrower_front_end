@@ -103,17 +103,17 @@ function BorrowingDetails() {
                             ? "is-valid"
                             : ""
                         }`}
-                        name="amount"
-                        id="amount"
-                        placeholder="amount"
-                        value={values.amount}
+                        name="amountAsked"
+                        id="amountAsked"
+                        placeholder="amountAsked"
+                        value={values.amountAsked}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <label htmlFor="amount">Amount</label>
-                      {errors.amount && touched.amount ? (
+                      <label htmlFor="amountAsked">Amount</label>
+                      {errors.amountAsked && touched.amountAsked ? (
                         <div className="form-error form-validation-warning text-danger">
-                          {errors.amount}
+                          {errors.amountAsked}
                         </div>
                       ) : null}
                     </div>
