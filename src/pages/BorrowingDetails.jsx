@@ -3,10 +3,10 @@ import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { BorrowingInitialValues, BorrowingSchema } from "../schemas";
 import { UserContext } from "../context/UserContext";
-import { ApiCall } from "../functions/ApiCall";
 
 function BorrowingDetails() {
   const { user, token } = useContext(UserContext);
+  console.log("user----", user);
 
   const url = "/dashboard";
   const api = "http://localhost:4000/api/v1/createLoan";
@@ -21,6 +21,7 @@ function BorrowingDetails() {
     );
 
   values.uid = user?.signUp?.uid;
+  values.Loan_state = "1200";
 
   return (
     <div>
