@@ -46,14 +46,16 @@ function PanCardDetails(props) {
 		console.log(response);
 	};
 
-	const updateLoanStatus = async () => {
+	const updateLoanStatus = async (e) => {
+		e.preventDefault();
+
 		const config = {
 			method: "post",
 			url: `http://localhost:4000/api/v1/updateLoanStatus`,
-			headers: { "Content-Type": "multipart/form-data", authorization: token },
+			headers: { "Content-Type": "application/json", authorization: token },
 			data: {
-				uid: user.userName.uid,
-				Loan_status: 1100,
+				uid: user?.userName?.uid,
+				Loan_state: 1100,
 			},
 		};
 
@@ -61,6 +63,7 @@ function PanCardDetails(props) {
 
 		if ((response.status = 201)) {
 			navigate("/dashboard");
+			console.log(response);
 			setPassed(false);
 		} else {
 			alert("Something went wrong");

@@ -26,7 +26,7 @@ function LoginComponent(props) {
 			if (response.status === 201) {
 				// setFlag(true);
 
-				console.log(response.data);
+				console.log(response.data.data.result);
 
 				setUser(response?.data?.data.result);
 				setToken(response?.data?.data?.auth);
@@ -34,12 +34,14 @@ function LoginComponent(props) {
 
 				if (response?.data?.data?.result?.signUp) {
 					navigate("/dashboard");
+				} else if (response?.data?.data?.result?.jobAssignees_id) {
+					navigate("/agent-dashboard");
 				} else {
 					navigate("/admin-dashboard");
 				}
 
-				setEmail("");
-				setPassword("");
+				// setEmail("");
+				// setPassword("");
 			} else {
 				setInvalidInfo(true);
 			}
