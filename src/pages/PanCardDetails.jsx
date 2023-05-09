@@ -6,13 +6,14 @@ import { Icons } from "../icons/Icons";
 
 function PanCardDetails(props) {
 	const { user, token } = useContext(UserContext);
-	let formData = new FormData();
 	const [passed, setPassed] = useState(false);
 	const [notPassed, setNotPassed] = useState(false);
 	const [loading, setLoading] = useState(false);
 	const navigate = useNavigate();
+	let formData = new FormData();
 
 	const handlesubmit = async (e) => {
+		console.log("handle submit called");
 		e.preventDefault();
 		setLoading(true);
 
@@ -23,7 +24,7 @@ function PanCardDetails(props) {
 			data: formData,
 		};
 
-		let response = await ApiCall(config);
+		const response = await ApiCall(config);
 
 		if (response.status === 201) {
 			setLoading(false);
@@ -48,6 +49,7 @@ function PanCardDetails(props) {
 
 	const updateLoanStatus = async (e) => {
 		e.preventDefault();
+		console.log("update loan status called");
 
 		const config = {
 			method: "post",
@@ -59,7 +61,7 @@ function PanCardDetails(props) {
 			},
 		};
 
-		let response = await ApiCall(config);
+		const response = await ApiCall(config);
 
 		if ((response.status = 201)) {
 			navigate("/dashboard");
@@ -147,8 +149,8 @@ function PanCardDetails(props) {
 											<div className={`col-4 ${loading ? "row-loader" : ""}`}>
 												<button
 													className="btn btn-primary w-100 py-3 btn-primary"
-													onClick={() => {
-														updateLoanStatus();
+													onClick={(e) => {
+														updateLoanStatus(e);
 													}}>
 													Next {Icons.next}
 												</button>
