@@ -15,6 +15,7 @@ function UserDetails(props) {
   const [userDetails, setUserDetails] = useState({});
   const [userImage, setUserImage] = useState();
   const [isEditing, setIsEditing] = useState(false);
+  const [verifyingLoan, setVerifyingLoan] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -164,7 +165,8 @@ function UserDetails(props) {
       </div>
       {isEditing ? (
         <UpdateUser user={userDetails} setIsEditing={setIsEditing} />
-      ) : (
+      ) : verifyingLoan ? // <VerifyLoan id={id} />
+      null : (
         <>
           <div className="container px-lg-5">
             <div className="row justify-content-center">
@@ -418,8 +420,7 @@ function UserDetails(props) {
                               <button
                                 type="button"
                                 className="btn btn-primary w-100 py-3 btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target="#verifyLoan"
+                                onClick={() => setVerifyingLoan(true)}
                               >
                                 {Icons.salary} Verify Loan
                               </button>
@@ -432,7 +433,6 @@ function UserDetails(props) {
                 </div>
               </div>
             </div>
-            <VerifyLoan id={id} />
           </div>
         </>
       )}

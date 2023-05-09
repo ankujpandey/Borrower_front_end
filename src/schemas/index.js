@@ -50,17 +50,32 @@ export const AddressInitialValues = {
 // ---------------------------------------
 
 export const BorrowingSchema = Yup.object({
-  amount: Yup.string()
+  amountAsked: Yup.string()
     .matches(/([0-9])/, "Please enter a valid amount")
     .max(6)
     .required("Amount can't be empty"),
 
-  tenure: Yup.string()
+  tenureAsked: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid time")
     .max(2)
     .required("Tenure can't be empty"),
 
-  rate_of_interest: Yup.string()
+  roiAsked: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid Rate of Interest")
+    .min(1)
+    .max(2)
+    .required("Rate of Interest can't be empty"),
+  amountApproved: Yup.string()
+    .matches(/([0-9])/, "Please enter a valid amount")
+    .max(6)
+    .required("Amount can't be empty"),
+
+  tenureApproved: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid time")
+    .max(2)
+    .required("Tenure can't be empty"),
+
+  minRoiApproved: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid Rate of Interest")
     .min(1)
     .max(2)
@@ -68,9 +83,12 @@ export const BorrowingSchema = Yup.object({
 });
 
 export const BorrowingInitialValues = {
-  amount: "",
-  tenure: "",
-  rate_of_interest: "",
+  amountAsked: "",
+  tenureAsked: "",
+  roiAsked: "",
+  amountApproved: "",
+  tenureApproved: "",
+  minRoiApproved: "",
 };
 
 // ---------------------------------------
