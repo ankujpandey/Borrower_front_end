@@ -18,10 +18,12 @@ function Dashboard(props) {
     }
   }, [user]);
 
+  // useEffect(() => {}, [loanStatus]);
+
   const fetchLoanDetails = async () => {
     const config = {
       method: "get",
-      url: `http://localhost:4000/api/v1/getLoanStatus/${user?.userName?.uid}`,
+      url: `http://localhost:4000/api/v1/getLoanStatus/${user.userName.uid}`,
       headers: { "Content-Type": "application/json", authorization: token },
     };
 
@@ -64,7 +66,8 @@ function Dashboard(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
-        {user && loanStatus === 1200 ? null : user?.userName?.contact ? (
+        {user && loanStatus && loanStatus === "1200" ? null : user?.userName
+            ?.contact ? (
           <h2 className="mt-2">
             Congratulations! Your registration is completed.
           </h2>
@@ -73,7 +76,7 @@ function Dashboard(props) {
         )}
       </div>
 
-      {user && loanStatus === 1200 ? (
+      {user && loanStatus && loanStatus === "1200" ? (
         <UserDashboard uid={user?.userName?.uid} />
       ) : user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />

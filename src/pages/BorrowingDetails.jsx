@@ -69,43 +69,17 @@ function BorrowingDetails() {
                   <div className="col-md-12">
                     <div className="form-floating">
                       <input
-                        className={`form-control ${
-                          errors.rate_of_interest && touched.rate_of_interest
-                            ? "is-invalid"
-                            : touched.rate_of_interest
-                            ? "is-valid"
-                            : ""
-                        }`}
-                        name="rate_of_interest"
-                        id="rate_of_interest"
-                        placeholder="Rate of Interest"
-                        value={values.rate_of_interest}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                      <label htmlFor="rate_of_interest">Rate of Interest</label>
-                      {errors.rate_of_interest && touched.rate_of_interest ? (
-                        <div className="form-error form-validation-warning text-danger">
-                          {errors.rate_of_interest}
-                        </div>
-                      ) : null}
-                    </div>
-                  </div>
-
-                  <div className="col-md-12">
-                    <div className="form-floating">
-                      <input
                         type="text"
                         className={`form-control ${
-                          errors.amount && touched.amount
+                          errors.amountAsked && touched.amountAsked
                             ? "is-invalid"
-                            : touched.amount
+                            : touched.amountAsked
                             ? "is-valid"
                             : ""
                         }`}
                         name="amountAsked"
                         id="amountAsked"
-                        placeholder="amountAsked"
+                        placeholder="amount"
                         value={values.amountAsked}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -122,25 +96,51 @@ function BorrowingDetails() {
                   <div className="col-md-12">
                     <div className="form-floating">
                       <input
-                        type="text"
                         className={`form-control ${
-                          errors.tenure && touched.tenure
+                          errors.roiAsked && touched.roiAsked
                             ? "is-invalid"
-                            : touched.tenure
+                            : touched.roiAsked
                             ? "is-valid"
                             : ""
                         }`}
-                        name="tenure"
-                        id="tenure"
-                        placeholder="tenure"
-                        value={values.tenure}
+                        name="roiAsked"
+                        id="roiAsked"
+                        placeholder="Rate of Interest"
+                        value={values.roiAsked}
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
-                      <label htmlFor="tenure">Tenure(in months)</label>
-                      {errors.tenure && touched.tenure ? (
+                      <label htmlFor="roiAsked">Rate of Interest</label>
+                      {errors.roiAsked && touched.roiAsked ? (
                         <div className="form-error form-validation-warning text-danger">
-                          {errors.tenure}
+                          {errors.roiAsked}
+                        </div>
+                      ) : null}
+                    </div>
+                  </div>
+
+                  <div className="col-md-12">
+                    <div className="form-floating">
+                      <input
+                        type="text"
+                        className={`form-control ${
+                          errors.tenureAsked && touched.tenureAsked
+                            ? "is-invalid"
+                            : touched.tenureAsked
+                            ? "is-valid"
+                            : ""
+                        }`}
+                        name="tenureAsked"
+                        id="tenureAsked"
+                        placeholder="tenure"
+                        value={values.tenureAsked}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                      <label htmlFor="tenureAsked">Tenure(in months)</label>
+                      {errors.tenureAsked && touched.tenureAsked ? (
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.tenureAsked}
                         </div>
                       ) : null}
                     </div>
