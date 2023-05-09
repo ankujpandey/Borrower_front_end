@@ -13,6 +13,8 @@ function UserDashboard({ uid }) {
 	const [passBookPage, setPassBookPage] = useState(false);
 	const [loanDetailsPage, setLoanDetailsPage] = useState(false);
 
+	console.log("UserDashboard Called");
+
 	// useEffect(() => {}, [profilePage]);
 
 	return (

@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { Icons } from "../icons/Icons";
 
 function PanCardDetails(props) {
+<<<<<<< HEAD
   const { user, token } = useContext(UserContext);
   let formData = new FormData();
   const [passed, setPassed] = useState(false);
@@ -15,6 +16,19 @@ function PanCardDetails(props) {
   const handlesubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+=======
+	const { user, token } = useContext(UserContext);
+	const [passed, setPassed] = useState(false);
+	const [notPassed, setNotPassed] = useState(false);
+	const [loading, setLoading] = useState(false);
+	const navigate = useNavigate();
+	let formData = new FormData();
+
+	const handlesubmit = async (e) => {
+		console.log("handle submit called");
+		e.preventDefault();
+		setLoading(true);
+>>>>>>> 6d1669c9fccd6ac393243428aae8ae9692d077f7
 
     const config = {
       method: "post",
@@ -23,7 +37,11 @@ function PanCardDetails(props) {
       data: formData,
     };
 
+<<<<<<< HEAD
     let response = await ApiCall(config);
+=======
+		const response = await ApiCall(config);
+>>>>>>> 6d1669c9fccd6ac393243428aae8ae9692d077f7
 
     if (response.status === 201) {
       setLoading(false);
@@ -46,8 +64,14 @@ function PanCardDetails(props) {
     console.log(response);
   };
 
+<<<<<<< HEAD
   const updateLoanStatus = async (e) => {
     e.preventDefault();
+=======
+	const updateLoanStatus = async (e) => {
+		e.preventDefault();
+		console.log("update loan status called");
+>>>>>>> 6d1669c9fccd6ac393243428aae8ae9692d077f7
 
     const config = {
       method: "post",
@@ -59,7 +83,11 @@ function PanCardDetails(props) {
       },
     };
 
+<<<<<<< HEAD
     let response = await ApiCall(config);
+=======
+		const response = await ApiCall(config);
+>>>>>>> 6d1669c9fccd6ac393243428aae8ae9692d077f7
 
     if ((response.status = 201)) {
       navigate("/dashboard");
@@ -139,6 +167,7 @@ function PanCardDetails(props) {
 										Upload Button
 			 						--------------------------------------------------------*/}
 
+<<<<<<< HEAD
                   {passed ? (
                     <>
                       <div className="form-floating mt-3">
@@ -196,6 +225,62 @@ function PanCardDetails(props) {
       </div>
     </div>
   );
+=======
+									{passed ? (
+										<>
+											<div className="form-floating mt-3">
+												<div className="alert alert-success m-0" role="alert">
+													{Icons.success}
+													<div className="mt-0 ">Verification Passed!</div>
+												</div>
+											</div>
+											<div className={`col-4 ${loading ? "row-loader" : ""}`}>
+												<button
+													className="btn btn-primary w-100 py-3 btn-primary"
+													onClick={(e) => {
+														updateLoanStatus(e);
+													}}>
+													Next {Icons.next}
+												</button>
+											</div>
+										</>
+									) : notPassed ? (
+										<>
+											<div className="form-floating mt-3">
+												<div className="alert alert-danger m-0" role="alert">
+													{Icons.error}
+													<div className="mt-0 ">
+														It seems that the document You provided is not
+														valid.
+													</div>
+												</div>
+											</div>
+											<div className={`col-4 ${loading ? "row-loader" : ""}`}>
+												<button
+													type="submit"
+													className="btn btn-primary w-100 py-3 btn-primary">
+													{Icons.upload} Upload
+												</button>
+											</div>
+										</>
+									) : (
+										<div className={`col-4 ${loading ? "row-loader" : ""}`}>
+											<button
+												type="submit"
+												className="btn btn-primary w-100 py-3 btn-primary">
+												{Icons.upload} Upload
+											</button>
+										</div>
+									)}
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	);
+>>>>>>> 6d1669c9fccd6ac393243428aae8ae9692d077f7
 }
 
 export default PanCardDetails;

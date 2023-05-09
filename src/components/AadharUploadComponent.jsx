@@ -65,14 +65,6 @@ function AadharUploadComponent(props) {
 		);
 	}
 
-	// if (loading) {
-	// 	return (
-	// 		<div className="d-flex justify-content-center">
-	// 			<div className="loader"></div>
-	// 		</div>
-	// 	);
-	// }
-
 	return (
 		// ----------------------------------------------------
 		// 	Input Aadhaar
