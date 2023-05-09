@@ -57,7 +57,7 @@ function LoanOverview({ uid }) {
 								</tr>
 								<tr>
 									<th>
-										<p>Duration: </p>
+										<p>Tenure: </p>
 									</th>
 									<td>
 										<p>{loanData?.tenureAsked} months</p>
@@ -87,38 +87,60 @@ function LoanOverview({ uid }) {
 									<th>
 										<p>Amount Approved: </p>
 									</th>
-									<td>None</td>
+									<td>
+										{loanData?.amountApproved === null ? (
+											<p>Pending</p>
+										) : (
+											<p>{loanData?.amountApproved}</p>
+										)}
+									</td>
 								</tr>
 								<tr>
 									<th>
-										<p>Duration Approved: </p>
+										<p>Tenure Approved: </p>
 									</th>
-									<td>None</td>
+									<td>
+										{loanData?.tenureApproved === null ? (
+											<p>Pending</p>
+										) : (
+											<p>{loanData?.tenureApproved}</p>
+										)}
+									</td>
 								</tr>
 								<tr>
 									<th>
 										<p>Minimum interest rate Approved: </p>
 									</th>
-									<td>None</td>
+									<td>
+										{loanData?.minRoiApproved === null ? (
+											<p>Pending</p>
+										) : (
+											<p>{loanData?.minRoiApproved}</p>
+										)}
+									</td>
 								</tr>
-								<tr>
+								{/* <tr>
 									<th>
 										<p>Maximum interest rate Approved: </p>
 									</th>
 									<td>None</td>
-								</tr>
-								<tr>
+								</tr> */}
+								{/* <tr>
 									<th>
 										<p>Amount Funded: </p>
 									</th>
-									<td>None</td>
-								</tr>
-								<tr>
+									<td>{loanData?.minRoiApproved === null ? (
+											<p>Pending</p>
+										) : (
+											<p>{loanData?.minRoiApproved}</p>
+										)}</td>
+								</tr> */}
+								{/* <tr>
 									<th>
 										<p>Remaining Amount: </p>
 									</th>
 									<td>None</td>
-								</tr>
+								</tr> */}
 								<tr>
 									<th>
 										<p>Amount Disbursed: </p>

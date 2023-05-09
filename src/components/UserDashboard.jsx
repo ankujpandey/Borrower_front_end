@@ -18,13 +18,7 @@ function UserDashboard({ uid }) {
 	// useEffect(() => {}, [profilePage]);
 
 	return (
-		<div
-			className="container px-lg-9 scrollspy-example bg-body-tertiary p-3 rounded-2"
-			data-bs-spy="scroll"
-			data-bs-target="#navbar-example2"
-			data-bs-root-margin="0px 0px -40%"
-			data-bs-smooth-scroll="true"
-			tabindex="0">
+		<div className="container px-lg-9 scrollspy-example bg-body-tertiary p-3 rounded-2">
 			<div className="row justify-content-center">
 				<div className="col-lg-12">
 					<div

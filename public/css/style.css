@@ -659,6 +659,10 @@ h6,
 	margin-top: -6px;
 }
 
+svg {
+	margin-top: -5px;
+}
+
 /* Dashboard */
 
 .round-nav {
