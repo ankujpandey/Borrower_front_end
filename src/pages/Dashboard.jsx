@@ -17,7 +17,7 @@ function Dashboard(props) {
 		}
 	}, [user]);
 
-	useEffect(() => {}, [loanStatus]);
+	// useEffect(() => {}, [loanStatus]);
 
 	const fetchLoanDetails = async () => {
 		const config = {

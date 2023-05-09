@@ -51,19 +51,25 @@ function LoanOverview({ uid }) {
 									<th>
 										<p>Amount Requested: </p>
 									</th>
-									<td>{loanData?.amount}</td>
+									<td>
+										<p>{loanData?.amountAsked}</p>
+									</td>
 								</tr>
 								<tr>
 									<th>
 										<p>Duration: </p>
 									</th>
-									<td>{loanData?.tenure} months</td>
+									<td>
+										<p>{loanData?.tenureAsked} months</p>
+									</td>
 								</tr>
 								<tr>
 									<th>
 										<p>Rate of Interest Expected: </p>
 									</th>
-									<td>{loanData?.rate_of_interest} %</td>
+									<td>
+										<p>{loanData?.roiAsked} %</p>
+									</td>
 								</tr>
 								<tr>
 									<th>
