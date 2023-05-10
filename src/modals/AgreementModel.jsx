@@ -218,11 +218,11 @@ function AgreementModel({ loanData }) {
 								<tbody>
 									<tr>
 										<td>Loan Amount</td>
-										<td>{loanData.amountApproved}</td>
+										<td>{loanData?.amountApproved}</td>
 									</tr>
 									<tr>
 										<td>Loan Term (Months)</td>
-										<td>{loanData.tenureApproved}</td>
+										<td>{loanData?.tenureApproved}</td>
 									</tr>
 									<tr>
 										<td>Payments Per Year</td>
@@ -230,7 +230,7 @@ function AgreementModel({ loanData }) {
 									</tr>
 									<tr>
 										<td>Rate of Interest</td>
-										<td>{loanData.minRoiApproved} %</td>
+										<td>{loanData?.minRoiApproved} %</td>
 									</tr>
 									<tr>
 										<td>Collection Fee (On Outstanding Principal)</td>
@@ -309,7 +309,7 @@ function AgreementModel({ loanData }) {
 									className="form-check-input"
 									id="exampleCheck1"
 								/>
-								<label className="form-check-label" for="exampleCheck1">
+								<label className="form-check-label" htmlfor="exampleCheck1">
 									<p className="calculator-msg">
 										I have read the loan agreement including the loan key fact
 										statement and I consent to the same.

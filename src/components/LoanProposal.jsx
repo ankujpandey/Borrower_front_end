@@ -63,7 +63,7 @@ function LoanProposal({ uid }) {
 												<p>Amount: </p>
 											</th>
 											<td>
-												<p>{loanData.amountApproved}</p>
+												<p>{loanData?.amountApproved}</p>
 											</td>
 										</tr>
 										<tr>
@@ -71,7 +71,7 @@ function LoanProposal({ uid }) {
 												<p>ROI:</p>
 											</th>
 											<td>
-												<p>{loanData.minRoiApproved}</p>
+												<p>{loanData?.minRoiApproved}</p>
 											</td>
 										</tr>
 									</tbody>
@@ -80,7 +80,7 @@ function LoanProposal({ uid }) {
 							<hr className="mt-2 mb-1" />
 
 							<div
-								class="alert alert-warning d-flex align-items-center"
+								className="alert alert-warning d-flex align-items-center"
 								role="alert">
 								{Icons.warning}
 								<div>
