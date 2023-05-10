@@ -64,7 +64,7 @@ function Dashboard(props) {
 				<h6 className="position-relative d-inline text-primary ps-4">
 					Dash Board
 				</h6>
-				{user && loanStatus && loanStatus === "1200" ? null : user?.userName
+				{user && loanStatus && loanStatus > 1100 ? null : user?.userName
 						?.contact ? (
 					<h2 className="mt-2">
 						Congratulations! Your registration is completed.
@@ -74,7 +74,7 @@ function Dashboard(props) {
 				)}
 			</div>
 
-			{user && loanStatus && loanStatus === "1200" ? (
+			{user && loanStatus && loanStatus > 1100 ? (
 				<UserDashboard uid={user?.userName?.uid} />
 			) : user?.userName?.contact || updatedUser?.contact ? (
 				<RegisteredDetails />

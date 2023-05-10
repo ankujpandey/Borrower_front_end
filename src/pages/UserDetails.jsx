@@ -6,6 +6,7 @@ import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
 import VerifyLoan from "../components/VerifyLoan";
+import UpdateLoanDetails from "../components/UpdateLoanDetails";
 
 function UserDetails(props) {
 	const { id } = useParams();
@@ -15,6 +16,7 @@ function UserDetails(props) {
 	const [userDetails, setUserDetails] = useState({});
 	const [userImage, setUserImage] = useState();
 	const [isEditing, setIsEditing] = useState(false);
+	const [updateLoanDetails, setUpdateLoanDetail] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -164,6 +166,12 @@ function UserDetails(props) {
 			{/* Editing Page Component */}
 			{isEditing ? (
 				<UpdateUser user={userDetails} setIsEditing={setIsEditing} />
+			) : updateLoanDetails ? (
+				<UpdateLoanDetails
+					user={userDetails}
+					setUpdateLoanDetail={setUpdateLoanDetail}
+					setColor={setColor}
+				/>
 			) : (
 				<>
 					<div className="container px-lg-5">
@@ -422,8 +430,11 @@ function UserDetails(props) {
 															<button
 																type="button"
 																className="btn btn-primary w-100 py-3 btn-primary"
-																data-bs-toggle="modal"
-																data-bs-target="#verifyLoan">
+																// data-bs-toggle="modal"
+																// data-bs-target="#verifyLoan"
+																onClick={() => {
+																	setUpdateLoanDetail(true);
+																}}>
 																{Icons.salary} Verify Loan
 															</button>
 														</div>

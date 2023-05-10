@@ -74,6 +74,34 @@ export const BorrowingInitialValues = {
 };
 
 // ---------------------------------------
+//   For Borrowing Details (Verify Loan)
+// ---------------------------------------
+
+export const verifyLoan = Yup.object({
+	amountApproved: Yup.string()
+		.matches(/([0-9])/, "Please enter a valid amount")
+		.max(6)
+		.required("Amount can't be empty"),
+
+	minRoiApproved: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid time")
+		.max(2)
+		.required("Tenure can't be empty"),
+
+	tenureApproved: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Rate of Interest")
+		.min(1)
+		.max(2)
+		.required("Rate of Interest can't be empty"),
+});
+
+export const verifyLoanInitialValues = {
+	amountApproved: "",
+	minRoiApproved: "",
+	tenureApproved: "",
+};
+
+// ---------------------------------------
 //   For Bank Account Registration
 // ---------------------------------------
 

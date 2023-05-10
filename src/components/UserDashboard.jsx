@@ -131,7 +131,7 @@ function UserDashboard({ uid }) {
 
 							{loanStatus ? (
 								<div className="col-10">
-									<LoanProposal />
+									<LoanProposal uid={uid} />
 								</div>
 							) : null}
 						</div>

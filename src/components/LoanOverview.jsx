@@ -44,7 +44,7 @@ function LoanOverview({ uid }) {
 							You're Application is under process.
 						</p>
 					</div>
-					<div className="col-9">
+					<div className="col-10">
 						<table className="table-without-line">
 							<tbody>
 								<tr>
@@ -145,7 +145,9 @@ function LoanOverview({ uid }) {
 									<th>
 										<p>Amount Disbursed: </p>
 									</th>
-									<td>None</td>
+									<td>
+										<p>Pending</p>
+									</td>
 								</tr>
 								<tr>
 									<th>
@@ -154,6 +156,8 @@ function LoanOverview({ uid }) {
 									<td>
 										{loanData?.Loan_state === "1200" ? (
 											<p>Your request is under review.</p>
+										) : loanData?.Loan_state === "1300" ? (
+											<p>Loan Approved by Agent Please check loan Proposal</p>
 										) : (
 											<p>None</p>
 										)}
@@ -165,7 +169,7 @@ function LoanOverview({ uid }) {
 									</th>
 									<td>
 										<p>
-											{moment(loanData?.createdAt)
+											{moment(loanData?.updatedAt)
 												.utcOffset("+05:30")
 												.format("DD-MMM-YYYY HH:MM:SS")}
 										</p>
