@@ -28,6 +28,9 @@ import WarningAmberIcon from "@mui/icons-material/WarningAmber";
 import ReportGmailerrorredIcon from "@mui/icons-material/ReportGmailerrorred";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import PercentIcon from "@mui/icons-material/Percent";
+import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
+import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -78,4 +81,7 @@ export const Icons = {
 			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
 		/>
 	),
+	roi: <PercentIcon />,
+	tenure: <TimerOutlinedIcon />,
+	agent: <SupportAgentIcon />,
 };

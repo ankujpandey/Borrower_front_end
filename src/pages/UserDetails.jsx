@@ -5,7 +5,7 @@ import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
-import VerifyLoan from "../components/VerifyLoan";
+import UpdateLoanDetails from "../components/UpdateLoanDetails";
 
 function UserDetails(props) {
   const { id } = useParams();
@@ -15,7 +15,7 @@ function UserDetails(props) {
   const [userDetails, setUserDetails] = useState({});
   const [userImage, setUserImage] = useState();
   const [isEditing, setIsEditing] = useState(false);
-  const [verifyingLoan, setVerifyingLoan] = useState(false);
+  const [updateLoanDetails, setUpdateLoanDetail] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
@@ -163,10 +163,16 @@ function UserDetails(props) {
           </div>
         </div>
       </div>
+      {/* Editing Page Component */}
       {isEditing ? (
         <UpdateUser user={userDetails} setIsEditing={setIsEditing} />
-      ) : verifyingLoan ? // <VerifyLoan id={id} />
-      null : (
+      ) : updateLoanDetails ? (
+        <UpdateLoanDetails
+          user={userDetails}
+          setUpdateLoanDetail={setUpdateLoanDetail}
+          setColor={setColor}
+        />
+      ) : (
         <>
           <div className="container px-lg-5">
             <div className="row justify-content-center">
@@ -235,7 +241,9 @@ function UserDetails(props) {
                         </div>
 
                         <hr />
-
+                        {/* ------------------------------------------
+                            Personal Details Section
+                        ----------------------------------------------*/}
                         <h3 className="menu-title fs-3 mt-4 fw-bold">
                           Personal Details
                         </h3>
@@ -269,6 +277,9 @@ function UserDetails(props) {
                           </li>
                         </ul>
 
+                        {/* ------------------------------------------
+                            Employment Details Section
+                        ----------------------------------------------*/}
                         <h3 className="menu-title fs-3 mt-4 fw-bold">
                           Employment Details
                         </h3>
@@ -312,6 +323,9 @@ function UserDetails(props) {
                           </li>
                         </ul>
 
+                        {/* ------------------------------------------
+                            Bank Details Section
+                        ----------------------------------------------*/}
                         <h3 className="menu-title fs-3 mt-4 fw-bold">
                           Bank Details
                         </h3>
@@ -346,27 +360,30 @@ function UserDetails(props) {
                           </li>
                         </ul>
 
+                        {/* ------------------------------------------
+                            Loan Details Section
+                        ----------------------------------------------*/}
                         <h3 className="menu-title fs-3 mt-4 fw-bold">
                           Loan Details
                         </h3>
 
                         <ul className="list-group ">
                           <li className="list-group-item">
-                            {Icons.salary} {userDetails.amount}
+                            {Icons.salary} {userDetails.amountAsked}
                             <span className="float-end text-secondary">
                               Amount
                             </span>
                           </li>
 
                           <li className="list-group-item">
-                            {Icons.roi} {userDetails.rate_of_interest}
+                            {Icons.roi} {userDetails.roiAsked}
                             <span className="float-end text-secondary">
                               Rate of Interest
                             </span>
                           </li>
 
                           <li className="list-group-item">
-                            {Icons.tenure} {userDetails.tenure}
+                            {Icons.tenure} {userDetails.tenureAsked}
                             <span className="float-end text-secondary">
                               Tenure
                             </span>
@@ -420,7 +437,9 @@ function UserDetails(props) {
                               <button
                                 type="button"
                                 className="btn btn-primary w-100 py-3 btn-primary"
-                                onClick={() => setVerifyingLoan(true)}
+                                onClick={() => {
+                                  setUpdateLoanDetail(true);
+                                }}
                               >
                                 {Icons.salary} Verify Loan
                               </button>
