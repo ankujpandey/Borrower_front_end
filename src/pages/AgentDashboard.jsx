@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { Icons } from "../icons/Icons";
 
@@ -51,6 +51,37 @@ function AgentDashboard(props) {
 			alert("Something went wrong!!!");
 		}
 	};
+
+	// ---------------------------------------------------
+	//  update Loan Status on clicking verify loan button
+	// ------------------------------------------------------
+
+	const updateLoanStatus = async (id, state) => {
+		console.log(id);
+		console.log(state);
+		if (state < 1300) {
+			const config = {
+				method: "post",
+				url: `http://localhost:4000/api/v1/updateLoanStatus`,
+				headers: { "Content-Type": "application/json", authorization: token },
+				data: {
+					uid: id,
+					Loan_state: 1300,
+					updatedBy: "agent",
+				},
+			};
+			let response = await ApiCall(config);
+			if (response.status === 201) {
+				console.log(response);
+				navigate(`/users/${id}`);
+			} else {
+				alert("Something went wrong!!!");
+			}
+		} else {
+			navigate(`/users/${id}`);
+		}
+	};
+
 	// -----------------------------------------------
 	//  page changing
 	// -----------------------------------------------
@@ -158,13 +189,16 @@ function AgentDashboard(props) {
 								</td>
 
 								<td>
-									<Link to={`/users/${person?.uid}`}>
-										<button
-											type="button"
-											className="btn fs-6 btn-primary btn-sm">
-											View
-										</button>
-									</Link>
+									{/* <Link to={`/users/${person.uid}`}> */}
+									<button
+										type="button"
+										className="btn fs-6 btn-primary btn-sm"
+										onClick={() => {
+											updateLoanStatus(person.uid, person.Loan_state);
+										}}>
+										View
+									</button>
+									{/* </Link> */}
 								</td>
 							</tr>
 						))}

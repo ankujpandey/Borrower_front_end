@@ -12,7 +12,7 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 	//  Fetch User's all data
 	// -------------------------------------------
 
-	console.log(user);
+	// console.log(user);
 
 	const url = "/agent-dashboard";
 	const api = "http://localhost:4000/api/v1/updateLoanStatus";
@@ -21,6 +21,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 		useHandleValidation(verifyLoanInitialValues, verifyLoan, url, api, token);
 
 	values.uid = user?.uid;
+	values.Loan_state = 1400;
+	values.updatedBy = "agent";
 
 	return (
 		<>
