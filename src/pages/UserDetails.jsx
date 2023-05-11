@@ -5,7 +5,6 @@ import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
-import VerifyLoan from "../components/VerifyLoan";
 import UpdateLoanDetails from "../components/UpdateLoanDetails";
 
 function UserDetails(props) {
@@ -430,8 +429,6 @@ function UserDetails(props) {
 															<button
 																type="button"
 																className="btn btn-primary w-100 py-3 btn-primary"
-																// data-bs-toggle="modal"
-																// data-bs-target="#verifyLoan"
 																onClick={() => {
 																	setUpdateLoanDetail(true);
 																}}>
@@ -446,7 +443,6 @@ function UserDetails(props) {
 								</div>
 							</div>
 						</div>
-						<VerifyLoan id={id} />
 					</div>
 				</>
 			)}
