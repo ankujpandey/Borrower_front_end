@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserContext";
 
 function BorrowingDetails() {
   const { user, token } = useContext(UserContext);
-  console.log("user----", user);
+  // console.log("user----", user);
 
   const url = "/dashboard";
   const api = "http://localhost:4000/api/v1/createLoan";
@@ -17,7 +17,10 @@ function BorrowingDetails() {
       BorrowingSchema,
       url,
       api,
-      token
+      token,
+      false,
+      false,
+      true
     );
 
   values.uid = user?.signUp?.uid;
