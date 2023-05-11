@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-function AgreementModel(props) {
+function AgreementModel({ loanData }) {
 	const date = moment().format("DD-MMM-YYYY");
 	console.log(date);
 	return (
@@ -218,31 +218,27 @@ function AgreementModel(props) {
 								<tbody>
 									<tr>
 										<td>Loan Amount</td>
-										<td>200000</td>
+										<td>{loanData?.amountApproved}</td>
 									</tr>
 									<tr>
 										<td>Loan Term (Months)</td>
-										<td>36</td>
+										<td>{loanData?.tenureApproved}</td>
 									</tr>
 									<tr>
 										<td>Payments Per Year</td>
-										<td>12</td>
+										<td>1200</td>
 									</tr>
 									<tr>
 										<td>Rate of Interest</td>
-										<td>24.00%</td>
+										<td>{loanData?.minRoiApproved} %</td>
 									</tr>
 									<tr>
 										<td>Collection Fee (On Outstanding Principal)</td>
-										<td>12.00%</td>
-									</tr>
-									<tr>
-										<td>Moratorium Period EMI</td>
-										<td>0</td>
+										<td>12.00 %</td>
 									</tr>
 									<tr>
 										<td>Regular EMI</td>
-										<td>12</td>
+										<td>120</td>
 									</tr>
 									<tr>
 										<td>EMI due date</td>
@@ -313,7 +309,7 @@ function AgreementModel(props) {
 									className="form-check-input"
 									id="exampleCheck1"
 								/>
-								<label className="form-check-label" for="exampleCheck1">
+								<label className="form-check-label" htmlfor="exampleCheck1">
 									<p className="calculator-msg">
 										I have read the loan agreement including the loan key fact
 										statement and I consent to the same.
