@@ -21,34 +21,35 @@ import UserDetails from "./pages/UserDetails";
 import PanCardDetails from "./pages/PanCardDetails";
 import Footer from "./components/Footer";
 import AgentDashboard from "./pages/AgentDashboard";
+import UserDetailedPage from "./pages/UserDetailedPage";
 
 function App() {
-  // const { user, setUser } = useContext(UserContext);
-  return (
-    <UserImageProvider>
-      <UserProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/sign-up" element={<SignUpPage />} />
-          <Route path="/sign-in" element={<LoginPage />} />
-          <Route path="/personal-details" element={<PersonalDetails />} />
-          <Route path="/employment-details" element={<EmploymentDetails />} />
-          <Route path="/register3" element={<Register3 />} />
-          <Route path="/register4" element={<Register4 />} />
-          <Route path="/bank-details" element={<BankDetails />} />
-          <Route path="/pancard" element={<PanCardDetails />} />
-          <Route path="/address" element={<Address />} />
-          <Route path="/borrowing-details" element={<BorrowingDetails />} />
-          <Route path="/admin-dashboard" element={<AdminDashboard />} />
-          <Route path="/agent-dashboard" element={<AgentDashboard />} />
-          <Route path="/users/:id" element={<UserDetails />} />
-        </Routes>
-        <Footer />
-      </UserProvider>
-    </UserImageProvider>
-  );
+	// const { user, setUser } = useContext(UserContext);
+	return (
+		<UserImageProvider>
+			<UserProvider>
+				<NavBar />
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/dashboard" element={<Dashboard />} />
+					<Route path="/sign-up" element={<SignUpPage />} />
+					<Route path="/sign-in" element={<LoginPage />} />
+					<Route path="/personal-details" element={<PersonalDetails />} />
+					<Route path="/employment-details" element={<EmploymentDetails />} />
+					<Route path="/register3" element={<Register3 />} />
+					<Route path="/register4" element={<Register4 />} />
+					<Route path="/bank-details" element={<BankDetails />} />
+					<Route path="/pancard" element={<PanCardDetails />} />
+					<Route path="/address" element={<Address />} />
+					<Route path="/borrowing-details" element={<BorrowingDetails />} />
+					<Route path="/admin-dashboard" element={<AdminDashboard />} />
+					<Route path="/agent-dashboard" element={<AgentDashboard />} />
+					<Route path="/users/:id" element={<UserDetails />} />
+				</Routes>
+				<Footer />
+			</UserProvider>
+		</UserImageProvider>
+	);
 }
 
 export default App;

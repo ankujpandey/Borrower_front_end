@@ -30,7 +30,7 @@ function BorrowingDetails() {
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
 								<h1 className="text-white animated zoomIn mt-5">
-									Registration
+									Borrowing Details
 								</h1>
 							</div>
 							<hr

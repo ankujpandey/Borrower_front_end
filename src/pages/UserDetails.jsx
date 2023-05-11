@@ -27,23 +27,25 @@ function UserDetails(props) {
 		return color;
 	};
 
-	const config = {
-		method: "get",
-		url: `http://localhost:4000/api/v1/getAllData/${id}`,
-		headers: { "Content-Type": "application/json" },
-	};
-
 	useEffect(() => {
-		fetchData();
-		fetchImage();
-	}, [loading, isEditing]);
+		if (user) {
+			fetchData(id);
+			fetchImage(id);
+		}
+	}, [loading, isEditing, user, updateLoanDetails]);
 
 	// -------------------------------------------
 	//  Fetch User's all data
 	// -------------------------------------------
 
-	const fetchData = async () => {
+	const fetchData = async (id) => {
 		console.log(id);
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/getAllData/${id}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
 		let response = await ApiCall(config);
 		if (response.status === 201) {
 			setIsData(true);
@@ -64,7 +66,7 @@ function UserDetails(props) {
 	//  Fetch User's Image
 	// ------------------------------------------
 
-	const fetchImage = async () => {
+	const fetchImage = async (id) => {
 		console.log(id);
 		const con = {
 			method: "get",
@@ -75,7 +77,7 @@ function UserDetails(props) {
 		let response = await ApiCall(con);
 		if (response.status === 201) {
 			setIsData(true);
-			console.log(response.data.data[0].profile_photo);
+			console.log(response?.data?.data[0]);
 			await setUserImage(response?.data?.data[0]);
 			//   console.log("users Image ------------>>>>>>>", userImage.profile_photo);
 		} else {
@@ -237,8 +239,8 @@ function UserDetails(props) {
 
 												<hr />
 												{/* ------------------------------------------
-                            Personal Details Section
-                        ----------------------------------------------*/}
+                           							 Personal Details Section
+                        						----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Personal Details
 												</h3>
@@ -273,8 +275,8 @@ function UserDetails(props) {
 												</ul>
 
 												{/* ------------------------------------------
-                            Employment Details Section
-                        ----------------------------------------------*/}
+                        							    Employment Details Section
+                      							----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Employment Details
 												</h3>
@@ -319,8 +321,8 @@ function UserDetails(props) {
 												</ul>
 
 												{/* ------------------------------------------
-                            Bank Details Section
-                        ----------------------------------------------*/}
+                          								  Bank Details Section
+                       							 ----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Bank Details
 												</h3>
@@ -356,8 +358,8 @@ function UserDetails(props) {
 												</ul>
 
 												{/* ------------------------------------------
-                            Loan Details Section
-                        ----------------------------------------------*/}
+                         								   Loan Details Section
+                    						    ----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Loan Details
 												</h3>

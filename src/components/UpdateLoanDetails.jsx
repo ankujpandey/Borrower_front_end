@@ -14,22 +14,6 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 
 	console.log(user);
 
-	// const onSubmit = async () => {
-	// 	const config = {
-	// 		method: "patch",
-	// 		url: "http://localhost:4000/api/v1/updateLoanStatus",
-	// 		headers: { "Content-Type": "application/json", authorization: token },
-	// 	};
-	// 	let response = await ApiCall(config);
-	// 	if (response.status === 201) {
-	// 		console.log("user data--->", response.data.data);
-	// 		setLoanData(response?.data?.data);
-	// 	} else {
-	// 		//   setIsData(false);
-	// 		alert("Something went wrong!!!");
-	// 	}
-	// };
-
 	const url = "/agent-dashboard";
 	const api = "http://localhost:4000/api/v1/updateLoanStatus";
 
