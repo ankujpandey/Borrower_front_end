@@ -17,14 +17,13 @@ function BorrowingDetails() {
       BorrowingSchema,
       url,
       api,
-      token,
-      false,
-      false,
-      true
+      token
     );
 
   values.uid = user?.signUp?.uid;
   values.Loan_state = "1200";
+  values.emailUser = true;
+  values.emailAgent = true;
 
   return (
     <div>

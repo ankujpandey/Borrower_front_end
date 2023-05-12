@@ -39,6 +39,7 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
   values.uid = user?.uid;
   values.Loan_state = 1400;
   values.updatedBy = "agent";
+  values.emailUser = true;
 
   return (
     <>
@@ -49,7 +50,7 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Update User Details
         </h6>
-        <h2 className="mt-2">User's Details Can be changed here</h2>
+        <h2 className="mt-2">Loan Details Can be updated here</h2>
       </div>
 
       <div className="container px-lg-5">

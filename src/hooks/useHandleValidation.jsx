@@ -11,8 +11,7 @@ export const useHandleValidation = (
   api,
   token,
   signUp,
-  personalDetails,
-  loanApplied
+  personalDetails
 ) => {
   const { user, setUser, setToken } = useContext(UserContext);
 
@@ -64,25 +63,6 @@ export const useHandleValidation = (
             JSON.stringify(response?.data?.data)
           );
           navigate(url);
-        } else if (loanApplied) {
-          console.log("loanApplied called");
-          console.log("user-------", user);
-          const config = {
-            method: "post",
-            url: "http://localhost:4000/api/v1/sendAgreement",
-            headers: {
-              "Content-Type": "application/json",
-              authorization: token,
-            },
-            data: {
-              uid: user.userName.uid,
-              name: user.userName.firstName + " " + user.userName.lastName,
-              email: user.signUp.email,
-            },
-          };
-          const res = await ApiCall(config);
-          console.log("response----", res);
-          // navigate(url);
         } else navigate(url);
       } else {
         alert("Something went wrong!!!");
