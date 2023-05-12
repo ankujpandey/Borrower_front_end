@@ -6,7 +6,7 @@ import { UserContext } from "../context/UserContext";
 
 function BorrowingDetails() {
 	const { user, token } = useContext(UserContext);
-	console.log("user----", user);
+	// console.log("user----", user);
 
 	const url = "/dashboard";
 	const api = "http://localhost:4000/api/v1/createLoan";
@@ -22,6 +22,8 @@ function BorrowingDetails() {
 
 	values.uid = user?.signUp?.uid;
 	values.Loan_state = "1200";
+	values.emailUser = true;
+	values.emailAgent = true;
 
 	return (
 		<div>
