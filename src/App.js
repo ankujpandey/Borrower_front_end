@@ -44,7 +44,7 @@ function App() {
 					<Route path="/borrowing-details" element={<BorrowingDetails />} />
 					<Route path="/admin-dashboard" element={<AdminDashboard />} />
 					<Route path="/agent-dashboard" element={<AgentDashboard />} />
-					<Route path="/users/:id" element={<UserDetailedPage />} />
+					<Route path="/users/:id" element={<UserDetails />} />
 				</Routes>
 				<Footer />
 			</UserProvider>

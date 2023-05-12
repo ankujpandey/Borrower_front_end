@@ -37,7 +37,7 @@ function EmiDetails({ uid }) {
 				<div className="col-12">
 					<h4>EMI Details</h4>
 					<hr className="mt-2 mb-1" />
-					{loanData?.loanData?.Loan_state == 1300 ? (
+					{loanData?.loanData?.Loan_state > 1300 ? (
 						<>
 							<div>
 								<p className="mt-3 mb-1">Emi Details are as given...</p>
@@ -123,7 +123,11 @@ function EmiDetails({ uid }) {
 								</table>
 							</div>
 						</>
-					) : null}
+					) : (
+						<>
+							<p className="calculator-msg">Your Request is under process</p>
+						</>
+					)}
 				</div>
 			</div>
 		</div>

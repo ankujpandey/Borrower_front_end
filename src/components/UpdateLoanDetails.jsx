@@ -8,6 +8,7 @@ import { verifyLoan, verifyLoanInitialValues } from "../schemas";
 function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 	const { token } = useContext(UserContext);
 	const [loanData, setLoanData] = useState();
+	const [loading, setLoading] = useState(false);
 	// -------------------------------------------
 	//  Fetch User's all data
 	// -------------------------------------------
@@ -77,10 +78,15 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 
 									<form
 										action=""
-										onSubmit={handleSubmit}
+										onSubmit={(e) => {
+											setLoading(true);
+											handleSubmit(e);
+										}}
 										className="needs-validation"
 										noValidate>
 										<div className="row justify-content-center g-3 m-2 mb-4">
+											<div className={`${loading ? "loader" : ""}`}></div>
+
 											{/* -------------------------------------------------
 													Borrower's requirement Section
 											-----------------------------------------------------*/}
@@ -89,7 +95,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												Applied Loan
 											</h3>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														type="text"
@@ -104,7 +111,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												</div>
 											</div>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														className={"form-control"}
@@ -120,7 +128,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												</div>
 											</div>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														type="text"
@@ -145,7 +154,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												Approve Loan
 											</h3>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														type="text"
@@ -172,7 +182,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												</div>
 											</div>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														className={`form-control 
@@ -202,7 +213,8 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												</div>
 											</div>
 
-											<div className="col-md-12">
+											<div
+												className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 												<div className="form-floating">
 													<input
 														type="text"
@@ -232,13 +244,14 @@ function UpdateLoanDetails({ user, setUpdateLoanDetail, setColor }) {
 												</div>
 											</div>
 										</div>
-
-										<div className="row mt-4 justify-content-center">
-											<button
-												type="submit"
-												className="btn col-3 btn-warning w-20 py-3 btn-warning">
-												{Icons.update} Update
-											</button>
+										<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
+											<div className="row mt-4 justify-content-center">
+												<button
+													type="submit"
+													className="btn col-3 btn-warning w-20 py-3 btn-warning">
+													{Icons.update} Update
+												</button>
+											</div>
 										</div>
 									</form>
 								</div>

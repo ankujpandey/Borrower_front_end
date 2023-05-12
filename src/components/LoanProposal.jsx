@@ -39,7 +39,7 @@ function LoanProposal({ uid }) {
 					<h4>Loan Proposal</h4>
 					<hr className="mt-2 mb-1" />
 
-					{loanData?.loanData?.Loan_state === "1300" ? (
+					{loanData?.loanData?.Loan_state > "1300" ? (
 						<>
 							<div className="col-9">
 								<table className="table-without-line">
@@ -77,26 +77,34 @@ function LoanProposal({ uid }) {
 									</tbody>
 								</table>
 							</div>
-							<hr className="mt-2 mb-1" />
+							{loanData?.loanData?.Loan_state === "1400" ? (
+								<>
+									<hr className="mt-2 mb-1" />
 
-							<div
-								className="alert alert-warning d-flex align-items-center"
-								role="alert">
-								{Icons.warning}
-								<div>
-									Please review the agreement and click on I accept below.
-								</div>
-							</div>
-							<div className="row justify-content-center">
-								<div className="col-5">
-									<button
-										className="btn btn-primary w-100 py-3 btn-primary"
-										data-bs-toggle="modal"
-										data-bs-target="#agreementModal">
-										View All Agreement
-									</button>
-								</div>
-							</div>
+									<div
+										className="alert alert-warning d-flex align-items-center"
+										role="alert">
+										{Icons.warning}
+										<div>
+											Please review the agreement and click on I accept below.
+										</div>
+									</div>
+									<div className="row justify-content-center">
+										<div className="col-5">
+											<button
+												className="btn btn-primary w-100 py-3 btn-primary"
+												data-bs-toggle="modal"
+												data-bs-target="#agreementModal">
+												View All Agreement
+											</button>
+										</div>
+									</div>
+								</>
+							) : loanData?.loanData?.Loan_state === "-1000" ? (
+								<>
+									<p>You have declined the Agreement.</p>
+								</>
+							) : null}
 						</>
 					) : (
 						<div>

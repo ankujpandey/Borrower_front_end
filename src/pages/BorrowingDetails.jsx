@@ -6,8 +6,10 @@ import { UserContext } from "../context/UserContext";
 
 function BorrowingDetails() {
 	const { user, token } = useContext(UserContext);
+	const [loading, setLoading] = useState(false);
 	// console.log("user----", user);
 
+	useEffect(() => {}, [loading]);
 	const url = "/dashboard";
 	const api = "http://localhost:4000/api/v1/createLoan";
 
@@ -62,11 +64,16 @@ function BorrowingDetails() {
 							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
 							data-wow-delay="0.3s">
 							<form
-								onSubmit={handleSubmit}
+								onSubmit={(e) => {
+									setLoading(true);
+									handleSubmit(e);
+								}}
 								className="needs-validation"
 								noValidate>
-								<div className="row justify-content-center g-3 m-3 mb-4">
-									<div className="col-md-12">
+								<div className="row justify-content-center align-items-center g-3 m-3 mb-4">
+									<div className={`${loading ? "loader" : ""}`}></div>
+
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 										<div className="form-floating">
 											<input
 												type="text"
@@ -93,7 +100,7 @@ function BorrowingDetails() {
 										</div>
 									</div>
 
-									<div className="col-md-12">
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 										<div className="form-floating">
 											<input
 												className={`form-control ${
@@ -119,7 +126,7 @@ function BorrowingDetails() {
 										</div>
 									</div>
 
-									<div className="col-md-12">
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 										<div className="form-floating">
 											<input
 												type="text"
@@ -145,7 +152,7 @@ function BorrowingDetails() {
 											) : null}
 										</div>
 									</div>
-									<div className="col-4">
+									<div className={`col-4 ${loading ? "row-loader" : ""}`}>
 										<button
 											type="submit"
 											className="btn btn-primary w-100 py-3 btn-primary">

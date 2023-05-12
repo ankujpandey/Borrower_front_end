@@ -29,45 +29,45 @@ export const useHandleValidation = (
 		initialValues,
 		enableReinitialize: true,
 		validationSchema,
-		onSubmit: (values) => {
-			console.log(values);
-		},
-
-		// onSubmit: async (values) => {
-		//   const config = {
-		//     method: "post",
-		//     url: api,
-		//     headers: { "Content-Type": "application/json", authorization: token },
-		//     data: values,
-		//   };
-
-		//   let response = await ApiCall(config);
-
-		//   if (response.status === 201) {
-		//     if (signUp) {
-		//       if (response?.data?.data?.result?.status == 203) {
-		//         errors.email = "Email already exists! Please login to continue!";
-		//       } else {
-		//         setUser(response?.data?.data?.result);
-		//         localStorage.setItem(
-		//           "localUser",
-		//           JSON.stringify(response?.data?.data)
-		//         );
-		//         setToken(response?.data?.data?.auth);
-		//         navigate(url);
-		//       }
-		//     } else if (personalDetails) {
-		//       user.userName = response.data.data;
-		//       localStorage.setItem(
-		//         "userPersonalDetails",
-		//         JSON.stringify(response?.data?.data)
-		//       );
-		//       navigate(url);
-		//     } else navigate(url);
-		//   } else {
-		//     alert("Something went wrong!!!");
-		//   }
+		// onSubmit: (values) => {
+		//   console.log(values);
 		// },
+
+		onSubmit: async (values) => {
+			const config = {
+				method: "post",
+				url: api,
+				headers: { "Content-Type": "application/json", authorization: token },
+				data: values,
+			};
+
+			let response = await ApiCall(config);
+
+			if (response.status === 201) {
+				if (signUp) {
+					if (response?.data?.data?.result?.status == 203) {
+						errors.email = "Email already exists! Please login to continue!";
+					} else {
+						setUser(response?.data?.data?.result);
+						localStorage.setItem(
+							"localUser",
+							JSON.stringify(response?.data?.data)
+						);
+						setToken(response?.data?.data?.auth);
+						navigate(url);
+					}
+				} else if (personalDetails) {
+					user.userName = response.data.data;
+					localStorage.setItem(
+						"userPersonalDetails",
+						JSON.stringify(response?.data?.data)
+					);
+					navigate(url);
+				} else navigate(url);
+			} else {
+				alert("Something went wrong!!!");
+			}
+		},
 	});
 
 	return {

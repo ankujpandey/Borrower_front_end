@@ -4,6 +4,7 @@ import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { acceptLoanTermsSchema, acceptLoanTermsInitialValue } from "../schemas";
+import { ApiCall } from "../functions/ApiCall";
 
 function AgreementModel({ loanData }) {
 	const { user, token } = useContext(UserContext);
@@ -32,6 +33,24 @@ function AgreementModel({ loanData }) {
 
 	const handleSubmit = async (agreement) => {
 		console.log(agreement);
+
+		// console.log("user uid", user.userName.uid);
+
+		const config = {
+			method: "post",
+			url: "http://localhost:4000/api/v1/updateLoanStatus",
+			headers: { "Content-Type": "application/json", authorization: token },
+			data: {
+				uid: user.userName.uid,
+				Loan_state: agreement,
+				emailAgent: true,
+			},
+		};
+		try {
+			const response = ApiCall(config);
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	console.log(user);

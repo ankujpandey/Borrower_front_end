@@ -102,7 +102,7 @@ function UserDashboard({ uid }) {
 											Passbook
 										</span>
 									</a>
-									<a
+									{/* <a
 										className={`nav-link ${loanDetailsPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
@@ -115,7 +115,7 @@ function UserDashboard({ uid }) {
 										<span className={`${loanDetailsPage ? "enable" : ""}`}>
 											Loan Details
 										</span>
-									</a>
+									</a> */}
 								</nav>
 							</div>
 							{profilePage ? (
