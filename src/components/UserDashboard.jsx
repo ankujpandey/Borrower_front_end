@@ -3,6 +3,7 @@ import RegisteredDetails from "./RegisteredDetails";
 import LoanOverview from "./LoanOverview";
 import UserProfile from "./UserProfile";
 import LoanProposal from "./LoanProposal";
+import EmiDetails from "./EmiDetails";
 
 function UserDashboard({ uid }) {
 	console.log(uid);
@@ -132,6 +133,12 @@ function UserDashboard({ uid }) {
 							{loanStatus ? (
 								<div className="col-10">
 									<LoanProposal uid={uid} />
+								</div>
+							) : null}
+
+							{emiPage ? (
+								<div className="col-10">
+									<EmiDetails uid={uid} />
 								</div>
 							) : null}
 						</div>

@@ -1,16 +1,42 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import moment from "moment";
+import { Icons } from "../icons/Icons";
+import { UserContext } from "../context/UserContext";
+import { useHandleValidation } from "../hooks/useHandleValidation";
+import { acceptLoanTermsSchema, acceptLoanTermsInitialValue } from "../schemas";
 
 function AgreementModel({ loanData }) {
+	const { user, token } = useContext(UserContext);
 	const date = moment().format("DD-MMM-YYYY");
-	console.log(date);
+
+	// const [agreement, setAgreement] = useState(-1000);
+
+	// const url = "/";
+	// const api = "http://localhost:4000/api/v1/updateLoanStatus";
+
+	// const {
+	// 	values,
+	// 	errors,
+	// 	touched,
+	// 	handleBlur,
+	// 	handleChange,
+	// 	handleSubmit,
+	// 	setFieldValue,
+	// } = useHandleValidation(
+	// 	acceptLoanTermsInitialValue,
+	// 	acceptLoanTermsSchema,
+	// 	url,
+	// 	api,
+	// 	token
+	// );
+
+	const handleSubmit = async (agreement) => {
+		console.log(agreement);
+	};
+
+	console.log(user);
 	return (
-		<div
-			className="modal fade"
-			id="agreementModal"
-			tabIndex={-1}
-			aria-labelledby="exampleModalLabel"
-			aria-hidden="true">
+		<div className="modal fade" id="agreementModal" tabIndex={-1}>
 			<div
 				className="modal-dialog"
 				style={{
@@ -28,8 +54,8 @@ function AgreementModel({ loanData }) {
 							aria-label="Close"
 						/>
 					</div>
-					<div className="modal-body modals-card-border calculator-msg px-5 d-flex flex-column justify-content-around">
-						<div className="col-12">
+					<div className="modal-body modals-card-border calculator-msg px-5 pb-3 pt-5 d-flex flex-column justify-content-around">
+						<div className="col-12 mt-3">
 							<p>
 								These Master Terms and Conditions of the Loan Agreement ("
 								<b>MTCLA</b>") shall govern the general terms and conditions
@@ -218,19 +244,19 @@ function AgreementModel({ loanData }) {
 								<tbody>
 									<tr>
 										<td>Loan Amount</td>
-										<td>{loanData?.amountApproved}</td>
+										<td>{loanData?.loanData?.amountApproved}</td>
 									</tr>
 									<tr>
 										<td>Loan Term (Months)</td>
-										<td>{loanData?.tenureApproved}</td>
+										<td>{loanData?.loanData?.tenureApproved}</td>
 									</tr>
 									<tr>
-										<td>Payments Per Year</td>
+										<td>Payments Per Month</td>
 										<td>1200</td>
 									</tr>
 									<tr>
 										<td>Rate of Interest</td>
-										<td>{loanData?.minRoiApproved} %</td>
+										<td>{loanData?.loanData?.minRoiApproved} %</td>
 									</tr>
 									<tr>
 										<td>Collection Fee (On Outstanding Principal)</td>
@@ -238,12 +264,12 @@ function AgreementModel({ loanData }) {
 									</tr>
 									<tr>
 										<td>Regular EMI</td>
-										<td>120</td>
+										<td>{loanData?.EMI?.EMI}</td>
 									</tr>
-									<tr>
+									{/* <tr>
 										<td>EMI due date</td>
-										<td>10th</td>
-									</tr>
+										<td></td>
+									</tr> */}
 									<tr>
 										<td>Additional Charges</td>
 										<td>18% pa</td>
@@ -257,20 +283,40 @@ function AgreementModel({ loanData }) {
 								<thead>
 									<tr>
 										<th scope="col">MONTHS</th>
-										<th scope="col">MONTHS Installment</th>
-										<th scope="col">Interest Amount Payable to</th>
+										<th scope="col">Opening Balance</th>
+										<th scope="col">Monthly Installment</th>
+										<th scope="col">Closing Balance</th>
+										<th scope="col">Interest Amount Payable</th>
 										<th scope="col">Principal</th>
-										<th scope="col">Balance</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>0</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td>200000</td>
-									</tr>
+									{loanData?.EMI?.table?.map((row) => (
+										<tr key={row.installmentNo}>
+											<th scope="row">{row.installmentNo}</th>
+											{/* <td>{row.installmentDate}</td> */}
+											<td>
+												{Icons.smallRupee}
+												{row.openingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{loanData?.EMI?.EMI}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.closingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.interestPerMonth}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.principle}
+											</td>
+										</tr>
+									))}
 								</tbody>
 							</table>
 						</div>
@@ -288,50 +334,84 @@ function AgreementModel({ loanData }) {
 									<b>Borrower's Details:</b>
 								</u>
 							</p>
-							<p>Name : MrBrrower </p>
 							<p>
-								Address:5C & 5D, 5th floor, Lemon Tree, Sector 60, Gurgaon –
-								Haryana 122011
+								Name : {user?.userName?.firstName} {user?.userName?.lastName}{" "}
+							</p>
+							<p>
+								Address: {user?.userName?.postOffice}, {user?.userName?.city},{" "}
+								{user?.userName?.state}, {user?.userName?.pinCode}
 							</p>
 							<p>Purpose of Loan availed by the borrower: Business Funding</p>
 							<p>
-								PAN:<b> BICPB9784R</b>
+								PAN:<b> {user?.userName?.pan}</b>
 							</p>
+							<p>Contact no.: {user?.userName?.contact}</p>
 						</div>
 					</div>
-					{/* <div className="modal-footer"> */}
+
 					<hr className="mt-0 mb-0" />
-					<div className="row justify-content-center align-items-center my-2 mx-3">
-						<div className="col-8">
-							<div className="form-check">
-								<input
-									type="checkbox"
-									className="form-check-input"
-									id="exampleCheck1"
-								/>
-								<label className="form-check-label" htmlfor="exampleCheck1">
-									<p className="calculator-msg">
+					<div className="row justify-content-end align-items-center py-3 mx-3">
+						{/* <form
+						action=""
+						onSubmit={handleSubmit}
+						className="needs-validation"
+						noValidate>
+						<div className="row justify-content-center align-items-center py-3 mx-3">
+							<div className="col-8">
+								<div className="form-check">
+									<input
+										type="checkbox"
+										className={`form-check-input ${
+											errors.accept_Terms && touched.accept_Terms
+												? "is-invalid"
+												: touched.accept_Terms
+												? "is-valid"
+												: ""
+										}`}
+										// className="form-check-input"
+										id="accept_Terms"
+										value={values.agreement}
+									/>
+									<label
+										className="form-check-label calculator-msg"
+										htmlFor="accept_Terms">
 										I have read the loan agreement including the loan key fact
 										statement and I consent to the same.
-									</p>
-								</label>
-							</div>
-						</div>
+									</label>
+									{/* {errors.accept_Terms && touched.accept_Terms ? (
+										<div className="form-error form-validation-warning text-danger">
+											{errors.accept_Terms}
+										</div>
+									) : null} */}
+						{/* </div>
+							</div> */}
 
 						<div className="col-2">
 							<button
 								className="btn btn-outline-primary rounded-pill px-4"
+								onClick={() => {
+									handleSubmit(-1000);
+								}}
 								data-bs-dismiss="modal">
 								Reject
 							</button>
 						</div>
 						<div className="col-2">
-							<button className="btn btn-primary rounded-pill px-4">
+							<button
+								type="submit"
+								className="btn btn-primary rounded-pill px-4"
+								// onClick={() => setFieldValue("Loan_state", "1500")}
+								onClick={() => {
+									// setAgreement(1500);
+									handleSubmit(1500);
+								}}
+								data-bs-dismiss="modal">
 								Accept
 							</button>
 						</div>
+						{/* </div>
+					</form> */}
 					</div>
-					{/* </div> */}
 				</div>
 			</div>
 		</div>

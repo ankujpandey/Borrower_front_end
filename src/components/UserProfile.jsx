@@ -58,58 +58,60 @@ function UserProfile(props) {
 					<div className="row justify-content-center">
 						<div className="col-9 mt-3">
 							<table className="table-without-line">
-								<tr>
-									<th>
-										<p>Name:</p>
-									</th>
-									<td>
-										<p>{userData?.firstName + " " + userData?.lastName}</p>{" "}
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<p>E-mail:</p>
-									</th>
-									<td>
-										<p> {userData?.email}</p>
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<p>Contact:</p>
-									</th>
-									<td>
-										<p> {userData?.contact}</p>
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<p>PAN:</p>
-									</th>
-									<td>
-										<p> {userData?.pan}</p>
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<p>Aadhaar:</p>
-									</th>
-									<td>
-										<p> {userData?.aadhaar}</p>
-									</td>
-								</tr>
-								<tr>
-									<th>
-										<p>Address:</p>
-									</th>
-									<td>
-										<p>
-											{" "}
-											{userData?.postOffice}, {userData?.city},{userData?.state}
-											, {userData?.pinCode}
-										</p>
-									</td>
-								</tr>
+								<tbody>
+									<tr>
+										<th>
+											<p>Name:</p>
+										</th>
+										<td>
+											<p>{userData?.firstName + " " + userData?.lastName}</p>{" "}
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<p>E-mail:</p>
+										</th>
+										<td>
+											<p> {userData?.email}</p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<p>Contact:</p>
+										</th>
+										<td>
+											<p> {userData?.contact}</p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<p>PAN:</p>
+										</th>
+										<td>
+											<p> {userData?.pan}</p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<p>Aadhaar:</p>
+										</th>
+										<td>
+											<p> {userData?.aadhaar}</p>
+										</td>
+									</tr>
+									<tr>
+										<th>
+											<p>Address:</p>
+										</th>
+										<td>
+											<p>
+												{" "}
+												{userData?.postOffice}, {userData?.city},
+												{userData?.state}, {userData?.pinCode}
+											</p>
+										</td>
+									</tr>
+								</tbody>
 							</table>
 						</div>
 						<div className="col-3 justify-content-end mt-2">
@@ -138,104 +140,108 @@ function UserProfile(props) {
 					<hr className="mt-2 mb-1" />
 					<div className="col-10 mt-3">
 						<table className="table-without-line">
-							<tr>
-								<th>
-									<p>Employment Type:</p>
-								</th>
-								<td>
-									<p>{userData?.employment_type}</p>
-								</td>
-							</tr>
-							{userData?.company_name != "N/A" && userData?.company_name ? (
+							<tbody>
 								<tr>
 									<th>
-										<p>Company Name:</p>
+										<p>Employment Type:</p>
 									</th>
 									<td>
-										<p> {userData?.company_name}</p>
+										<p>{userData?.employment_type}</p>
 									</td>
 								</tr>
-							) : null}
-							<tr>
-								<th>
-									<p>Professional Email:</p>
-								</th>
-								<td>
-									<p> {userData?.professional_email}</p>
-								</td>
-							</tr>
-							{userData?.business_nature != "N/A" &&
-							userData?.business_nature ? (
+								{userData?.company_name != "N/A" && userData?.company_name ? (
+									<tr>
+										<th>
+											<p>Company Name:</p>
+										</th>
+										<td>
+											<p> {userData?.company_name}</p>
+										</td>
+									</tr>
+								) : null}
 								<tr>
 									<th>
-										<p>Nature of Bussiness:</p>
+										<p>Professional Email:</p>
 									</th>
 									<td>
-										<p> {userData?.business_nature}</p>
+										<p> {userData?.professional_email}</p>
 									</td>
 								</tr>
-							) : null}
-							<tr>
-								<th>
-									<p>Monthly Income:</p>
-								</th>
-								<td>
-									<p> {userData?.monthly_income}</p>
-								</td>
-							</tr>
-							<tr>
-								<th>
-									<p>Address:</p>
-								</th>
-								<td>
-									<p>
-										{" "}
-										{userData?.postOffice}, {userData?.city},{userData?.state},{" "}
-										{userData?.pinCode}
-									</p>
-								</td>
-							</tr>
+								{userData?.business_nature != "N/A" &&
+								userData?.business_nature ? (
+									<tr>
+										<th>
+											<p>Nature of Bussiness:</p>
+										</th>
+										<td>
+											<p> {userData?.business_nature}</p>
+										</td>
+									</tr>
+								) : null}
+								<tr>
+									<th>
+										<p>Monthly Income:</p>
+									</th>
+									<td>
+										<p> {userData?.monthly_income}</p>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<p>Address:</p>
+									</th>
+									<td>
+										<p>
+											{" "}
+											{userData?.postOffice}, {userData?.city},{userData?.state}
+											, {userData?.pinCode}
+										</p>
+									</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 					<h4>Bank Details</h4>
 					<hr className="mt-2 mb-1" />
 					<div className="col-5 mt-3">
 						<table className="table-without-line">
-							<tr>
-								<th>
-									<p>Account Number:</p>
-								</th>
-								<td>
-									<p>{userData?.account_number}</p>
-								</td>
-							</tr>
+							<tbody>
+								<tr>
+									<th>
+										<p>Account Number:</p>
+									</th>
+									<td>
+										<p>{userData?.account_number}</p>
+									</td>
+								</tr>
 
-							<tr>
-								<th>
-									<p>IFSC Code:</p>
-								</th>
-								<td>
-									<p> {userData?.ifsc_code}</p>
-								</td>
-							</tr>
+								<tr>
+									<th>
+										<p>IFSC Code:</p>
+									</th>
+									<td>
+										<p> {userData?.ifsc_code}</p>
+									</td>
+								</tr>
 
-							<tr>
-								<th>
-									<p>Branch:</p>
-								</th>
-								<td>
-									<p> {userData?.branch_name}</p>
-								</td>
-							</tr>
+								<tr>
+									<th>
+										<p>Branch:</p>
+									</th>
+									<td>
+										<p> {userData?.branch_name}</p>
+									</td>
+								</tr>
 
-							<tr>
-								<th>
-									<p>Bank Name:</p>
-								</th>
-								<td>
-									<p> {userData?.bank_name}</p>
-								</td>
-							</tr>
+								<tr>
+									<th>
+										<p>Bank Name:</p>
+									</th>
+									<td>
+										<p> {userData?.bank_name}</p>
+									</td>
+								</tr>
+							</tbody>
 						</table>
 					</div>
 				</div>

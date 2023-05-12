@@ -7,6 +7,7 @@ import { Icons } from "../icons/Icons";
 
 function AgentDashboard(props) {
 	const { user, token } = useContext(UserContext);
+	const navigate = useNavigate();
 	console.log(user);
 
 	const [users, setUsers] = useState([]);

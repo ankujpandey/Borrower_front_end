@@ -15,7 +15,7 @@ function LoanProposal({ uid }) {
 	const fetchData = async (uid) => {
 		const config = {
 			method: "get",
-			url: `http://localhost:4000/api/v1/getLoan/${uid}`,
+			url: `http://localhost:4000/api/v1/getLoanWithEMI/${uid}`,
 			headers: { "Content-Type": "application/json", authorization: token },
 		};
 
@@ -33,13 +33,13 @@ function LoanProposal({ uid }) {
 		}
 	};
 	return (
-		<div className="container dashboard-card-border px-lg-5">
+		<div className="dashboard-card-border">
 			<div className="row m-5">
 				<div className="col-12">
 					<h4>Loan Proposal</h4>
 					<hr className="mt-2 mb-1" />
 
-					{loanData?.Loan_state === "1300" ? (
+					{loanData?.loanData?.Loan_state === "1300" ? (
 						<>
 							<div className="col-9">
 								<table className="table-without-line">
@@ -63,7 +63,7 @@ function LoanProposal({ uid }) {
 												<p>Amount: </p>
 											</th>
 											<td>
-												<p>{loanData?.amountApproved}</p>
+												<p>{loanData?.loanData?.amountApproved}</p>
 											</td>
 										</tr>
 										<tr>
@@ -71,7 +71,7 @@ function LoanProposal({ uid }) {
 												<p>ROI:</p>
 											</th>
 											<td>
-												<p>{loanData?.minRoiApproved}</p>
+												<p>{loanData?.loanData?.minRoiApproved}</p>
 											</td>
 										</tr>
 									</tbody>

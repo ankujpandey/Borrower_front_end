@@ -146,7 +146,13 @@ function LoanOverview({ uid }) {
 										<p>Amount Disbursed: </p>
 									</th>
 									<td>
-										<p>Pending</p>
+										{loanData?.Loan_state === "1500" ? (
+											<p>Yes</p>
+										) : loanData?.Loan_state === "-1000" ? (
+											<p>No</p>
+										) : (
+											<p>Pending</p>
+										)}
 									</td>
 								</tr>
 								<tr>
@@ -155,17 +161,25 @@ function LoanOverview({ uid }) {
 									</th>
 									<td>
 										{loanData?.Loan_state === "1200" ? (
-											<p>Your request is under review.</p>
+											// <p>
+											// 	Your Application is sent to one our agent Please wait
+											// 	for his response.
+											// </p>
+											<p>In Process</p>
 										) : loanData?.Loan_state === "1300" ? (
+											<p>Your Application is under review by our agent</p>
+										) : loanData?.Loan_state === "1400" ? (
 											<p>Loan Approved by Agent Please check loan Proposal</p>
-										) : (
-											<p>None</p>
-										)}
+										) : loanData?.Loan_state === "1500" ? (
+											<p>Your loan is passed.</p>
+										) : loanData?.Loan_state === "-1000" ? (
+											<p>We are sorry to inform you, Your loan isn't passed.</p>
+										) : null}
 									</td>
 								</tr>
 								<tr>
 									<th>
-										<p>Updated On: </p>
+										<p>Status Updated On: </p>
 									</th>
 									<td>
 										<p>
@@ -177,8 +191,19 @@ function LoanOverview({ uid }) {
 								</tr>
 							</tbody>
 						</table>
+
+						{loanData?.Loan_state < 1400 ? (
+							<>
+								<hr className="mt-2 mb-1" />
+								<p className="calculator-msg">
+									(Kindly note that this is just eastimated amount as per your
+									selection, actual amount presented once your application is
+									approved.)
+								</p>
+							</>
+						) : null}
 					</div>
-					<div className="col-12">
+					{/* <div className="col-12">
 						<h6>Eastimated EMI</h6>
 						<hr className="mt-2 mb-1" />
 						<p>Eastimated EMI would be {Icons.smallRupee}0.00 for ~</p>
@@ -187,7 +212,7 @@ function LoanOverview({ uid }) {
 							selection, actual EMI amount presented once your application is
 							approved.)
 						</p>
-					</div>
+					</div> */}
 				</div>
 			</div>
 		</div>
