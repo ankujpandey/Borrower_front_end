@@ -3,10 +3,12 @@ import { Icons } from "../icons/Icons";
 import AgreementModel from "../modals/AgreementModel";
 import { ApiCall } from "../functions/ApiCall";
 import { UserContext } from "../context/UserContext";
+import { saveAs } from "file-saver";
 
 function LoanProposal({ uid }) {
 	const [loanData, setLoanData] = useState();
 	const { token } = useContext(UserContext);
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		fetchData(uid);
@@ -32,6 +34,31 @@ function LoanProposal({ uid }) {
 			console.log("Something Went wrong");
 		}
 	};
+
+	// ------------------------------------------
+	//  download pdf
+	// ------------------------------------------
+
+	const handlepdfDownload = async (id) => {
+		try {
+			const config = {
+				method: "get",
+				url: `http://localhost:4000/api/v1/createAgreementPdf/${id}`,
+				responseType: "blob",
+			};
+			let response = await ApiCall(config);
+			console.log("==========response", response);
+			if (response.status == 200) {
+				setLoading(false);
+				console.log(response.data);
+				const pdfBlob = new Blob([response.data], { type: "application/pdf" });
+				saveAs(pdfBlob, `user_${id}.pdf`);
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return (
 		<div className="dashboard-card-border">
 			<div className="row m-5">
@@ -103,6 +130,22 @@ function LoanProposal({ uid }) {
 							) : loanData?.loanData?.Loan_state === "-1000" ? (
 								<>
 									<p>You have declined the Agreement.</p>
+								</>
+							) : loanData?.loanData?.Loan_state === "1500" ? (
+								<>
+									<hr className="mt-2 mb-3" />
+									<div className="row justify-content-center">
+										<div className="col-5 mt-3">
+											<button
+												className="btn btn-primary w-100 py-3 btn-primary"
+												onClick={() => {
+													setLoading(true);
+													handlepdfDownload(uid);
+												}}>
+												Download Agreement
+											</button>
+										</div>
+									</div>
 								</>
 							) : null}
 						</>
