@@ -31,6 +31,7 @@ import TaskAltIcon from "@mui/icons-material/TaskAlt";
 import PercentIcon from "@mui/icons-material/Percent";
 import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 export const Icons = {
 	delete: <DeleteIcon />,
@@ -84,4 +85,14 @@ export const Icons = {
 	roi: <PercentIcon />,
 	tenure: <TimerOutlinedIcon />,
 	agent: <SupportAgentIcon />,
+	wallet: (
+		<AccountBalanceWalletIcon
+			style={{
+				width: "7rem",
+				height: "10rem",
+				marginRight: "10px",
+				color: "#2124b1",
+			}}
+		/>
+	),
 };
