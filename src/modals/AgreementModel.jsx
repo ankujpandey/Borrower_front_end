@@ -279,7 +279,7 @@ function AgreementModel({ loanData }) {
 									</tr>
 									<tr>
 										<td>Collection Fee (On Outstanding Principal)</td>
-										<td>12.00 %</td>
+										<td>5.00 %</td>
 									</tr>
 									<tr>
 										<td>Regular EMI</td>
