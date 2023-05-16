@@ -2,32 +2,40 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import RegisteredDetails from "../components/RegisteredDetails";
-import LoanStatus from "../components/LoanStatus";
+import UserDashboard from "../components/UserDashboard";
 import { ApiCall } from "../functions/ApiCall";
 
 function Dashboard(props) {
   const { user, token } = useContext(UserContext);
+  console.log(token);
   const [loanStatus, setLoanStatus] = useState(null);
-  const uid = user.userName.uid;
-  // console.log("uid", uid);
 
   const updatedUser = JSON.parse(localStorage.getItem("userPersonalDetails"));
 
   useEffect(() => {
-    fetchLoanDetails(uid);
-  }, []);
+    if (user) {
+      fetchLoanDetails();
+    }
+  }, [user]);
 
-  const fetchLoanDetails = async (uid) => {
+  // useEffect(() => {}, [loanStatus]);
+
+  const fetchLoanDetails = async () => {
     const config = {
       method: "get",
-      url: `http://localhost:4000/api/v1/getLoanStatus/${uid}`,
+      url: `http://localhost:4000/api/v1/getLoanStatus/${user.userName.uid}`,
       headers: { "Content-Type": "application/json", authorization: token },
     };
 
-    let response = await ApiCall(config);
-    if (response?.status == 201) {
-      console.log(response?.data?.data);
-      setLoanStatus(response.data.data.cndtn_code);
+    try {
+      let response = await ApiCall(config);
+      if (response?.status == 201) {
+        console.log("+++++++++++++", response?.data?.data);
+        setLoanStatus(response?.data?.data?.Loan_state);
+        console.log(loanStatus);
+      }
+    } catch (error) {
+      console.log("Somthing Went Wrong!");
     }
   };
 
@@ -58,7 +66,8 @@ function Dashboard(props) {
         <h6 className="position-relative d-inline text-primary ps-4">
           Dash Board
         </h6>
-        {loanStatus ? null : user?.userName?.contact ? (
+        {user && loanStatus && loanStatus > 1100 ? null : user?.userName
+            ?.contact ? (
           <h2 className="mt-2">
             Congratulations! Your registration is completed.
           </h2>
@@ -67,8 +76,8 @@ function Dashboard(props) {
         )}
       </div>
 
-      {loanStatus ? (
-        <LoanStatus loanStatus={loanStatus} />
+      {user && loanStatus && loanStatus > 1100 ? (
+        <UserDashboard uid={user?.userName?.uid} />
       ) : user?.userName?.contact || updatedUser?.contact ? (
         <RegisteredDetails />
       ) : (

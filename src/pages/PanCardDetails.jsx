@@ -6,12 +6,14 @@ import { Icons } from "../icons/Icons";
 
 function PanCardDetails(props) {
   const { user, token } = useContext(UserContext);
-  let formData = new FormData();
   const [passed, setPassed] = useState(false);
+  const [notPassed, setNotPassed] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  let formData = new FormData();
 
   const handlesubmit = async (e) => {
+    console.log("handle submit called");
     e.preventDefault();
     setLoading(true);
 
@@ -22,7 +24,7 @@ function PanCardDetails(props) {
       data: formData,
     };
 
-    let response = await ApiCall(config);
+    const response = await ApiCall(config);
 
     if (response.status === 201) {
       setLoading(false);
@@ -31,11 +33,11 @@ function PanCardDetails(props) {
       //   response.data.data.verification.passed
       // );
       if (response.data.data.verification.passed) {
-        alert("PAN Authentication Failed!");
+        setNotPassed(true);
         setPassed(false);
       } else {
-        alert("PAN Authentication Passed!");
         setPassed(true);
+        setNotPassed(false);
       }
     } else {
       alert("Something went wrong");
@@ -43,11 +45,33 @@ function PanCardDetails(props) {
     }
 
     console.log(response);
-
-    // console.log("form data------>>>>", formData.get("biometric"));
-    // console.log("form data------>>>>", formData.get("aadharBiometric"));
-    // console.log("form data------>>>>", formData.get("aadharBiometric"));
   };
+
+  const updateLoanStatus = async (e) => {
+    e.preventDefault();
+    console.log("update loan status called");
+
+    const config = {
+      method: "post",
+      url: `http://localhost:4000/api/v1/updateLoanStatus`,
+      headers: { "Content-Type": "application/json", authorization: token },
+      data: {
+        uid: user?.userName?.uid,
+        Loan_state: 1100,
+      },
+    };
+
+    const response = await ApiCall(config);
+
+    if ((response.status = 201)) {
+      navigate("/dashboard");
+      console.log(response);
+      setPassed(false);
+    } else {
+      alert("Something went wrong");
+    }
+  };
+
   return (
     <div>
       <div className="py-5 bg-primary hero-header mb-3">
@@ -97,7 +121,9 @@ function PanCardDetails(props) {
                   <div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
                     <div className="form-floating">
                       <input
-                        className="form-control"
+                        className={`form-control ${
+                          notPassed ? "is-invalid" : passed ? "is-valid" : ""
+                        }`}
                         type="file"
                         id="aadharfrontfile"
                         placeholder="PAN Card"
@@ -116,17 +142,44 @@ function PanCardDetails(props) {
 			 						--------------------------------------------------------*/}
 
                   {passed ? (
-                    <div className={`col-4 ${loading ? "row-loader" : ""}`}>
-                      <button
-                        className="btn btn-primary w-100 py-3 btn-primary"
-                        onClick={() => {
-                          navigate("/dashboard");
-                          setPassed(false);
-                        }}
-                      >
-                        Next {Icons.next}
-                      </button>
-                    </div>
+                    <>
+                      <div className="form-floating mt-3">
+                        <div className="alert alert-success m-0" role="alert">
+                          {Icons.success}
+                          <div className="mt-0 ">Verification Passed!</div>
+                        </div>
+                      </div>
+                      <div className={`col-4 ${loading ? "row-loader" : ""}`}>
+                        <button
+                          className="btn btn-primary w-100 py-3 btn-primary"
+                          onClick={(e) => {
+                            updateLoanStatus(e);
+                          }}
+                        >
+                          Next {Icons.next}
+                        </button>
+                      </div>
+                    </>
+                  ) : notPassed ? (
+                    <>
+                      <div className="form-floating mt-3">
+                        <div className="alert alert-danger m-0" role="alert">
+                          {Icons.error}
+                          <div className="mt-0 ">
+                            It seems that the document You provided is not
+                            valid.
+                          </div>
+                        </div>
+                      </div>
+                      <div className={`col-4 ${loading ? "row-loader" : ""}`}>
+                        <button
+                          type="submit"
+                          className="btn btn-primary w-100 py-3 btn-primary"
+                        >
+                          {Icons.upload} Upload
+                        </button>
+                      </div>
+                    </>
                   ) : (
                     <div className={`col-4 ${loading ? "row-loader" : ""}`}>
                       <button

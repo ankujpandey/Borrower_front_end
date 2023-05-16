@@ -5,15 +5,17 @@ import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
+import UpdateLoanDetails from "../components/UpdateLoanDetails";
 
 function UserDetails(props) {
 	const { id } = useParams();
-	console.log(id);
+	// console.log(id);
 	const [isData, setIsData] = useState(false);
-	const { token } = useContext(UserContext);
-	const [user, setUser] = useState({});
+	const { user, token } = useContext(UserContext);
+	const [userDetails, setUserDetails] = useState({});
 	const [userImage, setUserImage] = useState();
 	const [isEditing, setIsEditing] = useState(false);
+	const [updateLoanDetails, setUpdateLoanDetail] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const navigate = useNavigate();
@@ -25,23 +27,25 @@ function UserDetails(props) {
 		return color;
 	};
 
-	const config = {
-		method: "get",
-		url: `http://localhost:4000/api/v1/getAllData/${id}`,
-		headers: { "Content-Type": "application/json" },
-	};
-
 	useEffect(() => {
-		fetchData();
-		fetchImage();
-	}, [loading, isEditing]);
+		if (user) {
+			fetchData(id);
+			fetchImage(id);
+		}
+	}, [loading, isEditing, user, updateLoanDetails]);
 
 	// -------------------------------------------
 	//  Fetch User's all data
 	// -------------------------------------------
 
-	const fetchData = async () => {
+	const fetchData = async (id) => {
 		console.log(id);
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/getAllData/${id}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
 		let response = await ApiCall(config);
 		if (response.status === 201) {
 			setIsData(true);
@@ -50,7 +54,7 @@ function UserDetails(props) {
 				"userDetails",
 				JSON.stringify(response.data.data[0])
 			);
-			setUser(response?.data?.data[0]);
+			setUserDetails(response?.data?.data[0]);
 			console.log(user);
 		} else {
 			setIsData(false);
@@ -62,7 +66,7 @@ function UserDetails(props) {
 	//  Fetch User's Image
 	// ------------------------------------------
 
-	const fetchImage = async () => {
+	const fetchImage = async (id) => {
 		console.log(id);
 		const con = {
 			method: "get",
@@ -73,7 +77,7 @@ function UserDetails(props) {
 		let response = await ApiCall(con);
 		if (response.status === 201) {
 			setIsData(true);
-			console.log(response.data.data[0].profile_photo);
+			console.log(response?.data?.data[0]);
 			await setUserImage(response?.data?.data[0]);
 			//   console.log("users Image ------------>>>>>>>", userImage.profile_photo);
 		} else {
@@ -160,8 +164,15 @@ function UserDetails(props) {
 					</div>
 				</div>
 			</div>
+			{/* Editing Page Component */}
 			{isEditing ? (
-				<UpdateUser user={user} setIsEditing={setIsEditing} />
+				<UpdateUser user={userDetails} setIsEditing={setIsEditing} />
+			) : updateLoanDetails ? (
+				<UpdateLoanDetails
+					user={userDetails}
+					setUpdateLoanDetail={setUpdateLoanDetail}
+					setColor={setColor}
+				/>
 			) : (
 				<>
 					<div className="container px-lg-5">
@@ -174,7 +185,12 @@ function UserDetails(props) {
 										<div className={`${loading ? "loader" : ""}`}></div>
 										<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 											<div className="col-md-12 p-4">
-												<NavLink to="/admin-dashboard">
+												<NavLink
+													to={
+														user.jobAssignees_id
+															? "/agent-dashboard"
+															: "/admin-dashboard"
+													}>
 													<button className="btn btn-light float-end col-2 ">
 														Back
 													</button>
@@ -201,10 +217,12 @@ function UserDetails(props) {
 													)}
 													<div className="ms-3">
 														<h3 className="menu-title fs-1 fw-bold">
-															{user.firstName + " " + user.lastName}
+															{userDetails.firstName +
+																" " +
+																userDetails.lastName}
 														</h3>
 														<div className="menu-text fs-5 fw-0 mb-2">
-															{user.email}
+															{userDetails.email}
 														</div>
 														<h6 className="menu-text fs-6 mb-1 fw-bold">
 															Active Status
@@ -212,119 +230,166 @@ function UserDetails(props) {
 														<div
 															className="menu-text fs-6 mt-0"
 															style={{
-																color: setColor(user.isActive),
+																color: setColor(userDetails.isActive),
 															}}>
-															{user.isActive == 1 ? "Yes" : "No"}
+															{userDetails.isActive == 1 ? "Yes" : "No"}
 														</div>
 													</div>
 												</div>
 
 												<hr />
-
+												{/* ------------------------------------------
+                           							 Personal Details Section
+                        						----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Personal Details
 												</h3>
 
 												<ul className="list-group ">
 													<li className="list-group-item">
-														{Icons.call} {user.contact}
+														{Icons.call} {userDetails.contact}
 														<span className="float-end text-secondary">
 															Contact
 														</span>
 													</li>
 													<li className="list-group-item">
-														{Icons.pan} {user.pan}
+														{Icons.pan} {userDetails.pan}
 														<span className="float-end text-secondary">
 															PAN
 														</span>
 													</li>
 													<li className="list-group-item">
-														{Icons.aadhar} {user.aadhaar}
+														{Icons.aadhar} {userDetails.aadhaar}
 														<span className="float-end text-secondary">
 															Aadhaar
 														</span>
 													</li>
 													<li className="list-group-item">
-														{Icons.location} {user.postOffice}, {user.city},{" "}
-														{user.state}, {user.pinCode}
+														{Icons.location} {userDetails.postOffice},{" "}
+														{userDetails.city}, {userDetails.state},{" "}
+														{userDetails.pinCode}
 														<span className="float-end text-secondary">
 															Location
 														</span>
 													</li>
 												</ul>
 
+												{/* ------------------------------------------
+                        							    Employment Details Section
+                      							----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Employment Details
 												</h3>
 
 												<ul className="list-group ">
 													<li className="list-group-item">
-														{Icons.employmentType} {user.employment_type}
+														{Icons.employmentType} {userDetails.employment_type}
 														<span className="float-end text-secondary">
 															Employment Type
 														</span>
 													</li>
-													{user.company_name && !user.company_name === "N/A" ? (
+													{userDetails.company_name &&
+													!userDetails.company_name === "N/A" ? (
 														<li className="list-group-item">
-															{Icons.workPlace} {user.company_name}
+															{Icons.workPlace} {userDetails.company_name}
 															<span className="float-end text-secondary">
 																Company Name
 															</span>
 														</li>
 													) : null}
 													<li className="list-group-item">
-														{Icons.email} {user.professional_email}
+														{Icons.email} {userDetails.professional_email}
 														<span className="float-end text-secondary">
 															Professional Email
 														</span>
 													</li>
-													{user.business_nature &&
-													!user.business_nature === "N/A" ? (
+													{userDetails.business_nature &&
+													!userDetails.business_nature === "N/A" ? (
 														<li className="list-group-item">
-															{Icons.bussiness} {user.business_nature}
+															{Icons.bussiness} {userDetails.business_nature}
 															<span className="float-end text-secondary">
 																Nature of Bussiness
 															</span>
 														</li>
 													) : null}
 													<li className="list-group-item">
-														{Icons.salary} {user.monthly_income}
+														{Icons.salary} {userDetails.monthly_income}
 														<span className="float-end text-secondary">
 															Monthly Income
 														</span>
 													</li>
 												</ul>
 
+												{/* ------------------------------------------
+                          								  Bank Details Section
+                       							 ----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
 													Bank Details
 												</h3>
 
 												<ul className="list-group ">
 													<li className="list-group-item">
-														{Icons.account} {user.account_number}
+														{Icons.account} {userDetails.account_number}
 														<span className="float-end text-secondary">
 															Account Number
 														</span>
 													</li>
 
 													<li className="list-group-item">
-														{Icons.searchWorld} {user.ifsc_code}
+														{Icons.searchWorld} {userDetails.ifsc_code}
 														<span className="float-end text-secondary">
 															IFSC
 														</span>
 													</li>
 
 													<li className="list-group-item">
-														{Icons.pin} {user.branch_name}
+														{Icons.pin} {userDetails.branch_name}
 														<span className="float-end text-secondary">
 															Branch
 														</span>
 													</li>
 
 													<li className="list-group-item">
-														{Icons.bank} {user.bank_name}
+														{Icons.bank} {userDetails.bank_name}
 														<span className="float-end text-secondary">
 															Bank
+														</span>
+													</li>
+												</ul>
+
+												{/* ------------------------------------------
+                         								   Loan Details Section
+                    						    ----------------------------------------------*/}
+												<h3 className="menu-title fs-3 mt-4 fw-bold">
+													Loan Details
+												</h3>
+
+												<ul className="list-group ">
+													<li className="list-group-item">
+														{Icons.salary} {userDetails.amountAsked}
+														<span className="float-end text-secondary">
+															Amount
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.roi} {userDetails.roiAsked}
+														<span className="float-end text-secondary">
+															Rate of Interest
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.tenure} {userDetails.tenureAsked}
+														<span className="float-end text-secondary">
+															Tenure
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.agent} {userDetails.AgentName}
+														<span className="float-end text-secondary">
+															Assigned To
 														</span>
 													</li>
 												</ul>
@@ -361,6 +426,18 @@ function UserDetails(props) {
 															{Icons.delete} Delete User
 														</button>
 													</div>
+													{user.jobAssignees_id ? (
+														<div className="col-3">
+															<button
+																type="button"
+																className="btn btn-primary w-100 py-3 btn-primary"
+																onClick={() => {
+																	setUpdateLoanDetail(true);
+																}}>
+																{Icons.salary} Verify Loan
+															</button>
+														</div>
+													) : null}
 												</div>
 											</div>
 										</div>
