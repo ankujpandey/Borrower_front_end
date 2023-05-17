@@ -22,6 +22,7 @@ import PanCardDetails from "./pages/PanCardDetails";
 import Footer from "./components/Footer";
 import AgentDashboard from "./pages/AgentDashboard";
 import UserDetailedPage from "./pages/UserDetailedPage";
+import PoolTable from "./components/PoolTable";
 
 function App() {
   // const { user, setUser } = useContext(UserContext);
@@ -45,6 +46,7 @@ function App() {
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
           <Route path="/agent-dashboard" element={<AgentDashboard />} />
           <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/pool-table" element={<PoolTable />} />
         </Routes>
         <Footer />
       </UserProvider>
