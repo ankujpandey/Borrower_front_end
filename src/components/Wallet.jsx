@@ -6,8 +6,8 @@ function Wallet(props) {
 		<div className="dashboard-card-border">
 			<div className="row m-5">
 				<div className="col-12">
-					{/* <h4>Wallet</h4>
-					<hr className="mt-2 mb-1" /> */}
+					<h4>Wallet</h4>
+					<hr className="mt-2 mb-1" />
 					<div className="row m-5 justify-content-center">
 						<div className="card wallet-user-div pb-5 shadow justify-content-center align-items-center ">
 							<div className=""></div>

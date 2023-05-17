@@ -29,7 +29,7 @@ function UserDashboard({ uid }) {
 						data-wow-delay="0.3s">
 						<div className="d-flex">
 							<div className="col-2 round-nav ps-3 pt-4 pb-4 ">
-								<nav className="nav nav-btns flex-column">
+								<nav className="nav nav-btns animation flex-column">
 									<a
 										className={`nav-link ${profilePage ? "active" : ""}`}
 										aria-current="page"
