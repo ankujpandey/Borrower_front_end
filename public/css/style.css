@@ -762,4 +762,14 @@ svg {
 	justify-content: center;
 }
 
-/*  */
+/* Wallet */
+.wallet-user-div {
+	margin-bottom: -50px;
+	background-color: #2124b1;
+}
+
+.wallet-holder-name {
+	color: white;
+	font-size: xx-large;
+	font-weight: bold;
+}
