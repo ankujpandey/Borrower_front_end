@@ -1,5 +1,6 @@
 import React from "react";
 import { Icons } from "../icons/Icons";
+import AddBorrowerMoney from "../modals/AddBorrowerMoney";
 
 function Wallet(props) {
 	return (
@@ -28,7 +29,10 @@ function Wallet(props) {
 
 						<div className="row mt-2 justify-content-center">
 							<div className="col-4">
-								<button className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInLeft">
+								<button
+									className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInLeft"
+									data-bs-toggle="modal"
+									data-bs-target="#addBorrowerMoney">
 									Add Money
 								</button>
 							</div>
@@ -42,6 +46,7 @@ function Wallet(props) {
 					</div>
 				</div>
 			</div>
+			<AddBorrowerMoney />
 		</div>
 	);
 }
