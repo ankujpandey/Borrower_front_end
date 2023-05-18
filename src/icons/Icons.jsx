@@ -34,65 +34,75 @@ import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
 
 export const Icons = {
-	delete: <DeleteIcon />,
-	update: <PermContactCalendarIcon />,
-	call: <CallIcon />,
-	email: <EmailIcon />,
-	aadhar: <FingerprintIcon />,
-	pan: <BadgeIcon />,
-	back: <ChevronLeftIcon />,
-	person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
-	personIcon: <PersonIcon />,
-	addUser: <PersonAddIcon style={{ marginRight: "4px" }} />,
-	upload: <UploadIcon />,
-	download: <DownloadIcon />,
-	location: <PinDropIcon />,
-	workPlace: <ApartmentIcon />,
-	employmentType: <Diversity2Icon />,
-	bussiness: <BusinessIcon />,
-	salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
-	smallRupee: (
-		<CurrencyRupeeIcon
-			style={{ marginTop: -5, width: "1rem", height: "1rem" }}
-		/>
-	),
-	searchWorld: <TravelExploreIcon />,
-	pin: <PushPinIcon />,
-	bank: <AccountBalanceIcon />,
-	account: <AccountBoxIcon />,
-	password: <LockIcon />,
-	next: <NavigateNextIcon style={{ marginTop: -2 }} />,
-	camera: <CameraAltIcon />,
-	login: <LoginIcon />,
-	logout: <LogoutIcon />,
-	edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
-	warning: (
-		<WarningAmberIcon
-			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
-		/>
-	),
-	error: (
-		<ReportGmailerrorredIcon
-			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
-		/>
-	),
-	info: <InfoOutlinedIcon />,
-	success: (
-		<TaskAltIcon
-			style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
-		/>
-	),
-	roi: <PercentIcon />,
-	tenure: <TimerOutlinedIcon />,
-	agent: <SupportAgentIcon />,
-	wallet: (
-		<AccountBalanceWalletIcon
-			style={{
-				width: "7rem",
-				height: "10rem",
-				marginRight: "10px",
-				color: "#2124b1",
-			}}
-		/>
-	),
+  delete: <DeleteIcon />,
+  update: <PermContactCalendarIcon />,
+  call: <CallIcon />,
+  email: <EmailIcon />,
+  aadhar: <FingerprintIcon />,
+  pan: <BadgeIcon />,
+  back: <ChevronLeftIcon />,
+  person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
+  personIcon: <PersonIcon />,
+  addUser: <PersonAddIcon style={{ marginRight: "4px" }} />,
+  upload: <UploadIcon />,
+  download: <DownloadIcon />,
+  location: <PinDropIcon />,
+  workPlace: <ApartmentIcon />,
+  employmentType: <Diversity2Icon />,
+  bussiness: <BusinessIcon />,
+  salary: <CurrencyRupeeIcon style={{ marginTop: -5 }} />,
+  smallRupee: (
+    <CurrencyRupeeIcon
+      style={{ marginTop: -5, width: "1rem", height: "1rem" }}
+    />
+  ),
+  searchWorld: <TravelExploreIcon />,
+  pin: <PushPinIcon />,
+  bank: <AccountBalanceIcon />,
+  account: <AccountBoxIcon />,
+  password: <LockIcon />,
+  next: <NavigateNextIcon style={{ marginTop: -2 }} />,
+  camera: <CameraAltIcon />,
+  login: <LoginIcon />,
+  logout: <LogoutIcon />,
+  edit: <EditIcon style={{ marginTop: -5, width: "1.2rem", marginLeft: -2 }} />,
+  warning: (
+    <WarningAmberIcon
+      style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+    />
+  ),
+  error: (
+    <ReportGmailerrorredIcon
+      style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+    />
+  ),
+  info: <InfoOutlinedIcon />,
+  success: (
+    <TaskAltIcon
+      style={{ marginTop: -1, width: "1.2rem", marginRight: "10px" }}
+    />
+  ),
+  roi: <PercentIcon />,
+  tenure: <TimerOutlinedIcon />,
+  agent: <SupportAgentIcon />,
+  wallet: (
+    <AccountBalanceWalletIcon
+      style={{
+        width: "7rem",
+        height: "10rem",
+        marginRight: "10px",
+        color: "#2124b1",
+      }}
+    />
+  ),
+  poolBalance: (
+    <AccountBalanceIcon
+      style={{
+        width: "7rem",
+        height: "10rem",
+        marginRight: "10px",
+        color: "#2124b1",
+      }}
+    />
+  ),
 };
