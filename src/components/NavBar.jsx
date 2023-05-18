@@ -73,7 +73,7 @@ function NavBar(props) {
               </Link>
             </div>
           </div>
-          {user.adminID ? (
+          {user?.adminID ? (
             <Link to="/pool-table" className="nav-item nav-link">
               Pool Table
             </Link>
