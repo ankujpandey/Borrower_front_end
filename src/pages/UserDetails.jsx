@@ -6,6 +6,7 @@ import { UserContext } from "../context/UserContext";
 import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
 import UpdateLoanDetails from "../components/UpdateLoanDetails";
+import LoanDisbursement from "../components/LoanDisbursement";
 
 function UserDetails(props) {
   const { id } = useParams();
@@ -77,7 +78,6 @@ function UserDetails(props) {
 
     let response = await ApiCall(con);
     if (response.status === 201) {
-      setUpdateLoanDetail(true);
       setIsData(true);
       console.log(response?.data?.data[0]);
       await setUserImage(response?.data?.data[0]);
@@ -176,7 +176,12 @@ function UserDetails(props) {
           setUpdateLoanDetail={setUpdateLoanDetail}
           setColor={setColor}
         />
-      ) : loanDisburse ? null : (
+      ) : loanDisburse ? (
+        <LoanDisbursement
+          user={userDetails}
+          setLoanDisburse={setLoanDisburse}
+        />
+      ) : (
         <>
           <div className="container px-lg-5">
             <div className="row justify-content-center">
@@ -436,7 +441,9 @@ function UserDetails(props) {
                               {Icons.delete} Delete User
                             </button>
                           </div>
-                          {user.jobAssignees_id ? (
+
+                          {user.jobAssignees_id &&
+                          userDetails.Loan_state == 1300 ? (
                             <div className="col-3">
                               <button
                                 type="button"
@@ -448,7 +455,9 @@ function UserDetails(props) {
                                 {Icons.salary} Verify Loan
                               </button>
                             </div>
-                          ) : userDetails.Loan_state == 1500 ? (
+                          ) : null}
+
+                          {userDetails.Loan_state > 1400 ? (
                             <div className="col-3">
                               <button
                                 type="button"
