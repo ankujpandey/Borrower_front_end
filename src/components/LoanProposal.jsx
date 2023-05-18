@@ -134,6 +134,10 @@ function LoanProposal({ uid }) {
 							) : loanData?.loanData?.Loan_state === "1500" ? (
 								<>
 									<hr className="mt-2 mb-3" />
+									<div className="alert alert-success m-0" role="alert">
+										{Icons.success}
+										<div>You have accepted our terms of agreement.</div>
+									</div>
 									<div className="row justify-content-center">
 										<div className="col-5 mt-3">
 											<button

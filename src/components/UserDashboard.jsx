@@ -4,6 +4,8 @@ import LoanOverview from "./LoanOverview";
 import UserProfile from "./UserProfile";
 import LoanProposal from "./LoanProposal";
 import EmiDetails from "./EmiDetails";
+import PassBook from "./PassBook";
+import Wallet from "./Wallet";
 
 function UserDashboard({ uid }) {
 	console.log(uid);
@@ -12,7 +14,7 @@ function UserDashboard({ uid }) {
 	const [loanOverview, setLoanOverview] = useState(false);
 	const [emiPage, setEmiPage] = useState(false);
 	const [passBookPage, setPassBookPage] = useState(false);
-	const [loanDetailsPage, setLoanDetailsPage] = useState(false);
+	const [walletPage, setWalletPage] = useState(false);
 
 	console.log("UserDashboard Called");
 
@@ -27,7 +29,7 @@ function UserDashboard({ uid }) {
 						data-wow-delay="0.3s">
 						<div className="d-flex">
 							<div className="col-2 round-nav ps-3 pt-4 pb-4 ">
-								<nav className="nav nav-btns flex-column">
+								<nav className="nav nav-btns animation flex-column">
 									<a
 										className={`nav-link ${profilePage ? "active" : ""}`}
 										aria-current="page"
@@ -37,7 +39,7 @@ function UserDashboard({ uid }) {
 											setLoanStatus(false);
 											setEmiPage(false);
 											setPassBookPage(false);
-											setLoanDetailsPage(false);
+											setWalletPage(false);
 										}}
 										href="#">
 										<span className={`${profilePage ? "enable" : ""}`}>
@@ -51,7 +53,7 @@ function UserDashboard({ uid }) {
 											setEmiPage(false);
 											setLoanStatus(false);
 											setPassBookPage(false);
-											setLoanDetailsPage(false);
+											setWalletPage(false);
 											setLoanOverview(true);
 										}}
 										href="#">
@@ -66,7 +68,7 @@ function UserDashboard({ uid }) {
 											setLoanOverview(false);
 											setEmiPage(false);
 											setPassBookPage(false);
-											setLoanDetailsPage(false);
+											setWalletPage(false);
 											setLoanStatus(true);
 										}}>
 										<span className={`${loanStatus ? "enable" : ""}`}>
@@ -80,7 +82,7 @@ function UserDashboard({ uid }) {
 											setLoanOverview(false);
 											setLoanStatus(false);
 											setPassBookPage(false);
-											setLoanDetailsPage(false);
+											setWalletPage(false);
 											setEmiPage(true);
 										}}
 										href="#">
@@ -95,27 +97,27 @@ function UserDashboard({ uid }) {
 											setLoanOverview(false);
 											setLoanStatus(false);
 											setEmiPage(false);
-											setLoanDetailsPage(false);
+											setWalletPage(false);
 											setPassBookPage(true);
 										}}>
 										<span className={`${passBookPage ? "enable" : ""}`}>
 											Passbook
 										</span>
 									</a>
-									{/* <a
-										className={`nav-link ${loanDetailsPage ? "active" : ""}`}
+									<a
+										className={`nav-link ${walletPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
 											setLoanOverview(false);
 											setLoanStatus(false);
 											setEmiPage(false);
 											setPassBookPage(false);
-											setLoanDetailsPage(true);
+											setWalletPage(true);
 										}}>
-										<span className={`${loanDetailsPage ? "enable" : ""}`}>
-											Loan Details
+										<span className={`${walletPage ? "enable" : ""}`}>
+											Wallet
 										</span>
-									</a> */}
+									</a>
 								</nav>
 							</div>
 							{profilePage ? (
@@ -139,6 +141,18 @@ function UserDashboard({ uid }) {
 							{emiPage ? (
 								<div className="col-10">
 									<EmiDetails uid={uid} />
+								</div>
+							) : null}
+
+							{passBookPage ? (
+								<div className="col-10">
+									<PassBook uid={uid} />
+								</div>
+							) : null}
+
+							{walletPage ? (
+								<div className="col-10">
+									<Wallet uid={uid} />
 								</div>
 							) : null}
 						</div>
