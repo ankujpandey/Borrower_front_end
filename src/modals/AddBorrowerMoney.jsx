@@ -8,7 +8,7 @@ function AddBorrowerMoney(props) {
 					<div className="modal-body">
 						<div className="modal-border-deign m-3">
 							<div className="row justify-content-center g-3 m-3">
-								<div className="modal-heading">Add Money</div>
+								<div className="modal-heading">Add money to Wallet</div>
 
 								<div className="col-12">
 									<div className="form-floating mt-3">
@@ -37,12 +37,14 @@ function AddBorrowerMoney(props) {
 									) : null} */}
 									</div>
 								</div>
-								<div className="col-4 ">
-									<button
-										type="submit"
-										className="btn btn-primary w-100 py-2 btn-primary">
-										Add Money
-									</button>
+								<div className="d-flex justify-content-end">
+									<div className="col-5">
+										<button
+											type="submit"
+											className="btn btn-primary rounded-pill w-100 py-2 btn-primary">
+											Deposit Money
+										</button>
+									</div>
 								</div>
 							</div>
 						</div>
