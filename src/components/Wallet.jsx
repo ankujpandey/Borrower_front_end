@@ -4,6 +4,7 @@ import AddBorrowerMoney from "../modals/AddBorrowerMoney";
 import TransferBorrowerMoneyModal from "../modals/TransferBorrowerMoneyModal";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
+import moment from "moment";
 
 function Wallet({ uid }) {
 	const [wallet, setWallet] = useState();
@@ -53,7 +54,7 @@ function Wallet({ uid }) {
 								<div className="col-md-5">{Icons.wallet}</div>
 								<div className="col-md-6">
 									<p className="mb-0">Your Balance</p>
-									<h1 className="mt-0">&#8377; 500</h1>
+									<h1 className="mt-0">&#8377; {wallet?.wallet_balance}</h1>
 								</div>
 							</div>
 						</div>
@@ -76,15 +77,81 @@ function Wallet({ uid }) {
 									Transfer Money
 								</button>
 							</div>
-
-							{/* <div className="col-4">
-								<button className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInRight">
-									Passbook
-								</button>
-							</div> */}
 						</div>
 					</div>
 				</div>
+				{/* <div className="card mt-3 shadow justify-content-center align-items-center">
+					<div className="row">
+						<div className="col-8 mt-3 mb-0 ms-3">
+							{wallet?.txn_flow === "credit" ? (
+								<h6>Money Added to Wallet</h6>
+							) : (
+								<h6>Money decresed</h6>
+							)}
+						</div>
+						<div className="col-3 m-3 mb-0 d-flex justify-content-end">
+							<h6 style={{ color: "green" }}>+500</h6>
+						</div>
+						<div className="col-7 ms-3">
+							<p className="calculator-msg">
+								{moment(wallet?.updatedAt).format("LLLL")}
+							</p>
+						</div>
+						<div className="col-4 ms-4 d-flex justify-content-end">
+							<p className="calculator-msg">Money Added from MrBorrower</p>
+						</div>
+					</div>
+				</div>
+				<div className="card mt-3 shadow justify-content-center align-items-center">
+					<div className="row">
+						<div className="col-8 mt-3 mb-0 ms-3">
+							{wallet?.txn_flow === "credit" ? (
+								<h6>Money Added to Wallet</h6>
+							) : (
+								<h6>Money decresed</h6>
+							)}
+						</div>
+						<div className="col-3 m-3 mb-0 d-flex justify-content-end">
+							<h6 style={{ color: "green" }}>+500</h6>
+						</div>
+						<div className="col-7 ms-3">
+							<p className="calculator-msg">
+								{moment(wallet?.updatedAt).format("LLLL")}
+							</p>
+						</div>
+						<div className="col-4 ms-4 d-flex justify-content-end">
+							<p className="calculator-msg">Money Added from MrBorrower</p>
+						</div>
+					</div>
+				</div>
+				<div className="card mt-3 shadow justify-content-center align-items-center">
+					<div className="row">
+						<div className="col-8 mt-3 mb-0 ms-3">
+							{wallet?.txn_flow === "credit" ? (
+								<h6>Money Added to Wallet</h6>
+							) : (
+								<h6>Money decresed</h6>
+							)}
+						</div>
+						<div className="col-3 m-3 mb-0 d-flex justify-content-end">
+							<h6 style={{ color: "green" }}>+500</h6>
+						</div>
+						<div className="col-7 ms-3">
+							<p className="calculator-msg">
+								{moment(wallet?.updatedAt).format("LLLL")}
+							</p>
+						</div>
+						<div className="col-4 ms-4 d-flex justify-content-end">
+							<p className="calculator-msg">Money Added from MrBorrower</p>
+						</div>
+					</div>
+				</div>
+
+				<div className="col-12 mt-4 d-flex justify-content-center">
+					<button className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInRight">
+						Passbook
+					</button>
+				</div> */}
 			</div>
 			<TransferBorrowerMoneyModal />
 			<AddBorrowerMoney />

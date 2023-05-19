@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
+import moment from "moment";
 
 function PassBook({ uid }) {
 	const [passbook, setPassbook] = useState();
 	const { token } = useContext(UserContext);
+	const date = moment().format("LLLL");
 
 	useEffect(() => {
 		fetchData(uid);
@@ -41,7 +43,7 @@ function PassBook({ uid }) {
 				</div>
 				<div className="col-12 mt-3">
 					<table className="table table-bordered">
-						<thead>
+						<thead className="wallet-user-div" style={{ color: "white" }}>
 							<tr>
 								<th scope="col">TXN ID</th>
 								<th scope="col">Date</th>
@@ -52,18 +54,25 @@ function PassBook({ uid }) {
 							</tr>
 						</thead>
 						<tbody>
-							{/* {loanData?.EMI?.table?.map((row) => ( */}
-							<tr>
-								{/* <th scope="row">{row.installmentNo}</th> */}
+							{passbook?.map((row) => (
+								<tr>
+									<th scope="row" key={row.txn_id}>
+										{row.txn_id}
+									</th>
 
-								<td>2341</td>
-								<td>24-12-2023</td>
-								<td>credit</td>
-								<td>loan</td>
-								<td>10000</td>
-								<td>10500</td>
-							</tr>
-							{/* ))} */}
+									<td>{moment(row.updatedAt).format("LLLL")}</td>
+									<td>{row.txn_type}</td>
+									<td>{row.txn_flow}</td>
+
+									{row.credit_Amount === 0 ? (
+										<td style={{ color: "red" }}>-{row.debit_Amount}</td>
+									) : (
+										<td style={{ color: "green" }}>+{row.credit_Amount}</td>
+									)}
+									<td>{row.running_Amount}</td>
+									{/* <td>{row.txn_id}</td> */}
+								</tr>
+							))}
 						</tbody>
 					</table>
 				</div>
