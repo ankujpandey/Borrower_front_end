@@ -8,20 +8,22 @@ function PoolTable(props) {
   const [poolTxn, setPoolTxn] = useState([]);
   const [Balance, setBalance] = useState();
   const [itemLen, setItemLen] = useState();
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
 
   const pageCount = Math.ceil(itemLen?.length / 5);
 
   const config = {
     method: "get",
-    url: "http://localhost:4000/api/v1/findAllPoolTransactions",
+    url: `http://localhost:4000/api/v1/findAllPoolTransactions?page=${page}&limit=5`,
     headers: { "Content-Type": "application/json" },
   };
 
   useEffect(() => {
     fetchData();
     fetchBalance();
-  }, []);
+    setLoading(false);
+  }, [loading]);
 
   // ----------------------------------------------
   //  Fetch Data functionality
@@ -30,8 +32,9 @@ function PoolTable(props) {
     let response = await ApiCall(config);
 
     if (response.status === 201) {
-      // console.log(response.data.data);
-      setPoolTxn(response?.data?.data);
+      setPoolTxn(response?.data?.data?.data);
+      setItemLen(response?.data?.data?.length[0]);
+      console.log(response?.data?.data?.length[0]);
     } else {
       alert("Something went wrong!!!");
     }
@@ -64,6 +67,7 @@ function PoolTable(props) {
 
   const handlePageClick = (event) => {
     setPage(event.selected + 1);
+    setLoading(true);
   };
 
   return (
