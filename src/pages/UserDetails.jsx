@@ -10,7 +10,6 @@ import LoanDisbursement from "../components/LoanDisbursement";
 
 function UserDetails(props) {
   const { id } = useParams();
-  // console.log(id);
   const [isData, setIsData] = useState(false);
   const { user, token } = useContext(UserContext);
   const [userDetails, setUserDetails] = useState({});

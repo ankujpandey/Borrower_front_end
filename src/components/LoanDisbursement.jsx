@@ -7,6 +7,8 @@ function LoanDisbursement({ user, setLoanDisburse }) {
   const [loading, setLoading] = useState(false);
   const { token } = useContext(UserContext);
 
+  const [lowBalance, setLowBalance] = useState(false);
+
   console.log(user);
 
   const handleSubmit = async () => {
@@ -32,11 +34,15 @@ function LoanDisbursement({ user, setLoanDisburse }) {
       if (response.status === 201) {
         setLoading(false);
         setLoanDisburse(false);
+      } else if (response.response.status === 503) {
+        setLoading(false);
+        console.log("Balance Low");
+        setLowBalance(true);
       } else {
         alert("Something went wrong!");
       }
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
     }
   };
 
@@ -139,12 +145,29 @@ function LoanDisbursement({ user, setLoanDisburse }) {
                       <div
                         className={`col-md-12 ${loading ? "row-loader" : ""}`}
                       >
+                        {lowBalance ? (
+                          <div className="form-floating mt-3">
+                            <div
+                              className="alert alert-danger m-0"
+                              role="alert"
+                            >
+                              {Icons.error}
+                              <div className="mt-0 ">
+                                Currently the balance in pool is low. So the
+                                loan can't be disbursed.
+                                <br />
+                                Please try again later!
+                              </div>
+                            </div>
+                          </div>
+                        ) : null}
                         <div className="row mt-4 justify-content-center">
                           <button
-                            className="btn col-3 btn-success w-20 py-3 btn-success"
+                            className="btn col-3 btn-primary w-20 py-3 btn-primary"
                             onClick={() => {
                               handleSubmit();
                             }}
+                            disabled={loading || lowBalance}
                           >
                             {Icons.salary} Disburse Loan
                           </button>
