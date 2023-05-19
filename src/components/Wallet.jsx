@@ -1,7 +1,39 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Icons } from "../icons/Icons";
+import AddBorrowerMoney from "../modals/AddBorrowerMoney";
+import TransferBorrowerMoneyModal from "../modals/TransferBorrowerMoneyModal";
+import { UserContext } from "../context/UserContext";
+import { ApiCall } from "../functions/ApiCall";
 
-function Wallet(props) {
+function Wallet({ uid }) {
+	const [wallet, setWallet] = useState();
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		fetchData(uid);
+	}, []);
+
+	const fetchData = async (uid) => {
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/getBorrowerWallet/${uid}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
+		try {
+			const response = await ApiCall(config);
+
+			if (response.status === 201) {
+				console.log(response?.data?.data);
+				setWallet(response?.data?.data);
+			} else {
+				alert("Something went Wrong");
+			}
+		} catch (error) {
+			console.log("Something Went wrong");
+		}
+	};
+
 	return (
 		<div className="dashboard-card-border">
 			<div className="row m-5">
@@ -27,21 +59,35 @@ function Wallet(props) {
 						</div>
 
 						<div className="row mt-2 justify-content-center">
-							<div className="col-4">
-								<button className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInLeft">
-									Add Money
+							<div className="col-5">
+								<button
+									className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInLeft"
+									data-bs-toggle="modal"
+									data-bs-target="#addBorrowerMoney">
+									Deposit Money
 								</button>
 							</div>
 
-							<div className="col-4">
+							<div className="col-5">
+								<button
+									className="btn ms-4 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInRight"
+									data-bs-toggle="modal"
+									data-bs-target="#transferMoney">
+									Transfer Money
+								</button>
+							</div>
+
+							{/* <div className="col-4">
 								<button className="btn ms-3 btn-primary py-sm-3 px-sm-5 rounded-pill animated slideInRight">
 									Passbook
 								</button>
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>
 			</div>
+			<TransferBorrowerMoneyModal />
+			<AddBorrowerMoney />
 		</div>
 	);
 }

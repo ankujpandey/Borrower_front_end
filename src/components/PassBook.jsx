@@ -1,7 +1,37 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Icons } from "../icons/Icons";
+import { UserContext } from "../context/UserContext";
+import { ApiCall } from "../functions/ApiCall";
 
-function PassBook(props) {
+function PassBook({ uid }) {
+	const [passbook, setPassbook] = useState();
+	const { token } = useContext(UserContext);
+
+	useEffect(() => {
+		fetchData(uid);
+	}, []);
+
+	const fetchData = async (uid) => {
+		const config = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/getUserTransaction/${uid}`,
+			headers: { "Content-Type": "application/json" },
+		};
+
+		try {
+			const response = await ApiCall(config);
+
+			if (response.status === 201) {
+				console.log(response?.data?.data);
+				setPassbook(response?.data?.data);
+			} else {
+				alert("Something went Wrong");
+			}
+		} catch (error) {
+			console.log("Something Went wrong");
+		}
+	};
+
 	return (
 		<div className="dashboard-card-border">
 			<div className="row m-5">
