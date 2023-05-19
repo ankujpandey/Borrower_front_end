@@ -31,6 +31,7 @@ function EmiDetails({ uid }) {
 			console.log("Something Went wrong");
 		}
 	};
+
 	return (
 		<div className="dashboard-card-border">
 			<div className="row m-5">
