@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
-import { AmountInitialValue, AmountSchema } from "../schemas";
+import { walletTransferInitialValue, walletTransferSchema } from "../schemas";
 import axios from "axios";
 
 function TransferBorrowerMoneyModal({ wallet }) {
@@ -11,7 +11,13 @@ function TransferBorrowerMoneyModal({ wallet }) {
   const api = "http://localhost:4000/api/v1/createBorrowerTransaction";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(AmountInitialValue, AmountSchema, url, api, token);
+    useHandleValidation(
+      walletTransferInitialValue,
+      walletTransferSchema,
+      url,
+      api,
+      token
+    );
 
   values.uid = wallet?.uid;
   values.LoanID = wallet?.LoanId;
@@ -197,9 +203,9 @@ function TransferBorrowerMoneyModal({ wallet }) {
                         <button
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                          onClick={() => {
-                            window.location = "/dashboard";
-                          }}
+                          //   onClick={() => {
+                          //     window.location = "/dashboard";
+                          //   }}
                         >
                           Transfer
                         </button>

@@ -67,9 +67,9 @@ function AddPoolMoney(props) {
                         <button
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                          onClick={() => {
-                            window.location = "/pool-table";
-                          }}
+                          // onClick={() => {
+                          //   window.location = "/pool-table";
+                          // }}
                         >
                           Add Money
                         </button>
