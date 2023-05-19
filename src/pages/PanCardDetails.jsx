@@ -32,7 +32,7 @@ function PanCardDetails(props) {
       //   "response__-------------->>>>>",
       //   response.data.data.verification.passed
       // );
-      if (response.data.data.verification.passed) {
+      if (!response.data.data.verification.passed) {
         setNotPassed(true);
         setPassed(false);
       } else {
