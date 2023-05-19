@@ -97,7 +97,7 @@ function PoolTable(props) {
         {/* <h6 className="position-relative d-inline text-primary ps-4">
   Users List
 </h6> */}
-        <h2 className="mt-2">Pool Table List</h2>
+        <h2 className="mt-2">Pool Table Transactions</h2>
       </div>
 
       <div className="row justify-content-center">

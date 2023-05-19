@@ -15,6 +15,7 @@ function AddBorrowerMoney({ wallet }) {
   values.uid = wallet?.uid;
   values.LoanID = wallet?.LoanId;
   values.txn_type = "added money to wallet";
+  values.debit_Amount = 0;
 
   return (
     <div className="modal fade" id="addBorrowerMoney" tabIndex={-1}>
@@ -63,6 +64,9 @@ function AddBorrowerMoney({ wallet }) {
                         <button
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
+                          onClick={() => {
+                            window.location = "/dashboard";
+                          }}
                         >
                           Deposit Money
                         </button>

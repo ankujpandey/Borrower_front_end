@@ -5,7 +5,7 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function AddPoolMoney(props) {
   const { token } = useContext(UserContext);
-  const url = "/admin-dashboard";
+  const url = "/pool-table";
   const api = "http://localhost:4000/api/v1/createPoolTransaction";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -35,40 +35,45 @@ function AddPoolMoney(props) {
                   className="needs-validation"
                   noValidate
                 >
-                  <div className="col-12">
-                    <div className="form-floating mt-3">
-                      <input
-                        type="text"
-                        name="credit_Amount"
-                        id="credit_Amount"
-                        placeholder="amount"
-                        value={values.credit_Amount}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        className={`form-control ${
-                          errors.credit_Amount && touched.credit_Amount
-                            ? "is-invalid"
-                            : touched.credit_Amount
-                            ? "is-valid"
-                            : ""
-                        }`}
-                      />
-                      <label htmlFor="amountAsked">Amount</label>
-                      {errors.credit_Amount && touched.credit_Amount ? (
-                        <div className="form-error form-validation-warning text-danger">
-                          {errors.credit_Amount}
-                        </div>
-                      ) : null}
+                  <div className="row justify-content-center g-3 mb-2">
+                    <div className="col-12">
+                      <div className="form-floating mt-3">
+                        <input
+                          type="text"
+                          name="credit_Amount"
+                          id="credit_Amount"
+                          placeholder="amount"
+                          value={values.credit_Amount}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          className={`form-control ${
+                            errors.credit_Amount && touched.credit_Amount
+                              ? "is-invalid"
+                              : touched.credit_Amount
+                              ? "is-valid"
+                              : ""
+                          }`}
+                        />
+                        <label htmlFor="amountAsked">Amount</label>
+                        {errors.credit_Amount && touched.credit_Amount ? (
+                          <div className="form-error form-validation-warning text-danger">
+                            {errors.credit_Amount}
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
-                  </div>
-                  <div className="d-flex justify-content-end">
-                    <div className="col-5">
-                      <button
-                        type="submit"
-                        className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                      >
-                        Add Money
-                      </button>
+                    <div className="d-flex justify-content-end">
+                      <div className="col-5">
+                        <button
+                          type="submit"
+                          className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
+                          onClick={() => {
+                            window.location = "/pool-table";
+                          }}
+                        >
+                          Add Money
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </form>
