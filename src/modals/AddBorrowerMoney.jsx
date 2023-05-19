@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { walletSchema, walletInitialValue } from "../schemas";
+import { AmountSchema, AmountInitialValue } from "../schemas";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
@@ -10,7 +10,7 @@ function AddBorrowerMoney({ wallet }) {
   const api = "http://localhost:4000/api/v1/createBorrowerTransaction";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    useHandleValidation(walletInitialValue, walletSchema, url, api, token);
+    useHandleValidation(AmountInitialValue, AmountSchema, url, api, token);
 
   values.uid = wallet?.uid;
   values.LoanID = wallet?.LoanId;
