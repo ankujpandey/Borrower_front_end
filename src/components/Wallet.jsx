@@ -161,8 +161,8 @@ function Wallet({ uid, loanStatus }) {
 					</button>
 				</div> */}
 			</div>
-			<TransferBorrowerMoneyModal />
-			<AddBorrowerMoney />
+			<TransferBorrowerMoneyModal wallet={wallet} />
+			<AddBorrowerMoney wallet={wallet} />
 		</div>
 	);
 }
