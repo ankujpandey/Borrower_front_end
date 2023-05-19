@@ -309,11 +309,11 @@ export const acceptLoanTermsSchema = Yup.object({
 //   To add money to borrower wallet
 // ---------------------------------------
 
-export const walletInitialValue = {
+export const AmountInitialValue = {
   credit_Amount: "",
 };
 
-export const walletSchema = Yup.object({
+export const AmountSchema = Yup.object({
   credit_Amount: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid Amount")
     .required("Amount can't be empty"),
