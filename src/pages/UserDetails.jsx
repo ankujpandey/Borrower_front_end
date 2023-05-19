@@ -457,7 +457,7 @@ function UserDetails(props) {
                             </div>
                           ) : null}
 
-                          {userDetails.Loan_state > 1400 ? (
+                          {userDetails.Loan_state == 1500 ? (
                             <div className="col-3">
                               <button
                                 type="button"

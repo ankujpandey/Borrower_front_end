@@ -10,24 +10,34 @@ function LoanDisbursement({ user, setLoanDisburse }) {
   console.log(user);
 
   const handleSubmit = async () => {
-    // setLoading(true);
+    setLoading(true);
 
-    const data = {
-      uid: user.uid,
-      Loan_state: 1600,
-      amount: user.amountApproved,
-      LoanID: user.LoanId,
-      jobAssignees_id: user.jobAssignees_id,
-    };
+    try {
+      const data = {
+        uid: user.uid,
+        Loan_state: 1600,
+        amount: user.amountApproved,
+        LoanID: user.LoanId,
+        jobAssignees_id: user.jobAssignees_id,
+      };
 
-    const config = {
-      method: "post",
-      url: "http://localhost:4000/api/v1/disburseLoan",
-      headers: { "Content-Type": "application/json", authorization: token },
-      data: data,
-    };
+      const config = {
+        method: "post",
+        url: "http://localhost:4000/api/v1/disburseLoan",
+        headers: { "Content-Type": "application/json", authorization: token },
+        data: data,
+      };
 
-    let response = await ApiCall(config);
+      let response = await ApiCall(config);
+      if (response.status === 201) {
+        setLoading(false);
+        setLoanDisburse(false);
+      } else {
+        alert("Something went wrong!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -77,6 +87,7 @@ function LoanDisbursement({ user, setLoanDisburse }) {
 					-----------------------------------------------------*/}
 
                   <div className="row justify-content-center g-3 m-2 mb-4">
+                    <div className={`${loading ? "loader" : ""}`}></div>
                     <h3 className="menu-title fs-3 mt-4 fw-bold">
                       Approved Loan
                     </h3>
