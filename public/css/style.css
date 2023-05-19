@@ -690,7 +690,7 @@ svg {
 	margin-left: 10px;
 }
 
-.round-nav .nav-btns .nav-link a:hover {
+.nav-link a:hover {
 	color: #d1d2ff;
 	background: white;
 	font-size: 13px;
