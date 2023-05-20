@@ -40,6 +40,7 @@ function CaptureImage(props) {
 
 	useEffect(() => {
 		localStorage.removeItem("capImg");
+		setImage(null);
 	}, []);
 
 	//Image Capturing--------->>>>>>>>
@@ -51,18 +52,14 @@ function CaptureImage(props) {
 		}
 	}, [seconds]);
 
-	// const biometicBlob = async (base64) => {
-	// 	await fetch(base64).then(async (res) => setBioImage(await res.blob()));
-	// };
-
 	const clickImage = () => {
 		setTimeout(async () => {
 			if (facesDetected != 1) {
 				setWarning(true);
 			} else {
 				picture = webcamRef?.current?.getScreenshot({
-					width: 400,
-					height: 400,
+					width: 350,
+					height: 280,
 				});
 
 				console.log("pic clicked");
@@ -86,17 +83,19 @@ function CaptureImage(props) {
 						{/* {window.location.reload(false)} */}
 
 						<div className="row justify-content-center g-3 m-3">
-							<div className="col-md-9">
+							<div className="col-md-9 p-3">
 								<img src={image} className="biometric-image" />
 							</div>
-
-							<div className="alert alert-success col-md-9" role="alert">
-								Image captured succesfully!!!
+							<div className="form-floating col-md-9 mt-2">
+								<div className="alert alert-success m-0 mx-2" role="alert">
+									{Icons.success}
+									<div className="mt-0 ">Image captured succesfully!!!</div>
+								</div>
 							</div>
 
-							<div className="col-5">
+							<div className="col-4">
 								<button
-									className="btn btn-primary w-100 py-2 btn-primary"
+									className="btn btn-primary w-100 py-3 btn-primary"
 									onClick={() => {
 										setFlag(!flag);
 										setImage(null);
@@ -109,14 +108,14 @@ function CaptureImage(props) {
 								</button>
 							</div>
 
-							<div className="col-5">
+							<div className="col-4">
 								<button
-									className="btn btn-primary w-100 py-2 btn-primary"
+									className="btn btn-primary w-100 py-3 btn-primary"
 									onClick={() => {
 										window.location.href = "/register4";
 										// navigate("/register4");
 									}}>
-									Next Page
+									Next{Icons.next}
 								</button>
 							</div>
 						</div>
@@ -139,8 +138,8 @@ function CaptureImage(props) {
 						))}
 						<Webcam
 							style={{
-								width: "600px",
-								height: "500px",
+								width: "100%",
+								height: "450px",
 								position: "relative",
 								//marginBottom: "20px",
 								marginLeft: "auto",
@@ -151,12 +150,10 @@ function CaptureImage(props) {
 
 						{warning ? (
 							<div className="row justify-content-center">
-								<div className="form-floating col-md-8">
-									<div className="alert alert-danger" role="alert">
-										{/* <svg className="bi" role="img" aria-label="Danger:">
-								<use xlinkHref="#exclamation-triangle-fill" />
-							</svg> */}
-										<div className="mt-0">
+								<div className="form-floating col-md-8 my-2">
+									<div className="alert alert-danger m-0" role="alert">
+										{Icons.error}
+										<div className="mt-0 ">
 											Image can only be clicked when there is only one person in
 											the frame!! Curently, the number of faces recognised are{" "}
 											{facesDetected}
@@ -166,7 +163,7 @@ function CaptureImage(props) {
 
 								<div className="col-6">
 									<button
-										className="btn btn-primary w-100 py-2 btn-primary"
+										className="btn btn-primary w-100 py-3 btn-primary"
 										onClick={() => {
 											setFlag(!flag);
 											setImage(null);

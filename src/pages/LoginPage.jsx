@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
-import { icons } from "react-icons";
 import { Icons } from "../icons/Icons";
 
 function LoginComponent(props) {
@@ -27,7 +26,7 @@ function LoginComponent(props) {
 			if (response.status === 201) {
 				// setFlag(true);
 
-				console.log(response.data);
+				console.log(response.data.data.result);
 
 				setUser(response?.data?.data.result);
 				setToken(response?.data?.data?.auth);
@@ -35,12 +34,14 @@ function LoginComponent(props) {
 
 				if (response?.data?.data?.result?.signUp) {
 					navigate("/dashboard");
+				} else if (response?.data?.data?.result?.jobAssignees_id) {
+					navigate("/agent-dashboard");
 				} else {
 					navigate("/admin-dashboard");
 				}
 
-				setEmail("");
-				setPassword("");
+				// setEmail("");
+				// setPassword("");
 			} else {
 				setInvalidInfo(true);
 			}
@@ -106,11 +107,9 @@ function LoginComponent(props) {
 										</div>
 
 										{invalidInfo && (
-											<div className="form-floating">
-												<div className="alert alert-danger" role="alert">
-													{/* <svg className="bi" role="img" aria-label="Danger:">
-								<use xlinkHref="#exclamation-triangle-fill" />
-							</svg> */}
+											<div className="form-floating my-2 mb-0">
+												<div className="alert alert-danger m-0" role="alert">
+													{Icons.error}
 													<div className="mt-0">
 														Please enter valid details!!!
 													</div>
@@ -118,7 +117,7 @@ function LoginComponent(props) {
 											</div>
 										)}
 
-										<div className="col-12">
+										<div className="col-12 mt-3">
 											{/* <NavLink to="/dashboard"> */}
 											<button
 												type="submit"

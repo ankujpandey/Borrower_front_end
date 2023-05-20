@@ -1,14 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ReactPaginate from "react-paginate";
 import { Icons } from "../icons/Icons";
 
-function AdminDashboard(props) {
+function AgentDashboard(props) {
+  const { user, token } = useContext(UserContext);
+  const navigate = useNavigate();
+  console.log(user);
+
   const [users, setUsers] = useState([]);
-  const { token } = useContext(UserContext);
-  console.log(token);
   const [loading, setLoading] = useState(false);
   const [itemLen, setItemLen] = useState();
   const [page, setPage] = useState(1);
@@ -16,16 +18,12 @@ function AdminDashboard(props) {
 
   const pageCount = Math.ceil(itemLen?.length / 5);
 
-  const config = {
-    method: "get",
-    url: `http://localhost:4000/api/v1/getUserData?page=${page}&limit=5`,
-    headers: { "Content-Type": "application/json" },
-  };
-
   useEffect(() => {
-    fetchData();
-    setLoading(false);
-  }, [loading]);
+    if (user) {
+      fetchData();
+      setLoading(false);
+    }
+  }, [loading, user]);
 
   setColor = (status) => {
     status == 1 ? (color = "green") : (color = "red");
@@ -35,7 +33,15 @@ function AdminDashboard(props) {
   // ----------------------------------------------
   //  Fetch Data functionality
   // ----------------------------------------------
+
   const fetchData = async () => {
+    setLoading(true);
+
+    const config = {
+      method: "get",
+      url: `http://localhost:4000/api/v1/getUserDataAgent?page=${page}&limit=5&agentId=${user?.jobAssignees_id}`,
+      headers: { "Content-Type": "application/json" },
+    };
     let response = await ApiCall(config);
     // console.log(page);
     if (response.status === 201) {
@@ -44,6 +50,36 @@ function AdminDashboard(props) {
       setItemLen(response?.data?.data?.length[0]);
     } else {
       alert("Something went wrong!!!");
+    }
+  };
+
+  // ---------------------------------------------------
+  //  update Loan Status on clicking verify loan button
+  // ------------------------------------------------------
+
+  const updateLoanStatus = async (id, state) => {
+    console.log(id);
+    console.log(state);
+    if (state < 1300) {
+      const config = {
+        method: "post",
+        url: `http://localhost:4000/api/v1/updateLoanStatus`,
+        headers: { "Content-Type": "application/json", authorization: token },
+        data: {
+          uid: id,
+          Loan_state: 1300,
+          updatedBy: "agent",
+        },
+      };
+      let response = await ApiCall(config);
+      if (response.status === 201) {
+        console.log(response);
+        navigate(`/users/${id}`);
+      } else {
+        alert("Something went wrong!!!");
+      }
+    } else {
+      navigate(`/users/${id}`);
     }
   };
 
@@ -83,7 +119,7 @@ function AdminDashboard(props) {
             <div className="col-12 text-center">
               <div data-wow-delay="0.1s">
                 <h1 className="text-white animated zoomIn mt-5">
-                  Admin Dashboard
+                  Agent Dashboard
                 </h1>
               </div>
               <hr
@@ -103,7 +139,7 @@ function AdminDashboard(props) {
         {/* <h6 className="position-relative d-inline text-primary ps-4">
 					Users List
 				</h6> */}
-        <h2 className="mt-2">Users List</h2>
+        <h2 className="mt-2">Users assigned to you...</h2>
       </div>
 
       <div className="container mt-5">
@@ -156,14 +192,17 @@ function AdminDashboard(props) {
                 </td>
 
                 <td>
-                  <Link to={`/users/${person.uid}`}>
-                    <button
-                      type="button"
-                      className="btn fs-6 btn-primary btn-sm"
-                    >
-                      View
-                    </button>
-                  </Link>
+                  {/* <Link to={`/users/${person.uid}`}> */}
+                  <button
+                    type="button"
+                    className="btn fs-6 btn-primary btn-sm"
+                    onClick={() => {
+                      updateLoanStatus(person.uid, person.Loan_state);
+                    }}
+                  >
+                    View
+                  </button>
+                  {/* </Link> */}
                 </td>
               </tr>
             ))}
@@ -200,4 +239,4 @@ function AdminDashboard(props) {
   );
 }
 
-export default AdminDashboard;
+export default AgentDashboard;

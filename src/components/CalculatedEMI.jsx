@@ -86,18 +86,44 @@ function CalculatedEMI(props) {
 								</thead>
 								<tbody>
 									{props.calcData?.table?.map((row) => (
-										<tr>
+										<tr key={row.installmentNo}>
 											<th scope="row">{row.installmentNo}</th>
-											<td>Date</td>
-											<td>{row.openingBalence}</td>
-											<td>{props.calcData.EMI}</td>
-											<td>{row.closingBalence}</td>
-											<td>{row.interestPerMonth}</td>
-											<td>{row.principle}</td>
+											<td>{row.installmentDate}</td>
+											<td>
+												{Icons.smallRupee}
+												{row.openingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{props.calcData.EMI}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.closingBalence}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.interestPerMonth}
+											</td>
+											<td>
+												{Icons.smallRupee}
+												{row.principle}
+											</td>
 										</tr>
 									))}
 								</tbody>
 							</table>
+
+							<p className="calculator-msg">
+								Amortization schedule shows the loan amount borrowed along with
+								a list of scheduled payments. The amortization table shows the
+								amount of each periodic payment along with the amount that goes
+								towards the principal deducted from the loan each time. The
+								amortization chart also shows the new loan balance after each
+								payment. The advantage of Amortization Calculator is that one
+								can determine when the loan will be paid off, and the principal
+								and interest component of each payment.
+							</p>
 
 							<div className="d-flex justify-content-center mt-2">
 								<button

@@ -6,6 +6,7 @@ export const UserProvider = (props) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
   const [companyDomain, setCompanyDomain] = useState(null);
+  // console.log(token);
 
   useEffect(() => {
     const userData = JSON.parse(localStorage.getItem("localUser"));

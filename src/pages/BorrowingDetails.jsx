@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { BorrowingInitialValues, BorrowingSchema } from "../schemas";
@@ -6,7 +6,10 @@ import { UserContext } from "../context/UserContext";
 
 function BorrowingDetails() {
 	const { user, token } = useContext(UserContext);
+	const [loading, setLoading] = useState(false);
+	// console.log("user----", user);
 
+	useEffect(() => {}, [loading]);
 	const url = "/dashboard";
 	const api = "http://localhost:4000/api/v1/createLoan";
 
@@ -20,6 +23,9 @@ function BorrowingDetails() {
 		);
 
 	values.uid = user?.signUp?.uid;
+	values.Loan_state = "1200";
+	values.emailUser = true;
+	values.emailAgent = true;
 
 	return (
 		<div>
@@ -29,7 +35,7 @@ function BorrowingDetails() {
 						<div className="col-12 text-center">
 							<div data-wow-delay="0.1s">
 								<h1 className="text-white animated zoomIn mt-5">
-									Registration
+									Borrowing Details
 								</h1>
 							</div>
 							<hr
@@ -58,83 +64,95 @@ function BorrowingDetails() {
 							className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
 							data-wow-delay="0.3s">
 							<form
-								onSubmit={handleSubmit}
+								onSubmit={(e) => {
+									setLoading(true);
+									handleSubmit(e);
+								}}
 								className="needs-validation"
 								noValidate>
-								<div className="row justify-content-center g-3 m-3 mb-4">
-									<div className="col-md-12">
-										<div className="form-floating">
-											<select
-												className="form-select"
-												name="rate_of_interest"
-												id="rate_of_interest"
-												placeholder="rate_of_interest"
-												// value={values.rate_of_interest}
-												onChange={handleChange}>
-												{/* You can add the interest rates acording to you */}
-												<option>Please select the rate of interest</option>
-												<option value={5}>5 %</option>
-												<option value={8}>8 %</option>
-												<option value={10}>10 %</option>
-											</select>
-											<label htmlFor="rate_of_interest">Rate of Interest</label>
-										</div>
-									</div>
+								<div className="row justify-content-center align-items-center g-3 m-3 mb-4">
+									<div className={`${loading ? "loader" : ""}`}></div>
 
-									<div className="col-md-12">
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 										<div className="form-floating">
 											<input
 												type="text"
 												className={`form-control ${
-													errors.amount && touched.amount
+													errors.amountAsked && touched.amountAsked
 														? "is-invalid"
-														: touched.amount
+														: touched.amountAsked
 														? "is-valid"
 														: ""
 												}`}
-												name="amount"
-												id="amount"
+												name="amountAsked"
+												id="amountAsked"
 												placeholder="amount"
-												value={values.amount}
+												value={values.amountAsked}
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
-											<label htmlFor="amount">Amount</label>
-											{errors.amount && touched.amount ? (
+											<label htmlFor="amountAsked">Amount</label>
+											{errors.amountAsked && touched.amountAsked ? (
 												<div className="form-error form-validation-warning text-danger">
-													{errors.amount}
+													{errors.amountAsked}
 												</div>
 											) : null}
 										</div>
 									</div>
 
-									<div className="col-md-12">
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
 										<div className="form-floating">
 											<input
-												type="text"
 												className={`form-control ${
-													errors.tenure && touched.tenure
+													errors.roiAsked && touched.roiAsked
 														? "is-invalid"
-														: touched.tenure
+														: touched.roiAsked
 														? "is-valid"
 														: ""
 												}`}
-												name="tenure"
-												id="tenure"
-												placeholder="tenure"
-												value={values.tenure}
+												name="roiAsked"
+												id="roiAsked"
+												placeholder="Rate of Interest"
+												value={values.roiAsked}
 												onChange={handleChange}
 												onBlur={handleBlur}
 											/>
-											<label htmlFor="tenure">Tenure(in months)</label>
-											{errors.tenure && touched.tenure ? (
+											<label htmlFor="roiAsked">Rate of Interest</label>
+											{errors.roiAsked && touched.roiAsked ? (
 												<div className="form-error form-validation-warning text-danger">
-													{errors.tenure}
+													{errors.roiAsked}
 												</div>
 											) : null}
 										</div>
 									</div>
-									<div className="col-4">
+
+									<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
+										<div className="form-floating">
+											<input
+												type="text"
+												className={`form-control ${
+													errors.tenureAsked && touched.tenureAsked
+														? "is-invalid"
+														: touched.tenureAsked
+														? "is-valid"
+														: ""
+												}`}
+												name="tenureAsked"
+												id="tenureAsked"
+												placeholder="tenure"
+												value={values.tenureAsked}
+												onChange={handleChange}
+												onBlur={handleBlur}
+											/>
+											<label htmlFor="tenureAsked">Tenure(in months)</label>
+											{errors.tenureAsked && touched.tenureAsked ? (
+												<div className="form-error form-validation-warning text-danger">
+													{errors.tenureAsked}
+												</div>
+											) : null}
+										</div>
+									</div>
+									<div className={`col-4 ${loading ? "row-loader" : ""}`}>
 										<button
 											type="submit"
 											className="btn btn-primary w-100 py-3 btn-primary">
