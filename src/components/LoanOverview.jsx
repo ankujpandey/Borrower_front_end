@@ -146,7 +146,7 @@ function LoanOverview({ uid }) {
 										<p>Amount Disbursed: </p>
 									</th>
 									<td>
-										{loanData?.Loan_state === "1600" ? (
+										{loanData?.Loan_state > "1500" ? (
 											<p>Yes</p>
 										) : loanData?.Loan_state === "-1000" ? (
 											<p>No</p>
@@ -157,7 +157,7 @@ function LoanOverview({ uid }) {
 								</tr>
 								<tr>
 									<th>
-										<p>Request Status: </p>
+										<p>Status: </p>
 									</th>
 									<td>
 										{loanData?.Loan_state === "1200" ? (
@@ -171,7 +171,11 @@ function LoanOverview({ uid }) {
 										) : loanData?.Loan_state === "1400" ? (
 											<p>Loan Approved by Agent Please check loan Proposal</p>
 										) : loanData?.Loan_state === "1500" ? (
-											<p>Your loan is passed.</p>
+											<p>waiting for loan Disburse.</p>
+										) : loanData?.Loan_state === "1600" ? (
+											<p>loan Amount disbursed.</p>
+										) : loanData?.Loan_state === "1700" ? (
+											<p>Loan Repaid.</p>
 										) : loanData?.Loan_state === "-1000" ? (
 											<p>We are sorry to inform you, Your loan isn't passed.</p>
 										) : null}
