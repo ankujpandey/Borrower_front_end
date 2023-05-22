@@ -280,8 +280,19 @@ function AgreementModel({ loanData }) {
                     <td>{loanData?.loanData?.minRoiApproved} %</td>
                   </tr>
                   <tr>
-                    <td>Collection Fee (On Outstanding Principal)</td>
+                    <td>Processing Fee (On Outstanding Principal)</td>
                     <td>5.00 %</td>
+                  </tr>
+                  <tr>
+                    <td>Processing Amount</td>
+                    <td>{loanData?.loanData?.amountApproved * 0.05}</td>
+                  </tr>
+                  <tr>
+                    <td>Loan Amount after deducting processing fee </td>
+                    <td>
+                      {loanData?.loanData?.amountApproved -
+                        loanData?.loanData?.amountApproved * 0.05}
+                    </td>
                   </tr>
                   <tr>
                     <td>Regular EMI</td>
