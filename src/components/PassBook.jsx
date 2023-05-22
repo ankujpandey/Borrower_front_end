@@ -68,10 +68,10 @@ function PassBook({ uid, loanStatus }) {
 										<td>{row.txn_type}</td>
 										<td>{row.txn_flow}</td>
 
-										{row.credit_Amount === 0 ? (
-											<td style={{ color: "red" }}>-{row.debit_Amount}</td>
-										) : (
+										{row.credit_Amount > 0 ? (
 											<td style={{ color: "green" }}>+{row.credit_Amount}</td>
+										) : (
+											<td style={{ color: "red" }}>-{row.debit_Amount}</td>
 										)}
 										<td>{row.running_Amount}</td>
 									</tr>

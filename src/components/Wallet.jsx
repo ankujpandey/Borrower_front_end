@@ -52,7 +52,7 @@ function Wallet({ uid, loanStatus }) {
 									Your Wallet
 								</p>
 							</div>
-							<div className="card col-8 wallet-div shadow mb-4 bg-body-tertiary rounded animated slideInDown">
+							<div className="card col-9 wallet-div shadow mb-4 bg-body-tertiary rounded animated slideInDown">
 								<div className="row justify-content-center align-items-center">
 									<div className="col-md-5">{Icons.wallet}</div>
 									<div className="col-md-6">
