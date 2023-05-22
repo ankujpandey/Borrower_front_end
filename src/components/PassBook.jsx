@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { Icons } from "../icons/Icons";
 import { UserContext } from "../context/UserContext";
 import { ApiCall } from "../functions/ApiCall";
+import moment from "moment";
 
-function PassBook({ uid }) {
+function PassBook({ uid, loanStatus }) {
 	const [passbook, setPassbook] = useState();
 	const { token } = useContext(UserContext);
+	const date = moment().format("LLLL");
 
 	useEffect(() => {
 		fetchData(uid);
@@ -38,35 +40,46 @@ function PassBook({ uid }) {
 				<div className="col-12">
 					<h4>Passbook</h4>
 					<hr className="mt-2 mb-1" />
+					{loanStatus < "1500" ? (
+						<p className="calculator-msg">
+							You're Application is under process.
+						</p>
+					) : null}
 				</div>
-				<div className="col-12 mt-3">
-					<table className="table table-bordered">
-						<thead>
-							<tr>
-								<th scope="col">TXN ID</th>
-								<th scope="col">Date</th>
-								<th scope="col">Transaction Type</th>
-								<th scope="col">Transaction flow</th>
-								<th scope="col">Transaction Amount</th>
-								<th scope="col">Remaining Balence</th>
-							</tr>
-						</thead>
-						<tbody>
-							{/* {loanData?.EMI?.table?.map((row) => ( */}
-							<tr>
-								{/* <th scope="row">{row.installmentNo}</th> */}
+				{loanStatus > "1400" ? (
+					<div className="col-12 mt-3">
+						<table className="table table-bordered">
+							<thead className="wallet-user-div" style={{ color: "white" }}>
+								<tr>
+									<th scope="col">TXN ID</th>
+									<th scope="col">Date</th>
+									<th scope="col">Transaction Type</th>
+									<th scope="col">Transaction flow</th>
+									<th scope="col">Transaction Amount</th>
+									<th scope="col">Remaining Balence</th>
+								</tr>
+							</thead>
+							<tbody>
+								{passbook?.map((row) => (
+									<tr key={row.txn_id}>
+										<th scope="row">{row.txn_id}</th>
 
-								<td>2341</td>
-								<td>24-12-2023</td>
-								<td>credit</td>
-								<td>loan</td>
-								<td>10000</td>
-								<td>10500</td>
-							</tr>
-							{/* ))} */}
-						</tbody>
-					</table>
-				</div>
+										<td>{moment(row.updatedAt).format("LLLL")}</td>
+										<td>{row.txn_type}</td>
+										<td>{row.txn_flow}</td>
+
+										{row.credit_Amount > 0 ? (
+											<td style={{ color: "green" }}>+{row.credit_Amount}</td>
+										) : (
+											<td style={{ color: "red" }}>-{row.debit_Amount}</td>
+										)}
+										<td>{row.running_Amount}</td>
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				) : null}
 				{/* <div className="col-12">
 					<div className="card p-2">
 						<h6>Yore transaction Amount</h6>

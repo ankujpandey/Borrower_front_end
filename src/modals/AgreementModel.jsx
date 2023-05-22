@@ -6,7 +6,7 @@ import { useHandleValidation } from "../hooks/useHandleValidation";
 import { acceptLoanTermsSchema, acceptLoanTermsInitialValue } from "../schemas";
 import { ApiCall } from "../functions/ApiCall";
 
-function AgreementModel({ loanData }) {
+function AgreementModel({ loanData, setLoanStatus }) {
   const { user, token } = useContext(UserContext);
   const date = moment().format("DD-MMM-YYYY");
 
@@ -32,7 +32,7 @@ function AgreementModel({ loanData }) {
   // );
 
   const handleSubmit = async (agreement) => {
-    console.log(agreement);
+    // console.log("Loan DAta", loanData.loanData);
 
     // console.log("user uid", user.userName.uid);
 
@@ -45,6 +45,7 @@ function AgreementModel({ loanData }) {
         Loan_state: agreement,
         emailAgent: true,
         emailUser: true,
+        LoanId: loanData?.loanData?.LoanId,
       },
     };
     try {
@@ -422,6 +423,7 @@ function AgreementModel({ loanData }) {
               <button
                 className="btn btn-outline-primary rounded-pill px-4"
                 onClick={() => {
+                  setLoanStatus(-1000);
                   handleSubmit(-1000);
                 }}
                 data-bs-dismiss="modal"
@@ -435,7 +437,7 @@ function AgreementModel({ loanData }) {
                 className="btn btn-primary rounded-pill px-4"
                 // onClick={() => setFieldValue("Loan_state", "1500")}
                 onClick={() => {
-                  // setAgreement(1500);
+                  setLoanStatus(1500);
                   handleSubmit(1500);
                 }}
                 data-bs-dismiss="modal"

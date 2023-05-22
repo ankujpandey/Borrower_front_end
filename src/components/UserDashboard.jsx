@@ -7,10 +7,10 @@ import EmiDetails from "./EmiDetails";
 import PassBook from "./PassBook";
 import Wallet from "./Wallet";
 
-function UserDashboard({ uid }) {
+function UserDashboard({ uid, loanStatus, setLoanStatus }) {
 	console.log(uid);
 	const [profilePage, setProfilePage] = useState(true);
-	const [loanStatus, setLoanStatus] = useState(false);
+	const [loanProposal, setloanProposal] = useState(false);
 	const [loanOverview, setLoanOverview] = useState(false);
 	const [emiPage, setEmiPage] = useState(false);
 	const [passBookPage, setPassBookPage] = useState(false);
@@ -29,14 +29,14 @@ function UserDashboard({ uid }) {
 						data-wow-delay="0.3s">
 						<div className="d-flex">
 							<div className="col-2 round-nav ps-3 pt-4 pb-4 ">
-								<nav className="nav nav-btns animation flex-column">
+								<li className="nav nav-btns animation flex-column">
 									<a
 										className={`nav-link ${profilePage ? "active" : ""}`}
 										aria-current="page"
 										onClick={() => {
 											setProfilePage(true);
 											setLoanOverview(false);
-											setLoanStatus(false);
+											setloanProposal(false);
 											setEmiPage(false);
 											setPassBookPage(false);
 											setWalletPage(false);
@@ -51,7 +51,7 @@ function UserDashboard({ uid }) {
 										onClick={() => {
 											setProfilePage(false);
 											setEmiPage(false);
-											setLoanStatus(false);
+											setloanProposal(false);
 											setPassBookPage(false);
 											setWalletPage(false);
 											setLoanOverview(true);
@@ -62,16 +62,16 @@ function UserDashboard({ uid }) {
 										</span>
 									</a>
 									<a
-										className={`nav-link ${loanStatus ? "active" : ""}`}
+										className={`nav-link ${loanProposal ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
 											setLoanOverview(false);
 											setEmiPage(false);
 											setPassBookPage(false);
 											setWalletPage(false);
-											setLoanStatus(true);
+											setloanProposal(true);
 										}}>
-										<span className={`${loanStatus ? "enable" : ""}`}>
+										<span className={`${loanProposal ? "enable" : ""}`}>
 											Loan Proposal
 										</span>
 									</a>
@@ -80,7 +80,7 @@ function UserDashboard({ uid }) {
 										onClick={() => {
 											setProfilePage(false);
 											setLoanOverview(false);
-											setLoanStatus(false);
+											setloanProposal(false);
 											setPassBookPage(false);
 											setWalletPage(false);
 											setEmiPage(true);
@@ -90,12 +90,13 @@ function UserDashboard({ uid }) {
 											EMI Details
 										</span>
 									</a>
+
 									<a
 										className={`nav-link ${passBookPage ? "active" : ""}`}
 										onClick={() => {
 											setProfilePage(false);
 											setLoanOverview(false);
-											setLoanStatus(false);
+											setloanProposal(false);
 											setEmiPage(false);
 											setWalletPage(false);
 											setPassBookPage(true);
@@ -109,7 +110,7 @@ function UserDashboard({ uid }) {
 										onClick={() => {
 											setProfilePage(false);
 											setLoanOverview(false);
-											setLoanStatus(false);
+											setloanProposal(false);
 											setEmiPage(false);
 											setPassBookPage(false);
 											setWalletPage(true);
@@ -118,7 +119,7 @@ function UserDashboard({ uid }) {
 											Wallet
 										</span>
 									</a>
-								</nav>
+								</li>
 							</div>
 							{profilePage ? (
 								<div className="col-10">
@@ -132,27 +133,27 @@ function UserDashboard({ uid }) {
 								</div>
 							) : null}
 
-							{loanStatus ? (
+							{loanProposal ? (
 								<div className="col-10">
-									<LoanProposal uid={uid} />
+									<LoanProposal uid={uid} setLoanStatus={setLoanStatus} />
 								</div>
 							) : null}
 
 							{emiPage ? (
 								<div className="col-10">
-									<EmiDetails uid={uid} />
+									<EmiDetails uid={uid} loanStatus={loanStatus} />
 								</div>
 							) : null}
 
 							{passBookPage ? (
 								<div className="col-10">
-									<PassBook uid={uid} />
+									<PassBook uid={uid} loanStatus={loanStatus} />
 								</div>
 							) : null}
 
 							{walletPage ? (
 								<div className="col-10">
-									<Wallet uid={uid} />
+									<Wallet uid={uid} loanStatus={loanStatus} />
 								</div>
 							) : null}
 						</div>

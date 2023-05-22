@@ -146,7 +146,7 @@ function LoanOverview({ uid }) {
 										<p>Amount Disbursed: </p>
 									</th>
 									<td>
-										{loanData?.Loan_state === "1500" ? (
+										{loanData?.Loan_state === "1600" ? (
 											<p>Yes</p>
 										) : loanData?.Loan_state === "-1000" ? (
 											<p>No</p>
