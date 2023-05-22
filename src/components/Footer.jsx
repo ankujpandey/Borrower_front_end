@@ -65,21 +65,15 @@ function Footer(props) {
             </div>
             <div className="col-md-6 col-lg-3">
               <h5 className="text-white mb-4">Popular Link</h5>
-              <a className="btn btn-link" href="">
+              <a className="btn btn-link" href="/about-us">
                 About Us
               </a>
-              <a className="btn btn-link" href="">
+              <a className="btn btn-link" href="/contact">
                 Contact Us
               </a>
-              <a className="btn btn-link" href="">
-                Privacy Policy
-              </a>
-              <a className="btn btn-link" href="">
-                Terms &amp; Condition
-              </a>
-              <a className="btn btn-link" href="">
-                Career
-              </a>
+              <a className="btn btn-link">Privacy Policy</a>
+              <a className="btn btn-link">Terms &amp; Condition</a>
+              <a className="btn btn-link">Career</a>
             </div>
             <div className="col-md-6 col-lg-3">
               <h5 className="text-white mb-4">Project Gallery</h5>
@@ -159,14 +153,12 @@ function Footer(props) {
                 <a className="border-bottom" href="#">
                   Mr. Borrower
                 </a>
-                , All Right Reserved.
+                , All Rights Reserved.
               </div>
               <div className="col-md-6 text-center text-md-end">
                 <div className="footer-menu">
-                  <a href="">Home</a>
-                  <a href="">Cookies</a>
-                  <a href="">Help</a>
-                  <a href="">FQAs</a>
+                  <a href="/">Home</a>
+                  <a href="/contact">Help</a>
                 </div>
               </div>
             </div>
