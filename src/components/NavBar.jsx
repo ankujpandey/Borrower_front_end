@@ -26,7 +26,7 @@ function NavBar(props) {
         <span className="fa fa-bars" />
       </button>
       <div className="collapse navbar-collapse" id="navbarCollapse">
-        <div className="navbar-nav ms-auto py-0">
+        <div className="navbar-nav ms-auto py-0 mr-5">
           {!user ? (
             <Link to="/" className="nav-item nav-link">
               Home
@@ -44,53 +44,21 @@ function NavBar(props) {
               Home
             </Link>
           )}
-          <Link href="about.html" className="nav-item nav-link">
+          <Link to="/about-us" className="nav-item nav-link">
             About
           </Link>
-          <Link href="service.html" className="nav-item nav-link">
-            Service
-          </Link>
-          <Link href="project.html" className="nav-item nav-link">
-            Project
-          </Link>
-          <div className="nav-item dropdown">
-            <Link
-              href="#"
-              className="nav-link dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              Pages
-            </Link>
-            <div className="dropdown-menu m-0">
-              <Link href="team.html" className="dropdown-item">
-                Our Team
-              </Link>
-              <Link href="testimonial.html" className="dropdown-item">
-                Testimonial
-              </Link>
-              <Link href="404.html" className="dropdown-item">
-                404 Page
-              </Link>
-            </div>
-          </div>
+
           {user?.adminID ? (
             <Link to="/pool-table" className="nav-item nav-link">
               Pool Table
             </Link>
           ) : (
-            <Link href="contact.html" className="nav-item nav-link">
+            <Link to="/contact" className="nav-item nav-link">
               Contact
             </Link>
           )}
         </div>
-        <button
-          type="button"
-          className="btn text-secondary ms-3"
-          data-bs-toggle="modal"
-          data-bs-target="#searchModal"
-        >
-          <i className="fa fa-search" />
-        </button>
+
         {!user ? (
           <Link
             to="/sign-in"

@@ -23,6 +23,8 @@ import Footer from "./components/Footer";
 import AgentDashboard from "./pages/AgentDashboard";
 import UserDetailedPage from "./pages/UserDetailedPage";
 import PoolTable from "./components/PoolTable";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 
 function App() {
   // const { user, setUser } = useContext(UserContext);
@@ -32,6 +34,8 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/about-us" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/sign-up" element={<SignUpPage />} />
           <Route path="/sign-in" element={<LoginPage />} />
