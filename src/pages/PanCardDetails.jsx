@@ -12,7 +12,7 @@ function PanCardDetails(props) {
   const navigate = useNavigate();
   let formData = new FormData();
 
-  const handlesubmit = async (e) => {
+  const handlesubmit = async e => {
     console.log("handle submit called");
     e.preventDefault();
     setLoading(true);
@@ -32,7 +32,7 @@ function PanCardDetails(props) {
       //   "response__-------------->>>>>",
       //   response.data.data.verification.passed
       // );
-      if (!response.data.data.verification.passed) {
+      if (response.data.data.verification.passed) {
         setNotPassed(true);
         setPassed(false);
       } else {
@@ -47,7 +47,7 @@ function PanCardDetails(props) {
     console.log(response);
   };
 
-  const updateLoanStatus = async (e) => {
+  const updateLoanStatus = async e => {
     e.preventDefault();
     console.log("update loan status called");
 
@@ -95,8 +95,7 @@ function PanCardDetails(props) {
 
       <div
         className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s"
-      >
+        data-wow-delay="0.1s">
         <h6 className="position-relative d-inline text-primary ps-4">
           PAN Card Upload
         </h6>
@@ -108,14 +107,12 @@ function PanCardDetails(props) {
           <div className="col-lg-11">
             <div
               className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
-              data-wow-delay="0.3s"
-            >
+              data-wow-delay="0.3s">
               <form
                 action=""
-                onSubmit={(e) => handlesubmit(e)}
+                onSubmit={e => handlesubmit(e)}
                 className="needs-validation"
-                noValidate
-              >
+                noValidate>
                 <div className="row justify-content-center align-items-center g-3">
                   <div className={`${loading ? "loader" : ""}`}></div>
                   <div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
@@ -127,7 +124,7 @@ function PanCardDetails(props) {
                         type="file"
                         id="aadharfrontfile"
                         placeholder="PAN Card"
-                        onChange={(e) => {
+                        onChange={e => {
                           console.log(e.target.files[0]);
                           formData.append("PAN_Card", e.target.files[0]);
                         }}
@@ -152,10 +149,9 @@ function PanCardDetails(props) {
                       <div className={`col-4 ${loading ? "row-loader" : ""}`}>
                         <button
                           className="btn btn-primary w-100 py-3 btn-primary"
-                          onClick={(e) => {
+                          onClick={e => {
                             updateLoanStatus(e);
-                          }}
-                        >
+                          }}>
                           Next {Icons.next}
                         </button>
                       </div>
@@ -174,8 +170,7 @@ function PanCardDetails(props) {
                       <div className={`col-4 ${loading ? "row-loader" : ""}`}>
                         <button
                           type="submit"
-                          className="btn btn-primary w-100 py-3 btn-primary"
-                        >
+                          className="btn btn-primary w-100 py-3 btn-primary">
                           {Icons.upload} Upload
                         </button>
                       </div>
@@ -184,8 +179,7 @@ function PanCardDetails(props) {
                     <div className={`col-4 ${loading ? "row-loader" : ""}`}>
                       <button
                         type="submit"
-                        className="btn btn-primary w-100 py-3 btn-primary"
-                      >
+                        className="btn btn-primary w-100 py-3 btn-primary">
                         {Icons.upload} Upload
                       </button>
                     </div>
