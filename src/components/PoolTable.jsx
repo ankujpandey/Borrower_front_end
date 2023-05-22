@@ -3,6 +3,7 @@ import { ApiCall } from "../functions/ApiCall";
 import moment from "moment";
 import { Icons } from "../icons/Icons";
 import ReactPaginate from "react-paginate";
+import AddPoolMoney from "../modals/AddPoolMoney";
 
 function PoolTable(props) {
   const [poolTxn, setPoolTxn] = useState([]);
@@ -96,7 +97,7 @@ function PoolTable(props) {
         {/* <h6 className="position-relative d-inline text-primary ps-4">
   Users List
 </h6> */}
-        <h2 className="mt-2">Pool Table List</h2>
+        <h2 className="mt-2">Pool Table Transactions</h2>
       </div>
 
       <div className="row justify-content-center">
@@ -109,9 +110,18 @@ function PoolTable(props) {
             </div>
           </div>
         </div>
+        <div className="col-10 mt-3 d-flex justify-content-center">
+          <button
+            className="btn btn-primary py-sm-3 px-sm-5 rounded-pill "
+            data-bs-toggle="modal"
+            data-bs-target="#addPoolMoney"
+          >
+            Add Money
+          </button>
+        </div>
       </div>
 
-      <div className="container mt-5">
+      <div className="container mt-3">
         <hr className="mb-0 mt-4" />
         <table className="table table-striped shadow-sm p-3 mb-4 rounded">
           <thead>
@@ -165,6 +175,7 @@ function PoolTable(props) {
         activeClassName={"active"}
         disabledClassName={"disabled"}
       />
+      <AddPoolMoney />
     </div>
   );
 }

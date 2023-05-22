@@ -3,28 +3,32 @@ import { AmountSchema, AmountInitialValue } from "../schemas";
 import { UserContext } from "../context/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
-function AddBorrowerMoney({ wallet }) {
+function AddPoolMoney(props) {
   const { token } = useContext(UserContext);
-
-  const url = "/dashboard";
-  const api = "http://localhost:4000/api/v1/createBorrowerTransaction";
+  const url = "/pool-table";
+  const api = "http://localhost:4000/api/v1/createPoolTransaction";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     useHandleValidation(AmountInitialValue, AmountSchema, url, api, token);
-
-  values.uid = wallet?.uid;
-  values.LoanID = wallet?.LoanId;
-  values.txn_type = "added money to wallet";
+  values.poolId = 1;
+  values.txn_type = "recharge";
 
   return (
-    <div className="modal fade" id="addBorrowerMoney" tabIndex={-1}>
+    <div className="modal fade" id="addPoolMoney" tabIndex={-1}>
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-body">
             <div className="modal-border-deign m-3">
               <div className="row justify-content-center g-3 m-3">
-                <div className="modal-heading">Add money to Wallet</div>
-
+                <div
+                  className="modal-heading"
+                  style={{
+                    marginRight: "10.2rem",
+                    width: "220px",
+                  }}
+                >
+                  Add money to Pool
+                </div>
                 <form
                   action=""
                   onSubmit={handleSubmit}
@@ -36,6 +40,12 @@ function AddBorrowerMoney({ wallet }) {
                       <div className="form-floating mt-3">
                         <input
                           type="text"
+                          name="credit_Amount"
+                          id="credit_Amount"
+                          placeholder="amount"
+                          value={values.credit_Amount}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
                           className={`form-control ${
                             errors.credit_Amount && touched.credit_Amount
                               ? "is-invalid"
@@ -43,14 +53,8 @@ function AddBorrowerMoney({ wallet }) {
                               ? "is-valid"
                               : ""
                           }`}
-                          name="credit_Amount"
-                          id="credit_Amount"
-                          placeholder="credit_Amount"
-                          value={values.credit_Amount}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
                         />
-                        <label htmlFor="credit_Amount">Amount</label>
+                        <label htmlFor="amountAsked">Amount</label>
                         {errors.credit_Amount && touched.credit_Amount ? (
                           <div className="form-error form-validation-warning text-danger">
                             {errors.credit_Amount}
@@ -64,10 +68,10 @@ function AddBorrowerMoney({ wallet }) {
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
                           // onClick={() => {
-                          //   window.location = "/dashboard";
+                          //   window.location = "/pool-table";
                           // }}
                         >
-                          Deposit Money
+                          Add Money
                         </button>
                       </div>
                     </div>
@@ -82,4 +86,4 @@ function AddBorrowerMoney({ wallet }) {
   );
 }
 
-export default AddBorrowerMoney;
+export default AddPoolMoney;

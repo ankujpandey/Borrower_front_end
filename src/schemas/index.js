@@ -305,16 +305,43 @@ export const acceptLoanTermsSchema = Yup.object({
   // ),
 });
 
-// ---------------------------------------
-//   To add money to borrower wallet
-// ---------------------------------------
+// -------------------------------------------------
+//   To add money to borrower wallet / pool table
+// -------------------------------------------------
 
-export const walletInitialValue = {
+export const AmountInitialValue = {
   credit_Amount: "",
 };
 
-export const walletSchema = Yup.object({
+export const AmountSchema = Yup.object({
   credit_Amount: Yup.string()
     .matches(/([0-9])$/, "Please enter a valid Amount")
     .required("Amount can't be empty"),
+});
+
+// ------------------------------------------
+//   To transfer money from borrower wallet
+// ------------------------------------------
+
+export const walletTransferInitialValue = {
+  ifsc_code: "",
+  debit_Amount: "",
+  account_number: "",
+};
+
+export const walletTransferSchema = Yup.object({
+  debit_Amount: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid Amount")
+    .required("Amount can't be empty"),
+
+  ifsc_code: Yup.string()
+    .matches(/([A-Z][0-9])/, "Please enter a valid IFSC Code")
+    .length(11)
+    .required("IFSC Code can't be empty"),
+
+  account_number: Yup.string()
+    .matches(/([0-9])$/, "Please enter a valid Account Number")
+    .max(14)
+    .min(11)
+    .required("Account Number can't be empty"),
 });
