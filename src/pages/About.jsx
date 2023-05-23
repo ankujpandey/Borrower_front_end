@@ -28,7 +28,7 @@ function About(props) {
 								</h6>
 								<h2 className="mt-2">Mr. Borrower </h2>
 							</div>
-							<p className="mb-4 ">
+							<p className="mb-4 d-flex justify-content-around">
 								This website usually verifies a user's identity using his/her ID
 								documents and live image capturing.
 								<br />
