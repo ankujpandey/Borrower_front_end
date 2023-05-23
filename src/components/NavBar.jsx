@@ -27,9 +27,9 @@ function NavBar(props) {
 			<div className="collapse navbar-collapse" id="navbarCollapse">
 				<div className="navbar-nav ms-auto py-0 mr-5">
 					{!user ? (
-						<NavLink to="/" className="nav-item nav-link">
+						<Link to="/" className="nav-item nav-link">
 							Home
-						</NavLink>
+						</Link>
 					) : user.adminID ? (
 						<Link to="/admin-dashboard" className="nav-item nav-link">
 							Home
@@ -47,7 +47,7 @@ function NavBar(props) {
 						About
 					</Link>
 
-					<Link to="/our-team" className="nav-item nav-link">
+					<Link to="/team" className="nav-item nav-link">
 						Our Team
 					</Link>
 
