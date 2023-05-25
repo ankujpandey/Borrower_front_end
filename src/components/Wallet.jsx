@@ -8,13 +8,14 @@ import moment from "moment";
 
 function Wallet({ uid, loanStatus }) {
 	const [wallet, setWallet] = useState();
+	const [openedModal, setOpenedModal] = useState(false);
 	const { token } = useContext(UserContext);
 
 	console.log(loanStatus);
 
 	useEffect(() => {
 		fetchData(uid);
-	}, []);
+	}, [openedModal]);
 
 	const fetchData = async (uid) => {
 		const config = {
@@ -29,6 +30,7 @@ function Wallet({ uid, loanStatus }) {
 			if (response.status === 201) {
 				console.log(response?.data?.data);
 				setWallet(response?.data?.data);
+				setOpenedModal(false);
 			} else {
 				alert("Something went Wrong");
 			}
@@ -161,8 +163,11 @@ function Wallet({ uid, loanStatus }) {
 					</button>
 				</div> */}
 			</div>
-			<TransferBorrowerMoneyModal wallet={wallet} />
-			<AddBorrowerMoney wallet={wallet} />
+			<TransferBorrowerMoneyModal
+				wallet={wallet}
+				setOpenedModal={setOpenedModal}
+			/>
+			<AddBorrowerMoney wallet={wallet} setOpenedModal={setOpenedModal} />
 		</div>
 	);
 }

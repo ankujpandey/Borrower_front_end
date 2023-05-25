@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 import { Icons } from "../icons/Icons";
 
@@ -48,7 +48,7 @@ function NavBar(props) {
             About
           </Link>
 
-          <Link to="/contact" className="nav-item nav-link">
+          <Link to="/team" className="nav-item nav-link">
             Our Team
           </Link>
 
@@ -63,27 +63,37 @@ function NavBar(props) {
           )}
         </div>
 
-        {!user ? (
-          <Link
-            to="/sign-in"
-            className="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3"
-          >
-            Log-In
+        {user?.adminID ? (
+          <Link to="/pool-table" className="nav-item nav-link me-3">
+            Pool Table
           </Link>
         ) : (
-          <a
-            role="button"
-            className="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3"
-            onClick={() => {
-              setUser(null);
-              localStorage.clear();
-              navigate("/");
-            }}
-          >
-            Log-Out
-          </a>
+          <Link to="/contact" className="nav-item nav-link me-3">
+            Contact
+          </Link>
         )}
       </div>
+
+      {!user ? (
+        <Link
+          to="/sign-in"
+          className="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3"
+        >
+          Log-In
+        </Link>
+      ) : (
+        <a
+          role="button"
+          className="btn btn-secondary text-light rounded-pill py-2 px-4 ms-3"
+          onClick={() => {
+            setUser(null);
+            localStorage.clear();
+            navigate("/");
+          }}
+        >
+          Log-Out
+        </a>
+      )}
     </nav>
   );
 }
