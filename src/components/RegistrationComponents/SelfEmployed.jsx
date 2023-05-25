@@ -6,7 +6,7 @@ import { Icons } from "../../icons/Icons";
 
 function SelfEmployed(props) {
   const { user, token } = useContext(UserContext);
-  const url = "/register3";
+  const url = "/image-capture";
   const api = "http://localhost:4000/api/v1/createEmployment";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =

@@ -7,7 +7,7 @@ import axios from "axios";
 
 function SalariedEmployee(props) {
   const { user, token } = useContext(UserContext);
-  const url = "/register3";
+  const url = "/image-capture";
   const api = "http://localhost:4000/api/v1/createEmployment";
   const [companies, setCompanies] = useState([]);
   // const [companyName, setCompanyName] = useState("");
