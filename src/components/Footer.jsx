@@ -10,7 +10,7 @@ function Footer(props) {
       >
         <div className="container py-5 px-lg-5">
           <div className="row g-5">
-            <div className="col-md-6 col-lg-3">
+            <div className="col-md-6 col-lg-5">
               <h5 className="text-white mb-4">Get In Touch</h5>
               <p>
                 <i className="fa fa-map-marker-alt me-3" />
@@ -64,65 +64,18 @@ function Footer(props) {
               </div>
             </div>
             <div className="col-md-6 col-lg-3">
-              <h5 className="text-white mb-4">Popular Link</h5>
+              <h5 className="text-white mb-4">Popular Links</h5>
               <a className="btn btn-link" href="/about-us">
                 About Us
               </a>
               <a className="btn btn-link" href="/contact">
                 Contact Us
               </a>
-              <a className="btn btn-link">Privacy Policy</a>
-              <a className="btn btn-link">Terms &amp; Condition</a>
-              <a className="btn btn-link">Career</a>
+              <a className="btn btn-link">Our Team</a>
+              <a className="btn btn-link">Terms &amp; Conditions</a>
             </div>
-            <div className="col-md-6 col-lg-3">
-              <h5 className="text-white mb-4">Project Gallery</h5>
-              <div className="row g-2">
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-1.jpg"
-                    alt="Image"
-                  />
-                </div>
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-2.jpg"
-                    alt="Image"
-                  />
-                </div>
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-3.jpg"
-                    alt="Image"
-                  />
-                </div>
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-4.jpg"
-                    alt="Image"
-                  />
-                </div>
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-5.jpg"
-                    alt="Image"
-                  />
-                </div>
-                <div className="col-4">
-                  <img
-                    className="img-fluid"
-                    src="img/portfolio-6.jpg"
-                    alt="Image"
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 col-lg-3">
+
+            <div className="col-md-6 col-lg-4">
               <h5 className="text-white mb-4">Newsletter</h5>
               <p>
                 Currently we don't have a newsletter. We will update here when
@@ -149,11 +102,16 @@ function Footer(props) {
           <div className="copyright">
             <div className="row">
               <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                ©
-                <a className="border-bottom" href="#">
+                &copy;{" "}
+                <a class="border-bottom" href="#">
                   Mr. Borrower
                 </a>
-                , All Rights Reserved.
+                , All Right Reserved.
+                {/*  This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. */}
+                Designed By{" "}
+                <a class="border-bottom" href="https://htmlcodex.com">
+                  HTML Codex
+                </a>
               </div>
               <div className="col-md-6 text-center text-md-end">
                 <div className="footer-menu">

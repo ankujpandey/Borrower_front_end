@@ -48,6 +48,10 @@ function NavBar(props) {
             About
           </Link>
 
+          <Link to="/contact" className="nav-item nav-link">
+            Our Team
+          </Link>
+
           {user?.adminID ? (
             <Link to="/pool-table" className="nav-item nav-link">
               Pool Table
