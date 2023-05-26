@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { ApiCall } from "../functions/ApiCall";
 import { Icons } from "../icons/Icons";
-import { UserContext } from "../context/UserContext";
-import UpdateUser from "../components/UpdateUser";
 import { saveAs } from "file-saver";
-import UpdateLoanDetails from "../components/UpdateLoanDetails";
-import LoanDisbursement from "../components/LoanDisbursement";
+import { UserContext } from "../contextAPI/UserContext";
+import UpdateUser from "../components/UserComponents/UpdateUser";
+import UpdateLoanDetails from "../components/LoanComponents/UpdateLoanDetails";
+import LoanDisbursement from "../components/LoanComponents/LoanDisbursement";
 
 function UserDetails(props) {
   const { id } = useParams();
@@ -24,7 +24,7 @@ function UserDetails(props) {
   let [color, setColor] = useState("black");
 
   setColor = (status) => {
-    status == 1 ? (color = "green") : (color = "red");
+    status === 1 ? (color = "green") : (color = "red");
     return color;
   };
 
@@ -100,7 +100,7 @@ function UserDetails(props) {
       };
       let response = await ApiCall(config);
       console.log("==========response", response);
-      if (response.status == 200) {
+      if (response.status === 200) {
         setLoading(false);
         console.log(response.data);
         const pdfBlob = new Blob([response.data], { type: "application/pdf" });
@@ -243,7 +243,7 @@ function UserDetails(props) {
                                 color: setColor(userDetails.isActive),
                               }}
                             >
-                              {userDetails.isActive == 1 ? "Yes" : "No"}
+                              {userDetails.isActive === 1 ? "Yes" : "No"}
                             </div>
                           </div>
                         </div>
@@ -442,7 +442,7 @@ function UserDetails(props) {
                           </div>
 
                           {user.jobAssignees_id &&
-                          userDetails.Loan_state == 1300 ? (
+                          userDetails.Loan_state === 1300 ? (
                             <div className="col-3">
                               <button
                                 type="button"
@@ -456,7 +456,7 @@ function UserDetails(props) {
                             </div>
                           ) : null}
 
-                          {userDetails.Loan_state == 1500 ? (
+                          {userDetails.Loan_state === 1500 ? (
                             <div className="col-3">
                               <button
                                 type="button"
