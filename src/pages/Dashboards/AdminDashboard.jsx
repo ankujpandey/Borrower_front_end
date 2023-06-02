@@ -39,7 +39,7 @@ function AdminDashboard(props) {
     let response = await ApiCall(config);
     // console.log(page);
     if (response.status === 201) {
-      console.log(response.data.data.data);
+      console.log(response.data.data);
       setUsers(response?.data?.data?.data);
       setItemLen(response?.data?.data?.length[0]);
     } else {

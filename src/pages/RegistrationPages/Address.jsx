@@ -146,7 +146,14 @@ function Address(props) {
                     <div className="form-floating">
                       <select
                         type="text"
-                        className="form-select"
+                        className={`form-select ${
+                          (errors.postOffice && touched.postOffice) ||
+                          (!validPIN && touched.postOffice)
+                            ? "is-invalid"
+                            : touched.postOffice
+                            ? "is-valid"
+                            : ""
+                        }`}
                         name="postOffice"
                         id="postOffice"
                         placeholder="Post Office"
@@ -166,6 +173,11 @@ function Address(props) {
                             })
                           : null}
                       </select>
+                      {errors.postOffice && touched.postOffice ? (
+                        <div className="form-error form-validation-warning text-danger">
+                          {errors.postOffice}
+                        </div>
+                      ) : null}
                       <label htmlFor="PostOffice">Post Office</label>
                     </div>
                   </div>
