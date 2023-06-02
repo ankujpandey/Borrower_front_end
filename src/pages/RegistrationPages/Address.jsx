@@ -159,7 +159,6 @@ function Address(props) {
                         placeholder="Post Office"
                         value={values.postOffice}
                         onChange={handleChange}
-                        required
                       >
                         <option>Please select your area Post Office</option>
 
