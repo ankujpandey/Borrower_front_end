@@ -17,8 +17,6 @@ function UserDashboard({ uid, loanStatus, setLoanStatus }) {
 
   console.log("UserDashboard Called");
 
-  // useEffect(() => {}, [profilePage]);
-
   return (
     <div className="container px-lg-9 scrollspy-example bg-body-tertiary p-3 rounded-2">
       <div className="row justify-content-center">
