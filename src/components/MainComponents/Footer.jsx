@@ -68,8 +68,8 @@ function Footer(props) {
 							<a className="btn btn-link" href="/team">
 								Our Team
 							</a>
-							<a className="btn btn-link" href="">
-								Terms &amp; Conditions
+							<a className="btn btn-link" href="/disclaimer">
+								Disclaimer
 							</a>
 						</div>
 
