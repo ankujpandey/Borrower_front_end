@@ -99,7 +99,7 @@ function SalariedEmployee(props) {
 						/>
 						<label htmlFor="company_name">Company Name</label>
 						{console.log(values.company_name)}
-						<div className="dropdown">
+						<div className="dropdown shadow">
 							{companies
 								.filter((item) => {
 									const searchTerm = values.company_name.toLowerCase();
