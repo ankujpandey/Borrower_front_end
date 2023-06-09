@@ -51,25 +51,26 @@ function LogModel(logData) {
                               </span>
 
                               {logdata?.current_state === "1000" ? (
-                                <>user created </>
+                                <> User created successfully! </>
                               ) : logdata?.current_state === "1100" ? (
-                                <>registration completed</>
+                                <> Registration completed!</>
                               ) : logdata?.current_state === "1200" ? (
-                                <>loan applied</>
+                                <> Loan applied!</>
                               ) : logdata?.current_state === "1300" ? (
-                                <>agent review</>
+                                <> Agent reviewed the user profile.</>
                               ) : logdata?.current_state === "1400" ? (
                                 <>
-                                  loan proposed by agent and agreement initiated
+                                  Available loan proposed by agent and agreement
+                                  initiated.
                                 </>
                               ) : logdata?.current_state === "1500" ? (
-                                <>loan and agreement accepted by user</>
+                                <> Loan agreement accepted by user!</>
                               ) : logdata?.current_state === "1600" ? (
-                                <>loan disbursed</>
+                                <> Loan disbursed!</>
                               ) : logdata?.current_state === "1700" ? (
-                                <>Loan Repaid</>
+                                <> Loan Repaid !</>
                               ) : logdata?.current_state === "-1000" ? (
-                                <>loan and agreement rejected by user</>
+                                <> Loan agreement rejected by user!</>
                               ) : null}
                             </span>
                           </h5>
