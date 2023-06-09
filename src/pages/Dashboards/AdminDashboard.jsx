@@ -14,7 +14,7 @@ function AdminDashboard(props) {
   const [itemLen, setItemLen] = useState();
   const [page, setPage] = useState(1);
   let [color, setColor] = useState("black");
-  const [Id, setId] = useState(null);
+  const [logData, setLogData] = useState([]);
 
   const pageCount = Math.ceil(itemLen?.length / 5);
 
@@ -44,6 +44,26 @@ function AdminDashboard(props) {
       console.log(response.data.data);
       setUsers(response?.data?.data?.data);
       setItemLen(response?.data?.data?.length[0]);
+    } else {
+      alert("Something went wrong!!!");
+    }
+  };
+
+  // ----------------------------------------------
+  //  Fetch Log Data  functionality
+  // ----------------------------------------------
+  const fetchDataLog = async (Id) => {
+    const getLogconfig = {
+      method: "get",
+      url: `http://localhost:4000/api/v1/getlogData/${Id}`,
+      headers: { "Content-Type": "application/json" },
+    };
+    let response = await ApiCall(getLogconfig);
+
+    if (response.status === 201) {
+      console.log("----response", response.data.data[0]);
+
+      setLogData(response.data.data);
     } else {
       alert("Something went wrong!!!");
     }
@@ -138,7 +158,7 @@ function AdminDashboard(props) {
                     className="btn fs-6 btn-primary btn-sm"
                     data-bs-toggle="modal"
                     data-bs-target="#LogModal"
-                    onClick={() => setId(person.uid)}
+                    onClick={() => fetchDataLog(person.uid)}
                   >
                     Log
                   </button>
@@ -183,7 +203,7 @@ function AdminDashboard(props) {
             ))}
           </tbody>
         </table>
-        <LogModel Id={Id} />
+        <LogModel logData={logData} />
 
         {/* -------------------------------
 				Pagination part
