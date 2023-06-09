@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Icons } from "../../icons/Icons";
 import { UserContext } from "../../contextAPI/UserContext";
 import ReactPaginate from "react-paginate";
+import LogModel from "../../modals/LogModel";
 
 function AdminDashboard(props) {
   const [users, setUsers] = useState([]);
@@ -13,6 +14,7 @@ function AdminDashboard(props) {
   const [itemLen, setItemLen] = useState();
   const [page, setPage] = useState(1);
   let [color, setColor] = useState("black");
+  const [logData, setLogData] = useState([]);
 
   const pageCount = Math.ceil(itemLen?.length / 5);
 
@@ -42,6 +44,26 @@ function AdminDashboard(props) {
       console.log(response.data.data);
       setUsers(response?.data?.data?.data);
       setItemLen(response?.data?.data?.length[0]);
+    } else {
+      alert("Something went wrong!!!");
+    }
+  };
+
+  // ----------------------------------------------
+  //  Fetch Log Data  functionality
+  // ----------------------------------------------
+  const fetchDataLog = async (Id) => {
+    const getLogconfig = {
+      method: "get",
+      url: `http://localhost:4000/api/v1/getlogData/${Id}`,
+      headers: { "Content-Type": "application/json" },
+    };
+    let response = await ApiCall(getLogconfig);
+
+    if (response.status === 201) {
+      console.log("----response", response.data.data[0]);
+
+      setLogData(response.data.data);
     } else {
       alert("Something went wrong!!!");
     }
@@ -108,10 +130,11 @@ function AdminDashboard(props) {
 
       <div className="container mt-5">
         <hr className="mb-0 mt-4" />
-        <table className="table table-striped shadow-sm p-3 mb-4 rounded">
+        <table className="table  table-sm table-striped shadow-sm p-3 mb-4 rounded">
           <thead>
             <tr>
               <th scope="col">ID</th>
+              <th scope="col">Log</th>
               <th scope="col">Name</th>
               <th scope="col">E-mail</th>
               <th scope="col">Mobile</th>
@@ -129,6 +152,17 @@ function AdminDashboard(props) {
             {users?.map((person) => (
               <tr key={person.uid}>
                 <th scope="row">{person.uid}</th>
+                <td>
+                  <button
+                    type="button"
+                    className="btn fs-6 btn-primary btn-sm"
+                    data-bs-toggle="modal"
+                    data-bs-target="#LogModal"
+                    onClick={() => fetchDataLog(person.uid)}
+                  >
+                    Log
+                  </button>
+                </td>
                 <td>
                   {person.firstName} {person.lastName}
                 </td>
@@ -169,6 +203,7 @@ function AdminDashboard(props) {
             ))}
           </tbody>
         </table>
+        <LogModel logData={logData} />
 
         {/* -------------------------------
 				Pagination part

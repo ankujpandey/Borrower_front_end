@@ -28,7 +28,7 @@ function PanCardDetails(props) {
 
     if (response.status === 201) {
       setLoading(false);
-      if (!response.data.data.verification.passed) {
+      if (response.data.data.verification.passed) {
         setNotPassed(true);
         setPassed(false);
       } else {
