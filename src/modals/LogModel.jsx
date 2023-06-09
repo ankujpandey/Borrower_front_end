@@ -1,11 +1,9 @@
 import React from "react";
 
 import { Icons } from "../icons/Icons";
+import moment from "moment";
 
 function LogModel(logData) {
-  // const logData = props;
-  console.log("-----------Model", logData.logData);
-
   return (
     <div className="modal fade" id="LogModal" tabIndex={-1}>
       <div
@@ -34,11 +32,15 @@ function LogModel(logData) {
                         <div className="mt-0">
                           <h6 className="mb-1 fs-6 fw-normal text-dark">
                             <span className="fs-11 fw-semibold">
-                              {logdata?.createdAt.slice(0, 10)}
+                              {moment(logdata?.createdAt)
+                                .utc("+05:30")
+                                .format("DD MMM YY")}
                             </span>
                           </h6>
                           <p className="mb-0 fs-10 text-muted">
-                            {logdata?.createdAt.slice(11, 16)}
+                            {moment(logdata?.createdAt)
+                              .utc("+05:30")
+                              .format("hh:mm")}
                           </p>
                         </div>
                         <div className="ml-22">
@@ -47,7 +49,28 @@ function LogModel(logData) {
                               <span className="text-blue fs-15">
                                 User Activity :
                               </span>
-                              {logdata?.current_state}
+
+                              {logdata?.current_state === "1000" ? (
+                                <>user created </>
+                              ) : logdata?.current_state === "1100" ? (
+                                <>registration completed</>
+                              ) : logdata?.current_state === "1200" ? (
+                                <>loan applied</>
+                              ) : logdata?.current_state === "1300" ? (
+                                <>agent review</>
+                              ) : logdata?.current_state === "1400" ? (
+                                <>
+                                  loan proposed by agent and agreement initiated
+                                </>
+                              ) : logdata?.current_state === "1500" ? (
+                                <>loan and agreement accepted by user</>
+                              ) : logdata?.current_state === "1600" ? (
+                                <>loan disbursed</>
+                              ) : logdata?.current_state === "1700" ? (
+                                <>Loan Repaid</>
+                              ) : logdata?.current_state === "-1000" ? (
+                                <>loan and agreement rejected by user</>
+                              ) : null}
                             </span>
                           </h5>
                         </div>
@@ -62,12 +85,9 @@ function LogModel(logData) {
             <button
               type="button"
               className="btn btn-secondary"
-              data-dismiss="modal"
+              data-bs-dismiss="modal"
             >
               Close
-            </button>
-            <button type="button" className="btn btn-primary">
-              Save changes
             </button>
           </div>
         </div>
