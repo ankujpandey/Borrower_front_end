@@ -25,3 +25,8 @@ code {
 	color: rgb(232, 232, 232);
 	animation: blinker 1.2s linear infinite;
 }
+
+.disclaimer {
+	text-align: justify;
+	font-weight: 545;
+}

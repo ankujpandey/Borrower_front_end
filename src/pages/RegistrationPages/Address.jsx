@@ -159,8 +159,11 @@ function Address(props) {
                         placeholder="Post Office"
                         value={values.postOffice}
                         onChange={handleChange}
+                        required
                       >
-                        <option>Please select your area Post Office</option>
+                        <option value={""}>
+                          Please select your area Post Office
+                        </option>
 
                         {validPIN
                           ? postOffice.map((area, index) => {
@@ -172,12 +175,13 @@ function Address(props) {
                             })
                           : null}
                       </select>
+                      <label htmlFor="postOffice">Post Office</label>
+
                       {errors.postOffice && touched.postOffice ? (
                         <div className="form-error form-validation-warning text-danger">
                           {errors.postOffice}
                         </div>
                       ) : null}
-                      <label htmlFor="PostOffice">Post Office</label>
                     </div>
                   </div>
 
