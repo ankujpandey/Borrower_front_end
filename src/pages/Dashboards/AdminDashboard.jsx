@@ -7,232 +7,229 @@ import ReactPaginate from "react-paginate";
 import LogModel from "../../modals/LogModel";
 
 function AdminDashboard(props) {
-  const [users, setUsers] = useState([]);
-  const { token } = useContext(UserContext);
-  console.log(token);
-  const [loading, setLoading] = useState(false);
-  const [itemLen, setItemLen] = useState();
-  const [page, setPage] = useState(1);
-  let [color, setColor] = useState("black");
-  const [logData, setLogData] = useState([]);
+	const [users, setUsers] = useState([]);
+	const { token } = useContext(UserContext);
+	console.log(token);
+	const [loading, setLoading] = useState(false);
+	const [itemLen, setItemLen] = useState();
+	const [page, setPage] = useState(1);
+	let [color, setColor] = useState("black");
+	const [logData, setLogData] = useState([]);
 
-  const pageCount = Math.ceil(itemLen?.length / 5);
+	const pageCount = Math.ceil(itemLen?.length / 5);
 
-  const config = {
-    method: "get",
-    url: `http://localhost:4000/api/v1/getUserData?page=${page}&limit=5`,
-    headers: { "Content-Type": "application/json" },
-  };
+	const config = {
+		method: "get",
+		url: `http://localhost:4000/api/v1/getUserData?page=${page}&limit=5`,
+		headers: { "Content-Type": "application/json" },
+	};
 
-  useEffect(() => {
-    fetchData();
-    setLoading(false);
-  }, [loading]);
+	useEffect(() => {
+		fetchData();
+		setLoading(false);
+	}, [loading]);
 
-  setColor = (status) => {
-    status === 1 ? (color = "green") : (color = "red");
-    return color;
-  };
+	setColor = (status) => {
+		status === 1 ? (color = "green") : (color = "red");
+		return color;
+	};
 
-  // ----------------------------------------------
-  //  Fetch Data functionality
-  // ----------------------------------------------
-  const fetchData = async () => {
-    let response = await ApiCall(config);
-    // console.log(page);
-    if (response.status === 201) {
-      console.log(response.data.data);
-      setUsers(response?.data?.data?.data);
-      setItemLen(response?.data?.data?.length[0]);
-    } else {
-      alert("Something went wrong!!!");
-    }
-  };
+	// ----------------------------------------------
+	//  Fetch Data functionality
+	// ----------------------------------------------
+	const fetchData = async () => {
+		let response = await ApiCall(config);
+		// console.log(page);
+		if (response.status === 201) {
+			console.log(response.data.data);
+			setUsers(response?.data?.data?.data);
+			setItemLen(response?.data?.data?.length[0]);
+		} else {
+			alert("Something went wrong!!!");
+		}
+	};
 
-  // ----------------------------------------------
-  //  Fetch Log Data  functionality
-  // ----------------------------------------------
-  const fetchDataLog = async (Id) => {
-    const getLogconfig = {
-      method: "get",
-      url: `http://localhost:4000/api/v1/getlogData/${Id}`,
-      headers: { "Content-Type": "application/json" },
-    };
-    let response = await ApiCall(getLogconfig);
+	// ----------------------------------------------
+	//  Fetch Log Data  functionality
+	// ----------------------------------------------
+	const fetchDataLog = async (Id) => {
+		const getLogconfig = {
+			method: "get",
+			url: `http://localhost:4000/api/v1/getlogData/${Id}`,
+			headers: { "Content-Type": "application/json" },
+		};
+		let response = await ApiCall(getLogconfig);
 
-    if (response.status === 201) {
-      console.log("----response", response.data.data[0]);
+		if (response.status === 201) {
+			console.log("----response", response.data.data[0]);
 
-      setLogData(response.data.data);
-    } else {
-      alert("Something went wrong!!!");
-    }
-  };
+			setLogData(response.data.data);
+		} else {
+			alert("Something went wrong!!!");
+		}
+	};
 
-  // -----------------------------------------------
-  //  page changing
-  // -----------------------------------------------
+	// -----------------------------------------------
+	//  page changing
+	// -----------------------------------------------
 
-  const handlePageClick = (event) => {
-    setPage(event.selected + 1);
-    // console.log("hit");
-    setLoading(true);
-  };
+	const handlePageClick = (event) => {
+		setPage(event.selected + 1);
+		// console.log("hit");
+		setLoading(true);
+	};
 
-  // -----------------------------------------------
-  //  Delete Button functionality
-  // -----------------------------------------------
-  const handleDeleteUser = async (id) => {
-    const deleteConfig = {
-      method: "delete",
-      url: `http://localhost:4000/api/v1/user/${id}`,
-      headers: { "Content-Type": "application/json", authorization: token },
-    };
-    let response = await ApiCall(deleteConfig);
+	// -----------------------------------------------
+	//  Delete Button functionality
+	// -----------------------------------------------
+	const handleDeleteUser = async (id) => {
+		const deleteConfig = {
+			method: "delete",
+			url: `http://localhost:4000/api/v1/user/${id}`,
+			headers: { "Content-Type": "application/json", authorization: token },
+		};
+		let response = await ApiCall(deleteConfig);
 
-    if (response.status === 201) {
-      setLoading(true);
-    } else {
-      alert("Something went wrong!!!");
-    }
-  };
+		if (response.status === 201) {
+			setLoading(true);
+		} else {
+			alert("Something went wrong!!!");
+		}
+	};
 
-  return (
-    <div>
-      <div className="py-5 bg-primary hero-header mb-3">
-        <div className="container py-3 px-5">
-          <div className="row mt-5">
-            <div className="col-12 text-center">
-              <div data-wow-delay="0.1s">
-                <h1 className="text-white animated zoomIn mt-5">
-                  Admin Dashboard
-                </h1>
-              </div>
-              <hr
-                className="bg-white mx-auto mt-0 mb-5"
-                style={{ width: 90 }}
-              />
-              <nav aria-label="breadcrumb"></nav>
-            </div>
-          </div>
-        </div>
-      </div>
+	return (
+		<div>
+			<div className="py-5 bg-primary hero-header mb-3">
+				<div className="container py-3 px-5">
+					<div className="row mt-5">
+						<div className="col-12 text-center">
+							<div data-wow-delay="0.1s">
+								<h1 className="text-white animated zoomIn mt-5">
+									Admin Dashboard
+								</h1>
+							</div>
+							<hr
+								className="bg-white mx-auto mt-0 mb-5"
+								style={{ width: 90 }}
+							/>
+							<nav aria-label="breadcrumb"></nav>
+						</div>
+					</div>
+				</div>
+			</div>
 
-      <div
-        className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s"
-      >
-        {/* <h6 className="position-relative d-inline text-primary ps-4">
+			<div
+				className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
+				data-wow-delay="0.1s">
+				{/* <h6 className="position-relative d-inline text-primary ps-4">
 					Users List
 				</h6> */}
-        <h2 className="mt-2">Users List</h2>
-      </div>
+				<h2 className="mt-2">Users List</h2>
+			</div>
 
-      <div className="container mt-5">
-        <hr className="mb-0 mt-4" />
-        <table className="table  table-sm table-striped shadow-sm p-3 mb-4 rounded">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">Log</th>
-              <th scope="col">Name</th>
-              <th scope="col">E-mail</th>
-              <th scope="col">Mobile</th>
-              <th scope="col">PAN</th>
-              <th scope="col">Aadhaar</th>
-              <th scope="col">Assigned</th>
-              <th scope="col">Status</th>
-              <th scope="col">Active</th>
-              <th scope="col">Deleted</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.map((person) => (
-              <tr key={person.uid}>
-                <th scope="row">{person.uid}</th>
-                <td>
-                  <button
-                    type="button"
-                    className="btn fs-6 btn-primary btn-sm"
-                    data-bs-toggle="modal"
-                    data-bs-target="#LogModal"
-                    onClick={() => fetchDataLog(person.uid)}
-                  >
-                    Log
-                  </button>
-                </td>
-                <td>
-                  {person.firstName} {person.lastName}
-                </td>
-                <td>{person.email}</td>
-                <td>{person.contact}</td>
-                <td>{person.pan}</td>
-                <td>{person.aadhaar}</td>
-                <td>{person.AgentName}</td>
-                <td>{person.Loan_state}</td>
-                <td style={{ color: setColor(person.isActive) }}>
-                  {person.isActive === 1 ? "Yes" : "No"}
-                </td>
-                <td style={{ color: setColor(!person.isDeleted) }}>
-                  {person.isDeleted === 1 ? "Yes" : "No"}
-                </td>
+			<div className="container-xl mt-5">
+				<hr className="mb-0 mt-4" />
+				<table className="table table-sm table-striped shadow-sm p-3 mb-4 rounded">
+					<thead>
+						<tr>
+							<th scope="col">ID</th>
 
-                <td>
-                  <button
-                    type="button"
-                    className="btn btn-sm"
-                    onClick={() => handleDeleteUser(person.uid)}
-                  >
-                    {Icons.delete}
-                  </button>
-                </td>
+							<th scope="col">Name</th>
+							<th scope="col">E-mail</th>
+							<th scope="col">Mobile</th>
+							<th scope="col">PAN</th>
+							<th scope="col">Aadhaar</th>
+							<th scope="col">Assigned</th>
+							<th scope="col">Status</th>
+							<th scope="col">Active</th>
+							<th scope="col">Deleted</th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+							<th scope="col"></th>
+						</tr>
+					</thead>
+					<tbody>
+						{users?.map((person) => (
+							<tr key={person.uid}>
+								<th scope="row">{person.uid}</th>
 
-                <td>
-                  <Link to={`/users/${person.uid}`}>
-                    <button
-                      type="button"
-                      className="btn fs-6 btn-primary btn-sm"
-                    >
-                      View
-                    </button>
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <LogModel logData={logData} />
+								<td>
+									{person.firstName} {person.lastName}
+								</td>
+								<td>{person.email}</td>
+								<td>{person.contact}</td>
+								<td>{person.pan}</td>
+								<td>{person.aadhaar}</td>
+								<td>{person.AgentName}</td>
+								<td>{person.Loan_state}</td>
+								<td style={{ color: setColor(person.isActive) }}>
+									{person.isActive === 1 ? "Yes" : "No"}
+								</td>
+								<td style={{ color: setColor(!person.isDeleted) }}>
+									{person.isDeleted === 1 ? "Yes" : "No"}
+								</td>
 
-        {/* -------------------------------
+								<td>
+									<button
+										type="button"
+										className="btn btn-sm"
+										onClick={() => handleDeleteUser(person.uid)}>
+										{Icons.delete}
+									</button>
+								</td>
+
+								<td>
+									<Link to={`/users/${person.uid}`}>
+										<button type="button" className="btn btn-primary btn-sm">
+											View
+										</button>
+									</Link>
+								</td>
+
+								<td>
+									<button
+										type="button"
+										className="btn btn-primary btn-sm"
+										data-bs-toggle="modal"
+										data-bs-target="#LogModal"
+										onClick={() => fetchDataLog(person.uid)}>
+										Log
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+				<LogModel logData={logData} />
+
+				{/* -------------------------------
 				Pagination part
 			----------------------------------- */}
 
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="next >"
-          onPageChange={handlePageClick}
-          initialPage={0}
-          pageRangeDisplayed={2}
-          marginPagesDisplayed={2}
-          pageCount={pageCount}
-          previousLabel="< previous"
-          renderOnZeroPageCount={null}
-          containerClassName={"pagination justify-content-center"}
-          pageClassName={"page-item"}
-          pageLinkClassName={"page-link"}
-          previousClassName={"page-item"}
-          previousLinkClassName={"page-link"}
-          nextClassName={"page-item"}
-          nextLinkClassName={"page-link"}
-          breakLinkClassName={"page-link"}
-          activeClassName={"active"}
-          disabledClassName={"disabled"}
-        />
-      </div>
-    </div>
-  );
+				<ReactPaginate
+					breakLabel="..."
+					nextLabel="next >"
+					onPageChange={handlePageClick}
+					initialPage={0}
+					pageRangeDisplayed={2}
+					marginPagesDisplayed={2}
+					pageCount={pageCount}
+					previousLabel="< previous"
+					renderOnZeroPageCount={null}
+					containerClassName={"pagination justify-content-center"}
+					pageClassName={"page-item"}
+					pageLinkClassName={"page-link"}
+					previousClassName={"page-item"}
+					previousLinkClassName={"page-link"}
+					nextClassName={"page-item"}
+					nextLinkClassName={"page-link"}
+					breakLinkClassName={"page-link"}
+					activeClassName={"active"}
+					disabledClassName={"disabled"}
+				/>
+			</div>
+		</div>
+	);
 }
 
 export default AdminDashboard;
