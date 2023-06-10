@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
 import { AmountSchema, AmountInitialValue } from "../schemas";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
-function AddBorrowerMoney({ wallet }) {
+function AddBorrowerMoney({ wallet, setOpenedModal }) {
   const { token } = useContext(UserContext);
 
-  const url = "/dashboard";
+  const url = "";
   const api = "http://localhost:4000/api/v1/createBorrowerTransaction";
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
@@ -61,11 +61,13 @@ function AddBorrowerMoney({ wallet }) {
                     <div className="d-flex justify-content-end">
                       <div className="col-5">
                         <button
-                          type="submit"
+                          // type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                          // onClick={() => {
-                          //   window.location = "/dashboard";
-                          // }}
+                          onClick={(e) => {
+                            handleSubmit(e);
+                            setOpenedModal(true);
+                          }}
+                          data-bs-dismiss="modal"
                         >
                           Deposit Money
                         </button>

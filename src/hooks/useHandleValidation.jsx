@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import { ApiCall } from "../functions/ApiCall";
-import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
+import { UserContext } from "../contextAPI/UserContext";
 
 export const useHandleValidation = (
   initialValues,
@@ -45,7 +45,7 @@ export const useHandleValidation = (
 
       if (response.status === 201) {
         if (signUp) {
-          if (response?.data?.data?.result?.status == 203) {
+          if (response?.data?.data?.result?.status === 203) {
             errors.email = "Email already exists! Please login to continue!";
           } else {
             setUser(response?.data?.data?.result);

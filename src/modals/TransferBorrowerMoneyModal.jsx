@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 import { walletTransferInitialValue, walletTransferSchema } from "../schemas";
 import axios from "axios";
 
-function TransferBorrowerMoneyModal({ wallet }) {
+function TransferBorrowerMoneyModal({ wallet, setOpenedModal }) {
   const { token } = useContext(UserContext);
 
   const url = "/dashboard";
@@ -37,7 +37,7 @@ function TransferBorrowerMoneyModal({ wallet }) {
   const [branch, setBranch] = useState("");
 
   const fetchBank = async () => {
-    if (values.ifsc_code.length == 11) {
+    if (values.ifsc_code.length === 11) {
       setValidIFSC(true);
       setLoading(true);
 
@@ -203,9 +203,11 @@ function TransferBorrowerMoneyModal({ wallet }) {
                         <button
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                          //   onClick={() => {
-                          //     window.location = "/dashboard";
-                          //   }}
+                          onClick={(e) => {
+                            handleSubmit(e);
+                            setOpenedModal(true);
+                          }}
+                          data-bs-dismiss="modal"
                         >
                           Transfer
                         </button>
