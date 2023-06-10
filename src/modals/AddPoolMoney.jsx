@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AmountSchema, AmountInitialValue } from "../schemas";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function AddPoolMoney(props) {
@@ -67,9 +67,6 @@ function AddPoolMoney(props) {
                         <button
                           type="submit"
                           className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-                          // onClick={() => {
-                          //   window.location = "/pool-table";
-                          // }}
                         >
                           Add Money
                         </button>

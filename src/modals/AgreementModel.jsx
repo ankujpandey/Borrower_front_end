@@ -1,41 +1,14 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import moment from "moment";
 import { Icons } from "../icons/Icons";
-import { UserContext } from "../context/UserContext";
-import { useHandleValidation } from "../hooks/useHandleValidation";
-import { acceptLoanTermsSchema, acceptLoanTermsInitialValue } from "../schemas";
+import { UserContext } from "../contextAPI/UserContext";
 import { ApiCall } from "../functions/ApiCall";
 
-function AgreementModel({ loanData }) {
+function AgreementModel({ loanData, setLoanStatus }) {
   const { user, token } = useContext(UserContext);
   const date = moment().format("DD-MMM-YYYY");
 
-  // const [agreement, setAgreement] = useState(-1000);
-
-  // const url = "/";
-  // const api = "http://localhost:4000/api/v1/updateLoanStatus";
-
-  // const {
-  // 	values,
-  // 	errors,
-  // 	touched,
-  // 	handleBlur,
-  // 	handleChange,
-  // 	handleSubmit,
-  // 	setFieldValue,
-  // } = useHandleValidation(
-  // 	acceptLoanTermsInitialValue,
-  // 	acceptLoanTermsSchema,
-  // 	url,
-  // 	api,
-  // 	token
-  // );
-
   const handleSubmit = async (agreement) => {
-    console.log(agreement);
-
-    // console.log("user uid", user.userName.uid);
-
     const config = {
       method: "post",
       url: "http://localhost:4000/api/v1/updateLoanStatus",
@@ -45,10 +18,11 @@ function AgreementModel({ loanData }) {
         Loan_state: agreement,
         emailAgent: true,
         emailUser: true,
+        LoanId: loanData?.loanData?.LoanId,
       },
     };
     try {
-      const response = ApiCall(config);
+      ApiCall(config);
     } catch (error) {
       console.log(error);
     }
@@ -280,8 +254,19 @@ function AgreementModel({ loanData }) {
                     <td>{loanData?.loanData?.minRoiApproved} %</td>
                   </tr>
                   <tr>
-                    <td>Collection Fee (On Outstanding Principal)</td>
+                    <td>Processing Fee (On Outstanding Principal)</td>
                     <td>5.00 %</td>
+                  </tr>
+                  <tr>
+                    <td>Processing Amount</td>
+                    <td>{loanData?.loanData?.amountApproved * 0.05}</td>
+                  </tr>
+                  <tr>
+                    <td>Loan Amount after deducting processing fee </td>
+                    <td>
+                      {loanData?.loanData?.amountApproved -
+                        loanData?.loanData?.amountApproved * 0.05}
+                    </td>
                   </tr>
                   <tr>
                     <td>Regular EMI</td>
@@ -315,7 +300,6 @@ function AgreementModel({ loanData }) {
                   {loanData?.EMI?.table?.map((row) => (
                     <tr key={row.installmentNo}>
                       <th scope="row">{row.installmentNo}</th>
-                      {/* <td>{row.installmentDate}</td> */}
                       <td>
                         {Icons.smallRupee}
                         {row.openingBalence}
@@ -372,45 +356,11 @@ function AgreementModel({ loanData }) {
 
           <hr className="mt-0 mb-0" />
           <div className="row justify-content-end align-items-center py-3 mx-3">
-            {/* <form
-						action=""
-						onSubmit={handleSubmit}
-						className="needs-validation"
-						noValidate>
-						<div className="row justify-content-center align-items-center py-3 mx-3">
-							<div className="col-8">
-								<div className="form-check">
-									<input
-										type="checkbox"
-										className={`form-check-input ${
-											errors.accept_Terms && touched.accept_Terms
-												? "is-invalid"
-												: touched.accept_Terms
-												? "is-valid"
-												: ""
-										}`}
-										// className="form-check-input"
-										id="accept_Terms"
-										value={values.agreement}
-									/>
-									<label
-										className="form-check-label calculator-msg"
-										htmlFor="accept_Terms">
-										I have read the loan agreement including the loan key fact
-										statement and I consent to the same.
-									</label>
-									{/* {errors.accept_Terms && touched.accept_Terms ? (
-										<div className="form-error form-validation-warning text-danger">
-											{errors.accept_Terms}
-										</div>
-									) : null} */}
-            {/* </div>
-							</div> */}
-
             <div className="col-2">
               <button
                 className="btn btn-outline-primary rounded-pill px-4"
                 onClick={() => {
+                  setLoanStatus(-1000);
                   handleSubmit(-1000);
                 }}
                 data-bs-dismiss="modal"
@@ -422,9 +372,8 @@ function AgreementModel({ loanData }) {
               <button
                 type="submit"
                 className="btn btn-primary rounded-pill px-4"
-                // onClick={() => setFieldValue("Loan_state", "1500")}
                 onClick={() => {
-                  // setAgreement(1500);
+                  setLoanStatus(1500);
                   handleSubmit(1500);
                 }}
                 data-bs-dismiss="modal"
@@ -432,8 +381,6 @@ function AgreementModel({ loanData }) {
                 Accept
               </button>
             </div>
-            {/* </div>
-					</form> */}
           </div>
         </div>
       </div>

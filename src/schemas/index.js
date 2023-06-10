@@ -36,6 +36,9 @@ export const AddressSchema = Yup.object({
     .matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
     .max(6)
     .required("Pin Code can not be empty!"),
+  postOffice: Yup.string()
+    .min(2)
+    .required("Post Office Type can not be empty!"),
 });
 
 export const AddressInitialValues = {
