@@ -367,7 +367,7 @@ function UserDetails(props) {
                          								   Loan Details Section
                     						    ----------------------------------------------*/}
 												<h3 className="menu-title fs-3 mt-4 fw-bold">
-													Loan Details
+													Loan Requested
 												</h3>
 
 												<ul className="list-group ">
@@ -396,6 +396,41 @@ function UserDetails(props) {
 														{Icons.agent} {userDetails.AgentName}
 														<span className="float-end text-secondary">
 															Assigned To
+														</span>
+													</li>
+												</ul>
+
+												
+												<h3 className="menu-title fs-3 mt-4 fw-bold">
+													Loan Provided
+												</h3>
+
+												<ul className="list-group ">
+													<li className="list-group-item">
+														{Icons.salary} {userDetails.amountApproved}
+														<span className="float-end text-secondary">
+															Amount
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.roi} {userDetails.minRoiApproved}
+														<span className="float-end text-secondary">
+															Rate of Interest
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.tenure} {userDetails.tenureApproved}
+														<span className="float-end text-secondary">
+															Tenure
+														</span>
+													</li>
+
+													<li className="list-group-item">
+														{Icons.agent} {userDetails.AgentName}
+														<span className="float-end text-secondary">
+															Approved By
 														</span>
 													</li>
 												</ul>

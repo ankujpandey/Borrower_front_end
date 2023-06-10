@@ -16,7 +16,7 @@ function PoolTable(props) {
 
   const config = {
     method: "get",
-    url: `http://localhost:4000/api/v1/findAllPoolTransactions?page=${page}&limit=5`,
+    url: `http://localhost:4000/api/v1/findAllPoolTransactions?page=${page}&limit=8`,
     headers: { "Content-Type": "application/json" },
   };
 
@@ -97,7 +97,7 @@ function PoolTable(props) {
         {/* <h6 className="position-relative d-inline text-primary ps-4">
   Users List
 </h6> */}
-        <h2 className="mt-2">Pool Table Transactions</h2>
+        <h2 className="mt-2">Pool Table</h2>
       </div>
 
       <div className="row justify-content-center">
@@ -122,6 +122,7 @@ function PoolTable(props) {
       </div>
 
       <div className="container mt-3">
+      <h2 className="mt-5 text-center">Pool Table Transactions</h2>
         <hr className="mb-0 mt-4" />
         <table className="table table-striped shadow-sm p-3 mb-4 rounded">
           <thead>
