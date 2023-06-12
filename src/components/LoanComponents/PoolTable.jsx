@@ -66,7 +66,7 @@ function PoolTable(props) {
   //  page changing
   // -----------------------------------------------
 
-  const handlePageClick = (event) => {
+  const handlePageClick = event => {
     setPage(event.selected + 1);
     setLoading(true);
   };
@@ -92,8 +92,7 @@ function PoolTable(props) {
 
       <div
         className="section-title position-relative text-center mb-5 pb-2 wow fadeInUp"
-        data-wow-delay="0.1s"
-      >
+        data-wow-delay="0.1s">
         {/* <h6 className="position-relative d-inline text-primary ps-4">
   Users List
 </h6> */}
@@ -102,9 +101,9 @@ function PoolTable(props) {
 
       <div className="row justify-content-center">
         <div className="card wallet-div col-5 shadow mb-3 bg-body-tertiary rounded">
-          <div className="row justify-content-center align-items-center">
-            <div className="col-md-4">{Icons.poolBalance}</div>
-            <div className="col-md-4">
+          <div className="d-flex justify-content-center align-items-center">
+            <div className="me-1">{Icons.poolBalance}</div>
+            <div className="ms-2">
               <p className="mb-0">Pool Balance</p>
               <h1 className="mt-0">&#8377; {Balance?.balance}</h1>
             </div>
@@ -114,8 +113,7 @@ function PoolTable(props) {
           <button
             className="btn btn-primary py-sm-3 px-sm-5 rounded-pill "
             data-bs-toggle="modal"
-            data-bs-target="#addPoolMoney"
-          >
+            data-bs-target="#addPoolMoney">
             Add Money
           </button>
         </div>
@@ -136,7 +134,7 @@ function PoolTable(props) {
             </tr>
           </thead>
           <tbody>
-            {poolTxn?.map((poolTxn) => (
+            {poolTxn?.map(poolTxn => (
               <tr key={poolTxn.pool_txn_id}>
                 <td>{poolTxn.pool_txn_id}</td>
                 <td>{poolTxn.txn_type}</td>
