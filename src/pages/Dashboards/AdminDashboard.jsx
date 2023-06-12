@@ -171,7 +171,7 @@ function AdminDashboard(props) {
 								<td style={{ color: setColor(person.isActive) }}>
 									{person.isActive === 1 ? "Yes" : "No"}
 								</td>
-								<td style={{ color: setColor(!person.isDeleted) }}>
+								<td style={{ color: setColor(person.isDeleted + 1) }}>
 									{person.isDeleted === 1 ? "Yes" : "No"}
 								</td>
 

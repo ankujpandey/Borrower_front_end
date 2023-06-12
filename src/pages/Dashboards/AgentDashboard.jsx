@@ -179,7 +179,7 @@ function AgentDashboard(props) {
 								<td>
 									<button
 										type="button"
-										className="btn fs-6 btn-primary btn-sm"
+										className="btn btn-primary btn-sm"
 										onClick={() => {
 											updateLoanStatus(person.uid, person.Loan_state);
 										}}>

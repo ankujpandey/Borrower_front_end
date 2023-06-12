@@ -18,6 +18,7 @@ function UserDetails(props) {
 	const [loanDisburse, setLoanDisburse] = useState(false);
 	const [updateLoanDetails, setUpdateLoanDetail] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [startLoader, setStartLoader] = useState(false);
 
 	const navigate = useNavigate();
 
@@ -33,7 +34,9 @@ function UserDetails(props) {
 			fetchData(id);
 			fetchImage(id);
 		}
-	}, [loading, isEditing, user, updateLoanDetails]);
+
+		setLoading(false);
+	}, [loading, isEditing, startLoader, user, updateLoanDetails]);
 
 	// -------------------------------------------
 	//  Fetch User's all data
@@ -101,7 +104,7 @@ function UserDetails(props) {
 			let response = await ApiCall(config);
 			console.log("==========response", response);
 			if (response.status === 200) {
-				setLoading(false);
+				setStartLoader(false);
 				console.log(response.data);
 				const pdfBlob = new Blob([response.data], { type: "application/pdf" });
 				saveAs(pdfBlob, `user_${id}.pdf`);
@@ -167,7 +170,11 @@ function UserDetails(props) {
 			</div>
 			{/* Editing Page Component */}
 			{isEditing ? (
-				<UpdateUser user={userDetails} setIsEditing={setIsEditing} />
+				<UpdateUser
+					user={userDetails}
+					setIsEditing={setIsEditing}
+					setLoading={setLoading}
+				/>
 			) : updateLoanDetails ? (
 				<UpdateLoanDetails
 					user={userDetails}
@@ -188,8 +195,11 @@ function UserDetails(props) {
 									className="card shadow p-3 mb-5 bg-body-tertiary rounded wow fadeInUp"
 									data-wow-delay="0.3s">
 									<div className="row justify-content-center align-items-center">
-										<div className={`${loading ? "loader" : ""}`}></div>
-										<div className={`col-md-12 ${loading ? "row-loader" : ""}`}>
+										<div className={`${startLoader ? "loader" : ""}`}></div>
+										<div
+											className={`col-md-12 ${
+												startLoader ? "row-loader" : ""
+											}`}>
 											<div className="col-md-12 p-4">
 												<NavLink
 													to={
@@ -406,9 +416,10 @@ function UserDetails(props) {
 															type="button"
 															className="btn btn-success w-100 py-3 btn-success"
 															onClick={() => {
-																setLoading(true);
+																setStartLoader(true);
 																handlepdfDownload(id);
-															}}>
+															}}
+															disabled={startLoader}>
 															{Icons.download} Download
 														</button>
 													</div>
@@ -419,7 +430,8 @@ function UserDetails(props) {
 															className="btn btn-warning w-100 py-3 btn-warning"
 															onClick={() => {
 																setIsEditing(true);
-															}}>
+															}}
+															disabled={startLoader}>
 															{Icons.edit} Edit
 														</button>
 													</div>
@@ -429,7 +441,8 @@ function UserDetails(props) {
 															<button
 																type="button"
 																className="btn btn-danger w-100 py-3 btn-danger"
-																onClick={() => handleDeleteUser(id)}>
+																onClick={() => handleDeleteUser(id)}
+																disabled={startLoader}>
 																{Icons.delete} Delete User
 															</button>
 														</div>
@@ -443,7 +456,8 @@ function UserDetails(props) {
 																className="btn btn-primary w-100 py-3 btn-primary"
 																onClick={() => {
 																	setUpdateLoanDetail(true);
-																}}>
+																}}
+																disabled={startLoader}>
 																{Icons.salary} Verify Loan
 															</button>
 														</div>
@@ -456,7 +470,8 @@ function UserDetails(props) {
 																className="btn btn-primary w-100 py-3 btn-primary"
 																onClick={() => {
 																	setLoanDisburse(true);
-																}}>
+																}}
+																disabled={startLoader}>
 																{Icons.salary} Disburse Loan
 															</button>
 														</div>
