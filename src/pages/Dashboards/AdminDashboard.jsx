@@ -52,7 +52,7 @@ function AdminDashboard(props) {
 	// ----------------------------------------------
 	//  Fetch Log Data  functionality
 	// ----------------------------------------------
-	const fetchDataLog = async (Id) => {
+	const fetchDataLog = async (Id, firstName, lastName) => {
 		const getLogconfig = {
 			method: "get",
 			url: `http://localhost:4000/api/v1/getlogData/${Id}`,
@@ -60,10 +60,16 @@ function AdminDashboard(props) {
 		};
 		let response = await ApiCall(getLogconfig);
 
+		let logWithName = {};
+
+		logWithName.id = Id;
+		logWithName.firstName = firstName;
+		logWithName.lastName = lastName;
+
 		if (response.status === 201) {
 			console.log("----response", response.data.data[0]);
-
-			setLogData(response.data.data);
+			logWithName.logs = response?.data?.data;
+			setLogData(logWithName);
 		} else {
 			alert("Something went wrong!!!");
 		}
@@ -192,7 +198,13 @@ function AdminDashboard(props) {
 										className="btn btn-primary btn-sm"
 										data-bs-toggle="modal"
 										data-bs-target="#LogModal"
-										onClick={() => fetchDataLog(person.uid)}>
+										onClick={() =>
+											fetchDataLog(
+												person.uid,
+												person.firstName,
+												person.lastName
+											)
+										}>
 										Log
 									</button>
 								</td>
