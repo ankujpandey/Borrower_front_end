@@ -59,6 +59,7 @@ function UserDetails(props) {
 				JSON.stringify(response.data.data[0])
 			);
 			setUserDetails(response?.data?.data[0]);
+			console.log("userDetails------>>>>>", userDetails.Loan_state);
 			console.log(user);
 		} else {
 			setIsData(false);
@@ -448,8 +449,8 @@ function UserDetails(props) {
 														</div>
 													) : null}
 
-													{user.jobAssignees_id &&
-													userDetails.Loan_state === 1300 ? (
+													{user?.jobAssignees_id &&
+													userDetails?.Loan_state === "1300" ? (
 														<div className="col-3">
 															<button
 																type="button"
@@ -463,7 +464,7 @@ function UserDetails(props) {
 														</div>
 													) : null}
 
-													{userDetails.Loan_state === 1500 ? (
+													{userDetails.Loan_state === "1500" ? (
 														<div className="col-3">
 															<button
 																type="button"
