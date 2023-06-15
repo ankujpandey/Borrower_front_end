@@ -186,6 +186,7 @@ function UserDetails(props) {
 				<LoanDisbursement
 					user={userDetails}
 					setLoanDisburse={setLoanDisburse}
+					setLoading={setLoading}
 				/>
 			) : (
 				<>
