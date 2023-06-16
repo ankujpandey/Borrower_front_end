@@ -1,6 +1,4 @@
 import * as Yup from "yup"; // npm i yup
-import { UserContext } from "../context/UserContext";
-import React, { useContext } from "react";
 
 // ---------------------------------------
 //   For Personal Details Registration
@@ -38,6 +36,9 @@ export const AddressSchema = Yup.object({
 		.matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
 		.max(6)
 		.required("Pin Code can not be empty!"),
+	postOffice: Yup.string()
+		.min(2)
+		.required("Post Office Type can not be empty!"),
 });
 
 export const AddressInitialValues = {
@@ -52,21 +53,73 @@ export const AddressInitialValues = {
 // ---------------------------------------
 
 export const BorrowingSchema = Yup.object({
-	amount: Yup.string()
+	amountAsked: Yup.string()
 		.matches(/([0-9])/, "Please enter a valid amount")
 		.max(6)
 		.required("Amount can't be empty"),
 
-	tenure: Yup.string()
+	tenureAsked: Yup.string()
 		.matches(/([0-9])$/, "Please enter a valid time")
 		.max(2)
 		.required("Tenure can't be empty"),
+
+	roiAsked: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Rate of Interest")
+		.min(1)
+		.max(2)
+		.required("Rate of Interest can't be empty"),
+	// amountApproved: Yup.string()
+	//   .matches(/([0-9])/, "Please enter a valid amount")
+	//   .max(6)
+	//   .required("Amount can't be empty"),
+
+	// tenureApproved: Yup.string()
+	//   .matches(/([0-9])$/, "Please enter a valid time")
+	//   .max(2)
+	//   .required("Tenure can't be empty"),
+
+	// minRoiApproved: Yup.string()
+	//   .matches(/([0-9])$/, "Please enter a valid Rate of Interest")
+	//   .min(1)
+	//   .max(2)
+	//   .required("Rate of Interest can't be empty"),
 });
 
 export const BorrowingInitialValues = {
-	amount: "",
-	tenure: "",
-	rate_of_interest: "",
+	amountAsked: "",
+	tenureAsked: "",
+	roiAsked: "",
+	// amountApproved: "",
+	// tenureApproved: "",
+	// minRoiApproved: "",
+};
+
+// ---------------------------------------
+//   For Borrowing Details (Verify Loan)
+// ---------------------------------------
+
+export const verifyLoan = Yup.object({
+	amountApproved: Yup.string()
+		.matches(/([0-9])/, "Please enter a valid amount")
+		.max(6)
+		.required("Amount can't be empty"),
+
+	minRoiApproved: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid time")
+		.max(2)
+		.required("Tenure can't be empty"),
+
+	tenureApproved: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Rate of Interest")
+		.min(1)
+		.max(2)
+		.required("Rate of Interest can't be empty"),
+});
+
+export const verifyLoanInitialValues = {
+	amountApproved: "",
+	minRoiApproved: "",
+	tenureApproved: "",
 };
 
 // ---------------------------------------
@@ -110,7 +163,7 @@ export const salariedSchema = Yup.object({
 	// Pending email validation for company name
 	// -------------------------------------------
 
-	// email: Yup.string().email().matches(/([a-zA-Z0-9+_.-])(@().com)$/, "Please enter a valid Account Number").required("Please enter your professional email"),
+	// professional_email: Yup.string().email().matches(/([a-zA-Z0-9+_.-])(@().com)$/, "Please enter a valid Account Number").required("Please enter your professional email"),
 });
 
 export const selfEmployedSchema = Yup.object({
@@ -124,14 +177,16 @@ export const selfEmployedSchema = Yup.object({
 		.max(100)
 		.required("Please enter nature of business"),
 
-	email: Yup.string().email().required("Please enter your professional email"),
+	professional_email: Yup.string()
+		.email()
+		.required("Please enter your professional email"),
 });
 
 export const initialValuesSalaried = {
 	uid: "",
 	employment_type: "Salaried",
 	company_name: "",
-	email: "",
+	professional_email: "",
 	monthly_income: "",
 };
 export const initialValueSelfEmployed = {
@@ -140,7 +195,7 @@ export const initialValueSelfEmployed = {
 	business_nature: "",
 	monthly_income: "",
 	company_name: "",
-	email: "",
+	professional_email: "",
 };
 
 // ---------------------------------------
@@ -155,7 +210,7 @@ export const SignUpschema = Yup.object({
 	lastName: Yup.string()
 		.min(2, "last name can't less than 2 characters")
 		.max(80)
-		.optional("last name can optional"),
+		.optional("last name can be optional"),
 	email: Yup.string()
 		.matches(
 			/([a-zA-Z0-9+_.-])(@(gmail|yahoo).com)$/,
@@ -168,7 +223,7 @@ export const SignUpschema = Yup.object({
 		.required("Please enter the password"),
 	Confirmpassword: Yup.string()
 		.required()
-		.oneOf([Yup.ref("password"), null], "Password must match"),
+		.oneOf([Yup.ref("password"), null], "Passwords must match"),
 });
 
 export const initialValuesSignupschema = {
@@ -178,3 +233,118 @@ export const initialValuesSignupschema = {
 	password: "",
 	Confirmpassword: "",
 };
+
+// ---------------------------------------
+//   For Updating user by admin
+// ---------------------------------------
+
+export const UpdateSchema = Yup.object({
+	contact: Yup.string()
+		.matches(/([6-9]){1}([0-9]){9}$/, "Please enter a valid phone number.")
+		.max(10)
+		.required("Contact can not be empty!"),
+
+	aadhaar: Yup.string()
+		.matches(/([0-9]){12}$/, "Please enter a valid aadhaar number.")
+		.max(12)
+		.required("Aadhaar can not be empty!"),
+
+	pan: Yup.string()
+		.matches(
+			/([A-Z]){5}([0-9]){4}([A-Z]){1}$/,
+			"Please enter a valid PAN Number"
+		)
+		.required("PAN can not be empty!"),
+
+	pinCode: Yup.string()
+		.matches(/([0-9]){6}$/, "Please enter a valid Pin Code.")
+		.max(6)
+		.required("Pin Code can not be empty!"),
+
+	monthly_income: Yup.number()
+		.min(1)
+		.max(1000000)
+		.required("Please fill you monthly Income"),
+
+	business_nature: Yup.string()
+		.min(2)
+		.max(100)
+		.required("Please enter nature of business"),
+
+	professional_email: Yup.string()
+		.email()
+		.required("Please enter your professional email"),
+
+	company_name: Yup.string().required("Please select your company name"),
+
+	ifsc_code: Yup.string()
+		.matches(/([A-Z][0-9])/, "Please enter a valid IFSC Code")
+		.length(11)
+		.required("IFSC Code can't be empty"),
+
+	account_number: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Account Number")
+		.max(14)
+		.min(11)
+		.required("Account Number can't be empty"),
+});
+
+// ---------------------------------------
+//   For Bank Account Registration
+// ---------------------------------------
+
+export const acceptLoanTermsInitialValue = {
+	Loan_state: "",
+};
+
+export const acceptLoanTermsSchema = Yup.object({
+	Loan_state: Yup.boolean().oneOf(
+		[true],
+		"You must accept the terms and conditions"
+	),
+
+	// Yup.string().required(
+	// 	"Please select this checkbox before clicking Accept button!"
+	// ),
+});
+
+// -------------------------------------------------
+//   To add money to borrower wallet / pool table
+// -------------------------------------------------
+
+export const AmountInitialValue = {
+	credit_Amount: "",
+};
+
+export const AmountSchema = Yup.object({
+	credit_Amount: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Amount")
+		.required("Amount can't be empty"),
+});
+
+// ------------------------------------------
+//   To transfer money from borrower wallet
+// ------------------------------------------
+
+export const walletTransferInitialValue = {
+	ifsc_code: "",
+	debit_Amount: "",
+	account_number: "",
+};
+
+export const walletTransferSchema = Yup.object({
+	debit_Amount: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Amount")
+		.required("Amount can't be empty"),
+
+	ifsc_code: Yup.string()
+		.matches(/([A-Z][0-9])/, "Please enter a valid IFSC Code")
+		.length(11)
+		.required("IFSC Code can't be empty"),
+
+	account_number: Yup.string()
+		.matches(/([0-9])$/, "Please enter a valid Account Number")
+		.max(14)
+		.min(11)
+		.required("Account Number can't be empty"),
+});

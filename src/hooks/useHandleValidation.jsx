@@ -1,8 +1,8 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router";
 import { ApiCall } from "../functions/ApiCall";
-import { useContext, useState } from "react";
-import { UserContext } from "../context/UserContext";
+import { useContext } from "react";
+import { UserContext } from "../contextAPI/UserContext";
 
 export const useHandleValidation = (
 	initialValues,
@@ -10,11 +10,10 @@ export const useHandleValidation = (
 	url,
 	api,
 	token,
-	signUp
+	signUp,
+	personalDetails
 ) => {
-	const { setUser, setToken } = useContext(UserContext);
-
-	const [validUser, setValidUser] = useState(true);
+	const { user, setUser, setToken } = useContext(UserContext);
 
 	const navigate = useNavigate();
 
@@ -28,15 +27,14 @@ export const useHandleValidation = (
 		setFieldValue,
 	} = useFormik({
 		initialValues,
+		enableReinitialize: true,
 		validationSchema,
-
 		// onSubmit: (values) => {
-		//   console.log(values);
+		// 	console.log(values);
 		// },
 
 		onSubmit: async (values) => {
-			// console.log(values);
-
+			console.log(values);
 			const config = {
 				method: "post",
 				url: api,
@@ -47,18 +45,11 @@ export const useHandleValidation = (
 			let response = await ApiCall(config);
 
 			if (response.status === 201) {
-				// console.log(response.data);
-				// console.log(signUp);
 				if (signUp) {
-					// console.log(response.data.data.result.status);
-
-					if (response?.data?.data?.result?.status == 203) {
-						// setValidUser(false);
+					if (response?.data?.data?.result?.status === 203) {
 						errors.email = "Email already exists! Please login to continue!";
 					} else {
-						console.log(response?.data?.data?.auth);
 						setUser(response?.data?.data?.result);
-						// console.log(response?.data?.data?.result);
 						localStorage.setItem(
 							"localUser",
 							JSON.stringify(response?.data?.data)
@@ -66,9 +57,14 @@ export const useHandleValidation = (
 						setToken(response?.data?.data?.auth);
 						navigate(url);
 					}
-				}
-				// console.log("validuser before navigate---", validUser);
-				else navigate(url);
+				} else if (personalDetails) {
+					user.userName = response.data.data;
+					localStorage.setItem(
+						"userPersonalDetails",
+						JSON.stringify(response?.data?.data)
+					);
+					navigate(url);
+				} else navigate(url);
 			} else {
 				alert("Something went wrong!!!");
 			}
