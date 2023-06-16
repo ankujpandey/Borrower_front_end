@@ -34,7 +34,7 @@ function AgreementModel({ loanData, setLoanStatus, setUpdate }) {
 	return (
 		<div className="modal fade" id="agreementModal" tabIndex={-1}>
 			<div
-				className="modal-dialog"
+				className="modal-dialog modal-dialog-scrollable"
 				style={{
 					maxWidth: "60%",
 				}}>
@@ -50,8 +50,8 @@ function AgreementModel({ loanData, setLoanStatus, setUpdate }) {
 							aria-label="Close"
 						/>
 					</div>
-					<div className="modal-body modals-card-border calculator-msg px-5 pb-3 pt-5 d-flex flex-column justify-content-around">
-						<div className="col-12 mt-3">
+					<div className="modal-body calculator-msg">
+						<div className="mt-3 d-flex flex-column align-items-stretch px-2">
 							<p>
 								These Master Terms and Conditions of the Loan Agreement ("
 								<b>MTCLA</b>") shall govern the general terms and conditions

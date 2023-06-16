@@ -110,7 +110,7 @@ function LoanProposal({ uid, setLoanStatus }) {
 										</tbody>
 									</table>
 								</div>
-								{loanData?.loanData?.Loan_state === "1400" ? (
+								{loanData?.loanData?.Loan_state === "1700" ? (
 									<>
 										<hr className="mt-2 mb-1" />
 

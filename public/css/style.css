@@ -737,7 +737,7 @@ svg {
 
 .modals-card-border {
 	height: 65vh;
-	overflow: auto;
+	/* overflow: auto; */
 }
 
 /* table */

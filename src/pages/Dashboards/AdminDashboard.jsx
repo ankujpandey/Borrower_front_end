@@ -16,11 +16,11 @@ function AdminDashboard(props) {
 	let [color, setColor] = useState("black");
 	const [logData, setLogData] = useState([]);
 
-	const pageCount = Math.ceil(itemLen?.length / 5);
+	const pageCount = Math.ceil(itemLen?.length / 8);
 
 	const config = {
 		method: "get",
-		url: `http://localhost:4000/api/v1/getUserData?page=${page}&limit=5`,
+		url: `http://localhost:4000/api/v1/getUserData?page=${page}&limit=8`,
 		headers: { "Content-Type": "application/json" },
 	};
 
