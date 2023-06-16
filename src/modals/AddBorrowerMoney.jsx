@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { AmountSchema, AmountInitialValue } from "../schemas";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
 function AddBorrowerMoney({ wallet, setOpenedModal }) {
@@ -63,8 +63,8 @@ function AddBorrowerMoney({ wallet, setOpenedModal }) {
 													// type="submit"
 													className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
 													onClick={(e) => {
-														handleSubmit(e);
 														setOpenedModal(true);
+														handleSubmit(e);
 													}}
 													data-bs-dismiss="modal">
 													Deposit Money

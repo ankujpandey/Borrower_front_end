@@ -32,6 +32,8 @@ import PercentIcon from "@mui/icons-material/Percent";
 import TimerOutlinedIcon from "@mui/icons-material/TimerOutlined";
 import SupportAgentIcon from "@mui/icons-material/SupportAgent";
 import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import { BsCalendarCheck } from "react-icons/bs";
+import EventNoteIcon from "@mui/icons-material/EventNote";
 
 export const Icons = {
   delete: <DeleteIcon />,
@@ -39,6 +41,7 @@ export const Icons = {
   call: <CallIcon />,
   email: <EmailIcon />,
   aadhar: <FingerprintIcon />,
+  BsCalendarCheck: <BsCalendarCheck />,
   pan: <BadgeIcon />,
   back: <ChevronLeftIcon />,
   person: <PersonIcon style={{ height: "100px", width: "100px" }} />,
@@ -105,4 +108,6 @@ export const Icons = {
       }}
     />
   ),
+
+  log: <EventNoteIcon />,
 };

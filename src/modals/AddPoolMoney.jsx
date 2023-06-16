@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { AmountSchema, AmountInitialValue } from "../schemas";
-import { UserContext } from "../context/UserContext";
+import { UserContext } from "../contextAPI/UserContext";
 import { useHandleValidation } from "../hooks/useHandleValidation";
 
-function AddPoolMoney(props) {
+function AddPoolMoney({ setLoading }) {
 	const { token } = useContext(UserContext);
 	const url = "/pool-table";
 	const api = "http://localhost:4000/api/v1/createPoolTransaction";
@@ -63,12 +63,13 @@ function AddPoolMoney(props) {
 										<div className="d-flex justify-content-end">
 											<div className="col-5">
 												<button
-													type="submit"
+													type="button"
 													className="btn btn-primary rounded-pill w-100 py-2 btn-primary"
-													// onClick={() => {
-													//   window.location = "/pool-table";
-													// }}
-												>
+													onClick={(e) => {
+														setLoading(true);
+														handleSubmit(e);
+													}}
+													data-bs-dismiss="modal">
 													Add Money
 												</button>
 											</div>
